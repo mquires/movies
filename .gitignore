@@ -1,0 +1,13 @@
+node_modules
+dist
+
+# eclipse project file
+.settings/
+.classpath
+.project
+
+# OS
+.DS_Store
+
+# Maven 
+target/
