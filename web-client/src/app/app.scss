@@ -1,3 +1,6 @@
+@import '../assets/styles/abstracts/variables';
+@import '../assets/styles/base/reset';
+
 body {
-  background: red;
+  font-family: $FONT-FAMILY; 
 }
