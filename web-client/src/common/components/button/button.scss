@@ -1,0 +1,21 @@
+@import "../../../assets/styles/abstracts/variables";
+
+.button {
+  background: $BLUE;
+  border: none;
+  color: $WHITE;
+  border-radius: 5rem;
+  padding: 0.8rem 3.5rem;
+  cursor: pointer;
+  outline: none;
+  font-family: $FONT_FAMILY;
+  border: 0.2rem solid transparent;
+  transition: 0.2s;
+  font-weight: 500;
+
+  &:hover {
+    background: none;
+    border: 0.2rem solid $BLUE;
+    color: $BLUE;
+  }
+}
