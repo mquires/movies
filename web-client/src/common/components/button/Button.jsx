@@ -2,9 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
+import BUTTON_TYPES from '../../constants/button-types';
+
 import './button.scss';
 
-export default function Button(props) {
+const Button = (props) => {
   const {
     className,
     type,
@@ -33,8 +35,10 @@ Button.propTypes = {
 };
 
 Button.defaultProps = {
-  type: 'button',
+  type: BUTTON_TYPES.BUTTON,
   className: undefined,
   caption: undefined,
   onClick: undefined,
 };
+
+export default Button;
