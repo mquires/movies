@@ -1,0 +1,18 @@
+@import '../../../assets/styles/abstracts/variables';
+
+.header {
+  display: flex;
+  border-bottom: 0.1rem solid $CL_1_GREY;
+  height: 7rem;
+  background: $WHITE;
+
+  &__container {
+    display: flex;
+    align-items: center;
+    margin: 0 auto;
+    max-width: 160rem;
+    justify-content: space-between;
+    width: 100%;
+    padding: 0 4rem;
+  }
+}
