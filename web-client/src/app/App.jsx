@@ -1,13 +1,37 @@
 import React from "react";
+import { Switch, Route, Router } from 'react-router-dom';
+import { createBrowserHistory } from 'history';
+import ROUTES from '../common/constants/routes'
 
 import Header from "../common/components/header";
+import Sidebar from "../common/components/sidebar";
 
 import './app.scss';
+
+const history = createBrowserHistory();
 
 const App = () => {
   return (
     <div className="app">
       <Header />
+      <div className="app__container">
+        <Router history={history}>
+          <Sidebar />
+          <div className="app__content">
+            <Switch>
+              <Route
+                exact
+                path={ROUTES.MAIN}
+                render={() => <div>123</div>}
+              />
+              <Route
+                path={ROUTES.LOGIN}
+                render={() => <div>login</div>}
+              />
+            </Switch>
+          </div>
+        </Router>
+      </div>
     </div>
   );
 }

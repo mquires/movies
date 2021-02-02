@@ -14,11 +14,23 @@ const Header = (props) => {
   return (
     <header className={classNames('header', className)}>
       <div className="header__container">
-        <h1>Movies</h1>
-        <Button caption="Login" />
+        <div className="header__logo">
+          <h1>Movies</h1>
+        </div>
+        <div className="header__info">
+          <Button caption="Login" />
+        </div>
       </div>
     </header>
   );
+}
+
+Header.propTypes = {
+  className: PropTypes.string
+}
+
+Header.defaultProps = {
+  className: undefined
 }
 
 export default Header;

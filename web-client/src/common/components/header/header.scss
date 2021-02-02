@@ -1,18 +1,29 @@
-@import '../../../assets/styles/abstracts/variables';
+@import "../../../assets/styles/abstracts/variables";
 
 .header {
   display: flex;
   border-bottom: 0.1rem solid $CL_1_GREY;
   height: 7rem;
   background: $WHITE;
+  width: 100%;
 
   &__container {
-    display: flex;
+    display: grid;
     align-items: center;
-    margin: 0 auto;
     max-width: 160rem;
     justify-content: space-between;
     width: 100%;
+    grid-template-columns: 20rem 1fr;
+  }
+
+  &__logo {
+    text-align: center;
+  }
+
+  &__info {
+    display: flex;
+    justify-content: flex-end;
+    width: calc(100vw - 20rem);
     padding: 0 4rem;
   }
 }

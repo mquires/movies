@@ -1,7 +1,18 @@
-@import '../assets/styles/abstracts/variables';
-@import '../assets/styles/base/reset';
+@import "../assets/styles/abstracts/variables";
+@import "../assets/styles/base/reset";
 
 body {
   font-family: $FONT-FAMILY;
   background: $CL_2_GREY;
+}
+
+.app {
+  &__container {
+    display: flex;
+  }
+
+  &__content {
+    width: 100%;
+    margin: 0 40px;
+  }
 }

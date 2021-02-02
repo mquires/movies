@@ -1,0 +1,24 @@
+@import "../../../assets/styles/abstracts/variables";
+
+.sidebar {
+  position: sticky;
+  top: 0;
+  grid-template-columns: 20rem;
+  display: grid;
+  align-items: center;
+
+  &__nav {
+    height: calc(100vh - 7rem);
+    display: grid;
+    background: $WHITE;
+    border-radius: 0.5rem;
+    border-right: 0.1rem solid $CL_1_GREY;
+
+    &-links {
+      display: flex;
+      flex-direction: column;
+      margin: auto 0;
+      padding: 0 1rem;
+    }
+  }
+}
