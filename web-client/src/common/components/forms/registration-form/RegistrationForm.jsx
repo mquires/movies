@@ -40,4 +40,6 @@ const RegistrationForm = (props) => {
   );
 };
 
-export default reduxForm({ form: 'registration' })(RegistrationForm);
+const RegistrationReduxForm = reduxForm({ form: 'registration' })(RegistrationForm);
+
+export default RegistrationReduxForm;

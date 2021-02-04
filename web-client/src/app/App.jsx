@@ -7,8 +7,8 @@ import ROUTES from '../common/constants/routes'
 import Header from "../common/components/header";
 import Sidebar from "../common/components/sidebar";
 
-import Login from "../common/pages/login";
-import Registration from "../common/pages/registration";
+import LoginContainer from "../common/pages/login/container";
+import RegistrationContainer from "../common/pages/registration/container";
 
 import './app.scss';
 
@@ -33,11 +33,11 @@ const App = () => {
                 />
                 <Route
                   path={ROUTES.LOGIN}
-                  render={() => <Login />}
+                  render={() => <LoginContainer />}
                 />
                 <Route
                   path={ROUTES.REGISTRATION}
-                  render={() => <Registration />}
+                  render={() => <RegistrationContainer />}
                 />
               </Switch>
             </div>
