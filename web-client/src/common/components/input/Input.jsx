@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-
+import { Field } from 'redux-form';
 import INPUT_TYPES from '../../constants/input-types';
 
 import './input.scss';
@@ -11,20 +11,18 @@ const Input = (props) => {
     className,
     name,
     type,
-    value,
-    onChange,
+    component,
     placeholder,
     ...restProps
   } = props;
 
   return (
-    <input
+    <Field
       className={classNames('input', className)}
       id={name}
       name={name}
       type={type}
-      value={value}
-      onChange={onChange}
+      component={component}
       placeholder={placeholder}
       {...restProps}
     />
@@ -36,8 +34,7 @@ Input.propTypes = {
   id: PropTypes.string,
   name: PropTypes.string,
   type: PropTypes.string,
-  value: PropTypes.string,
-  onChange: PropTypes.func,
+  component: PropTypes.string,
   placeholder: PropTypes.string,
 };
 
@@ -46,9 +43,8 @@ Input.defaultProps = {
   className: undefined,
   name: undefined,
   placeholder: undefined,
+  component: 'input',
   id: undefined,
-  value: undefined,
-  onChange: undefined,
 };
 
 export default Input;

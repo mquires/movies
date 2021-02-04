@@ -1,20 +1,22 @@
 import React from 'react';
+import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import * as axios from 'axios';
 
 import AuthComponent from '../../components/auth-component';
-import LoginForm from '../../components/forms/login-form';
+import RegistrationForm from '../../components/forms/registration-form';
 
-const Login = () => {
+const Registration = () => {
   const onSubmit = (formData) => {
     const {
+      name,
       email,
       password
     } = formData;
 
     console.log(email, password);
 
-    axios.post('http://localhost:3500/api/auth/signin', { email, password })
+    axios.post('http://localhost:3500/api/auth/signup', { name, email, password })
       .then(response => {
         localStorage.setItem('token', response.data.values.token);
       });
@@ -22,12 +24,12 @@ const Login = () => {
 
   return (
     <AuthComponent
-      className="login"
-      title="Login"
+      className="registration"
+      title="Registration"
     >
-      <LoginForm onSubmit={onSubmit} />
+      <RegistrationForm onSubmit={onSubmit} />
     </AuthComponent>
   );
 };
 
-export default Login;
+export default Registration;
