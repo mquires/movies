@@ -1,0 +1,18 @@
+@import "../../../assets/styles/abstracts/variables";
+
+.input {
+  color: $CL_4_GREY;
+  border: none;
+  border-bottom: 0.1rem solid $CL_1_GREY;
+  font-family: $FONT_FAMILY;
+  font-size: 1.7rem;
+  outline: none;
+  font-weight: 400;
+  padding: 1rem 2rem;
+  background: none;
+  transition: 0.2s border-bottom;
+
+  &:focus {
+    border-color: $BLUE;
+  }
+}

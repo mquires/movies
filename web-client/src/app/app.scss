@@ -4,6 +4,7 @@
 body {
   font-family: $FONT-FAMILY;
   background: $CL_2_GREY;
+  color: $CL_3_GREY;
 }
 
 .app {
@@ -13,6 +14,7 @@ body {
 
   &__content {
     width: 100%;
-    margin: 0 40px;
+    margin: 3rem;
+    font-size: 1.7rem;
   }
 }

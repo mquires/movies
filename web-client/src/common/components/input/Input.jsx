@@ -4,6 +4,8 @@ import classNames from 'classnames';
 
 import INPUT_TYPES from '../../constants/input-types';
 
+import './input.scss';
+
 const Input = (props) => {
   const {
     className,

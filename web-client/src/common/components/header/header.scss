@@ -18,6 +18,11 @@
 
   &__logo {
     text-align: center;
+    
+    &-link {
+      text-decoration: none;
+      color: $CL_3_GREY;
+    }
   }
 
   &__info {

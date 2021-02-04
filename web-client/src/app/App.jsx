@@ -6,6 +6,8 @@ import ROUTES from '../common/constants/routes'
 import Header from "../common/components/header";
 import Sidebar from "../common/components/sidebar";
 
+import Login from "../common/pages/login";
+
 import './app.scss';
 
 const history = createBrowserHistory();
@@ -13,7 +15,9 @@ const history = createBrowserHistory();
 const App = () => {
   return (
     <div className="app">
-      <Header />
+      <Router history={history}>
+        <Header />
+      </Router>
       <div className="app__container">
         <Router history={history}>
           <Sidebar />
@@ -26,7 +30,11 @@ const App = () => {
               />
               <Route
                 path={ROUTES.LOGIN}
-                render={() => <div>login</div>}
+                render={() => <Login />}
+              />
+              <Route
+                path={ROUTES.REGISTRATION}
+                render={() => <Registration />}
               />
             </Switch>
           </div>

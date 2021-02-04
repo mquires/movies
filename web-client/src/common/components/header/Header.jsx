@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import { NavLink } from 'react-router-dom';
+import ROUTES from '../../constants/routes';
 
 import Button from '../button';
 
@@ -15,10 +17,14 @@ const Header = (props) => {
     <header className={classNames('header', className)}>
       <div className="header__container">
         <div className="header__logo">
-          <h1>Movies</h1>
+          <NavLink className="header__logo-link" to={ROUTES.MAIN}>
+            <h1>Movies</h1>
+          </NavLink>
         </div>
         <div className="header__info">
-          <Button caption="Login" />
+          <NavLink to={ROUTES.LOGIN}>
+            <Button caption="Login" />
+          </NavLink>
         </div>
       </div>
     </header>
