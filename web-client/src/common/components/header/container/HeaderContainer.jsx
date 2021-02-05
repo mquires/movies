@@ -1,9 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
-import { compose } from 'redux';
-
-import withAuthRedirect from '../../../../hoc/withAuthRedirect';
+import { setIsAuth } from '../../../../redux/auth-reducer';
 
 import Header from '../Header';
 
@@ -14,8 +11,22 @@ const mapStateToProps = (state) => {
 }
 
 class HeaderContainer extends React.Component {
+  componentDidMount() {
+    const {
+      setIsAuth
+    } = this.props;
+
+    setIsAuth();
+  }
+
   onLogout() {
+    const {
+      setIsAuth
+    } = this.props;
+
     localStorage.removeItem('token');
+
+    setIsAuth();
   }
 
   render() {
@@ -29,9 +40,6 @@ class HeaderContainer extends React.Component {
   }
 };
 
-const HeaderContainerCompose = compose(
-  connect(mapStateToProps, {}),
-  withRouter
-)(HeaderContainer);
+const HeaderContainerConnect = connect(mapStateToProps, { setIsAuth })(HeaderContainer);
 
-export default HeaderContainerCompose;
+export default HeaderContainerConnect;

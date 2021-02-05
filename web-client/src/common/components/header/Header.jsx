@@ -25,7 +25,7 @@ const Header = (props) => {
         </div>
         <div className="header__info">
           {
-            isAuth || localStorage.getItem('token') ?
+            isAuth ?
               <div className="header__user">
                 <p>avatar</p>
                 <Button onClick={onLogout} caption="Logout" />

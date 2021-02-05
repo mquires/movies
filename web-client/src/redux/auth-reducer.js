@@ -30,7 +30,7 @@ export const loginUser = (email, password) => {
         dispatch(setAuthUser(true));
       });
   }
-}
+};
 
 export const signupUser = (name, email, password) => {
   return (dispatch) => {
@@ -40,6 +40,12 @@ export const signupUser = (name, email, password) => {
         dispatch(setAuthUser(true));
       });
   }
-}
+};
+
+export const setIsAuth = () => (dispatch) => {
+  return localStorage.getItem('token') ?
+    dispatch(setAuthUser(true)) :
+    dispatch(setAuthUser(false));
+};
 
 export default authReducer;

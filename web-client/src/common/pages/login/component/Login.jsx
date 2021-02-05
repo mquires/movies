@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { NavLink } from 'react-router-dom';
+import ROUTES from '../../../constants/routes';
 
 import AuthComponent from '../../../components/auth-component';
 import LoginForm from '../../../components/forms/login-form';
-import { NavLink } from 'react-router-dom';
-import ROUTES from '../../../constants/routes';
 
 import './login.scss';
 
