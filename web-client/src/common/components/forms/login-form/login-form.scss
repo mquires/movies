@@ -1,6 +1,16 @@
+@import '../../../../assets/styles/abstracts/variables';
+
 .form {
   display: flex;
   flex-direction: column;
   justify-content: center;
   gap: 3rem;
+
+  &__error {
+    border: 2px solid $BLUE;
+    border-radius: 1.5rem;
+    padding: 1rem;
+    color: $BLUE;
+    margin: 0.5rem 0;
+  }
 }

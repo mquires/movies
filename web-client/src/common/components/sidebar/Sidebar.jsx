@@ -18,15 +18,17 @@ const Sidebar = (props) => {
         <div className="sidebar__nav-links">
           <NavLink
             className={classNames('sidebar__nav-link', className)}
-            to={ROUTES.MAIN}
+            activeClassName={classNames('sidebar__nav-link-active', className)}
+            to={ROUTES.MOVIES}
           >
-            Main
+            Movies
           </NavLink>
           <NavLink
             className={classNames('sidebar__nav-link', className)}
-            to={ROUTES.LOGIN}
+            activeClassName={classNames('sidebar__nav-link-active', className)}
+            to={ROUTES.TV}
           >
-            WD
+            TV Series
           </NavLink>
         </div>
       </div>

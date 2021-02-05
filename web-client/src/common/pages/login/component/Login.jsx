@@ -3,6 +3,10 @@ import PropTypes from 'prop-types';
 
 import AuthComponent from '../../../components/auth-component';
 import LoginForm from '../../../components/forms/login-form';
+import { NavLink } from 'react-router-dom';
+import ROUTES from '../../../constants/routes';
+
+import './login.scss';
 
 const Login = (props) => {
   const {
@@ -15,6 +19,12 @@ const Login = (props) => {
       title="Login"
     >
       <LoginForm onSubmit={onLogin} />
+      <NavLink
+        className="login__signup-link"
+        to={ROUTES.REGISTRATION}
+      >
+        Don't have an account? Create one now
+      </NavLink>
     </AuthComponent>
   );
 };

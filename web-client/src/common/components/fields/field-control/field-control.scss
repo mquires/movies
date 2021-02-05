@@ -1,0 +1,13 @@
+@import "../../../../assets/styles/abstracts/variables";
+
+.field-control {
+  position: relative;
+
+  &__error {
+    position: absolute;
+    bottom: 3.5rem;
+    color: $BLUE;
+    margin: 0.5rem 0;
+    font-size: 1.4rem;
+  }
+}

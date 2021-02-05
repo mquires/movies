@@ -22,6 +22,11 @@
     &-link {
       text-decoration: none;
       color: $CL_3_GREY;
+      transition: 0.2s;
+
+      &:hover {
+        color: $BLUE;
+      }
     }
   }
 
@@ -30,5 +35,11 @@
     justify-content: flex-end;
     width: calc(100vw - 20rem);
     padding: 0 4rem;
+  }
+
+  &__user {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
   }
 }

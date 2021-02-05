@@ -10,7 +10,9 @@ import './header.scss';
 
 const Header = (props) => {
   const {
-    className
+    className,
+    isAuth,
+    onLogout
   } = props;
 
   return (
@@ -22,9 +24,16 @@ const Header = (props) => {
           </NavLink>
         </div>
         <div className="header__info">
-          <NavLink to={ROUTES.LOGIN}>
-            <Button caption="Login" />
-          </NavLink>
+          {
+            isAuth || localStorage.getItem('token') ?
+              <div className="header__user">
+                <p>avatar</p>
+                <Button onClick={onLogout} caption="Logout" />
+              </div> :
+              <NavLink to={ROUTES.LOGIN}>
+                <Button caption="Login" />
+              </NavLink>
+          }
         </div>
       </div>
     </header>

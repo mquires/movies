@@ -1,0 +1,10 @@
+@import '../../../../assets/styles/abstracts/variables';
+
+.login {
+
+  &__signup-link {
+    text-decoration: none;
+    color: $BLUE;
+    margin: 2rem 0;
+  }
+}

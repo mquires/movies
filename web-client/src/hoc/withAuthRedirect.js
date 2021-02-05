@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from "react-redux";
 import ROUTES from '../common/constants/routes';
-import { Redirect } from 'react-router-dom';
+import { Redirect, withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 const mapStateToProps = (state) => ({

@@ -4,9 +4,10 @@ import { createBrowserHistory } from 'history';
 import { Provider } from 'react-redux';
 import ROUTES from '../common/constants/routes'
 
-import Header from "../common/components/header";
+import HeaderContainer from "../common/components/header/container";
 import Sidebar from "../common/components/sidebar";
 
+import Main from "../common/pages/main";
 import LoginContainer from "../common/pages/login/container";
 import RegistrationContainer from "../common/pages/registration/container";
 
@@ -19,7 +20,7 @@ const App = () => {
     <Provider store={store}>
       <div className="app">
         <Router history={history}>
-          <Header />
+          <HeaderContainer />
         </Router>
         <div className="app__container">
           <Router history={history}>
@@ -29,7 +30,7 @@ const App = () => {
                 <Route
                   exact
                   path={ROUTES.MAIN}
-                  render={() => <div>123</div>}
+                  render={() => <Main />}
                 />
                 <Route
                   path={ROUTES.LOGIN}
