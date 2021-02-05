@@ -9,3 +9,9 @@ export const maxLength = (length) => (value) => {
 
   return undefined;
 }
+
+export const minLength = (length) => (value) => {
+  if (value.length < length) return `Min length is ${length} symbols`;
+
+  return undefined;
+}
