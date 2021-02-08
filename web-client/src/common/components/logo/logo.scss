@@ -1,13 +1,23 @@
-@import '../../../assets/styles/abstracts/variables';
+@import "../../../assets/styles/abstracts/variables";
 
 .logo {
   &__link {
     color: $BLACK;
     text-decoration: none;
-    transition: color 0.1s;
+    transition: 0.1s;
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
 
     &:hover {
       color: $RED;
+      fill: $RED;
+      stroke: $RED;
     }
+  }
+
+  &__icon {
+    width: 2.5rem;
+    height: 2.5rem;
   }
 }

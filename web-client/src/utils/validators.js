@@ -15,3 +15,10 @@ export const minLength = (length) => (value) => {
 
   return undefined;
 }
+
+export const validateEmail = (email) => {
+  const reg = /\S+@\S+\.\S+/;
+  if (!reg.test(email)) return `Invalid e-mail`;
+  
+  return undefined;
+}

@@ -18,7 +18,7 @@ const Login = (props) => {
     <CenteredPageComponent
       className="login"
     >
-      <Logo />
+      <Logo className="login__logo" />
       <h3 className="login__title">Sign in with your account</h3>
       <LoginForm
         className="login__form"

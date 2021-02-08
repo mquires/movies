@@ -12,6 +12,11 @@
     margin: 2rem 0;
   }
 
+  &__logo {
+    display: flex;
+    justify-content: center;
+  }
+
   &__form {
     margin: 5rem;
   }

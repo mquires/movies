@@ -2,7 +2,7 @@ import React from 'react';
 import { reduxForm } from 'redux-form';
 import BUTTON_TYPES from '../../../constants/button-types';
 import INPUT_TYPES from '../../../constants/input-types';
-import { maxLength, minLength, required } from '../../../../utils/validators';
+import { maxLength, minLength, required, validateEmail } from '../../../../utils/validators';
 
 import Input from '../../input';
 import Button from '../../button';
@@ -34,7 +34,7 @@ const RegistrationForm = (props) => {
         component={Input}
         placeholder="Your e-mail"
         type={INPUT_TYPES.EMAIL}
-        validate={[required, maxLength30, minLength5]}
+        validate={[required, maxLength30, minLength5, validateEmail]}
       />
       <EntryField
         name={"password"}
