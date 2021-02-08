@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import AuthComponent from '../../../components/auth-component';
 import RegistrationForm from '../../../components/forms/registration-form';
+import CenteredPageComponent from '../../../components/centered-page-component';
 
 const Registration = (props) => {
   const {
@@ -10,12 +10,12 @@ const Registration = (props) => {
   } = props;
 
   return (
-    <AuthComponent
+    <CenteredPageComponent
       className="registration"
       title="Registration"
     >
       <RegistrationForm onSubmit={onRegistration} />
-    </AuthComponent>
+    </CenteredPageComponent>
   );
 };
 

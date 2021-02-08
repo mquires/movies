@@ -1,14 +1,23 @@
+@import "../../../assets/styles/abstracts/variables";
+
 .page-component {
-  height: 100%;
-  
+  max-width: 160rem;
+  margin: 0 auto;
+  padding: 0 3rem;
+
+  &__title-container {
+    font-size: 2.5rem;
+    border-bottom: 0.1rem solid $CL_6_GREY;
+  }
+
   &__title {
-    font-size: 3rem;
+    margin-bottom: 0.6rem;
   }
 
   &__content {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin: auto;
+    margin: 3.2rem 0;
   }
 }

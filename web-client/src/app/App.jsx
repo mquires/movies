@@ -10,6 +10,7 @@ import Sidebar from "../common/components/sidebar";
 import Main from "../common/pages/main";
 import LoginContainer from "../common/pages/login/container";
 import RegistrationContainer from "../common/pages/registration/container";
+import Movies from "../common/pages/movies";
 
 import './app.scss';
 
@@ -20,30 +21,30 @@ const App = () => {
     <Provider store={store}>
       <div className="app">
         <Router history={history}>
-          <HeaderContainer />
+          <Sidebar />
+          <div className="app__content">
+            <HeaderContainer />
+            <Switch>
+              <Route
+                exact
+                path={ROUTES.MAIN}
+                render={() => <Main />}
+              />
+              <Route
+                path={ROUTES.LOGIN}
+                render={() => <LoginContainer />}
+              />
+              <Route
+                path={ROUTES.REGISTRATION}
+                render={() => <RegistrationContainer />}
+              />
+              <Route
+                path={ROUTES.MOVIES}
+                render={() => <Movies />}
+              />
+            </Switch>
+          </div>
         </Router>
-        <div className="app__container">
-          <Router history={history}>
-            <Sidebar />
-            <div className="app__content">
-              <Switch>
-                <Route
-                  exact
-                  path={ROUTES.MAIN}
-                  render={() => <Main />}
-                />
-                <Route
-                  path={ROUTES.LOGIN}
-                  render={() => <LoginContainer />}
-                />
-                <Route
-                  path={ROUTES.REGISTRATION}
-                  render={() => <RegistrationContainer />}
-                />
-              </Switch>
-            </div>
-          </Router>
-        </div>
       </div>
     </Provider>
   );

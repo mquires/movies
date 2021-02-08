@@ -1,0 +1,32 @@
+@import '../../../assets/styles/abstracts/variables';
+
+.search {
+  position: relative;
+
+  &__icon {
+    position: absolute;
+    top: 11px;
+    left: 10px;
+    width: 13px;
+    height: 13px;
+    fill: $CL_8_GREY;
+    stroke: $CL_8_GREY;
+  }
+
+  &__input {
+    font-family: $FONT-FAMILY;
+    height: 3.5rem;
+    border-radius: 0.4rem;
+    width: 100%;
+    font-weight: 400;
+    font-size: 1.2rem;
+    padding: 0 3rem;
+    border: 0.1rem solid $CL_9_GREY;
+    outline: none;
+
+    &:focus {
+      border: 0.1rem solid $PINK;
+      border-radius: 0.7rem;
+    }
+  }
+}

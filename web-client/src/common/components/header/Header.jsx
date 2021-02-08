@@ -17,24 +17,17 @@ const Header = (props) => {
 
   return (
     <header className={classNames('header', className)}>
-      <div className="header__container">
-        <div className="header__logo">
-          <NavLink className="header__logo-link" to={ROUTES.MAIN}>
-            <h1>Movies</h1>
-          </NavLink>
-        </div>
-        <div className="header__info">
-          {
-            isAuth ?
-              <div className="header__user">
-                <p>avatar</p>
-                <Button onClick={onLogout} caption="Logout" />
-              </div> :
-              <NavLink to={ROUTES.LOGIN}>
-                <Button caption="Login" />
-              </NavLink>
-          }
-        </div>
+      <div className="header__info">
+        {
+          isAuth ?
+            <div className="header__user">
+              <p>avatar</p>
+              <Button onClick={onLogout} caption="Logout" />
+            </div> :
+            <NavLink to={ROUTES.LOGIN}>
+              <Button caption="Login" />
+            </NavLink>
+        }
       </div>
     </header>
   );

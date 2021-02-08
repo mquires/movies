@@ -3,18 +3,24 @@
 
 body {
   font-family: $FONT-FAMILY;
-  background: $CL_2_GREY;
-  color: $CL_3_GREY;
+  color: $BLACK;
+  font-size: 1.5rem;
+
+  &::-webkit-scrollbar {
+    width: 0.5rem;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: $CL_8_GREY;
+    border-radius: 1.5rem;
+  }
 }
 
 .app {
-  &__container {
-    display: flex;
-  }
+  display: flex;
 
   &__content {
     width: 100%;
-    margin: 3rem;
     font-size: 1.7rem;
   }
 }

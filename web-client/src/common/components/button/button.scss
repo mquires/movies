@@ -1,11 +1,12 @@
 @import "../../../assets/styles/abstracts/variables";
 
 .button {
-  background: $BLUE;
+  background: $RED;
   border: none;
   color: $WHITE;
-  border-radius: 5rem;
-  padding: 0.8rem 3.5rem;
+  border-radius: 0.6rem;
+  height: 2.8rem;
+  padding: 0 1.2rem;
   cursor: pointer;
   outline: none;
   font-family: $FONT_FAMILY;
@@ -15,7 +16,7 @@
 
   &:hover {
     background: none;
-    border: 0.2rem solid $BLUE;
-    color: $BLUE;
+    border: 0.2rem solid $RED;
+    color: $RED;
   }
 }

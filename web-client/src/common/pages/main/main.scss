@@ -1,0 +1,51 @@
+@import "../../../assets/styles/abstracts/variables";
+
+.main {
+  height: 94.9vh;
+  overflow: hidden;
+  box-sizing: border-box;
+
+  &__info-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  &__info {
+    max-width: 70%;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  &__title {
+    font-size: 6rem;
+    max-width: 64rem;
+    margin: 0 auto;
+    font-weight: 500;
+  }
+
+  &__text {
+    margin: 2.5rem auto;
+    max-width: 44rem;
+  }
+
+  &__learn-more {
+    display: flex;
+    align-items: center;
+    color: $BLACK;
+    text-decoration: none;
+    justify-content: center;
+    margin: 2.5rem 0;
+    font-size: 1.4rem;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  &__image {
+    width: 100%;
+    max-width: 160rem;
+    margin-top: 5%;
+  }
+}

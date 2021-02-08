@@ -1,41 +1,16 @@
 @import "../../../assets/styles/abstracts/variables";
 
 .header {
+  position: sticky;
+  top: 0;
+  padding: 1rem 3rem;
+  margin: 0 auto;
+  max-width: 160rem;
   display: flex;
-  border-bottom: 0.1rem solid $CL_1_GREY;
-  height: 7rem;
-  background: $WHITE;
-  width: 100%;
-
-  &__container {
-    display: grid;
-    align-items: center;
-    max-width: 160rem;
-    justify-content: space-between;
-    width: 100%;
-    grid-template-columns: 20rem 1fr;
-  }
-
-  &__logo {
-    text-align: center;
-    
-    &-link {
-      text-decoration: none;
-      color: $CL_3_GREY;
-      transition: 0.2s;
-
-      &:hover {
-        color: $BLUE;
-      }
-    }
-  }
-
-  &__info {
-    display: flex;
-    justify-content: flex-end;
-    width: calc(100vw - 20rem);
-    padding: 0 4rem;
-  }
+  align-items: center;
+  justify-content: flex-end;
+  z-index: 3;
+  backdrop-filter: saturate(50%) blur(10px) opacity(50%);
 
   &__user {
     display: flex;

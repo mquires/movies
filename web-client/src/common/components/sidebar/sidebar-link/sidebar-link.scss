@@ -1,0 +1,15 @@
+@import '../../../../assets/styles/abstracts/variables';
+
+.sidebar-link {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+
+  &__icon {
+    fill: $RED;
+    stroke: $RED;
+    width: 2.5rem;
+    height: 2.5rem;
+    margin: 0 1rem 0 0;
+  }
+}

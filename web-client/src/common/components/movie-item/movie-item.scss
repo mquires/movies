@@ -1,0 +1,37 @@
+.film-item {
+  border-radius: 1rem;
+  max-width: 30rem;
+  object-fit: cover;
+  overflow: hidden;
+  box-shadow: 0px 2px 35px 14px rgba(13, 13, 13, 0.04);
+  font-size: 1.3rem;
+
+  &__image {
+    max-width: 100%;
+    height: auto;
+  }
+
+  &__info {
+    margin: 2rem;
+  }
+
+  &__title {
+    font-size: 2rem;
+    margin: 2rem 0;
+  }
+
+  &__language {
+    display: flex;
+  }
+
+  &__lang-date {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 2rem 0;
+  }
+
+  &__language-icon {
+    margin-right: 0.5rem;
+  }
+}

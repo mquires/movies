@@ -1,10 +1,18 @@
-@import '../../../../assets/styles/abstracts/variables';
+@import "../../../../assets/styles/abstracts/variables";
 
 .login {
-
   &__signup-link {
     text-decoration: none;
     color: $BLUE;
     margin: 2rem 0;
+  }
+
+  &__title {
+    font-size: 2.2rem;
+    margin: 2rem 0;
+  }
+
+  &__form {
+    margin: 5rem;
   }
 }

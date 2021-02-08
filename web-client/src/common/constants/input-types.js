@@ -5,6 +5,7 @@ const INPUT_TYPES = {
   EMAIL: 'email',
   PASSWORD: 'password',
   DATE: 'date',
+  SEARCH: 'search'
 };
 
 export default INPUT_TYPES;

@@ -1,0 +1,13 @@
+@import '../../../assets/styles/abstracts/variables';
+
+.logo {
+  &__link {
+    color: $BLACK;
+    text-decoration: none;
+    transition: color 0.1s;
+
+    &:hover {
+      color: $RED;
+    }
+  }
+}

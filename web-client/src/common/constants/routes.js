@@ -3,7 +3,8 @@ const ROUTES = {
   LOGIN: '/signin',
   REGISTRATION: '/signup',
   MOVIES: '/movies',
-  TV: '/tv'
+  TV: '/tv',
+  SHOW_MORE: '/more'
 };
 
 export default ROUTES;

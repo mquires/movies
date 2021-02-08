@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from "react-redux";
 import ROUTES from '../common/constants/routes';
-import { Redirect, withRouter } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 const mapStateToProps = (state) => ({
@@ -16,7 +16,7 @@ const withProfileRedirect = (Component) => {
         isAuth
       } = this.props;
 
-     if (localStorage.getItem('token')) return <Redirect to={ROUTES.MAIN} />
+     if (localStorage.getItem('token')) return <Redirect to={ROUTES.MOVIES} />
 
       return (
         <Component {...this.props} />

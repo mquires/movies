@@ -1,4 +1,5 @@
 import React from 'react';
+import classNames from 'classnames';
 import { reduxForm } from 'redux-form';
 import BUTTON_TYPES from '../../../constants/button-types';
 import INPUT_TYPES from '../../../constants/input-types';
@@ -15,6 +16,7 @@ import './login-form.scss';
 
 const LoginForm = (props) => {
   const {
+    className,
     handleSubmit,
     error
   } = props;
@@ -22,7 +24,7 @@ const LoginForm = (props) => {
   return (
     <form
       onSubmit={handleSubmit}
-      className="form"
+      className={classNames("form", className)}
     >
       {error &&
         <div className="form__error">{error}</div>
