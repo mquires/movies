@@ -1,0 +1,34 @@
+@import "../../../assets/styles/abstracts/variables";
+
+.auth-user-nav {
+  position: relative;
+
+  &__avatar {
+    cursor: pointer;
+  }
+
+  &__list {
+    position: absolute;
+    left: -6.5rem;
+    top: 4rem;
+    list-style-type: none;
+    width: 15rem;
+    box-shadow: 0 1px 2px $CL_8_GREY;
+    border-radius: 2.5rem;
+    padding: 1rem 2rem;
+    text-align: center;
+    font-size: 1.4rem;
+
+    &-item {
+      &-link {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        fill: $CL_2_BLUE;
+        color: $CL_2_BLUE;
+        text-decoration: none;
+        gap: 1rem;
+      }
+    }
+  }
+}

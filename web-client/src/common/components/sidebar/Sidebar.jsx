@@ -6,7 +6,7 @@ import { NavLink } from 'react-router-dom';
 import ROUTES from '../../constants/routes';
 
 import Logo from '../logo';
-import SidebarLink from './sidebar-link';
+import SidebarLink from '../sidebar-link';
 import Search from '../search';
 
 import moviesIcon from '../../../assets/icons/movies.svg';

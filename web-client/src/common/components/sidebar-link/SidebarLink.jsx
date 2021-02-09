@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { NavLink } from 'react-router-dom';
 
-import Icon from '../../icon';
+import Icon from '../icon';
 
 import './sidebar-link.scss';
 

@@ -5,6 +5,7 @@ import { NavLink } from 'react-router-dom';
 import ROUTES from '../../constants/routes';
 
 import Button from '../button';
+import AuthUserNav from '../auth-user-nav';
 
 import './header.scss';
 
@@ -21,7 +22,7 @@ const Header = (props) => {
         {
           isAuth ?
             <div className="header__user">
-              <p>avatar</p>
+              <AuthUserNav />
               <Button onClick={onLogout} caption="Logout" />
             </div> :
             <NavLink to={ROUTES.LOGIN}>
