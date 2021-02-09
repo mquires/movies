@@ -22,3 +22,10 @@ export const validateEmail = (email) => {
   
   return undefined;
 }
+
+export const validatePassword = (password) => {
+  const reg = /^(?=.*[\d])(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%^&*])[\w!@#$%^&*]{8,}$/;
+  if (!reg.test(password)) return `Password example: expQ123!`;
+  
+  return undefined;
+}

@@ -1,3 +1,4 @@
+import { stopSubmit } from "redux-form";
 import { authAPI } from "../api/api";
 
 const SET_AUTH_USER = 'SET-AUTH-USER';
@@ -28,6 +29,11 @@ export const loginUser = (email, password) => {
       .then((response) => {
         localStorage.setItem('token', response.data.values.token);
         dispatch(setAuthUser(true));
+      })
+      .catch(() => {
+        dispatch(stopSubmit("login", {
+          email: 'E-mail or password are wrong'
+        }));
       });
   }
 };
@@ -38,6 +44,11 @@ export const signupUser = (name, email, password) => {
       .then((response) => {
         localStorage.setItem('token', response.data.values.token);
         dispatch(setAuthUser(true));
+      })
+      .catch(() => {
+        dispatch(stopSubmit("registration", {
+          email: 'This e-mail already exists'
+        }));
       });
   }
 };
