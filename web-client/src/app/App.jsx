@@ -10,7 +10,8 @@ import Sidebar from "../common/components/sidebar";
 import Main from "../common/pages/main";
 import LoginContainer from "../common/pages/login/container";
 import RegistrationContainer from "../common/pages/registration/container";
-import Movies from "../common/pages/movies";
+import MoviesContainer from "../common/pages/movies/container";
+import Profile from "../common/pages/profile";
 
 import './app.scss';
 
@@ -40,7 +41,11 @@ const App = () => {
               />
               <Route
                 path={ROUTES.MOVIES}
-                render={() => <Movies />}
+                render={() => <MoviesContainer />}
+              />
+              <Route
+                path={ROUTES.PROFILE}
+                render={() => <Profile />}
               />
             </Switch>
           </div>

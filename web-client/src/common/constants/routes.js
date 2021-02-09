@@ -5,7 +5,7 @@ const ROUTES = {
   MOVIES: '/movies',
   TV: '/tv',
   SHOW_MORE: '/more',
-  ACCOUNT: '/account'
+  PROFILE: '/profile'
 };
 
 export default ROUTES;

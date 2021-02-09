@@ -17,8 +17,7 @@ import './login-form.scss';
 const LoginForm = (props) => {
   const {
     className,
-    handleSubmit,
-    error
+    handleSubmit
   } = props;
 
   return (
@@ -26,10 +25,6 @@ const LoginForm = (props) => {
       onSubmit={handleSubmit}
       className={classNames("form", className)}
     >
-      {error &&
-        <div className="form__error">{error}</div>
-      }
-      <div className="form__error">{error}</div>
       <EntryField
         name={"email"}
         component={Input}

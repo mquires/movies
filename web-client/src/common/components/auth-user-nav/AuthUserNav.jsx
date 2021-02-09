@@ -18,7 +18,8 @@ const AuthUserNav = (props) => {
 
   const [isOpen, setIsOpen] = useState(false);
 
-  const toggleMenu = () => setIsOpen(!isOpen)
+  const toggleMenu = () => setIsOpen(!isOpen);
+  const closeMenu = () => setIsOpen(false);
 
   return (
     <div className={classNames("auth-user-nav", className)}>
@@ -33,16 +34,19 @@ const AuthUserNav = (props) => {
       {
         isOpen &&
         <ul className="auth-user-nav__list">
-          <li className="auth-user-nav__list-item">
+          <li
+            className="auth-user-nav__list-item"
+            onClick={closeMenu}
+          >
             <NavLink
               className="auth-user-nav__list-item-link"
-              to={ROUTES.ACCOUNT}
+              to={ROUTES.PROFILE}
             >
               <Icon
                 glyph={userIcon.id}
                 viewBox={userIcon.viewBox}
               />
-              My account
+              My profile
               </NavLink>
           </li>
         </ul>

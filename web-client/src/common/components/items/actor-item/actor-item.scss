@@ -1,0 +1,14 @@
+.actor-item {
+  &__image {
+    max-width: 100%;
+    object-fit: cover;
+    height: 17rem;
+    border-radius: 50%;
+  }
+
+  &__category {
+    text-transform: uppercase;
+    font-size: 1.4rem;
+    margin-top: 1rem;
+  }
+}

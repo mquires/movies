@@ -28,6 +28,13 @@
         color: $CL_2_BLUE;
         text-decoration: none;
         gap: 1rem;
+        padding: 0.5rem 1.1rem;
+        transition: background 0.1s;
+
+        &:hover {
+          background: $CL_7_GREY;
+          border-radius: 0.5rem;
+        }
       }
     }
   }
