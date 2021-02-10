@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import { NavLink } from 'react-router-dom';
 import ROUTES from '../../constants/routes';
 
-import Button from '../button';
+import Button from '../buttons/main-button';
 import AuthUserNav from '../auth-user-nav';
 
 import './header.scss';

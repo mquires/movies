@@ -1,0 +1,16 @@
+.categories {
+  margin-bottom: 3rem;
+
+  &__title {
+    padding: 1.5rem 0;
+    font-size: 1.7rem;
+    font-weight: 500;
+  }
+
+  &__list {
+    list-style-type: none;
+    display: flex;
+    gap: 3rem;
+    flex-wrap: wrap;
+  }
+}

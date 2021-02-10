@@ -1,7 +1,7 @@
 import React from 'react';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
-import INPUT_TYPES from '../../constants/input-types';
+import { Field, reduxForm } from 'redux-form';
 
 import Icon from '../icon';
 
@@ -11,20 +11,26 @@ import './search.scss';
 
 const Search = (props) => {
   const {
-    className
+    className,
+    handleSubmit
   } = props;
 
   return (
-    <form className={classNames("search", className)}>
+    <form
+      className={classNames("search", className)}
+      onSubmit={handleSubmit}
+    >
       <Icon
         glyph={findIcon.id}
         viewBox={findIcon.viewBox}
         className="search__icon"
       />
-      <input
+      <Field
         className="search__input"
-        type={INPUT_TYPES.TEXT}
+        component="input"
+        type="search"
         placeholder="Search"
+        name="search"
       />
     </form>
   );
@@ -38,4 +44,4 @@ Search.defaultProps = {
   className: undefined
 };
 
-export default Search;
+export default reduxForm({ form: 'search-form' })(Search);

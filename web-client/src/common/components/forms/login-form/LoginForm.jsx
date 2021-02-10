@@ -6,7 +6,7 @@ import INPUT_TYPES from '../../../constants/input-types';
 import { maxLength, minLength, required, validateEmail, validatePassword } from '../../../../utils/validators';
 
 import Input from '../../input';
-import Button from '../../button';
+import Button from '../../buttons/main-button';
 import EntryField from '../../fields/EntryField';
 
 const maxLength30 = maxLength(30);
@@ -29,7 +29,6 @@ const LoginForm = (props) => {
         name={"email"}
         component={Input}
         placeholder="E-mail"
-        type={INPUT_TYPES.EMAIL}
         validate={[required, maxLength30, minLength5, validateEmail]}
       />
       <EntryField

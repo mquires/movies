@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
-import BUTTON_TYPES from '../../constants/button-types';
+import BUTTON_TYPES from '../../../constants/button-types';
 
 import './button.scss';
 
@@ -12,6 +12,7 @@ const Button = (props) => {
     type,
     onClick,
     caption,
+    children,
     ...restProps
   } = props;
 
@@ -22,6 +23,7 @@ const Button = (props) => {
       onClick={onClick}
       {...restProps}
     >
+      {children}
       {caption}
     </button>
   );

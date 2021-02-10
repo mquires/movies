@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import RegistrationForm from '../../../components/forms/registration-form';
-import CenteredPageComponent from '../../../components/centered-page-component';
+import CenteredPageComponent from '../../../components/page-components/centered-page-component';
 
 const Registration = (props) => {
   const {

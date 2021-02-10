@@ -1,0 +1,37 @@
+.trends-item-cover {
+  border-radius: 10px;
+  width: 100%;
+  overflow: hidden;
+  cursor: pointer;
+  position: relative;
+  transition: 0.5s;
+
+  &:hover {
+    transform: scale(1.05);
+  }
+
+  &:hover &__image {
+    transform: scale(1.05);
+    filter: brightness(40%);
+  }
+
+  &:hover &__content {
+    opacity: 1;
+  }
+
+  &__image {
+    width: 100%;
+    transition: 0.5s;
+    border-radius: 10px;
+  }
+
+  &__content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    transition: 0.5s;
+    z-index: 2;
+  }
+}

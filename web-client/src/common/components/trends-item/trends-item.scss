@@ -1,0 +1,31 @@
+@import "../../../assets/styles/abstracts/variables";
+
+.trends-item {
+  width: 20rem;
+
+  &__info {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.5rem;
+    padding: 1rem 0 1rem 1rem;
+
+    & a {
+      text-decoration: none;
+
+      &:hover {
+        text-decoration: underline;
+        cursor: pointer;
+      }
+    }
+  }
+
+  &__name {
+    font-size: 1.6rem;
+    color: $CL_11_GREY;
+  }
+
+  &__release-date {
+    font-size: 1.2rem;
+    color: $CL_12_GREY;
+  }
+}

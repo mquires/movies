@@ -1,0 +1,29 @@
+@import "../../../../assets/styles/abstracts/variables";
+
+.play-button {
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 50%;
+  position: relative;
+  padding: 0;
+  fill: $RED;
+  stroke: $RED;
+  background: $WHITE;
+  transition: 0.3s;
+  backdrop-filter: blur(5px);
+
+  &__icon {
+    width: 10px;
+    height: 10px;
+    position: absolute;
+    top: 51%;
+    left: 52%;
+    transform: translate(-50%, -50%);
+  }
+
+  &:hover {
+    fill: $WHITE;
+    stroke: $WHITE;
+    background: $RED;
+  }
+}

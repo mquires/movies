@@ -12,6 +12,7 @@ import LoginContainer from "../common/pages/login/container";
 import RegistrationContainer from "../common/pages/registration/container";
 import MoviesContainer from "../common/pages/movies/container";
 import Profile from "../common/pages/profile";
+import TrendsMoviesContainer from "../common/pages/trends-movies/container";
 
 import './app.scss';
 
@@ -46,6 +47,10 @@ const App = () => {
               <Route
                 path={ROUTES.PROFILE}
                 render={() => <Profile />}
+              />
+              <Route
+                path={ROUTES.ALL_TODAY_TRENDS_MOVIES}
+                render={() => <TrendsMoviesContainer />}
               />
             </Switch>
           </div>

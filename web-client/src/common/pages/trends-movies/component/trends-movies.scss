@@ -1,0 +1,10 @@
+@import "../../../../assets/styles/abstracts/variables";
+
+.trends-movies {
+  &__container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 3rem;
+  }
+}

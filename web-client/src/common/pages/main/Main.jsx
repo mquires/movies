@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
 import ROUTES from '../../constants/routes';
 
-import PageComponent from '../../components/page-component';
+import PageComponent from '../../components/page-components/page-component';
 import Logo from '../../components/logo';
-import Button from '../../components/button';
+import Button from '../../components/buttons/main-button';
 import Icon from '../../components/icon';
 import Image from '../../components/image';
 

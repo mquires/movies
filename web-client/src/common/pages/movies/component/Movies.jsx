@@ -1,14 +1,22 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import ROUTES from '../../../constants/routes';
 
-import PageComponent from '../../../components/page-component';
+import SearchPageComponent from '../../../components/page-components/search-page-component';
 import MovieItem from '../../../components/movie-item';
+import Categories from '../../../components/categories';
+import CategoryItem from '../../../components/categories/category-item';
+import SectionInfo from '../../../components/section-info';
+import TrendsItem from '../../../components/trends-item';
+import SectionInfoSeeAll from '../../../components/section-info/section-info-see-all';
 
 import './movies.scss';
 
 const Movies = (props) => {
   const {
-    movies
+    movies,
+    todayTrendingMovies,
+    onSubmit
   } = props;
 
   const moviesList = movies.map(movie => (
@@ -24,15 +32,40 @@ const Movies = (props) => {
     />
   ));
 
+  const todayTrendingMoviesList = todayTrendingMovies.map(todayTrendingMovie => (
+    <TrendsItem
+      id={todayTrendingMovie.id}
+      key={todayTrendingMovie.id}
+      className="trends__item"
+      name={todayTrendingMovie.original_title}
+      releaseDate={todayTrendingMovie.release_date}
+      src={`http://image.tmdb.org/t/p/w1280/${todayTrendingMovie.backdrop_path}`}
+      alt={todayTrendingMovie.original_title}
+    />
+  ));
+
   return (
-    <PageComponent
+    <SearchPageComponent
       className="movies"
       title="Movies"
+      onSubmit={onSubmit}
     >
-      <div className="movies__container">
+      <Categories title="Find more">
+        <CategoryItem categoryTitle="Comedy" />
+        <CategoryItem categoryTitle="Comedy" />
+        <CategoryItem categoryTitle="Comedy" />
+      </Categories>
+      <SectionInfoSeeAll
+        className="trends"
+        title="Today's trends"
+        navLink={ROUTES.ALL_TODAY_TRENDS_MOVIES}
+      >
+        {todayTrendingMoviesList}
+      </SectionInfoSeeAll>
+      <SectionInfo className="movies__list" title="Movies list">
         {moviesList}
-      </div>
-    </PageComponent>
+      </SectionInfo>
+    </SearchPageComponent>
   );
 };
 

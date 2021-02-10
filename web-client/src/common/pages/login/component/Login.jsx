@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
 import ROUTES from '../../../constants/routes';
 
-import CenteredPageComponent from '../../../components/centered-page-component';
+import CenteredPageComponent from '../../../components/page-components/centered-page-component';
 import LoginForm from '../../../components/forms/login-form';
 import Logo from '../../../components/logo';
 

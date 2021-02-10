@@ -12,14 +12,21 @@ class RegistrationContainer extends React.Component {
     const {
       name,
       email,
-      password
+      password,
+      confirmPassword
     } = formData;
 
     const {
       signupUser
     } = this.props;
+    
+    
+    console.log(password)
+    
+    console.log(confirmPassword)
 
-    signupUser(name, email, password);
+
+    signupUser(name, email, password, confirmPassword);
   }
 
   render() {

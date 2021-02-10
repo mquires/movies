@@ -38,18 +38,22 @@ export const loginUser = (email, password) => {
   }
 };
 
-export const signupUser = (name, email, password) => {
+export const signupUser = (name, email, password, confirmPassword) => {
   return (dispatch) => {
-    return authAPI.signup(name, email, password)
-      .then((response) => {
-        localStorage.setItem('token', response.data.values.token);
-        dispatch(setAuthUser(true));
-      })
-      .catch(() => {
-        dispatch(stopSubmit("registration", {
-          email: 'This e-mail already exists'
-        }));
-      });
+    if (password !== confirmPassword) {
+      dispatch(stopSubmit("registration", { confirmPassword: 'Passwords do not match' }));
+    } else {
+      authAPI.signup(name, email, password)
+        .then((response) => {
+          localStorage.setItem('token', response.data.values.token);
+          dispatch(setAuthUser(true));
+        })
+        .catch(() => {
+          dispatch(stopSubmit("registration", {
+            email: 'This e-mail already exists'
+          }));
+        });
+    }
   }
 };
 

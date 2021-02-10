@@ -1,0 +1,21 @@
+@import "../../../assets/styles/abstracts/variables";
+
+.section-info {
+  &__title {
+    padding: 1.5rem 0;
+    font-size: 1.7rem;
+    font-weight: 500;
+
+    &-container {
+      margin-top: 3rem;
+      border-top: 0.1rem solid $CL_6_GREY;
+    }
+  }
+
+  &__container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 3rem;
+  }
+}

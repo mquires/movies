@@ -1,0 +1,19 @@
+@import "../../../../assets/styles/abstracts/variables";
+
+.section-info-see-all {
+  &__title-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &__link {
+    color: $RED;
+    text-decoration: none;
+    font-size: 1.5rem;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}

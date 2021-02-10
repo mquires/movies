@@ -14,27 +14,29 @@
     list-style-type: none;
     width: 15rem;
     box-shadow: 0 1px 2px $CL_8_GREY;
-    border-radius: 2.5rem;
-    padding: 1rem 2rem;
+    border-radius: 0.6rem;
     text-align: center;
-    font-size: 1.4rem;
+    font-size: 1.3rem;
+    background: $WHITE;
 
     &-item {
+      padding: 0.2rem 0;
+      border-radius: 0.5rem;
+      transition: background 0.1s;
+
+      &:hover {
+        background: $CL_7_GREY;
+      }
+
       &-link {
         display: flex;
         align-items: center;
         justify-content: center;
-        fill: $CL_2_BLUE;
-        color: $CL_2_BLUE;
-        text-decoration: none;
         gap: 1rem;
+        fill: $RED;
+        color: $BLACK;
+        text-decoration: none;
         padding: 0.5rem 1.1rem;
-        transition: background 0.1s;
-
-        &:hover {
-          background: $CL_7_GREY;
-          border-radius: 0.5rem;
-        }
       }
     }
   }

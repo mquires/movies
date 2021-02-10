@@ -1,11 +1,11 @@
-@import '../../../assets/styles/abstracts/variables';
+@import "../../../assets/styles/abstracts/variables";
 
 .search {
   position: relative;
 
   &__icon {
     position: absolute;
-    top: 11px;
+    top: 14px;
     left: 10px;
     width: 13px;
     height: 13px;
@@ -27,6 +27,13 @@
     &:focus {
       border: 0.1rem solid $PINK;
       border-radius: 0.7rem;
+    }
+
+    &::-webkit-search-decoration,
+    &::-webkit-search-cancel-button,
+    &::-webkit-search-results-button,
+    &::-webkit-search-results-decoration {
+      display: none;
     }
   }
 }

@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 import './centered-page-component.scss';
 
-const AuthComponent = (props) => {
+const CenteredPageComponent = (props) => {
   const {
     className,
     children
@@ -19,4 +19,4 @@ const AuthComponent = (props) => {
   );
 };
 
-export default AuthComponent;
+export default CenteredPageComponent;

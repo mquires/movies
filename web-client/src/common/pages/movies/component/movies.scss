@@ -1,10 +1,9 @@
 @import "../../../../assets/styles/abstracts/variables";
 
-.movies {
-  &__container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 5rem;
-    justify-content: center;
+.trends {
+  &__item {
+    &:nth-child(n + 7) {
+      display: none;
+    }
   }
 }

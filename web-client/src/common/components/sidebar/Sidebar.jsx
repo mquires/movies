@@ -24,7 +24,6 @@ const Sidebar = (props) => {
     <nav className={classNames('sidebar', className)}>
       <Logo />
       <div className="sidebar__links">
-        <Search className="sidebar__search" />
         <SidebarLink
           glyph={moviesIcon.id}
           viewBox={moviesIcon.viewBox}
