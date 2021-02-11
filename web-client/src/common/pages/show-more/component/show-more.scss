@@ -1,0 +1,19 @@
+@import "../../../../assets/styles/abstracts/variables";
+
+.show-more {
+  max-width: 160rem;
+  margin: 4rem auto;
+  padding: 0 3rem;
+
+  &__title {
+    margin-bottom: 3rem;
+  }
+
+  &__container {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 3rem;
+    justify-content: center;
+  }
+}

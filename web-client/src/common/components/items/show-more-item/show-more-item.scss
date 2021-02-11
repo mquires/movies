@@ -1,0 +1,19 @@
+@import "../../../../assets/styles/abstracts/variables";
+
+.show-more-item {
+  position: relative;
+  width: 35rem;
+
+  &__title {
+    color: $WHITE;
+    position: absolute;
+    bottom: 3rem;
+    left: 3rem;
+  }
+
+  &__image {
+    height: 17rem;
+    object-fit: cover;
+    filter: brightness(0.7);
+  }
+}

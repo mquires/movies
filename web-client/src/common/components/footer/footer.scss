@@ -1,0 +1,39 @@
+@import "../../../assets/styles/abstracts/variables";
+
+.footer {
+  background: $CL_13_GREY;
+  position: absolute;
+  bottom: 0;
+  width: calc(100% - 27rem);
+  font-size: 1.1rem;
+  padding: 3rem 5rem;
+
+  &__copyright {
+    color: $CL_12_GREY;
+  }
+
+  &__nav {
+    list-style-type: none;
+    display: flex;
+    align-items: center;
+    margin-top: 1rem;
+
+    &-item {
+      padding: 0 1rem;
+
+      &:not(:last-child) {
+        border-right: 1px solid $CL_12_GREY;
+      }
+    }
+
+    &-link {
+      text-decoration: none;
+      color: $CL_11_GREY;
+
+      &:hover {
+        text-decoration: underline;
+        color: $RED;
+      }
+    }
+  }
+}
