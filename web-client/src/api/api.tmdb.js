@@ -33,3 +33,17 @@ export const personsAPI = {
     return instance.get(`person/popular?api_key=${API_KEY}`);
   }
 };
+
+export const tvAPI = {
+  getTV() {
+    return instance.get(`discover/tv?api_key=${API_KEY}`);
+  },
+
+  findTV(query) {
+    return instance.get(`search/tv?api_key=${API_KEY}&query=${query}`);
+  },
+
+  getTodayTrendingTV() {
+    return instance.get(`trending/tv/day?api_key=${API_KEY}`);
+  },
+};

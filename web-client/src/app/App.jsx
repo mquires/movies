@@ -15,6 +15,7 @@ import Profile from "../common/pages/profile";
 import TrendsMoviesContainer from "../common/pages/trends-movies/container";
 import TopRatedMoviesContainer from "../common/pages/top-rated-movies/container";
 import PopularPersonsContainer from "../common/pages/popular-persons/container";
+import TVContainer from "../common/pages/tv/container";
 
 import './app.scss';
 
@@ -61,6 +62,10 @@ const App = () => {
               <Route
                 path={ROUTES.POPULAR_PERSONS}
                 render={() => <PopularPersonsContainer />}
+              />
+              <Route
+                path={ROUTES.TV}
+                render={() => <TVContainer />}
               />
             </Switch>
           </div>

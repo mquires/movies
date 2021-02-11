@@ -8,7 +8,8 @@ const ROUTES = {
   PROFILE: '/profile',
   ALL_TODAY_TRENDS_MOVIES: '/trends-movies',
   TOP_RATED_MOVIES: '/top-rated-movies',
-  POPULAR_PERSONS: '/popular-persons'
+  POPULAR_PERSONS: '/popular-persons',
+  ALL_TODAY_TRENDS_TV: '/trends-tv',
 };
 
 export default ROUTES;
