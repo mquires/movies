@@ -11,7 +11,7 @@ const SearchPageComponent = (props) => {
     className,
     title,
     children,
-    onSubmit
+    onChange
   } = props;
 
   return (
@@ -20,7 +20,7 @@ const SearchPageComponent = (props) => {
         <h2 className="page-component__title">
           {title}
         </h2>
-        <Search onSubmit={onSubmit} />
+        <Search onChange={onChange} />
       </div>
       <div className="page-component__content">
         {children}

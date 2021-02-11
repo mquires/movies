@@ -13,6 +13,8 @@ import RegistrationContainer from "../common/pages/registration/container";
 import MoviesContainer from "../common/pages/movies/container";
 import Profile from "../common/pages/profile";
 import TrendsMoviesContainer from "../common/pages/trends-movies/container";
+import TopRatedMoviesContainer from "../common/pages/top-rated-movies/container";
+import PopularPersonsContainer from "../common/pages/popular-persons/container";
 
 import './app.scss';
 
@@ -51,6 +53,14 @@ const App = () => {
               <Route
                 path={ROUTES.ALL_TODAY_TRENDS_MOVIES}
                 render={() => <TrendsMoviesContainer />}
+              />
+              <Route
+                path={ROUTES.TOP_RATED_MOVIES}
+                render={() => <TopRatedMoviesContainer />}
+              />
+              <Route
+                path={ROUTES.POPULAR_PERSONS}
+                render={() => <PopularPersonsContainer />}
               />
             </Switch>
           </div>

@@ -1,10 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import SearchPageComponent from '../../../components/page-components/search-page-component';
+import SectionPage from '../../../components/page-components/section-page';
 import TrendsItem from '../../../components/trends-item';
-
-import './trends-movies.scss';
 
 const TrendsMovies = (props) => {
   const {
@@ -23,14 +21,9 @@ const TrendsMovies = (props) => {
   ));
 
   return (
-    <SearchPageComponent
-      className="trends-movies"
-      title="Trends movies"
-    >
-      <div className="trends-movies__container">
-        {todayTrendingMoviesList}
-      </div>
-    </SearchPageComponent>
+    <SectionPage title="Trends movies">
+      {todayTrendingMoviesList}
+    </SectionPage>
   );
 };
 

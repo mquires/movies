@@ -5,6 +5,8 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    border-top: 0.1rem solid $CL_6_GREY;
+    margin-top: 3rem;
   }
 
   &__link {

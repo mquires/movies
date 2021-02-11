@@ -20,6 +20,16 @@ export const moviesAPI = {
   },
 
   findMovie(query) {
-    return instance.get(`/search/movie?api_key=${API_KEY}&query=${query}`);
+    return instance.get(`search/movie?api_key=${API_KEY}&query=${query}`);
+  },
+
+  getTopRatedMovies() {
+    return instance.get(`movie/top_rated?api_key=${API_KEY}`);
+  }
+};
+
+export const personsAPI = {
+  getPopularPersons() {
+    return instance.get(`person/popular?api_key=${API_KEY}`);
   }
 };

@@ -2,19 +2,23 @@ import React from 'react';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 
+import Search from '../search';
+
 import './section-info.scss';
 
 const SectionInfo = (props) => {
   const {
     className,
     title,
-    children
+    children,
+    onChange
   } = props;
 
   return (
     <div className={classNames("section-info", className)}>
       <div className="section-info__title-container">
         <h3 className="section-info__title">{title}</h3>
+        <Search onChange={onChange} />
       </div>
       <div className="section-info__container">
         {children}

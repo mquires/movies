@@ -15,7 +15,7 @@ const SectionInfoSeeAll = (props) => {
 
   return (
     <div className={classNames("section-info", className)}>
-      <div className="section-info__title-container section-info-see-all__title-container">
+      <div className="section-info-see-all__title-container">
         <h3 className="section-info__title">{title}</h3>
         <NavLink
           className="section-info-see-all__link"

@@ -3,8 +3,13 @@ import { connect } from 'react-redux';
 import {
   getMoviesRequest,
   getTodayTrendingMoviesRequest,
-  findMovieRequest
+  findMovieRequest,
+  getTopRatedMoviesRequest
 } from '../../../../redux/movies-reducer';
+
+import {
+  getPopularPersonsRequest
+} from '../../../../redux/persons-reducer';
 
 import Movies from '../component';
 
@@ -12,11 +17,15 @@ class MoviesContainer extends React.Component {
   componentDidMount() {
     const {
       getMoviesRequest,
-      getTodayTrendingMoviesRequest
+      getTodayTrendingMoviesRequest,
+      getTopRatedMoviesRequest,
+      getPopularPersonsRequest
     } = this.props;
 
     getMoviesRequest();
     getTodayTrendingMoviesRequest();
+    getTopRatedMoviesRequest();
+    getPopularPersonsRequest();
   }
 
   onFindMovie(movie) {
@@ -30,14 +39,18 @@ class MoviesContainer extends React.Component {
   render() {
     const {
       movies,
-      todayTrendingMovies
+      todayTrendingMovies,
+      topRatedMovies,
+      popularPersons
     } = this.props;
 
     return (
       <Movies
         movies={movies}
         todayTrendingMovies={todayTrendingMovies}
-        onSubmit={this.onFindMovie.bind(this)}
+        topRatedMovies={topRatedMovies}
+        popularPersons={popularPersons}
+        onChange={this.onFindMovie.bind(this)}
       />
     );
   }
@@ -46,7 +59,9 @@ class MoviesContainer extends React.Component {
 const mapStateToProps = (state) => {
   return {
     movies: state.movies.movies,
-    todayTrendingMovies: state.movies.todayTrendingMovies
+    todayTrendingMovies: state.movies.todayTrendingMovies,
+    topRatedMovies: state.movies.topRatedMovies,
+    popularPersons: state.persons.popularPersons
   }
 }
 
@@ -54,5 +69,7 @@ export default connect(mapStateToProps,
   {
     getMoviesRequest,
     getTodayTrendingMoviesRequest,
-    findMovieRequest
+    findMovieRequest,
+    getTopRatedMoviesRequest,
+    getPopularPersonsRequest
   })(MoviesContainer);
