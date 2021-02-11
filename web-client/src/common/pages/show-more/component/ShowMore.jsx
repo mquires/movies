@@ -53,7 +53,7 @@ const ShowMore = () => {
           />
           <ShowMoreItem
             title="Upcoming movies"
-            navLink={ROUTES.POPULAR_PERSONS}
+            navLink={ROUTES.UPCOMING_MOVIES}
             src={upcomingMovies}
             alt="Upcoming movies"
           />

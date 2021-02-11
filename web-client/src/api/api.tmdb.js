@@ -25,12 +25,20 @@ export const moviesAPI = {
 
   getTopRatedMovies() {
     return instance.get(`movie/top_rated?api_key=${API_KEY}`);
+  },
+
+  getUpcomingMovies() {
+    return instance.get(`movie/upcoming?api_key=${API_KEY}`);
   }
 };
 
 export const personsAPI = {
   getPopularPersons() {
     return instance.get(`person/popular?api_key=${API_KEY}`);
+  },
+
+  findPerson(query) {
+    return instance.get(`search/person?api_key=${API_KEY}&query=${query}`);
   }
 };
 

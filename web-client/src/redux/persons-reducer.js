@@ -30,3 +30,10 @@ export const getPopularPersonsRequest = () => (dispatch) => {
       dispatch(setPopularPersons(response.data.results));
     });
 };
+
+export const findPersonRequest = (query) => (dispatch) => {
+  personsAPI.findPerson(query)
+    .then(response => {
+      dispatch(setPopularPersons(response.data.results));
+    });
+};

@@ -1,0 +1,14 @@
+@import "../../../../assets/styles/abstracts/variables";
+
+.section-page-no-search {
+  &__title {
+    margin: 3rem 0;
+  }
+
+  &__container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 3rem;
+  }
+}

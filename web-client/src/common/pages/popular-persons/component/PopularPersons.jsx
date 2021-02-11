@@ -6,7 +6,8 @@ import ActorItem from '../../../components/items/actor-item';
 
 const PopularPersons = (props) => {
   const {
-    popularPersons
+    popularPersons,
+    onChange
   } = props;
 
   const popularPersonsList = popularPersons.map(popularPerson => (
@@ -20,7 +21,7 @@ const PopularPersons = (props) => {
   ));
 
   return (
-    <SectionPage title="Popular persons">
+    <SectionPage title="Popular persons" onChange={onChange}>
       {popularPersonsList}
     </SectionPage>
   );

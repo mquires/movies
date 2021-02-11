@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { getPopularPersonsRequest } from '../../../../redux/persons-reducer';
+import { getPopularPersonsRequest, findPersonRequest } from '../../../../redux/persons-reducer';
 
 import PopularPersons from '../component';
 
@@ -13,13 +13,24 @@ class PopularPersonsContainer extends React.Component {
     getPopularPersonsRequest();
   }
 
+  onFindPerson(person) {
+    const {
+      findPersonRequest
+    } = this.props;
+
+    findPersonRequest(person.search);
+  }
+
   render() {
     const {
       popularPersons
     } = this.props;
 
     return (
-      <PopularPersons popularPersons={popularPersons} />
+      <PopularPersons
+        onChange={this.onFindPerson.bind(this)}
+        popularPersons={popularPersons}
+      />
     );
   }
 }
@@ -30,4 +41,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps, { getPopularPersonsRequest })(PopularPersonsContainer);
+export default connect(mapStateToProps, { getPopularPersonsRequest, findPersonRequest })(PopularPersonsContainer);

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import SectionPage from '../../../components/page-components/section-page';
+import SectionPageNoSearch from '../../../components/page-components/section-page-no-search';
 import TrendsItem from '../../../components/trends-item';
 
 const TrendsMovies = (props) => {
@@ -21,9 +21,9 @@ const TrendsMovies = (props) => {
   ));
 
   return (
-    <SectionPage title="Trends movies">
+    <SectionPageNoSearch title="Trends movies">
       {todayTrendingMoviesList}
-    </SectionPage>
+    </SectionPageNoSearch>
   );
 };
 

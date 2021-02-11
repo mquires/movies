@@ -17,6 +17,7 @@ import TopRatedMoviesContainer from "../common/pages/top-rated-movies/container"
 import PopularPersonsContainer from "../common/pages/popular-persons/container";
 import TVContainer from "../common/pages/tv/container";
 import ShowMoreContainer from "../common/pages/show-more/container";
+import UpcomingMoviesContainer from "../common/pages/upcoming-movies/container";
 
 import './app.scss';
 
@@ -71,6 +72,10 @@ const App = () => {
               <Route
                 path={ROUTES.SHOW_MORE}
                 render={() => <ShowMoreContainer />}
+              />
+              <Route
+                path={ROUTES.UPCOMING_MOVIES}
+                render={() => <UpcomingMoviesContainer />}
               />
             </Switch>
           </div>
