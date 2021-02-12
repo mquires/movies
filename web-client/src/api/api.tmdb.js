@@ -23,8 +23,8 @@ export const moviesAPI = {
     return instance.get(`search/movie?api_key=${API_KEY}&query=${query}`);
   },
 
-  getTopRatedMovies() {
-    return instance.get(`movie/top_rated?api_key=${API_KEY}`);
+  getTopRatedMovies(currentPage) {
+    return instance.get(`movie/top_rated?api_key=${API_KEY}&page=${currentPage}`);
   },
 
   getUpcomingMovies() {

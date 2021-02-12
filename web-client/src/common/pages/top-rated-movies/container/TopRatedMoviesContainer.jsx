@@ -1,16 +1,29 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { getTopRatedMoviesRequest } from '../../../../redux/movies-reducer';
+import { getTopRatedMoviesRequest, scrollHandler } from '../../../../redux/movies-reducer';
 
 import TopRatedMovies from '../component';
 
 class TopRatedMoviesContainer extends React.Component {
   componentDidMount() {
     const {
-      getTopRatedMoviesRequest
+      getTopRatedMoviesRequest,
+      scrollHandler,
+      currentPage,
+      isFetching
     } = this.props;
 
+    document.addEventListener('scroll', scrollHandler);
+
     getTopRatedMoviesRequest();
+  }
+
+  componentWillUnmount() {
+    const {
+      scrollHandler
+    } = this.props;
+
+    document.removeEventListener('scroll', scrollHandler);
   }
 
   render() {
@@ -26,8 +39,10 @@ class TopRatedMoviesContainer extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    topRatedMovies: state.movies.topRatedMovies
+    topRatedMovies: state.movies.topRatedMovies,
+    currentPage: state.movies.currentPage,
+    isFetching: state.movies.isFetching
   }
 }
 
-export default connect(mapStateToProps, { getTopRatedMoviesRequest })(TopRatedMoviesContainer);
+export default connect(mapStateToProps, { getTopRatedMoviesRequest, scrollHandler })(TopRatedMoviesContainer);

@@ -20,6 +20,7 @@ import ShowMoreContainer from "../common/pages/show-more/container";
 import UpcomingMoviesContainer from "../common/pages/upcoming-movies/container";
 
 import './app.scss';
+import TopRatedMovies from "../common/pages/top-rated-movies/component";
 
 const history = createBrowserHistory();
 
