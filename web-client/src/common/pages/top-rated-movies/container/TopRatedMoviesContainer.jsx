@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { getTopRatedMoviesRequest, scrollHandler } from '../../../../redux/movies-reducer';
+import { getTopRatedMoviesRequest } from '../../../../redux/movies-reducer';
 
 import TopRatedMovies from '../component';
 
@@ -8,22 +8,19 @@ class TopRatedMoviesContainer extends React.Component {
   componentDidMount() {
     const {
       getTopRatedMoviesRequest,
-      scrollHandler,
-      currentPage,
-      isFetching
+      currentPage
     } = this.props;
 
-    document.addEventListener('scroll', scrollHandler);
-
-    getTopRatedMoviesRequest();
+    getTopRatedMoviesRequest(currentPage);
   }
 
-  componentWillUnmount() {
+  loadMoreData() {
     const {
-      scrollHandler
+      getTopRatedMoviesRequest,
+      currentPage
     } = this.props;
 
-    document.removeEventListener('scroll', scrollHandler);
+    (currentPage > 1) && getTopRatedMoviesRequest(currentPage);
   }
 
   render() {
@@ -32,7 +29,10 @@ class TopRatedMoviesContainer extends React.Component {
     } = this.props;
 
     return (
-      <TopRatedMovies topRatedMovies={topRatedMovies} />
+      <TopRatedMovies
+        topRatedMovies={topRatedMovies}
+        loadMoreData={this.loadMoreData.bind(this)}
+      />
     );
   }
 }
@@ -40,9 +40,8 @@ class TopRatedMoviesContainer extends React.Component {
 const mapStateToProps = (state) => {
   return {
     topRatedMovies: state.movies.topRatedMovies,
-    currentPage: state.movies.currentPage,
-    isFetching: state.movies.isFetching
+    currentPage: state.movies.currentPage
   }
 }
 
-export default connect(mapStateToProps, { getTopRatedMoviesRequest, scrollHandler })(TopRatedMoviesContainer);
+export default connect(mapStateToProps, { getTopRatedMoviesRequest })(TopRatedMoviesContainer);

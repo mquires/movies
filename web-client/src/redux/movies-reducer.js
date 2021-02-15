@@ -70,23 +70,15 @@ export const setUpcomingMovies = (upcomingMovies) => ({ type: SET_UPCOMING_MOVIE
 export const setCurrentPage = (currentPage) => ({ type: SET_CURRENT_PAGE, currentPage });
 export const setIsFetching = (isFetching) => ({ type: SET_IS_FETCHING, isFetching });
 
-export const getTopRatedMoviesRequest = (currentPage = 1, isFetching) => (dispatch) => {
-  moviesAPI.getTopRatedMovies(currentPage)
+export const getTopRatedMoviesRequest = (currentPage) => (dispatch) => {
+  /*moviesAPI.getTopRatedMovies(currentPage)
     .then(response => {
+      dispatch(setIsFetching(true));
       dispatch(setTopRatedMovies(response.data.results));
       dispatch(setCurrentPage(currentPage + 1));
-    })
-    .finally(() => dispatch(setIsFetching(false)));
+      dispatch(setIsFetching(false));
+    })*/
 };
-
-export const scrollHandler = (e) => (dispatch) => {
-  if (e.target.documentElement.scrollHeight - (e.target.documentElement.scrollTop + window.innerHeight) < 100) {
-    dispatch(getTopRatedMoviesRequest(currentPage++));
-    //dispatch(setIsFetching(true));
-    console.log('123')
-    console.log(currentPage)
-  }
-}
 
 export const getMoviesRequest = () => (dispatch) => {
   moviesAPI.getMovies()

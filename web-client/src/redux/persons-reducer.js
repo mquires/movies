@@ -1,9 +1,11 @@
 import { personsAPI } from "../api/api.tmdb";
 
 const SET_POPULAR_PERSONS = 'SET-POPULAR-PERSONS';
+const SET_IS_FETCHING = 'SET-IS-FETCHING';
 
 const initialState = {
-  popularPersons: []
+  popularPersons: [],
+  isFetching: false
 };
 
 const personsReducer = (state = initialState, action) => {
@@ -12,6 +14,12 @@ const personsReducer = (state = initialState, action) => {
       return {
         ...state,
         popularPersons: action.popularPersons
+      }
+    }
+    case SET_IS_FETCHING: {
+      return {
+        ...state,
+        isFetching: action.isFetching
       }
     }
     default: {
@@ -23,11 +31,14 @@ const personsReducer = (state = initialState, action) => {
 export default personsReducer;
 
 export const setPopularPersons = (popularPersons) => ({ type: SET_POPULAR_PERSONS, popularPersons });
+export const setIsFetching = (isFetching) => ({ type: SET_IS_FETCHING, isFetching });
 
 export const getPopularPersonsRequest = () => (dispatch) => {
   personsAPI.getPopularPersons()
     .then(response => {
+      dispatch(setIsFetching(true));
       dispatch(setPopularPersons(response.data.results));
+      dispatch(setIsFetching(false));
     });
 };
 

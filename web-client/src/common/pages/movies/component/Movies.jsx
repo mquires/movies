@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import ROUTES from '../../../constants/routes';
+import { moviesAPI } from '../../../../api/api.tmdb';
 
 import PageComponent from '../../../components/page-components/page-component';
 import MovieItem from '../../../components/movie-item';
@@ -10,16 +11,43 @@ import SectionInfo from '../../../components/section-info';
 import TrendsItem from '../../../components/trends-item';
 import SectionInfoSeeAll from '../../../components/section-info/section-info-see-all';
 import ActorItem from '../../../components/items/actor-item';
+import Preloader from '../../../components/preloader';
 
 import './movies.scss';
 
 const Movies = (props) => {
+  const [movies, setMovies] = useState([]);
+
+  useEffect(() => findMovieRequest(), []);
+  useEffect(() => getMoviesRequest(), []);
+
+  const getMoviesRequest = () => {
+    moviesAPI.getMovies()
+      .then((response) => {
+        setMovies(movies => [...movies, ...response.data.results]);
+      })
+  };
+
+  const findMovieRequest = (query) => {
+    moviesAPI.findMovie(query)
+      .then((response) => {
+        setMovies(() => [...response.data.results]);
+      })
+  };
+
+  const onFindMovie = (movie) => {
+    findMovieRequest(movie.search);
+
+    !movie.search && getMoviesRequest();
+  }
+
   const {
-    movies,
+    //  movies,
     todayTrendingMovies,
     onChange,
     topRatedMovies,
-    popularPersons
+    popularPersons,
+    isFetching
   } = props;
 
   const moviesList = movies.map(movie => (
@@ -82,10 +110,14 @@ const Movies = (props) => {
       </Categories>
       <SectionInfoSeeAll
         className="section-items"
-        title="Today's trends"
+        title="Today's trending"
         navLink={ROUTES.ALL_TODAY_TRENDS_MOVIES}
       >
-        {todayTrendingMoviesList}
+        {
+          isFetching ?
+            <Preloader /> :
+            <>{todayTrendingMoviesList}</>
+        }
       </SectionInfoSeeAll>
       <SectionInfoSeeAll
         className="section-items"
@@ -104,7 +136,7 @@ const Movies = (props) => {
       <SectionInfo
         className="movies__list"
         title="Movies list"
-        onChange={onChange}
+        onChange={onFindMovie}
       >
         {moviesList}
       </SectionInfo>

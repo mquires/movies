@@ -41,7 +41,8 @@ class MoviesContainer extends React.Component {
       movies,
       todayTrendingMovies,
       topRatedMovies,
-      popularPersons
+      popularPersons,
+      isFetching
     } = this.props;
 
     return (
@@ -50,7 +51,8 @@ class MoviesContainer extends React.Component {
         todayTrendingMovies={todayTrendingMovies}
         topRatedMovies={topRatedMovies}
         popularPersons={popularPersons}
-        onChange={this.onFindMovie.bind(this)}
+        isFetching={isFetching}
+       // onChange={this.onFindMovie.bind(this)}
       />
     );
   }
@@ -61,7 +63,8 @@ const mapStateToProps = (state) => {
     movies: state.movies.movies,
     todayTrendingMovies: state.movies.todayTrendingMovies,
     topRatedMovies: state.movies.topRatedMovies,
-    popularPersons: state.persons.popularPersons
+    popularPersons: state.persons.popularPersons,
+    isFetching: state.movies.isFetching
   }
 }
 

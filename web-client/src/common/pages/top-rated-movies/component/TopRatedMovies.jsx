@@ -1,46 +1,32 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import { LazyLoadImage } from 'react-lazy-load-image-component';
-import 'react-lazy-load-image-component/src/effects/blur.css';
+import { moviesAPI } from '../../../../api/api.tmdb';
 
 import SectionPageNoSearch from '../../../components/page-components/section-page-no-search';
 import TrendsItem from '../../../components/trends-item';
-import * as axios from 'axios';
-import InfiniteScroll from 'react-infinite-scroll-component';
 
-const TopRatedMovies = (props) => {
-  const {
-    topRatedMovies
-  } = props;
+const TopRatedMovies = () => {
+  const [topRatedMovies, setTopRatedMovies] = useState([]);
+  const [page, setPage] = useState(1);
+  const [hasNextPage, setHasNextPage] = useState(true);
 
-  /*const [topRatedMovies, setPhotos] = useState([]);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [fetching, setIsFetching] = useState(true);
+  useEffect(() => getData(), []);
 
-  useEffect(() => {
-    if (fetching) {
-      axios.get(`http://api.themoviedb.org/3/movie/top_rated?api_key=e76fd28bc6d77e87ebae191d64a73110&page=${currentPage}`)
-        .then(res => {
-          setPhotos([...topRatedMovies, ...res.data.results]);
-          setCurrentPage(prevState => prevState + 1)
-        })
-        .finally(() => setIsFetching(false))
-    }
-  }, [fetching])
+  const getData = () => {
+    if (!hasNextPage) return;
 
-  useEffect(() => {
-    document.addEventListener('scroll', scrollHandler)
+    moviesAPI.getTopRatedMovies(page)
+      .then((response) => {
+        if (response.data.total_results === (topRatedMovies.length + response.data.results.length)) {
+          setHasNextPage(false);
+        }
 
-    return () => {
-      document.removeEventListener('scroll', scrollHandler)
-    }
-  }, []);
+        setTopRatedMovies(topRatedMovies => [...topRatedMovies, ...response.data.results]);
+        setPage(page => page + 1);
+      })
+  }
 
-  const scrollHandler = (e) => {
-    if (e.target.documentElement.scrollHeight - (e.target.documentElement.scrollTop + window.innerHeight) < 100) {
-      setIsFetching(true);
-    }
-  }*/
+  const loadMoreData = () => (page > 1) && getData();
 
   const topRatedMoviesList = topRatedMovies.map(topRatedMovie => (
     <TrendsItem
@@ -54,7 +40,7 @@ const TopRatedMovies = (props) => {
   ));
 
   return (
-    <SectionPageNoSearch title="Top rated">
+    <SectionPageNoSearch title="Top rated" onEnter={loadMoreData}>
       {topRatedMoviesList}
     </SectionPageNoSearch>
   );
