@@ -7,16 +7,16 @@ const instance = axios.create({
 const API_KEY = 'e76fd28bc6d77e87ebae191d64a73110';
 
 export const moviesAPI = {
-  getMovies() {
-    return instance.get(`discover/movie?api_key=${API_KEY}`);
+  getMovies(currentPage) {
+    return instance.get(`discover/movie?api_key=${API_KEY}&page=${currentPage}`);
   },
 
   getGengres() {
     return instance.get(`genre/movie/list?api_key=${API_KEY}`);
   },
 
-  getTodayTrendingMovies() {
-    return instance.get(`trending/movie/day?api_key=${API_KEY}`);
+  getTodayTrendingMovies(currentPage) {
+    return instance.get(`trending/movie/day?api_key=${API_KEY}&page=${currentPage}`);
   },
 
   findMovie(query) {
@@ -27,14 +27,14 @@ export const moviesAPI = {
     return instance.get(`movie/top_rated?api_key=${API_KEY}&page=${currentPage}`);
   },
 
-  getUpcomingMovies() {
-    return instance.get(`movie/upcoming?api_key=${API_KEY}`);
+  getUpcomingMovies(currentPage) {
+    return instance.get(`movie/upcoming?api_key=${API_KEY}&page=${currentPage}`);
   }
 };
 
 export const personsAPI = {
-  getPopularPersons() {
-    return instance.get(`person/popular?api_key=${API_KEY}`);
+  getPopularPersons(currentPage) {
+    return instance.get(`person/popular?api_key=${API_KEY}&page=${currentPage}`);
   },
 
   findPerson(query) {
@@ -43,15 +43,15 @@ export const personsAPI = {
 };
 
 export const tvAPI = {
-  getTV() {
-    return instance.get(`discover/tv?api_key=${API_KEY}`);
+  getTV(currentPage) {
+    return instance.get(`discover/tv?api_key=${API_KEY}&page=${currentPage}`);
   },
 
   findTV(query) {
     return instance.get(`search/tv?api_key=${API_KEY}&query=${query}`);
   },
 
-  getTodayTrendingTV() {
-    return instance.get(`trending/tv/day?api_key=${API_KEY}`);
+  getTodayTrendingTV(currentPage) {
+    return instance.get(`trending/tv/day?api_key=${API_KEY}&page=${currentPage}`);
   },
 };

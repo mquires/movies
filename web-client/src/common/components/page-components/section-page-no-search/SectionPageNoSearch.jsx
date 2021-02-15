@@ -1,9 +1,6 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { Waypoint } from 'react-waypoint';
-
-import Preloader from '../../../components/preloader';
 
 import './section-page-no-search.scss';
 
@@ -11,8 +8,7 @@ const SectionPageNoSearch = (props) => {
   const {
     className,
     children,
-    title,
-    onEnter
+    title
   } = props;
 
   return (
@@ -23,13 +19,6 @@ const SectionPageNoSearch = (props) => {
       <div className="section-page-no-search__container">
         {children}
       </div>
-      <Waypoint
-        onEnter={onEnter}
-      >
-        <div>
-          <Preloader />
-        </div>
-      </Waypoint>
     </section>
   );
 };

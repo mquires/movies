@@ -1,29 +1,78 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import ROUTES from '../../../constants/routes';
+import { tvAPI } from '../../../../api/api.tmdb';
 
 import PageComponent from '../../../components/page-components/page-component';
 import MovieItem from '../../../components/movie-item';
-import Categories from '../../../components/categories';
-import CategoryItem from '../../../components/categories/category-item';
 import SectionInfo from '../../../components/section-info';
 import TrendsItem from '../../../components/trends-item';
 import SectionInfoSeeAll from '../../../components/section-info/section-info-see-all';
-import ActorItem from '../../../components/items/actor-item';
 
 import './tv.scss';
+import Preloader from '../../../components/preloader';
 
 const TV = (props) => {
   const {
-    tv,
-    onChange,
     todayTrendingTV
   } = props;
 
-  const tvList = tv.map(tvItem => (
+  const [tv, setTV] = useState([]);
+
+  const [page, setPage] = useState(1);
+  const [hasNextPage, setHasNextPage] = useState(true);
+  const [fetching, setIsFetching] = useState(true);
+
+  useEffect(() => {
+    document.addEventListener('scroll', scrollHandler)
+    return () => {
+      document.removeEventListener('scroll', scrollHandler)
+    }
+  }, []);
+
+  const scrollHandler = (e) => {
+    if (e.target.documentElement.scrollHeight - (e.target.documentElement.scrollTop + window.innerHeight) < 100) {
+      setIsFetching(true);
+    }
+  }
+
+  useEffect(() => findTVRequest(), []);
+  useEffect(() => getTVRequest(), [fetching]);
+
+  const findTVRequest = (query) => {
+    tvAPI.findTV(query)
+      .then((response) => {
+        setTV(() => [...response.data.results]);
+      })
+  }
+
+  const getTVRequest = () => {
+    if (!hasNextPage) return;
+
+    if (fetching) {
+      tvAPI.getTV(page)
+        .then((response) => {
+          if (response.data.total_results === (tv.length + response.data.results.length)) {
+            setHasNextPage(false);
+          }
+
+          setTV(tv => [...tv, ...response.data.results]);
+          setPage(page => page + 1);
+        })
+        .finally(() => setIsFetching(false));
+    }
+  }
+
+  const onFindTV = (tv) => {
+    findTVRequest(tv.search);
+
+    !tv.search && getTVRequest(1);
+  }
+
+  const tvList = tv.map((tvItem, index) => (
     <MovieItem
       id={tvItem.id}
-      key={tvItem.id}
+      key={index}
       movieName={tvItem.name}
       movieOverview={tvItem.overview}
       language={tvItem.original_language}
@@ -33,15 +82,15 @@ const TV = (props) => {
     />
   ));
 
-  const todayTrendingTVList = todayTrendingTV.map(todayTrendingTVItem => (
+  const todayTrendingTVList = todayTrendingTV.map((todayTrendingTVItem, index) => (
     <TrendsItem
       id={todayTrendingTVItem.id}
-      key={todayTrendingTVItem.id}
+      key={index}
       className="section-items__item"
-      name={todayTrendingTVItem.original_title}
-      releaseDate={todayTrendingTVItem.release_date}
+      name={todayTrendingTVItem.name}
+      releaseDate={todayTrendingTVItem.first_air_date}
       src={`http://image.tmdb.org/t/p/w1280/${todayTrendingTVItem.backdrop_path}`}
-      alt={todayTrendingTVItem.original_title}
+      alt={todayTrendingTVItem.name}
     />
   ));
 
@@ -52,15 +101,19 @@ const TV = (props) => {
     >
       <SectionInfoSeeAll
         className="section-items"
-        title="Today's trending"
+        title="Today's trends"
         navLink={ROUTES.ALL_TODAY_TRENDS_TV}
       >
-        {todayTrendingTVList}
+        {
+          fetching ?
+            <Preloader /> :
+            <>{todayTrendingTVList}</>
+        }
       </SectionInfoSeeAll>
       <SectionInfo
         className="movies__list"
         title="TV list"
-        onChange={onChange}
+        onChange={onFindTV}
       >
         {tvList}
       </SectionInfo>

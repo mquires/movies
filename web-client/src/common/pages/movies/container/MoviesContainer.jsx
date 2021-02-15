@@ -1,58 +1,37 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import {
-  getMoviesRequest,
-  getTodayTrendingMoviesRequest,
-  findMovieRequest,
-  getTopRatedMoviesRequest
-} from '../../../../redux/movies-reducer';
-
-import {
-  getPopularPersonsRequest
-} from '../../../../redux/persons-reducer';
+import { getTodayTrendingMoviesRequest, getTopRatedMoviesRequest } from '../../../../redux/movies-reducer';
+import { getPopularPersonsRequest } from '../../../../redux/persons-reducer';
 
 import Movies from '../component';
 
 class MoviesContainer extends React.Component {
   componentDidMount() {
     const {
-      getMoviesRequest,
       getTodayTrendingMoviesRequest,
       getTopRatedMoviesRequest,
       getPopularPersonsRequest
     } = this.props;
 
-    getMoviesRequest();
-    getTodayTrendingMoviesRequest();
-    getTopRatedMoviesRequest();
-    getPopularPersonsRequest();
-  }
-
-  onFindMovie(movie) {
-    const {
-      findMovieRequest
-    } = this.props;
-
-    findMovieRequest(movie.search);
+    getTodayTrendingMoviesRequest(1);
+    getTopRatedMoviesRequest(1);
+    getPopularPersonsRequest(1);
   }
 
   render() {
     const {
-      movies,
       todayTrendingMovies,
       topRatedMovies,
       popularPersons,
-      isFetching
+      isTopRatedFetching
     } = this.props;
 
     return (
       <Movies
-        movies={movies}
         todayTrendingMovies={todayTrendingMovies}
         topRatedMovies={topRatedMovies}
         popularPersons={popularPersons}
-        isFetching={isFetching}
-       // onChange={this.onFindMovie.bind(this)}
+        isTopRatedFetching={isTopRatedFetching}
       />
     );
   }
@@ -60,19 +39,16 @@ class MoviesContainer extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    movies: state.movies.movies,
     todayTrendingMovies: state.movies.todayTrendingMovies,
     topRatedMovies: state.movies.topRatedMovies,
     popularPersons: state.persons.popularPersons,
-    isFetching: state.movies.isFetching
+    isTopRatedFetching: state.movies.isTopRatedFetching
   }
 }
 
 export default connect(mapStateToProps,
   {
-    getMoviesRequest,
     getTodayTrendingMoviesRequest,
-    findMovieRequest,
     getTopRatedMoviesRequest,
     getPopularPersonsRequest
   })(MoviesContainer);

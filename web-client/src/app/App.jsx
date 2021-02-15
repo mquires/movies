@@ -12,15 +12,15 @@ import LoginContainer from "../common/pages/login/container";
 import RegistrationContainer from "../common/pages/registration/container";
 import MoviesContainer from "../common/pages/movies/container";
 import Profile from "../common/pages/profile";
-import TrendsMoviesContainer from "../common/pages/trends-movies/container";
-import TopRatedMoviesContainer from "../common/pages/top-rated-movies/container";
-import PopularPersonsContainer from "../common/pages/popular-persons/container";
+import TopRatedMovies from "../common/pages/top-rated-movies/component";
 import TVContainer from "../common/pages/tv/container";
-import ShowMoreContainer from "../common/pages/show-more/container";
 import UpcomingMoviesContainer from "../common/pages/upcoming-movies/container";
+import TrendsMovies from "../common/pages/trends-movies/component";
+import PopularPersons from "../common/pages/popular-persons/component";
+import ShowMore from "../common/pages/show-more/component";
+import TrendsTV from "../common/pages/trends-tv/component";
 
 import './app.scss';
-import TopRatedMovies from "../common/pages/top-rated-movies/component";
 
 const history = createBrowserHistory();
 
@@ -56,15 +56,15 @@ const App = () => {
               />
               <Route
                 path={ROUTES.ALL_TODAY_TRENDS_MOVIES}
-                render={() => <TrendsMoviesContainer />}
+                render={() => <TrendsMovies />}
               />
               <Route
                 path={ROUTES.TOP_RATED_MOVIES}
-                render={() => <TopRatedMoviesContainer />}
+                render={() => <TopRatedMovies />}
               />
               <Route
                 path={ROUTES.POPULAR_PERSONS}
-                render={() => <PopularPersonsContainer />}
+                render={() => <PopularPersons />}
               />
               <Route
                 path={ROUTES.TV}
@@ -72,11 +72,15 @@ const App = () => {
               />
               <Route
                 path={ROUTES.SHOW_MORE}
-                render={() => <ShowMoreContainer />}
+                render={() => <ShowMore />}
               />
               <Route
                 path={ROUTES.UPCOMING_MOVIES}
                 render={() => <UpcomingMoviesContainer />}
+              />
+              <Route
+                path={ROUTES.ALL_TODAY_TRENDS_TV}
+                render={() => <TrendsTV />}
               />
             </Switch>
           </div>

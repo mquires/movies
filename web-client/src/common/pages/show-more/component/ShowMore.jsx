@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import ROUTES from '../../../constants/routes';
 
 import ShowMoreItem from '../../../components/items/show-more-item';
 import Footer from '../../../components/footer';
@@ -13,7 +14,6 @@ import upcomingMovies from '../../../../assets/images/upcoming_movies.jpg';
 import theLatestMovies from '../../../../assets/images/the_latest.png';
 
 import './show-more.scss';
-import ROUTES from '../../../constants/routes';
 
 const ShowMore = () => {
   return (

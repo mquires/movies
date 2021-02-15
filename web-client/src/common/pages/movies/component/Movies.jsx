@@ -16,24 +16,58 @@ import Preloader from '../../../components/preloader';
 import './movies.scss';
 
 const Movies = (props) => {
+  const {
+    topRatedMovies,
+    todayTrendingMovies,
+    popularPersons,
+    isTopRatedFetching
+  } = props;
+
   const [movies, setMovies] = useState([]);
 
-  useEffect(() => findMovieRequest(), []);
-  useEffect(() => getMoviesRequest(), []);
+  const [page, setPage] = useState(1);
+  const [hasNextPage, setHasNextPage] = useState(true);
+  const [fetching, setIsFetching] = useState(true);
 
-  const getMoviesRequest = () => {
-    moviesAPI.getMovies()
-      .then((response) => {
-        setMovies(movies => [...movies, ...response.data.results]);
-      })
-  };
+  useEffect(() => {
+    document.addEventListener('scroll', scrollHandler)
+    return () => {
+      document.removeEventListener('scroll', scrollHandler)
+    }
+  }, []);
+
+  const scrollHandler = (e) => {
+    if (e.target.documentElement.scrollHeight - (e.target.documentElement.scrollTop + window.innerHeight) < 100) {
+      setIsFetching(true);
+    }
+  }
+
+  useEffect(() => findMovieRequest(), []);
+  useEffect(() => getMoviesRequest(), [fetching]);
 
   const findMovieRequest = (query) => {
     moviesAPI.findMovie(query)
       .then((response) => {
         setMovies(() => [...response.data.results]);
       })
-  };
+  }
+
+  const getMoviesRequest = () => {
+    if (!hasNextPage) return;
+
+    if (fetching) {
+      moviesAPI.getMovies(page)
+        .then((response) => {
+          if (response.data.total_results === (movies.length + response.data.results.length)) {
+            setHasNextPage(false);
+          }
+
+          setMovies(movies => [...movies, ...response.data.results]);
+          setPage(page => page + 1);
+        })
+        .finally(() => setIsFetching(false));
+    }
+  }
 
   const onFindMovie = (movie) => {
     findMovieRequest(movie.search);
@@ -41,19 +75,10 @@ const Movies = (props) => {
     !movie.search && getMoviesRequest();
   }
 
-  const {
-    //  movies,
-    todayTrendingMovies,
-    onChange,
-    topRatedMovies,
-    popularPersons,
-    isFetching
-  } = props;
-
-  const moviesList = movies.map(movie => (
+  const moviesList = movies.map((movie, index) => (
     <MovieItem
       id={movie.id}
-      key={movie.id}
+      key={index}
       movieName={movie.original_title}
       movieOverview={movie.overview}
       language={movie.original_language}
@@ -63,10 +88,10 @@ const Movies = (props) => {
     />
   ));
 
-  const todayTrendingMoviesList = todayTrendingMovies.map(todayTrendingMovie => (
+  const todayTrendingMoviesList = todayTrendingMovies.map((todayTrendingMovie, index) => (
     <TrendsItem
       id={todayTrendingMovie.id}
-      key={todayTrendingMovie.id}
+      key={index}
       className="section-items__item"
       name={todayTrendingMovie.original_title}
       releaseDate={todayTrendingMovie.release_date}
@@ -75,10 +100,10 @@ const Movies = (props) => {
     />
   ));
 
-  const topRatedMoviesList = topRatedMovies.map(topRatedMovie => (
+  const topRatedMoviesList = topRatedMovies.map((topRatedMovie, index) => (
     <TrendsItem
       id={topRatedMovie.id}
-      key={topRatedMovie.id}
+      key={index}
       className="section-items__item"
       name={topRatedMovie.original_title}
       releaseDate={topRatedMovie.release_date}
@@ -87,10 +112,10 @@ const Movies = (props) => {
     />
   ));
 
-  const popularPersonsList = popularPersons.map(popularPerson => (
+  const popularPersonsList = popularPersons.map((popularPerson, index) => (
     <ActorItem
       id={popularPerson.id}
-      key={popularPerson.id}
+      key={index}
       className="section-items__item"
       title={popularPerson.name}
       src={`http://image.tmdb.org/t/p/w1280/${popularPerson.profile_path}`}
@@ -110,11 +135,11 @@ const Movies = (props) => {
       </Categories>
       <SectionInfoSeeAll
         className="section-items"
-        title="Today's trending"
+        title="Today's trends"
         navLink={ROUTES.ALL_TODAY_TRENDS_MOVIES}
       >
         {
-          isFetching ?
+          fetching ?
             <Preloader /> :
             <>{todayTrendingMoviesList}</>
         }
@@ -124,14 +149,22 @@ const Movies = (props) => {
         title="Popular persons"
         navLink={ROUTES.POPULAR_PERSONS}
       >
-        {popularPersonsList}
+        {
+          fetching ?
+            <Preloader /> :
+            <>{popularPersonsList}</>
+        }
       </SectionInfoSeeAll>
       <SectionInfoSeeAll
         className="section-items"
         title="Top rated"
         navLink={ROUTES.TOP_RATED_MOVIES}
       >
-        {topRatedMoviesList}
+        {
+          isTopRatedFetching ?
+            <Preloader /> :
+            <>{topRatedMoviesList}</>
+        }
       </SectionInfoSeeAll>
       <SectionInfo
         className="movies__list"

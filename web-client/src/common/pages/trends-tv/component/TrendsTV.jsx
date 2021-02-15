@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import { moviesAPI } from '../../../../api/api.tmdb';
-
+import { tvAPI } from '../../../../api/api.tmdb';
 import SectionPageNoSearch from '../../../components/page-components/section-page-no-search';
 import TrendsItem from '../../../components/trends-item';
 
-const TopRatedMovies = () => {
-  const [topRatedMovies, setTopRatedMovies] = useState([]);
+const TrendsTV = () => {
+  const [todayTrendingTV, setTodayTrendingTV] = useState([]);
 
   const [page, setPage] = useState(1);
   const [hasNextPage, setHasNextPage] = useState(true);
@@ -31,35 +30,35 @@ const TopRatedMovies = () => {
     if (!hasNextPage) return;
 
     if (fetching) {
-      moviesAPI.getTopRatedMovies(page)
+      tvAPI.getTodayTrendingTV(page)
         .then((response) => {
-          if (response.data.total_results === (topRatedMovies.length + response.data.results.length)) {
+          if (response.data.total_results === (todayTrendingTV.length + response.data.results.length)) {
             setHasNextPage(false);
           }
 
-          setTopRatedMovies(topRatedMovies => [...topRatedMovies, ...response.data.results]);
+          setTodayTrendingTV(todayTrendingTV => [...todayTrendingTV, ...response.data.results]);
           setPage(page => page + 1);
         })
         .finally(() => setIsFetching(false));
     }
   }
 
-  const topRatedMoviesList = topRatedMovies.map((topRatedMovie, index) => (
+  const todayTrendingTVList = todayTrendingTV.map((todayTrendingTVItem, index) => (
     <TrendsItem
-      id={topRatedMovie.id}
+      id={todayTrendingTVItem.id}
       key={index}
-      name={topRatedMovie.original_title}
-      releaseDate={topRatedMovie.release_date}
-      src={`http://image.tmdb.org/t/p/w1280/${topRatedMovie.backdrop_path}`}
-      alt={topRatedMovie.original_title}
+      name={todayTrendingTVItem.name}
+      releaseDate={todayTrendingTVItem.first_air_date}
+      src={`http://image.tmdb.org/t/p/w1280/${todayTrendingTVItem.backdrop_path}`}
+      alt={todayTrendingTVItem.name}
     />
   ));
 
   return (
-    <SectionPageNoSearch title="Top rated">
-      {topRatedMoviesList}
+    <SectionPageNoSearch title="Trends serials">
+      {todayTrendingTVList}
     </SectionPageNoSearch>
   );
 };
 
-export default TopRatedMovies;
+export default TrendsTV;
