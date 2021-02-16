@@ -6,12 +6,7 @@
   position: relative;
   transition: 0.5s;
 
-  &:hover {
-    transform: scale(1.05);
-  }
-
   &:hover &__image {
-    transform: scale(1.05);
     filter: brightness(40%);
   }
 

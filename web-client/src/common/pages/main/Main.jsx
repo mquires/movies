@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
 import ROUTES from '../../constants/routes';
 
-import PageComponent from '../../components/page-components/page-component';
+import PageComponentNoTitle from '../../components/page-components/page-component-no-title';
 import Logo from '../../components/logo';
 import Button from '../../components/buttons/main-button';
 import Icon from '../../components/icon';
@@ -16,9 +16,8 @@ import './main.scss';
 
 const Main = () => {
   return (
-    <PageComponent
+    <PageComponentNoTitle
       className="main"
-      title="Main"
     >
       <div className="main__info-container">
         <div className="main__info">
@@ -37,7 +36,7 @@ const Main = () => {
           <Image className="main__image" src={mainWindow} alt="Main window" />
         </div>
       </div>
-    </PageComponent>
+    </PageComponentNoTitle>
   );
 };
 

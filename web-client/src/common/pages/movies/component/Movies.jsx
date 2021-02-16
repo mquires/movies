@@ -10,7 +10,6 @@ import CategoryItem from '../../../components/categories/category-item';
 import SectionInfo from '../../../components/section-info';
 import TrendsItem from '../../../components/trends-item';
 import SectionInfoSeeAll from '../../../components/section-info/section-info-see-all';
-import ActorItem from '../../../components/items/actor-item';
 import Preloader from '../../../components/preloader';
 
 import './movies.scss';
@@ -19,7 +18,6 @@ const Movies = (props) => {
   const {
     topRatedMovies,
     todayTrendingMovies,
-    popularPersons,
     isTopRatedFetching
   } = props;
 
@@ -85,6 +83,9 @@ const Movies = (props) => {
       releaseDate={movie.release_date}
       src={`http://image.tmdb.org/t/p/w1280/${movie.poster_path}`}
       alt={movie.original_title}
+      onError={(e) => {
+        e.target.src = 'https://media.sproutsocial.com/uploads/2017/02/10x-featured-social-media-image-size.png'
+     }}
     />
   ));
 
@@ -112,17 +113,6 @@ const Movies = (props) => {
     />
   ));
 
-  const popularPersonsList = popularPersons.map((popularPerson, index) => (
-    <ActorItem
-      id={popularPerson.id}
-      key={index}
-      className="section-items__item"
-      title={popularPerson.name}
-      src={`http://image.tmdb.org/t/p/w1280/${popularPerson.profile_path}`}
-      alt={popularPerson.name}
-    />
-  ));
-
   return (
     <PageComponent
       className="movies"
@@ -142,17 +132,6 @@ const Movies = (props) => {
           fetching ?
             <Preloader /> :
             <>{todayTrendingMoviesList}</>
-        }
-      </SectionInfoSeeAll>
-      <SectionInfoSeeAll
-        className="section-items"
-        title="Popular persons"
-        navLink={ROUTES.POPULAR_PERSONS}
-      >
-        {
-          fetching ?
-            <Preloader /> :
-            <>{popularPersonsList}</>
         }
       </SectionInfoSeeAll>
       <SectionInfoSeeAll

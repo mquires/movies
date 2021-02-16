@@ -19,12 +19,6 @@ class RegistrationContainer extends React.Component {
     const {
       signupUser
     } = this.props;
-    
-    
-    console.log(password)
-    
-    console.log(confirmPassword)
-
 
     signupUser(name, email, password, confirmPassword);
   }

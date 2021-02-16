@@ -6,6 +6,7 @@ const Image = (props) => {
     className,
     src,
     alt,
+    onError
   } = props;
 
   return (
@@ -13,6 +14,7 @@ const Image = (props) => {
       className={className}
       src={src}
       alt={alt}
+      onError={onError}
     />
   );
 }
