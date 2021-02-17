@@ -19,6 +19,7 @@ import TrendsMovies from "../common/pages/trends-movies/component";
 import PopularPersons from "../common/pages/popular-persons/component";
 import ShowMore from "../common/pages/show-more/component";
 import TrendsTV from "../common/pages/trends-tv/component";
+import MovieDetailsContainer from "../common/pages/movie-details/container";
 
 import './app.scss';
 
@@ -81,6 +82,12 @@ const App = () => {
               <Route
                 path={ROUTES.ALL_TODAY_TRENDS_TV}
                 render={() => <TrendsTV />}
+              />
+              
+
+              <Route
+                path='/mmm'
+                render={() => <MovieDetailsContainer />}
               />
             </Switch>
           </div>

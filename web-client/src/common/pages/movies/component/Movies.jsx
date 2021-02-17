@@ -12,6 +12,8 @@ import TrendsItem from '../../../components/trends-item';
 import SectionInfoSeeAll from '../../../components/section-info/section-info-see-all';
 import Preloader from '../../../components/preloader';
 
+import noWallpaper from '../../../../assets/images/no-wallpaper.jpg';
+
 import './movies.scss';
 
 const Movies = (props) => {
@@ -84,8 +86,8 @@ const Movies = (props) => {
       src={`http://image.tmdb.org/t/p/w1280/${movie.poster_path}`}
       alt={movie.original_title}
       onError={(e) => {
-        e.target.src = 'https://media.sproutsocial.com/uploads/2017/02/10x-featured-social-media-image-size.png'
-     }}
+        e.target.src = noWallpaper
+      }}
     />
   ));
 
