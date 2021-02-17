@@ -5,6 +5,8 @@ const SET_TOP_RATED_MOVIES = 'SET-TOP-RATED-MOVIES';
 const SET_UPCOMING_MOVIES = 'SET-UPCOMING-MOVIES';
 const SET_CURRENT_PAGE = 'SET-CURRENT-PAGE';
 const SET_IS_TOP_RATED_FETCHING = 'SET-IS-TOP-RATED-FETCHING';
+const SET_MOVIE_DETAILS = 'SET-MOVIE-DETAILS';
+const SET_RECOMMENDATIONS = 'SET-RECOMMENDATIONS';
 
 const initialState = {
   genres: [],
@@ -12,7 +14,9 @@ const initialState = {
   topRatedMovies: [],
   upcomingMovies: [],
   currentPage: 1,
-  isTopRatedFetching: false
+  isTopRatedFetching: false,
+  movieDetails: null,
+  recommendations: null
 };
 
 const moviesReducer = (state = initialState, action) => {
@@ -47,6 +51,18 @@ const moviesReducer = (state = initialState, action) => {
         isTopRatedFetching: action.isTopRatedFetching
       }
     }
+    case SET_MOVIE_DETAILS: {
+      return {
+        ...state,
+        movieDetails: action.movieDetails
+      }
+    }
+    case SET_RECOMMENDATIONS: {
+      return {
+        ...state,
+        recommendations: action.recommendations
+      }
+    }
     default: {
       return state;
     }
@@ -60,6 +76,8 @@ export const setTopRatedMovies = (topRatedMovies) => ({ type: SET_TOP_RATED_MOVI
 export const setUpcomingMovies = (upcomingMovies) => ({ type: SET_UPCOMING_MOVIES, upcomingMovies });
 export const setCurrentPage = (currentPage) => ({ type: SET_CURRENT_PAGE, currentPage });
 export const setIsTopRatedFetching = (isTopRatedFetching) => ({ type: SET_IS_TOP_RATED_FETCHING, isTopRatedFetching });
+export const setMovieDetails = (movieDetails) => ({ type: SET_MOVIE_DETAILS, movieDetails });
+export const setRecommendations = (recommendations) => ({ type: SET_RECOMMENDATIONS, recommendations });
 
 export const getTopRatedMoviesRequest = (currentPage) => (dispatch) => {
   moviesAPI.getTopRatedMovies(currentPage)
@@ -81,5 +99,22 @@ export const getUpcomingMoviesRequest = (currentPage) => (dispatch) => {
   moviesAPI.getUpcomingMovies(currentPage)
     .then(response => {
       dispatch(setUpcomingMovies(response.data.results));
+    });
+};
+
+export const getMovieDetailsRequest = (movieId) => (dispatch) => {
+  moviesAPI.getMovieDetails(movieId)
+    .then(response => {
+      dispatch(setMovieDetails(response.data));
+    });
+};
+
+export const getRecommendationsRequest = (movieId) => (dispatch) => {
+  return console.log('123')
+  moviesAPI.getRecommendations(movieId)
+    .then(response => {
+      console.log(response)
+      console.log('123')
+      dispatch(setRecommendations(response.data));
     });
 };

@@ -83,10 +83,8 @@ const App = () => {
                 path={ROUTES.ALL_TODAY_TRENDS_TV}
                 render={() => <TrendsTV />}
               />
-              
-
               <Route
-                path='/mmm'
+                path='/movie/:id'
                 render={() => <MovieDetailsContainer />}
               />
             </Switch>

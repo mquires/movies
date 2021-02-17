@@ -77,6 +77,7 @@ const Movies = (props) => {
 
   const moviesList = movies.map((movie, index) => (
     <MovieItem
+      navLink={`/movie/${movie.id}`}
       id={movie.id}
       key={index}
       movieName={movie.original_title}

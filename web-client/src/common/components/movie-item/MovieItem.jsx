@@ -1,5 +1,6 @@
 import React from 'react';
 import classNames from 'classnames';
+import { NavLink } from 'react-router-dom';
 
 import Image from '../image';
 import Icon from '../icon';
@@ -15,11 +16,17 @@ const MovieItem = (props) => {
     movieOverview,
     language,
     releaseDate,
+    navLink,
+    onClick,
     ...restProps
   } = props;
 
   return (
-    <article className={classNames('movie-item', className)}>
+    <NavLink
+      to={navLink}
+      className={classNames('movie-item', className)}
+      onClick={onClick}
+    >
       <Image
         className="movie-item__image"
         {...restProps}
@@ -45,7 +52,7 @@ const MovieItem = (props) => {
           <p>{releaseDate}</p>
         </div>
       </div>
-    </article>
+    </NavLink>
   );
 };
 

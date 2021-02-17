@@ -1,6 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { getTodayTrendingMoviesRequest, getTopRatedMoviesRequest } from '../../../../redux/movies-reducer';
+import { withRouter } from 'react-router-dom';
+import { compose } from 'redux';
+import {
+  getTodayTrendingMoviesRequest,
+  getTopRatedMoviesRequest
+} from '../../../../redux/movies-reducer';
 
 import Movies from '../component';
 
@@ -40,8 +45,11 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps,
-  {
-    getTodayTrendingMoviesRequest,
-    getTopRatedMoviesRequest
-  })(MoviesContainer);
+export default compose(
+  connect(mapStateToProps,
+    {
+      getTodayTrendingMoviesRequest,
+      getTopRatedMoviesRequest
+    }),
+  withRouter
+)(MoviesContainer);

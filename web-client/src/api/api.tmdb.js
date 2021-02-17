@@ -29,6 +29,14 @@ export const moviesAPI = {
 
   getUpcomingMovies(currentPage) {
     return instance.get(`movie/upcoming?api_key=${API_KEY}&page=${currentPage}`);
+  },
+
+  getMovieDetails(movieId) {
+    return instance.get(`movie/${movieId}?api_key=${API_KEY}`);
+  },
+
+  getRecommendations(movieId) {
+    return instance.get(`movie/${movieId}/recommendations?api_key=${API_KEY}`);
   }
 };
 
