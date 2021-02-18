@@ -77,7 +77,7 @@ const Movies = (props) => {
 
   const moviesList = movies.map((movie, index) => (
     <MovieItem
-      navLink={`/movie/${movie.id}`}
+      navLink={`${ROUTES.MOVIE_ITEM}/${movie.id}`}
       id={movie.id}
       key={index}
       movieName={movie.original_title}
@@ -86,9 +86,7 @@ const Movies = (props) => {
       releaseDate={movie.release_date}
       src={`http://image.tmdb.org/t/p/w1280/${movie.poster_path}`}
       alt={movie.original_title}
-      onError={(e) => {
-        e.target.src = noWallpaper
-      }}
+      onError={(e) => e.target.src = noWallpaper}
     />
   ));
 
@@ -96,6 +94,8 @@ const Movies = (props) => {
     <TrendsItem
       id={todayTrendingMovie.id}
       key={index}
+      navLink={`${ROUTES.MOVIE_ITEM}/${todayTrendingMovie.id}`}
+      navPlayButtonLink={`${ROUTES.MOVIE_ITEM}/${todayTrendingMovie.id}`}
       className="section-items__item"
       name={todayTrendingMovie.original_title}
       releaseDate={todayTrendingMovie.release_date}
@@ -108,6 +108,8 @@ const Movies = (props) => {
     <TrendsItem
       id={topRatedMovie.id}
       key={index}
+      navLink={`${ROUTES.MOVIE_ITEM}/${topRatedMovie.id}`}
+      navPlayButtonLink={`${ROUTES.MOVIE_ITEM}/${topRatedMovie.id}`}
       className="section-items__item"
       name={topRatedMovie.original_title}
       releaseDate={topRatedMovie.release_date}

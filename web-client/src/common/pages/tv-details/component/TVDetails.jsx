@@ -23,7 +23,7 @@ import noWallpaper from '../../../../assets/images/no-wallpaper.jpg';
 
 import './movie-details.scss';
 
-const MovieDetails = (props) => {
+const TVDetails = (props) => {
   const {
     className,
     popularPersons,
@@ -259,4 +259,4 @@ const MovieDetails = (props) => {
   );
 };
 
-export default MovieDetails;
+export default TVDetails;

@@ -13,6 +13,7 @@ const TrendsItem = (props) => {
     className,
     name,
     releaseDate,
+    navLink,
     ...restProps
   } = props;
 
@@ -21,13 +22,13 @@ const TrendsItem = (props) => {
       <TrendsItemCover {...restProps} />
       <div className="trends-item__info">
         <NavLink
-          to={ROUTES.MAIN}
+          to={navLink}
           className="trends-item__name"
         >
           {name}
         </NavLink>
         <NavLink
-          to={ROUTES.MAIN}
+          to={navLink}
           className="trends-item__release-date"
         >
           {releaseDate}

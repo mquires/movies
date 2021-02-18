@@ -73,6 +73,7 @@ const TV = (props) => {
     <MovieItem
       id={tvItem.id}
       key={index}
+      navLink={`${ROUTES.TV_ITEM}/${tvItem.id}`}
       movieName={tvItem.name}
       movieOverview={tvItem.overview}
       language={tvItem.original_language}
@@ -86,6 +87,8 @@ const TV = (props) => {
     <TrendsItem
       id={todayTrendingTVItem.id}
       key={index}
+      navLink={`${ROUTES.TV_ITEM}/${todayTrendingTVItem.id}`}
+      navPlayButtonLink={`${ROUTES.TV_ITEM}/${todayTrendingTVItem.id}`}
       className="section-items__item"
       name={todayTrendingTVItem.name}
       releaseDate={todayTrendingTVItem.first_air_date}

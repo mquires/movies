@@ -20,7 +20,7 @@ const TrendsItemCover = (props) => {
         className="trends-item-cover__image"
       />
       <div className="trends-item-cover__content">
-        <PlayButton />
+        <PlayButton {...restProps} />
       </div>
     </div>
   );

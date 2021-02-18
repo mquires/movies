@@ -11,7 +11,9 @@ const ROUTES = {
   POPULAR_PERSONS: '/popular-persons',
   ALL_TODAY_TRENDS_TV: '/trends-tv',
   UPCOMING_MOVIES: '/upcoming-movies',
-  ALL_TODAY_TRENDS_TV: '/trends-tv'
+  ALL_TODAY_TRENDS_TV: '/trends-tv',
+  MOVIE_ITEM: '/movie',
+  TV_ITEM: '/tv'
 };
 
 export default ROUTES;

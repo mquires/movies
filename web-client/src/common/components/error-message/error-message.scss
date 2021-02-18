@@ -1,0 +1,16 @@
+@import "../../../assets/styles/abstracts/variables";
+
+.error-message {
+  background-color: $CL_1_WHITE;
+  border: 0.1rem solid $CL_1_PINK;
+  padding: 2rem 3rem;
+  border-radius: 0.6rem;
+
+  &__text {
+    color: $RED;
+    font-size: 1.3rem;
+    font-weight: bold;
+    line-height: 2rem;
+    text-shadow: 1px 1px rgba(250, 250, 250, 0.3);
+  }
+}

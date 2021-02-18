@@ -14,7 +14,7 @@ import {
 
 import MovieDetails from '../component';
 
-class MovieDetailsContainer extends React.Component {
+class TVDetailsContainer extends React.Component {
   componentDidMount() {
     const {
       getPopularPersonsRequest,
@@ -94,4 +94,4 @@ export default compose(
     getMoviesCastRequest
   }),
   withRouter
-)(MovieDetailsContainer);
+)(TVDetailsContainer);

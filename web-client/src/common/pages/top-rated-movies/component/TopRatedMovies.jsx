@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { moviesAPI } from '../../../../api/api.tmdb';
+import ROUTES from '../../../constants/routes';
 
 import SectionPageNoSearch from '../../../components/page-components/section-page-no-search';
 import TrendsItem from '../../../components/trends-item';
@@ -48,6 +49,8 @@ const TopRatedMovies = () => {
     <TrendsItem
       id={topRatedMovie.id}
       key={index}
+      navLink={`${ROUTES.MOVIE_ITEM}/${topRatedMovie.id}`}
+      navPlayButtonLink={`${ROUTES.MOVIE_ITEM}/${topRatedMovie.id}`}
       name={topRatedMovie.original_title}
       releaseDate={topRatedMovie.release_date}
       src={`http://image.tmdb.org/t/p/w1280/${topRatedMovie.backdrop_path}`}

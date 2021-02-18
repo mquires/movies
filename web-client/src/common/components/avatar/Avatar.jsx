@@ -8,14 +8,14 @@ import './avatar.scss';
 
 const Avatar = (props) => {
   const {
-    className
+    className,
+    ...restProps
   } = props;
 
   return (
     <Image
       className={classNames("avatar", className)}
-      src="https://off-cs.ru/upload/2018/06/1451529920117.jpeg"
-      alt="avatar"
+      {...restProps}
     />
   );
 }

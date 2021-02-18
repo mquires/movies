@@ -37,6 +37,22 @@ export const moviesAPI = {
 
   getRecommendations(movieId) {
     return instance.get(`movie/${movieId}/recommendations?api_key=${API_KEY}`);
+  },
+
+  getMovieImages(movieId) {
+    return instance.get(`movie/${movieId}/images?api_key=${API_KEY}`);
+  },
+
+  getSimilarMovies(movieId) {
+    return instance.get(`movie/${movieId}/similar?api_key=${API_KEY}`);
+  },
+
+  getMoviesKeywords(movieId) {
+    return instance.get(`movie/${movieId}/keywords?api_key=${API_KEY}`);
+  },
+
+  getMoviesCast(movieId) {
+    return instance.get(`movie/${movieId}/credits?api_key=${API_KEY}`);
   }
 };
 

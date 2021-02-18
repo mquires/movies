@@ -8,9 +8,15 @@ module.exports = {
     main: path.resolve(__dirname, './src/index.js'),
   },
 
-  output: {
+  /*output: {
     path: path.resolve(__dirname, './dist'),
     filename: '[name].bundle.js',
+  },*/
+
+  output: {
+    filename: 'bundle.js',
+    path: path.resolve('dist'),
+    publicPath: '/',
   },
 
   mode: 'development',
@@ -58,10 +64,6 @@ module.exports = {
         loader: 'svg-sprite-loader'
       }
     ],
-  },
-
-  devServer: {
-    historyApiFallback: true,
   },
   resolve: {
     extensions: ['.js', '.jsx'],

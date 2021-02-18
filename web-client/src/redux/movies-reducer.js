@@ -7,6 +7,10 @@ const SET_CURRENT_PAGE = 'SET-CURRENT-PAGE';
 const SET_IS_TOP_RATED_FETCHING = 'SET-IS-TOP-RATED-FETCHING';
 const SET_MOVIE_DETAILS = 'SET-MOVIE-DETAILS';
 const SET_RECOMMENDATIONS = 'SET-RECOMMENDATIONS';
+const SET_MOVIE_IMAGES = 'SET-MOVIE-IMAGES';
+const SET_SIMILAR_MOVIES = 'SET-SIMILAR-MOVIES';
+const SET_MOVIES_KEYWORDS = 'SET-MOVIES-KEYWORDS';
+const SET_MOVIES_CAST = 'SET-MOVIES-CAST';
 
 const initialState = {
   genres: [],
@@ -16,7 +20,11 @@ const initialState = {
   currentPage: 1,
   isTopRatedFetching: false,
   movieDetails: null,
-  recommendations: null
+  recommendations: [],
+  movieImages: [],
+  similarMovies: [],
+  moviesKeywords: [],
+  moviesCast: []
 };
 
 const moviesReducer = (state = initialState, action) => {
@@ -63,6 +71,30 @@ const moviesReducer = (state = initialState, action) => {
         recommendations: action.recommendations
       }
     }
+    case SET_MOVIE_IMAGES: {
+      return {
+        ...state,
+        movieImages: action.movieImages
+      }
+    }
+    case SET_SIMILAR_MOVIES: {
+      return {
+        ...state,
+        similarMovies: action.similarMovies
+      }
+    }
+    case SET_MOVIES_KEYWORDS: {
+      return {
+        ...state,
+        moviesKeywords: action.moviesKeywords
+      }
+    }
+    case SET_MOVIES_CAST: {
+      return {
+        ...state,
+        moviesCast: action.moviesCast
+      }
+    }
     default: {
       return state;
     }
@@ -78,6 +110,10 @@ export const setCurrentPage = (currentPage) => ({ type: SET_CURRENT_PAGE, curren
 export const setIsTopRatedFetching = (isTopRatedFetching) => ({ type: SET_IS_TOP_RATED_FETCHING, isTopRatedFetching });
 export const setMovieDetails = (movieDetails) => ({ type: SET_MOVIE_DETAILS, movieDetails });
 export const setRecommendations = (recommendations) => ({ type: SET_RECOMMENDATIONS, recommendations });
+export const setMovieImages = (movieImages) => ({ type: SET_MOVIE_IMAGES, movieImages });
+export const setSimilarMovies = (similarMovies) => ({ type: SET_SIMILAR_MOVIES, similarMovies });
+export const setMoviesKeywords = (moviesKeywords) => ({ type: SET_MOVIES_KEYWORDS, moviesKeywords });
+export const setMoviesCast = (moviesCast) => ({ type: SET_MOVIES_CAST, moviesCast });
 
 export const getTopRatedMoviesRequest = (currentPage) => (dispatch) => {
   moviesAPI.getTopRatedMovies(currentPage)
@@ -110,11 +146,36 @@ export const getMovieDetailsRequest = (movieId) => (dispatch) => {
 };
 
 export const getRecommendationsRequest = (movieId) => (dispatch) => {
-  return console.log('123')
   moviesAPI.getRecommendations(movieId)
     .then(response => {
-      console.log(response)
-      console.log('123')
-      dispatch(setRecommendations(response.data));
+      dispatch(setRecommendations(response.data.results));
+    });
+};
+
+export const getMovieImagesRequest = (movieId) => (dispatch) => {
+  moviesAPI.getMovieImages(movieId)
+    .then(response => {
+      dispatch(setMovieImages(response.data.backdrops));
+    });
+};
+
+export const getSimilarMoviesRequest = (movieId) => (dispatch) => {
+  moviesAPI.getSimilarMovies(movieId)
+    .then(response => {
+      dispatch(setSimilarMovies(response.data.results));
+    });
+};
+
+export const getMoviesKeywordsRequest = (movieId) => (dispatch) => {
+  moviesAPI.getMoviesKeywords(movieId)
+    .then(response => {
+      dispatch(setMoviesKeywords(response.data.keywords));
+    });
+};
+
+export const getMoviesCastRequest = (movieId) => (dispatch) => {
+  moviesAPI.getMoviesCast(movieId)
+    .then(response => {
+      dispatch(setMoviesCast(response.data.cast));
     });
 };

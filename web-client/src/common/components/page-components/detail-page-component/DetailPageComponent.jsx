@@ -20,19 +20,13 @@ import noPhoto from '../../../../assets/images/no-photo.png';
 import noAvatar from '../../../../assets/images/no-avatar.jpg';
 import noBackground from '../../../../assets/images/no-background.png';
 import noWallpaper from '../../../../assets/images/no-wallpaper.jpg';
+import KeyWordItem from '../../../components/keyword-item';
 
-import './movie-details.scss';
+import './detail-page-component.scss';
 
-const MovieDetails = (props) => {
+const DetailPageComponent = (props) => {
   const {
-    className,
-    popularPersons,
-    movieDetails,
-    recommendations,
-    movieImages,
-    similarMovies,
-    moviesKeywords,
-    moviesCast
+    className
   } = props;
 
   const popularPersonsList = popularPersons.map((popularPerson, index) => (
@@ -110,13 +104,12 @@ const MovieDetails = (props) => {
   ));
 
   const moviesKeywordsList = moviesKeywords.map((moviesKeyword, index) => (
-    <li
-      className="movie-details__keyword"
+    <KeyWordItem
       id={moviesKeyword.id}
       key={index}
     >
       {moviesKeyword.name}
-    </li>
+    </KeyWordItem>
   ));
 
   const moviesCastList = moviesCast.map((moviesCastItem, index) => (
@@ -135,21 +128,12 @@ const MovieDetails = (props) => {
     </NavLink>
   ));
 
-  (!movieDetails?.production_companies) && <Preloader />;
-
   return (
-    <section className={classNames("movie-details", className)}>
-      {!movieDetails ?
+    <section className={classNames("detail-page-component", className)}>
+      {!detail ?
         <Preloader /> :
-        <><div className="movie-details__background">
-          <Image
-            className="movie-details__background-image"
-            src={`http://image.tmdb.org/t/p/w1280${movieDetails.backdrop_path}`}
-            alt="Background"
-            onError={(e) => e.target.src = noBackground}
-          />
-          <h2 className="movie-details__title">{movieDetails.original_title}</h2>
-        </div>
+        <>
+          <DetailItemBackground {...restProps} />
           <div className="movie-details__container">
             <div className="movie-details__info-wrapper">
               <div className="movie-details__info">
@@ -253,10 +237,11 @@ const MovieDetails = (props) => {
                   <>{moviesCastList}</>
               }
             </div>
-          </div></>
+          </div>
+        </>
       }
     </section>
   );
 };
 
-export default MovieDetails;
+export default DetailPageComponent;
