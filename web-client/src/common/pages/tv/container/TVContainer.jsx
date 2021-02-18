@@ -1,5 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
+import { compose } from 'redux';
 import { getTodayTrendingTVRequest } from '../../../../redux/tv-reducer';
 
 import TV from '../component';
@@ -30,5 +32,8 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps,
-  { getTodayTrendingTVRequest })(TVContainer);
+export default compose(
+  connect(mapStateToProps,
+    { getTodayTrendingTVRequest }),
+  withRouter
+)(TVContainer);

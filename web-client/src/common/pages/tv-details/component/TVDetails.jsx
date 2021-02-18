@@ -10,29 +10,27 @@ import SectionInfoSeeAll from '../../../components/section-info/section-info-see
 import TrendsItem from '../../../components/trends-item';
 import ActorItem from '../../../components/items/actor-item';
 import MovieTvItem from '../../../components/items/movie-tv-item';
-import Icon from '../../../components/icon';
 import Preloader from '../../../components/preloader';
 import ErrorMessage from '../../../components/error-message/ErrorMessage';
+import DetailItemBackground from '../../../components/detail-item-background';
 
-import moneyIcon from '../../../../assets/icons/money.svg';
-import languageIcon from '../../../../assets/icons/language.svg';
 import noPhoto from '../../../../assets/images/no-photo.png';
 import noAvatar from '../../../../assets/images/no-avatar.jpg';
-import noBackground from '../../../../assets/images/no-background.png';
-import noWallpaper from '../../../../assets/images/no-wallpaper.jpg';
 
-import './movie-details.scss';
+import './tv-details.scss';
+import DetailItemPoster from '../../../components/detail-item-poster/DetailItemPoster';
+import DetailItemSectionList from '../../../components/detail-item-section-list';
 
 const TVDetails = (props) => {
   const {
     className,
     popularPersons,
-    movieDetails,
-    recommendations,
-    movieImages,
-    similarMovies,
-    moviesKeywords,
-    moviesCast
+    tvDetails,
+    tvKeywords,
+    TVCast,
+    tvRecommendations,
+    similarTV,
+    tvImages
   } = props;
 
   const popularPersonsList = popularPersons.map((popularPerson, index) => (
@@ -47,195 +45,138 @@ const TVDetails = (props) => {
     />
   ));
 
-  const productionCompaniesList = movieDetails?.production_companies.map((productionCompany, index) => (
-    <MovieTvItem
-      id={productionCompany.id}
+
+
+  const tvKeywordsList = tvKeywords.map((tvKeyword, index) => (
+    <li
+      className="movie-details__keyword"
+      id={tvKeyword.id}
       key={index}
-      title={productionCompany.name}
-      src={`http://image.tmdb.org/t/p/w1280${productionCompany.logo_path}`}
-      alt={productionCompany.name}
-      onError={(e) => e.target.src = noPhoto}
-    />
+    >
+      {tvKeyword.name}
+    </li>
   ));
 
-  const recommendationsList = recommendations.map((recommendation, index) => (
+  const tvCastList = TVCast.map((tvCastItem, index) => (
+    <NavLink
+      to={ROUTES.MAIN}
+      className="movie-details__actor"
+      id={tvCastItem.id}
+      key={index}
+    >
+      <Avatar
+        src={`http://image.tmdb.org/t/p/w1280${tvCastItem.profile_path}`}
+        alt={tvCastItem.name}
+        onError={(e) => e.target.src = noAvatar}
+      />
+      <p>{tvCastItem.name}</p>
+    </NavLink>
+  ));
+
+  const recommendationsList = tvRecommendations.map((tvRecommendation, index) => (
     <li
       className="movie-details__similar-movie-item"
-      id={recommendation.id}
+      id={tvRecommendation.id}
       key={index}
     >
       <TrendsItem
-        navLink={`${ROUTES.MOVIE_ITEM}/${recommendation.id}`}
-        navPlayButtonLink={`${ROUTES.MOVIE_ITEM}/${recommendation.id}`}
-        name={recommendation.original_title}
-        releaseDate={recommendation.release_date}
-        src={`http://image.tmdb.org/t/p/w1280${recommendation.backdrop_path}`}
-        alt={recommendation.original_title}
+        navLink={`${ROUTES.TV_ITEM}/${tvRecommendation.id}`}
+        navPlayButtonLink={`${ROUTES.TV_ITEM}/${tvRecommendation.id}`}
+        name={tvRecommendation.name}
+        releaseDate={tvRecommendation.first_air_date}
+        src={`http://image.tmdb.org/t/p/w1280${tvRecommendation.backdrop_path}`}
+        alt={tvRecommendation.name}
         onError={(e) => e.target.src = noPhoto}
       />
     </li>
   ));
 
-  const movieImagesList = movieImages.map((movieImage, index) => (
+  const similarTVList = similarTV.map((similarTVItem, index) => (
+    <li
+      className="movie-details__similar-movie-item"
+      id={similarTVItem.id}
+      key={index}
+    >
+      <TrendsItem
+        navLink={`${ROUTES.TV_ITEM}/${similarTVItem.id}`}
+        navPlayButtonLink={`${ROUTES.TV_ITEM}/${similarTVItem.id}`}
+        name={similarTVItem.name}
+        releaseDate={similarTVItem.release_date}
+        src={`http://image.tmdb.org/t/p/w1280${similarTVItem.backdrop_path}`}
+        alt={similarTVItem.name}
+        onError={(e) => e.target.src = noPhoto}
+      />
+    </li>
+  ));
+
+  const tvImagesList = tvImages.map((tvImage, index) => (
     <li
       className="movie-details__picture-item"
-      id={movieImage.id}
+      id={tvImage.id}
       key={index}
     >
       <Image
         className="movie-details__picture"
-        src={`http://image.tmdb.org/t/p/w1280${movieImage.file_path}`}
+        src={`http://image.tmdb.org/t/p/w1280${tvImage.file_path}`}
         alt="Picture of the movie"
         onError={(e) => e.target.src = noPhoto}
       />
     </li>
   ));
 
-  const similarMoviesList = similarMovies.map((similarMovie, index) => (
-    <li
-      className="movie-details__similar-movie-item"
-      id={similarMovie.id}
-      key={index}
-    >
-      <TrendsItem
-        navLink={`${ROUTES.MOVIE_ITEM}/${similarMovie.id}`}
-        navPlayButtonLink={`${ROUTES.MOVIE_ITEM}/${similarMovie.id}`}
-        name={similarMovie.original_title}
-        releaseDate={similarMovie.release_date}
-        src={`http://image.tmdb.org/t/p/w1280${similarMovie.backdrop_path}`}
-        alt={similarMovie.original_title}
-        onError={(e) => e.target.src = noPhoto}
-      />
-    </li>
-  ));
-
-  const moviesKeywordsList = moviesKeywords.map((moviesKeyword, index) => (
-    <li
-      className="movie-details__keyword"
-      id={moviesKeyword.id}
-      key={index}
-    >
-      {moviesKeyword.name}
-    </li>
-  ));
-
-  const moviesCastList = moviesCast.map((moviesCastItem, index) => (
-    <NavLink
-      to={ROUTES.MAIN}
-      className="movie-details__actor"
-      id={moviesCastItem.id}
-      key={index}
-    >
-      <Avatar
-        src={`http://image.tmdb.org/t/p/w1280${moviesCastItem.profile_path}`}
-        alt={moviesCastItem.name}
-        onError={(e) => e.target.src = noAvatar}
-      />
-      <p>{moviesCastItem.name}</p>
-    </NavLink>
-  ));
-
-  (!movieDetails?.production_companies) && <Preloader />;
+  (!tvDetails?.production_companies) && <Preloader />;
 
   return (
     <section className={classNames("movie-details", className)}>
-      {!movieDetails ?
+      {!tvDetails ?
         <Preloader /> :
-        <><div className="movie-details__background">
-          <Image
-            className="movie-details__background-image"
-            src={`http://image.tmdb.org/t/p/w1280${movieDetails.backdrop_path}`}
-            alt="Background"
-            onError={(e) => e.target.src = noBackground}
+        <>
+          <DetailItemBackground
+            backgroundImage={tvDetails.backdrop_path}
+            title={tvDetails.name}
           />
-          <h2 className="movie-details__title">{movieDetails.original_title}</h2>
-        </div>
           <div className="movie-details__container">
             <div className="movie-details__info-wrapper">
               <div className="movie-details__info">
-                <div className="movie-details__poster-container">
-                  <div>
-                    <div className="movie-details__section-info">
-                      <ul className="movie-details__keywords-list">
-                        <li className="movie-details__secondary-info-item">
-                          <Icon
-                            className="movie-details__icon"
-                            glyph={moneyIcon.id}
-                            viewBox={moneyIcon.viewBox}
-                          />
-                          <p>{movieDetails.budget}$</p>
-                        </li>
-                        <li className="movie-details__secondary-info-item">
-                          <Icon
-                            className="movie-details__icon"
-                            glyph={languageIcon.id}
-                            viewBox={languageIcon.viewBox}
-                          />
-                          <p>{movieDetails.original_language}</p>
-                        </li>
-                      </ul>
-                    </div>
-                    <div className="movie-details__section-info">
-                      <h3 className="movie-details__section-info-title">Keywords</h3>
-                      <ul className="movie-details__keywords-list">
-                        {
-                          moviesKeywordsList.length === 0 ?
-                            <ErrorMessage message="List is empty" /> :
-                            <>{moviesKeywordsList}</>
-                        }
-                      </ul>
-                    </div>
-                    <div className="movie-details__section-info">
-                      <h3 className="movie-details__section-info-title">About</h3>
-                      <p className="movie-details__section-info-text">{movieDetails.overview}</p>
-                    </div>
-                  </div>
-                  <Image
-                    className="movie-details__poster"
-                    src={`http://image.tmdb.org/t/p/w1280${movieDetails.poster_path}`}
-                    alt="Poster"
-                    onError={(e) => e.target.src = noWallpaper}
-                  />
-                </div>
+                <DetailItemPoster
+                  budget={tvDetails.budget}
+                  language={tvDetails.original_language}
+                  overview={tvDetails.overview}
+                  posterImage={tvDetails.poster_path}
+                >
+                  {
+                    tvKeywordsList.length === 0 ?
+                      <ErrorMessage message="List is empty" /> :
+                      <>{tvKeywordsList}</>
+                  }
+                </DetailItemPoster>
                 <SectionInfoSeeAll title="Pictures" navLink={ROUTES.MAIN} className="movie-details__section-info">
                   <ul className="movie-details__pictures-list">
                     {
-                      movieImagesList.length === 0 ?
+                      tvImagesList.length === 0 ?
                         <ErrorMessage message="List is empty" /> :
-                        <>{movieImagesList}</>
+                        <>{tvImagesList}</>
                     }
                   </ul>
                 </SectionInfoSeeAll>
-                <div className="movie-details__section-info">
-                  <h3 className="movie-details__section-info-title">Similar movies</h3>
-                  <ul className="movie-details__similar-movies-list">
-                    {
-                      similarMoviesList.length === 0 ?
-                        <ErrorMessage message="List is empty" /> :
-                        <>{similarMoviesList}</>
-                    }
-                  </ul>
-                </div>
-                <div className="movie-details__section-info">
-                  <h3 className="movie-details__section-info-title">Production companies</h3>
-                  <ul className="movie-details__similar-movies-list">
-                    {
-                      recommendationsList.length === 0 ?
-                        <ErrorMessage message="List is empty" /> :
-                        <>{productionCompaniesList}</>
-                    }
-                  </ul>
-                </div>
-                <div className="movie-details__section-info">
-                  <h3 className="movie-details__section-info-title">Recommendations</h3>
-                  <ul className="movie-details__similar-movies-list">
-                    {
-                      recommendationsList.length === 0 ?
-                        <ErrorMessage message="List is empty" /> :
-                        <>{recommendationsList}</>
-                    }
-                  </ul>
-                </div>
+                <DetailItemSectionList title="Similar TV Shows">
+                  {
+                    similarTVList.length === 0 ?
+                      <ErrorMessage message="List is empty" /> :
+                      <>{similarTVList}</>
+                  }
+                </DetailItemSectionList>
+                <DetailItemSectionList title="Production companies">
+                
+             
+                </DetailItemSectionList>
+                <DetailItemSectionList title="Recommendations">
+                  {
+                    recommendationsList.length === 0 ?
+                      <ErrorMessage message="List is empty" /> :
+                      <>{recommendationsList}</>
+                  }
+                </DetailItemSectionList>
                 <SectionInfoSeeAll
                   className="section-items"
                   title="Popular persons"
@@ -248,12 +189,13 @@ const TVDetails = (props) => {
             <div className="movie-details__cast">
               <h3 className="movie-details__cast-title">Cast</h3>
               {
-                moviesCastList.length === 0 ?
+                tvCastList.length === 0 ?
                   <ErrorMessage message="List is empty" /> :
-                  <>{moviesCastList}</>
+                  <>{tvCastList}</>
               }
             </div>
-          </div></>
+          </div>
+        </>
       }
     </section>
   );

@@ -2,9 +2,9 @@ import React from 'react';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 
-import Image from '../../../components/image';
+import Image from '../image';
 
-import noBackground from '../../../../assets/images/no-background.png';
+import noBackground from '../../../assets/images/no-background.png';
 
 import './detail-item-background.scss';
 

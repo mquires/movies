@@ -4,67 +4,67 @@ import { withRouter } from 'react-router-dom';
 import { compose } from 'redux';
 import { getPopularPersonsRequest } from '../../../../redux/persons-reducer';
 import {
-  getMovieDetailsRequest,
-  getRecommendationsRequest,
-  getMovieImagesRequest,
-  getSimilarMoviesRequest,
-  getMoviesKeywordsRequest,
-  getMoviesCastRequest
-} from '../../../../redux/movies-reducer';
+  getTVDetailsRequest,
+  getTVKeywordsRequest,
+  getTVCastRequest,
+  getTVRecommendationsRequest,
+  getSimilarTVRequest,
+  getTVImagesRequest
+} from '../../../../redux/tv-reducer';
 
-import MovieDetails from '../component';
+import TVDetails from '../component';
 
 class TVDetailsContainer extends React.Component {
   componentDidMount() {
     const {
       getPopularPersonsRequest,
-      getMovieDetailsRequest,
-      getRecommendationsRequest,
-      getMovieImagesRequest,
-      getSimilarMoviesRequest,
-      getMoviesKeywordsRequest,
-      getMoviesCastRequest,
+      getTVDetailsRequest,
+      getTVKeywordsRequest,
+      getTVCastRequest,
+      getTVRecommendationsRequest,
+      getSimilarTVRequest,
+      getTVImagesRequest,
       match
     } = this.props;
 
     getPopularPersonsRequest(1);
-    getMovieDetailsRequest(match.params.id);
-    getRecommendationsRequest(match.params.id);
-    getMovieImagesRequest(match.params.id);
-    getSimilarMoviesRequest(match.params.id);
-    getMoviesKeywordsRequest(match.params.id);
-    getMoviesCastRequest(match.params.id);
+    getTVDetailsRequest(match.params.id);
+    getTVKeywordsRequest(match.params.id);
+    getTVCastRequest(match.params.id);
+    getTVRecommendationsRequest(match.params.id);
+    getSimilarTVRequest(match.params.id);
+    getTVImagesRequest(match.params.id);
   }
 
   componentDidUpdate() {
     const {
-      getMovieDetailsRequest,
+      getTVDetailsRequest,
       match
     } = this.props;
 
-    getMovieDetailsRequest(match.params.id);
+    getTVDetailsRequest(match.params.id);
   }
 
   render() {
     const {
       popularPersons,
-      movieDetails,
-      recommendations,
-      movieImages,
-      similarMovies,
-      moviesKeywords,
-      moviesCast
+      tvDetails,
+      tvKeywords,
+      TVCast,
+      tvRecommendations,
+      similarTV,
+      tvImages
     } = this.props;
 
     return (
-      <MovieDetails
+      <TVDetails
         popularPersons={popularPersons}
-        movieDetails={movieDetails}
-        recommendations={recommendations}
-        movieImages={movieImages}
-        similarMovies={similarMovies}
-        moviesKeywords={moviesKeywords}
-        moviesCast={moviesCast}
+        tvDetails={tvDetails}
+        tvKeywords={tvKeywords}
+        TVCast={TVCast}
+        tvRecommendations={tvRecommendations}
+        similarTV={similarTV}
+        tvImages={tvImages}
         {...this.props}
       />
     );
@@ -74,24 +74,24 @@ class TVDetailsContainer extends React.Component {
 const mapStateToProps = (state) => {
   return {
     popularPersons: state.persons.popularPersons,
-    movieDetails: state.movies.movieDetails,
-    recommendations: state.movies.recommendations,
-    movieImages: state.movies.movieImages,
-    similarMovies: state.movies.similarMovies,
-    moviesKeywords: state.movies.moviesKeywords,
-    moviesCast: state.movies.moviesCast
+    tvDetails: state.tv.tvDetails,
+    tvKeywords: state.tv.tvKeywords,
+    TVCast: state.tv.TVCast,
+    tvRecommendations: state.tv.tvRecommendations,
+    similarTV: state.tv.similarTV,
+    tvImages: state.tv.tvImages
   }
 }
 
 export default compose(
   connect(mapStateToProps, {
+    getTVDetailsRequest,
     getPopularPersonsRequest,
-    getMovieDetailsRequest,
-    getRecommendationsRequest,
-    getMovieImagesRequest,
-    getSimilarMoviesRequest,
-    getMoviesKeywordsRequest,
-    getMoviesCastRequest
+    getTVKeywordsRequest,
+    getTVCastRequest,
+    getTVRecommendationsRequest,
+    getSimilarTVRequest,
+    getTVImagesRequest
   }),
   withRouter
 )(TVDetailsContainer);

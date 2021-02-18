@@ -10,18 +10,16 @@ import SectionInfoSeeAll from '../../../components/section-info/section-info-see
 import TrendsItem from '../../../components/trends-item';
 import ActorItem from '../../../components/items/actor-item';
 import MovieTvItem from '../../../components/items/movie-tv-item';
-import Icon from '../../../components/icon';
 import Preloader from '../../../components/preloader';
 import ErrorMessage from '../../../components/error-message/ErrorMessage';
+import DetailItemBackground from '../../../components/detail-item-background';
 
-import moneyIcon from '../../../../assets/icons/money.svg';
-import languageIcon from '../../../../assets/icons/language.svg';
 import noPhoto from '../../../../assets/images/no-photo.png';
 import noAvatar from '../../../../assets/images/no-avatar.jpg';
-import noBackground from '../../../../assets/images/no-background.png';
-import noWallpaper from '../../../../assets/images/no-wallpaper.jpg';
 
 import './movie-details.scss';
+import DetailItemPoster from '../../../components/detail-item-poster/DetailItemPoster';
+import DetailItemSectionList from '../../../components/detail-item-section-list';
 
 const MovieDetails = (props) => {
   const {
@@ -141,62 +139,26 @@ const MovieDetails = (props) => {
     <section className={classNames("movie-details", className)}>
       {!movieDetails ?
         <Preloader /> :
-        <><div className="movie-details__background">
-          <Image
-            className="movie-details__background-image"
-            src={`http://image.tmdb.org/t/p/w1280${movieDetails.backdrop_path}`}
-            alt="Background"
-            onError={(e) => e.target.src = noBackground}
+        <>
+          <DetailItemBackground
+            backgroundImage={movieDetails.backdrop_path}
+            title={movieDetails.original_title}
           />
-          <h2 className="movie-details__title">{movieDetails.original_title}</h2>
-        </div>
           <div className="movie-details__container">
             <div className="movie-details__info-wrapper">
               <div className="movie-details__info">
-                <div className="movie-details__poster-container">
-                  <div>
-                    <div className="movie-details__section-info">
-                      <ul className="movie-details__keywords-list">
-                        <li className="movie-details__secondary-info-item">
-                          <Icon
-                            className="movie-details__icon"
-                            glyph={moneyIcon.id}
-                            viewBox={moneyIcon.viewBox}
-                          />
-                          <p>{movieDetails.budget}$</p>
-                        </li>
-                        <li className="movie-details__secondary-info-item">
-                          <Icon
-                            className="movie-details__icon"
-                            glyph={languageIcon.id}
-                            viewBox={languageIcon.viewBox}
-                          />
-                          <p>{movieDetails.original_language}</p>
-                        </li>
-                      </ul>
-                    </div>
-                    <div className="movie-details__section-info">
-                      <h3 className="movie-details__section-info-title">Keywords</h3>
-                      <ul className="movie-details__keywords-list">
-                        {
-                          moviesKeywordsList.length === 0 ?
-                            <ErrorMessage message="List is empty" /> :
-                            <>{moviesKeywordsList}</>
-                        }
-                      </ul>
-                    </div>
-                    <div className="movie-details__section-info">
-                      <h3 className="movie-details__section-info-title">About</h3>
-                      <p className="movie-details__section-info-text">{movieDetails.overview}</p>
-                    </div>
-                  </div>
-                  <Image
-                    className="movie-details__poster"
-                    src={`http://image.tmdb.org/t/p/w1280${movieDetails.poster_path}`}
-                    alt="Poster"
-                    onError={(e) => e.target.src = noWallpaper}
-                  />
-                </div>
+                <DetailItemPoster
+                  budget={movieDetails.budget}
+                  language={movieDetails.original_language}
+                  overview={movieDetails.overview}
+                  posterImage={movieDetails.poster_path}
+                >
+                  {
+                    moviesKeywordsList.length === 0 ?
+                      <ErrorMessage message="List is empty" /> :
+                      <>{moviesKeywordsList}</>
+                  }
+                </DetailItemPoster>
                 <SectionInfoSeeAll title="Pictures" navLink={ROUTES.MAIN} className="movie-details__section-info">
                   <ul className="movie-details__pictures-list">
                     {
@@ -206,36 +168,27 @@ const MovieDetails = (props) => {
                     }
                   </ul>
                 </SectionInfoSeeAll>
-                <div className="movie-details__section-info">
-                  <h3 className="movie-details__section-info-title">Similar movies</h3>
-                  <ul className="movie-details__similar-movies-list">
-                    {
-                      similarMoviesList.length === 0 ?
-                        <ErrorMessage message="List is empty" /> :
-                        <>{similarMoviesList}</>
-                    }
-                  </ul>
-                </div>
-                <div className="movie-details__section-info">
-                  <h3 className="movie-details__section-info-title">Production companies</h3>
-                  <ul className="movie-details__similar-movies-list">
-                    {
-                      recommendationsList.length === 0 ?
-                        <ErrorMessage message="List is empty" /> :
-                        <>{productionCompaniesList}</>
-                    }
-                  </ul>
-                </div>
-                <div className="movie-details__section-info">
-                  <h3 className="movie-details__section-info-title">Recommendations</h3>
-                  <ul className="movie-details__similar-movies-list">
-                    {
-                      recommendationsList.length === 0 ?
-                        <ErrorMessage message="List is empty" /> :
-                        <>{recommendationsList}</>
-                    }
-                  </ul>
-                </div>
+                <DetailItemSectionList title="Similar movies">
+                  {
+                    similarMoviesList.length === 0 ?
+                      <ErrorMessage message="List is empty" /> :
+                      <>{similarMoviesList}</>
+                  }
+                </DetailItemSectionList>
+                <DetailItemSectionList title="Production companies">
+                  {
+                    productionCompaniesList.length === 0 ?
+                      <ErrorMessage message="List is empty" /> :
+                      <>{productionCompaniesList}</>
+                  }
+                </DetailItemSectionList>
+                <DetailItemSectionList title="Recommendations">
+                  {
+                    recommendationsList.length === 0 ?
+                      <ErrorMessage message="List is empty" /> :
+                      <>{recommendationsList}</>
+                  }
+                </DetailItemSectionList>
                 <SectionInfoSeeAll
                   className="section-items"
                   title="Popular persons"
@@ -253,7 +206,8 @@ const MovieDetails = (props) => {
                   <>{moviesCastList}</>
               }
             </div>
-          </div></>
+          </div>
+        </>
       }
     </section>
   );

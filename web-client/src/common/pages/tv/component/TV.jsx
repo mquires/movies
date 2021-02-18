@@ -11,10 +11,12 @@ import SectionInfoSeeAll from '../../../components/section-info/section-info-see
 
 import './tv.scss';
 import Preloader from '../../../components/preloader';
+import { NavLink } from 'react-router-dom';
 
 const TV = (props) => {
   const {
-    todayTrendingTV
+    todayTrendingTV,
+    history
   } = props;
 
   const [tv, setTV] = useState([]);
@@ -73,7 +75,7 @@ const TV = (props) => {
     <MovieItem
       id={tvItem.id}
       key={index}
-      navLink={`${ROUTES.TV_ITEM}/${tvItem.id}`}
+      navLink={`/tv/${tvItem.id}`}
       movieName={tvItem.name}
       movieOverview={tvItem.overview}
       language={tvItem.original_language}
@@ -102,6 +104,7 @@ const TV = (props) => {
       className="movies"
       title="TV"
     >
+      <NavLink to="/movies/555">213</NavLink>
       <SectionInfoSeeAll
         className="section-items"
         title="Today's trends"

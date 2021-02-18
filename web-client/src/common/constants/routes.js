@@ -3,7 +3,7 @@ const ROUTES = {
   LOGIN: '/signin',
   REGISTRATION: '/signup',
   MOVIES: '/movies',
-  TV: '/tv',
+  TV: '/serials',
   SHOW_MORE: '/more',
   PROFILE: '/profile',
   ALL_TODAY_TRENDS_MOVIES: '/trends-movies',

@@ -78,4 +78,28 @@ export const tvAPI = {
   getTodayTrendingTV(currentPage) {
     return instance.get(`trending/tv/day?api_key=${API_KEY}&page=${currentPage}`);
   },
+
+  getTVDetails(tvId) {
+    return instance.get(`tv/${tvId}?api_key=${API_KEY}`);
+  },
+
+  getTVKeywords(tvId) {
+    return instance.get(`tv/${tvId}/keywords?api_key=${API_KEY}`);
+  },
+
+  getTVCast(tvId) {
+    return instance.get(`tv/${tvId}/credits?api_key=${API_KEY}`);
+  },
+
+  getTVRecommendations(tvId) {
+    return instance.get(`tv/${tvId}/recommendations?api_key=${API_KEY}`);
+  },
+
+  getSimilarTV(movieId) {
+    return instance.get(`tv/${movieId}/similar?api_key=${API_KEY}`);
+  },
+
+  getTVImages(tvId) {
+    return instance.get(`tv/${tvId}/images?api_key=${API_KEY}`);
+  },
 };
