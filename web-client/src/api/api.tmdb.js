@@ -11,10 +11,6 @@ export const moviesAPI = {
     return instance.get(`discover/movie?api_key=${API_KEY}&page=${currentPage}`);
   },
 
-  getGengres() {
-    return instance.get(`genre/movie/list?api_key=${API_KEY}`);
-  },
-
   getTodayTrendingMovies(currentPage) {
     return instance.get(`trending/movie/day?api_key=${API_KEY}&page=${currentPage}`);
   },
@@ -53,7 +49,19 @@ export const moviesAPI = {
 
   getMoviesCast(movieId) {
     return instance.get(`movie/${movieId}/credits?api_key=${API_KEY}`);
-  }
+  },
+
+  getMovieVideos(tvId) {
+    return instance.get(`movie/${tvId}/videos?api_key=${API_KEY}`);
+  },
+
+  getGenres() {
+    return instance.get(`genre/movie/list?api_key=${API_KEY}`);
+  },
+
+  getMoviesByGenre(currentPage, genre) {
+    return instance.get(`discover/movie?api_key=${API_KEY}&page=${currentPage}&with_genres=${genre}`);
+  },
 };
 
 export const personsAPI = {
@@ -63,7 +71,11 @@ export const personsAPI = {
 
   findPerson(query) {
     return instance.get(`search/person?api_key=${API_KEY}&query=${query}`);
-  }
+  },
+
+  getPersonDetails(personId) {
+    return instance.get(`person/${personId}?api_key=${API_KEY}`);
+  },
 };
 
 export const tvAPI = {
@@ -102,4 +114,8 @@ export const tvAPI = {
   getTVImages(tvId) {
     return instance.get(`tv/${tvId}/images?api_key=${API_KEY}`);
   },
+
+  getTVVideos(tvId) {
+    return instance.get(`tv/${tvId}/videos?api_key=${API_KEY}`);
+  }
 };

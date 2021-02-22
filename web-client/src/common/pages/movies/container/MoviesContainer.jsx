@@ -4,7 +4,8 @@ import { withRouter } from 'react-router-dom';
 import { compose } from 'redux';
 import {
   getTodayTrendingMoviesRequest,
-  getTopRatedMoviesRequest
+  getTopRatedMoviesRequest,
+  getGenresRequest
 } from '../../../../redux/movies-reducer';
 
 import Movies from '../component';
@@ -13,26 +14,18 @@ class MoviesContainer extends React.Component {
   componentDidMount() {
     const {
       getTodayTrendingMoviesRequest,
-      getTopRatedMoviesRequest
+      getTopRatedMoviesRequest,
+      getGenresRequest
     } = this.props;
 
     getTodayTrendingMoviesRequest(1);
     getTopRatedMoviesRequest(1);
+    getGenresRequest();
   }
 
   render() {
-    const {
-      todayTrendingMovies,
-      topRatedMovies,
-      isTopRatedFetching
-    } = this.props;
-
     return (
-      <Movies
-        todayTrendingMovies={todayTrendingMovies}
-        topRatedMovies={topRatedMovies}
-        isTopRatedFetching={isTopRatedFetching}
-      />
+      <Movies {...this.props} />
     );
   }
 }
@@ -41,7 +34,8 @@ const mapStateToProps = (state) => {
   return {
     todayTrendingMovies: state.movies.todayTrendingMovies,
     topRatedMovies: state.movies.topRatedMovies,
-    isTopRatedFetching: state.movies.isTopRatedFetching
+    isTopRatedFetching: state.movies.isTopRatedFetching,
+    genres: state.movies.genres
   }
 }
 
@@ -49,7 +43,8 @@ export default compose(
   connect(mapStateToProps,
     {
       getTodayTrendingMoviesRequest,
-      getTopRatedMoviesRequest
+      getTopRatedMoviesRequest,
+      getGenresRequest
     }),
   withRouter
 )(MoviesContainer);

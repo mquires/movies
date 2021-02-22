@@ -13,3 +13,9 @@ export const authAPI = {
     return instance.post('auth/signup', { name, email, password })
   }
 };
+
+export const usersAPI = {
+  getAllUsers() {
+    return instance.get('users');
+  }
+};

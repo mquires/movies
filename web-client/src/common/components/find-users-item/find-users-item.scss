@@ -1,0 +1,45 @@
+@import '../../../assets/styles/abstracts/variables';
+
+.find-users-item {
+  color: $BLACK;
+  text-decoration: none;
+  background: $CL_5_GREY;
+  border-radius: 5px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px 40px;
+
+  &__avatar {
+    width: 6rem;
+    height: 6rem;
+  }
+
+  &__contact {
+    display: flex;
+    align-items: center;
+  }
+
+  &__contact-info {
+    margin-left: 15px;
+  }
+
+  &__name {
+    font-size: 30px;
+    margin-bottom: 5px;
+  }
+
+  &__type {
+    font-size: 12px;
+    background: $CL_1_GREY;
+    border-radius: 15px;
+    text-align: center;
+    padding: 5px 0;
+    max-width: 7rem;
+  }
+
+  &__created {
+    margin: 0 0 15px 0;
+  }
+}

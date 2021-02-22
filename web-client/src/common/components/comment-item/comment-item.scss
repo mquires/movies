@@ -1,0 +1,14 @@
+@import '../../../assets/styles/abstracts/variables';
+
+.comment-item {
+  display: flex;
+  gap: 2rem;
+  transition: background 0.1s;
+  padding: 0.5rem 1rem;
+  border-radius: 0.6rem;
+  align-items: center;
+
+  &:hover {
+    background: $CL_1_GREY;
+  }
+}

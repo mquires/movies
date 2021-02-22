@@ -1,0 +1,55 @@
+@import "../../../../assets/styles/abstracts/variables";
+
+.profile {
+  &__main-info {
+    display: flex;
+    align-items: flex-end;
+    gap: 3rem;
+
+    &-wrapper {
+      display: flex;
+      width: 100%;
+      justify-content: space-between;
+    }
+  }
+
+  &__avatar {
+    width: 20rem;
+  }
+
+  &__stats {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin: 1rem 0;
+
+    &-container {
+      margin: 0 auto;
+    }
+  }
+
+  &__likes-icon {
+    fill: $RED;
+  }
+
+  &__comments-icon {
+    fill: $BLUE;
+  }
+
+  &__category {
+    text-transform: uppercase;
+    font-size: 1.5rem;
+  }
+
+  &__username {
+    font-size: 6rem;
+  }
+
+  &__posts {
+    margin-top: 5rem;
+  }
+
+  &__post-item {
+    margin: 1rem 0;
+  }
+}

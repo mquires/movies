@@ -20,7 +20,8 @@ const Movies = (props) => {
   const {
     topRatedMovies,
     todayTrendingMovies,
-    isTopRatedFetching
+    isTopRatedFetching,
+    genres
   } = props;
 
   const [movies, setMovies] = useState([]);
@@ -75,6 +76,23 @@ const Movies = (props) => {
     !movie.search && getMoviesRequest();
   }
 
+  const getMoviesByGenreRequest = (genre) => {
+    if (!hasNextPage) return;
+
+    if (fetching) {
+      moviesAPI.getMoviesByGenre(page, genre)
+        .then((response) => {
+          if (response.data.total_results === (movies.length + response.data.results.length)) {
+            setHasNextPage(false);
+          }
+
+          setMovies(movies => [...movies, ...response.data.results]);
+          setPage(page => page + 1);
+        })
+        .finally(() => setIsFetching(false));
+    }
+  }
+
   const moviesList = movies.map((movie, index) => (
     <MovieItem
       navLink={`${ROUTES.MOVIE_ITEM}/${movie.id}`}
@@ -118,15 +136,22 @@ const Movies = (props) => {
     />
   ));
 
+  const genresList = genres.map((genre, index) => (
+    <CategoryItem
+      id={genre.id}
+      key={index}
+      categoryTitle={genre.name}
+      onClick={() => getMoviesByGenreRequest(genre.name)}
+    />
+  ));
+
   return (
     <PageComponent
       className="movies"
       title="Movies"
     >
       <Categories title="Find more">
-        <CategoryItem categoryTitle="Comedy" />
-        <CategoryItem categoryTitle="Comedy" />
-        <CategoryItem categoryTitle="Comedy" />
+        {genresList}
       </Categories>
       <SectionInfoSeeAll
         className="section-items"

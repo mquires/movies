@@ -9,7 +9,8 @@ import {
   getMovieImagesRequest,
   getSimilarMoviesRequest,
   getMoviesKeywordsRequest,
-  getMoviesCastRequest
+  getMoviesCastRequest,
+  getMovieVideosRequest
 } from '../../../../redux/movies-reducer';
 
 import MovieDetails from '../component';
@@ -24,6 +25,7 @@ class MovieDetailsContainer extends React.Component {
       getSimilarMoviesRequest,
       getMoviesKeywordsRequest,
       getMoviesCastRequest,
+      getMovieVideosRequest,
       match
     } = this.props;
 
@@ -34,39 +36,35 @@ class MovieDetailsContainer extends React.Component {
     getSimilarMoviesRequest(match.params.id);
     getMoviesKeywordsRequest(match.params.id);
     getMoviesCastRequest(match.params.id);
+    getMovieVideosRequest(match.params.id);
   }
 
-  componentDidUpdate() {
-    const {
-      getMovieDetailsRequest,
-      match
-    } = this.props;
+  componentDidUpdate(prevProps, prevState) {
+    if (prevProps.match.params.id !== this.props.match.params.id) {
+      const {
+        getMovieDetailsRequest,
+        getRecommendationsRequest,
+        getMovieImagesRequest,
+        getSimilarMoviesRequest,
+        getMoviesKeywordsRequest,
+        getMoviesCastRequest,
+        getMovieVideosRequest,
+        match
+      } = this.props;
 
-    getMovieDetailsRequest(match.params.id);
+      getMovieDetailsRequest(match.params.id);
+      getRecommendationsRequest(match.params.id);
+      getMovieImagesRequest(match.params.id);
+      getSimilarMoviesRequest(match.params.id);
+      getMoviesKeywordsRequest(match.params.id);
+      getMoviesCastRequest(match.params.id);
+      getMovieVideosRequest(match.params.id);
+    }
   }
 
   render() {
-    const {
-      popularPersons,
-      movieDetails,
-      recommendations,
-      movieImages,
-      similarMovies,
-      moviesKeywords,
-      moviesCast
-    } = this.props;
-
     return (
-      <MovieDetails
-        popularPersons={popularPersons}
-        movieDetails={movieDetails}
-        recommendations={recommendations}
-        movieImages={movieImages}
-        similarMovies={similarMovies}
-        moviesKeywords={moviesKeywords}
-        moviesCast={moviesCast}
-        {...this.props}
-      />
+      <MovieDetails {...this.props} />
     );
   }
 }
@@ -79,7 +77,8 @@ const mapStateToProps = (state) => {
     movieImages: state.movies.movieImages,
     similarMovies: state.movies.similarMovies,
     moviesKeywords: state.movies.moviesKeywords,
-    moviesCast: state.movies.moviesCast
+    moviesCast: state.movies.moviesCast,
+    movieVideos: state.movies.movieVideos
   }
 }
 
@@ -91,7 +90,8 @@ export default compose(
     getMovieImagesRequest,
     getSimilarMoviesRequest,
     getMoviesKeywordsRequest,
-    getMoviesCastRequest
+    getMoviesCastRequest,
+    getMovieVideosRequest
   }),
   withRouter
 )(MovieDetailsContainer);

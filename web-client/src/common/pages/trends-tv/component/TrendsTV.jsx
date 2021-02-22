@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { tvAPI } from '../../../../api/api.tmdb';
 import SectionPageNoSearch from '../../../components/page-components/section-page-no-search';
 import TrendsItem from '../../../components/trends-item';
+import ROUTES from '../../../constants/routes';
 
 const TrendsTV = () => {
   const [todayTrendingTV, setTodayTrendingTV] = useState([]);
@@ -51,6 +52,8 @@ const TrendsTV = () => {
       releaseDate={todayTrendingTVItem.first_air_date}
       src={`http://image.tmdb.org/t/p/w1280/${todayTrendingTVItem.backdrop_path}`}
       alt={todayTrendingTVItem.name}
+      navLink={`${ROUTES.TV_ITEM}/${todayTrendingTVItem.id}`}
+      navPlayButtonLink={`${ROUTES.TV_ITEM}/${todayTrendingTVItem.id}`}
     />
   ));
 

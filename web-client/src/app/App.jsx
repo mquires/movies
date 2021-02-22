@@ -11,7 +11,7 @@ import Main from "../common/pages/main";
 import LoginContainer from "../common/pages/login/container";
 import RegistrationContainer from "../common/pages/registration/container";
 import MoviesContainer from "../common/pages/movies/container";
-import Profile from "../common/pages/profile";
+import ProfileContainer from "../common/pages/profile/container";
 import TopRatedMovies from "../common/pages/top-rated-movies/component";
 import TVContainer from "../common/pages/tv/container";
 import UpcomingMoviesContainer from "../common/pages/upcoming-movies/container";
@@ -21,6 +21,8 @@ import ShowMore from "../common/pages/show-more/component";
 import TrendsTV from "../common/pages/trends-tv/component";
 import MovieDetailsContainer from "../common/pages/movie-details/container";
 import TVDetailsContainer from "../common/pages/tv-details/container";
+import PersonDetailsContainer from "../common/pages/person-details/container";
+import AdminPanelContainer from "../common/pages/admin-panel/container";
 
 import './app.scss';
 
@@ -54,7 +56,7 @@ const App = () => {
               />
               <Route
                 path={ROUTES.PROFILE}
-                render={() => <Profile />}
+                render={() => <ProfileContainer />}
               />
               <Route
                 path={ROUTES.ALL_TODAY_TRENDS_MOVIES}
@@ -91,6 +93,14 @@ const App = () => {
               <Route
                 path={`${ROUTES.TV_ITEM}/:id`}
                 render={() => <TVDetailsContainer />}
+              />
+              <Route
+                path={`${ROUTES.PERSON_ITEM}/:id`}
+                render={() => <PersonDetailsContainer />}
+              />
+              <Route
+                path={`${ROUTES.ADMIN_PANEL}`}
+                render={() => <AdminPanelContainer />}
               />
             </Switch>
           </div>

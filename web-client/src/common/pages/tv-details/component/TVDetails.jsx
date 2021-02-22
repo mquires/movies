@@ -30,13 +30,15 @@ const TVDetails = (props) => {
     TVCast,
     tvRecommendations,
     similarTV,
-    tvImages
+    tvImages,
+    tvVideos
   } = props;
 
   const popularPersonsList = popularPersons.map((popularPerson, index) => (
     <ActorItem
       id={popularPerson.id}
       key={index}
+      navLink={`${ROUTES.PERSON_ITEM}/${popularPerson.id}`}
       className="section-items__item"
       title={popularPerson.name}
       src={`http://image.tmdb.org/t/p/w1280/${popularPerson.profile_path}`}
@@ -44,8 +46,6 @@ const TVDetails = (props) => {
       onError={(e) => e.target.src = 'https://static.thenounproject.com/png/156197-200.png'}
     />
   ));
-
-
 
   const tvKeywordsList = tvKeywords.map((tvKeyword, index) => (
     <li
@@ -59,7 +59,7 @@ const TVDetails = (props) => {
 
   const tvCastList = TVCast.map((tvCastItem, index) => (
     <NavLink
-      to={ROUTES.MAIN}
+      to={`${ROUTES.PERSON_ITEM}/${tvCastItem.id}`}
       className="movie-details__actor"
       id={tvCastItem.id}
       key={index}
@@ -124,7 +124,18 @@ const TVDetails = (props) => {
     </li>
   ));
 
-  (!tvDetails?.production_companies) && <Preloader />;
+  const productionCompaniesList = (!tvDetails?.production_companies) ?
+    <Preloader /> :
+    tvDetails?.production_companies.map((productionCompany, index) => (
+      <MovieTvItem
+        id={productionCompany.id}
+        key={index}
+        title={productionCompany.name}
+        src={`http://image.tmdb.org/t/p/w1280${productionCompany.logo_path}`}
+        alt={productionCompany.name}
+        onError={(e) => e.target.src = noPhoto}
+      />
+    ));
 
   return (
     <section className={classNames("movie-details", className)}>
@@ -134,6 +145,7 @@ const TVDetails = (props) => {
           <DetailItemBackground
             backgroundImage={tvDetails.backdrop_path}
             title={tvDetails.name}
+            video={tvVideos}
           />
           <div className="movie-details__container">
             <div className="movie-details__info-wrapper">
@@ -167,8 +179,11 @@ const TVDetails = (props) => {
                   }
                 </DetailItemSectionList>
                 <DetailItemSectionList title="Production companies">
-                
-             
+                  {
+                    productionCompaniesList.length === 0 ?
+                      <ErrorMessage message="List is empty" /> :
+                      <>{productionCompaniesList}</>
+                  }
                 </DetailItemSectionList>
                 <DetailItemSectionList title="Recommendations">
                   {

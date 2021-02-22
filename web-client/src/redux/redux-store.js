@@ -5,12 +5,14 @@ import authReducer from './auth-reducer';
 import moviesReducer from './movies-reducer';
 import personsReducer from './persons-reducer';
 import tvReducer from './tv-reducer';
+import usersReducer from './users-reducer';
 
 const reducers = combineReducers({
   auth: authReducer,
   movies: moviesReducer,
   persons: personsReducer,
   tv: tvReducer,
+  users: usersReducer,
   form: formReducer
 });
 

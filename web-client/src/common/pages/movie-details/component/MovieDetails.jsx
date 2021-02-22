@@ -30,13 +30,15 @@ const MovieDetails = (props) => {
     movieImages,
     similarMovies,
     moviesKeywords,
-    moviesCast
+    moviesCast,
+    movieVideos
   } = props;
 
   const popularPersonsList = popularPersons.map((popularPerson, index) => (
     <ActorItem
       id={popularPerson.id}
       key={index}
+      navLink={`${ROUTES.PERSON_ITEM}/${popularPerson.id}`}
       className="section-items__item"
       title={popularPerson.name}
       src={`http://image.tmdb.org/t/p/w1280/${popularPerson.profile_path}`}
@@ -119,7 +121,7 @@ const MovieDetails = (props) => {
 
   const moviesCastList = moviesCast.map((moviesCastItem, index) => (
     <NavLink
-      to={ROUTES.MAIN}
+      to={`${ROUTES.PERSON_ITEM}/${moviesCastItem.id}`}
       className="movie-details__actor"
       id={moviesCastItem.id}
       key={index}
@@ -143,6 +145,7 @@ const MovieDetails = (props) => {
           <DetailItemBackground
             backgroundImage={movieDetails.backdrop_path}
             title={movieDetails.original_title}
+            video={movieVideos}
           />
           <div className="movie-details__container">
             <div className="movie-details__info-wrapper">

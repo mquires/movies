@@ -11,6 +11,8 @@ const SET_MOVIE_IMAGES = 'SET-MOVIE-IMAGES';
 const SET_SIMILAR_MOVIES = 'SET-SIMILAR-MOVIES';
 const SET_MOVIES_KEYWORDS = 'SET-MOVIES-KEYWORDS';
 const SET_MOVIES_CAST = 'SET-MOVIES-CAST';
+const SET_MOVIE_VIDEOS = 'SET-MOVIE-VIDEOS';
+const SET_GENRES = 'SET-GENRES';
 
 const initialState = {
   genres: [],
@@ -24,7 +26,8 @@ const initialState = {
   movieImages: [],
   similarMovies: [],
   moviesKeywords: [],
-  moviesCast: []
+  moviesCast: [],
+  movieVideos: []
 };
 
 const moviesReducer = (state = initialState, action) => {
@@ -95,6 +98,18 @@ const moviesReducer = (state = initialState, action) => {
         moviesCast: action.moviesCast
       }
     }
+    case SET_MOVIE_VIDEOS: {
+      return {
+        ...state,
+        movieVideos: action.movieVideos
+      }
+    }
+    case SET_GENRES: {
+      return {
+        ...state,
+        genres: action.genres
+      }
+    }
     default: {
       return state;
     }
@@ -114,6 +129,8 @@ export const setMovieImages = (movieImages) => ({ type: SET_MOVIE_IMAGES, movieI
 export const setSimilarMovies = (similarMovies) => ({ type: SET_SIMILAR_MOVIES, similarMovies });
 export const setMoviesKeywords = (moviesKeywords) => ({ type: SET_MOVIES_KEYWORDS, moviesKeywords });
 export const setMoviesCast = (moviesCast) => ({ type: SET_MOVIES_CAST, moviesCast });
+export const setMovieVideos = (movieVideos) => ({ type: SET_MOVIE_VIDEOS, movieVideos });
+export const setGenres = (genres) => ({ type: SET_GENRES, genres });
 
 export const getTopRatedMoviesRequest = (currentPage) => (dispatch) => {
   moviesAPI.getTopRatedMovies(currentPage)
@@ -141,6 +158,7 @@ export const getUpcomingMoviesRequest = (currentPage) => (dispatch) => {
 export const getMovieDetailsRequest = (movieId) => (dispatch) => {
   moviesAPI.getMovieDetails(movieId)
     .then(response => {
+      console.log(response.data)
       dispatch(setMovieDetails(response.data));
     });
 };
@@ -177,5 +195,19 @@ export const getMoviesCastRequest = (movieId) => (dispatch) => {
   moviesAPI.getMoviesCast(movieId)
     .then(response => {
       dispatch(setMoviesCast(response.data.cast));
+    });
+};
+
+export const getMovieVideosRequest = (movieId) => (dispatch) => {
+  moviesAPI.getMovieVideos(movieId)
+    .then(response => {
+      dispatch(setMovieVideos(response.data.results[0]));
+    });
+};
+
+export const getGenresRequest = () => (dispatch) => {
+  moviesAPI.getGenres()
+    .then(response => {
+      dispatch(setGenres(response.data.genres));
     });
 };

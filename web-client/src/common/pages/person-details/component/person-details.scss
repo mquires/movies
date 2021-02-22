@@ -1,0 +1,13 @@
+@import "../../../../assets/styles/abstracts/variables";
+
+.person-details {
+  &__container {
+    margin: 0 auto;
+    max-width: 160rem;
+    padding: 3rem;
+  }
+
+  &__avatar {
+    width: 35rem;
+  }
+}

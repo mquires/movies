@@ -1,13 +1,55 @@
-@import '../../../assets/styles/abstracts/variables';
+@import "../../../assets/styles/abstracts/variables";
 
 .detail-item {
   &__background {
     position: relative;
 
+    &-container {
+      position: relative;
+    }
+
     &-image {
       width: 100%;
-      height: 50vh;
+      height: 47.2vh !important;
       object-fit: cover;
+      filter: brightness(0.7);
+    }
+  }
+
+  &__play-button {
+    width: 5.5rem;
+    height: 5.5rem;
+    fill: $RED;
+    stroke: $RED;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    cursor: pointer;
+    transition: 0.1s;
+    z-index: 2;
+
+    &:hover {
+      fill: $PINK;
+      stroke: $PINK;
+    }
+  }
+
+  &__close-button {
+    width: 2.5rem;
+    height: 2.5rem;
+    fill: $WHITE;
+    stroke: $WHITE;
+    position: absolute;
+    top: 50%;
+    right: 2%;
+    transform: translate(-50%, -50%);
+    cursor: pointer;
+    transition: 0.1s;
+
+    &:hover {
+      fill: $CL_1_GREY;
+      stroke: $CL_1_GREY;
     }
   }
 

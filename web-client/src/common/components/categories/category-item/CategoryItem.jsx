@@ -11,11 +11,12 @@ import './category-item.scss';
 const CategoryItem = (props) => {
   const {
     className,
-    categoryTitle
+    categoryTitle,
+    onClick
   } = props;
 
   return (
-    <li className={classNames("category-item", className)}>
+    <li className={classNames("category-item", className)} onClick={onClick}>
       <div className="category-item__container">
         <p>{categoryTitle}</p>
         <Icon

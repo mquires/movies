@@ -104,7 +104,6 @@ const TV = (props) => {
       className="movies"
       title="TV"
     >
-      <NavLink to="/movies/555">213</NavLink>
       <SectionInfoSeeAll
         className="section-items"
         title="Today's trends"
