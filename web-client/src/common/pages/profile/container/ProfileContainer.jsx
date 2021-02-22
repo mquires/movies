@@ -2,11 +2,20 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { compose } from 'redux';
-import { addPost } from '../../../../redux/users-reducer';
+import { addPost, getUserByIdRequest } from '../../../../redux/users-reducer';
 
 import Profile from '../component';
 
 class ProfileContainer extends React.Component {
+  componentDidMount() {
+    const {
+      getUserByIdRequest,
+      match
+    } = this.props;
+
+    getUserByIdRequest(match.params.id);
+  }
+
   onSendPost(comment) {
     const {
       addPost
@@ -27,13 +36,15 @@ class ProfileContainer extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    userPosts: state.users.userPosts
+    userPosts: state.users.userPosts,
+    user: state.users.user
   }
 }
 
 export default compose(
   connect(mapStateToProps, {
-    addPost
+    addPost,
+    getUserByIdRequest
   }),
   withRouter
 )(ProfileContainer);

@@ -17,5 +17,9 @@ export const authAPI = {
 export const usersAPI = {
   getAllUsers() {
     return instance.get('users');
+  },
+
+  getUserById(id) {
+    return instance.get(`user/${id}`);
   }
 };

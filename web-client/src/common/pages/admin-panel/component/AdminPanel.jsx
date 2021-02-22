@@ -17,7 +17,7 @@ const AdminPanel = (props) => {
   const usersList = users.map((user, index) => (
     <FindUsersItem
       className="admin-panel__user-item"
-      navLink={`${ROUTES.USER_ITEM}/${user.id}`}
+      navLink={`${ROUTES.PROFILE}/${user.id}`}
       id={user.id}
       key={index}
       name={user.name}

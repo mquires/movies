@@ -55,7 +55,7 @@ const App = () => {
                 render={() => <MoviesContainer />}
               />
               <Route
-                path={ROUTES.PROFILE}
+                path={`${ROUTES.PROFILE}/:id?`}
                 render={() => <ProfileContainer />}
               />
               <Route
