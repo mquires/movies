@@ -8,15 +8,16 @@ import MovieItem from '../../../components/movie-item';
 import SectionInfo from '../../../components/section-info';
 import TrendsItem from '../../../components/trends-item';
 import SectionInfoSeeAll from '../../../components/section-info/section-info-see-all';
+import Preloader from '../../../components/preloader';
+import CategoryItem from '../../../components/categories/category-item';
+import Categories from '../../../components/categories';
 
 import './tv.scss';
-import Preloader from '../../../components/preloader';
-import { NavLink } from 'react-router-dom';
 
 const TV = (props) => {
   const {
     todayTrendingTV,
-    history
+    genres
   } = props;
 
   const [tv, setTV] = useState([]);
@@ -99,11 +100,42 @@ const TV = (props) => {
     />
   ));
 
+  const getTVByGenreRequest = (genre) => {
+    if (!hasNextPage) return;
+
+    tvAPI.getTV(page, genre)
+      .then((response) => {
+        if (response.data.total_results === (tv.length + response.data.results.length)) {
+          setHasNextPage(false);
+        }
+
+        setTV(() => [...response.data.results]);
+        setPage(page => page + 1);
+      })
+      .finally(() => setIsFetching(false));
+  }
+
+  const onGetTVByGenre = (genreId) => {
+    getTVByGenreRequest(genreId);
+  }
+
+  const genresList = genres.map((genre, index) => (
+    <CategoryItem
+      id={genre.id}
+      key={index}
+      categoryTitle={genre.name}
+      onClick={() => onGetTVByGenre(genre.id)}
+    />
+  ));
+
   return (
     <PageComponent
       className="movies"
       title="TV"
     >
+      <Categories title="Find more">
+        {genresList}
+      </Categories>
       <SectionInfoSeeAll
         className="section-items"
         title="Today's trends"

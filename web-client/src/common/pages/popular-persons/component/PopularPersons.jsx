@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { personsAPI } from '../../../../api/api.tmdb';
+import ROUTES from '../../../constants/routes';
 
 import SectionPage from '../../../components/page-components/section-page';
 import ActorItem from '../../../components/items/actor-item';
@@ -61,6 +62,7 @@ const PopularPersons = () => {
   const popularPersonsList = persons.map((popularPerson, index) => (
     <ActorItem
       id={popularPerson.id}
+      navLink={`${ROUTES.PERSON_ITEM}/${popularPerson.id}`}
       key={index}
       title={popularPerson.name}
       src={`http://image.tmdb.org/t/p/w1280/${popularPerson.profile_path}`}

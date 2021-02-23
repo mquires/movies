@@ -18,8 +18,11 @@ const SectionInfo = (props) => {
     <div className={classNames("section-info", className)}>
       <div className="section-info__title-container">
         <h3 className="section-info__title">{title}</h3>
-        <Search onChange={onChange} />
       </div>
+      <Search
+        className="section-info__search"
+        onChange={onChange}
+      />
       <div className="section-info__container">
         {children}
       </div>

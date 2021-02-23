@@ -1,13 +1,47 @@
 @import "../../../../assets/styles/abstracts/variables";
 
 .person-details {
+  & h3 {
+    margin: 2rem 0;
+  }
+
   &__container {
     margin: 0 auto;
     max-width: 160rem;
     padding: 3rem;
   }
 
+  &__person {
+    display: flex;
+    gap: 2rem;
+  }
+
   &__avatar {
-    width: 35rem;
+    width: 30rem;
+    border-radius: 0.6rem;
+  }
+
+  &__quaternary-title {
+    margin: 1.5rem 0 0.7rem;
+  }
+
+  &__contacts {
+    & p {
+      font-size: 1.4rem;
+    }
+  }
+
+  &__biography {
+    letter-spacing: 0.4px;
+    line-height: 2.5rem;
+  }
+
+  &__known-for {
+    &-info {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      justify-content: center;
+    }
   }
 }

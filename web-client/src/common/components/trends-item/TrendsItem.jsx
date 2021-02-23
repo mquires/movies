@@ -6,6 +6,8 @@ import ROUTES from '../../constants/routes';
 
 import TrendsItemCover from './trends-item-cover';
 
+import noPhoto from '../../../assets/images/no-photo.png';
+
 import './trends-item.scss';
 
 const TrendsItem = (props) => {
@@ -19,7 +21,7 @@ const TrendsItem = (props) => {
 
   return (
     <div className={classNames('trends-item', className)}>
-      <TrendsItemCover {...restProps} />
+      <TrendsItemCover {...restProps} onError={(e) => e.target.src = noPhoto} />
       <div className="trends-item__info">
         <NavLink
           to={navLink}

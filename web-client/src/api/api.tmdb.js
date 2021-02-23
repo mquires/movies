@@ -61,7 +61,7 @@ export const moviesAPI = {
 
   getMoviesByGenre(currentPage, genre) {
     return instance.get(`discover/movie?api_key=${API_KEY}&page=${currentPage}&with_genres=${genre}`);
-  },
+  }
 };
 
 export const personsAPI = {
@@ -76,6 +76,14 @@ export const personsAPI = {
   getPersonDetails(personId) {
     return instance.get(`person/${personId}?api_key=${API_KEY}`);
   },
+
+  getPersonMovieCredits(personId) {
+    return instance.get(`person/${personId}/movie_credits?api_key=${API_KEY}`);
+  },
+
+  getPersonTVCredits(personId) {
+    return instance.get(`person/${personId}/tv_credits?api_key=${API_KEY}`);
+  }
 };
 
 export const tvAPI = {
@@ -117,5 +125,13 @@ export const tvAPI = {
 
   getTVVideos(tvId) {
     return instance.get(`tv/${tvId}/videos?api_key=${API_KEY}`);
-  }
+  },
+
+  getGenres() {
+    return instance.get(`genre/tv/list?api_key=${API_KEY}`);
+  },
+
+  getTVByGenre(currentPage, genre) {
+    return instance.get(`discover/tv?api_key=${API_KEY}&page=${currentPage}&with_genres=${genre}`);
+  },
 };

@@ -2,38 +2,43 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { compose } from 'redux';
-import { getTodayTrendingTVRequest } from '../../../../redux/tv-reducer';
+import {
+  getTodayTrendingTVRequest,
+  getGenresRequest
+} from '../../../../redux/tv-reducer';
 
 import TV from '../component';
 
 class TVContainer extends React.Component {
   componentDidMount() {
     const {
-      getTodayTrendingTVRequest
+      getTodayTrendingTVRequest,
+      getGenresRequest
     } = this.props;
 
     getTodayTrendingTVRequest(1);
+    getGenresRequest();
   }
 
   render() {
-    const {
-      todayTrendingTV
-    } = this.props;
-
     return (
-      <TV todayTrendingTV={todayTrendingTV} />
+      <TV {...this.props} />
     );
   }
 }
 
 const mapStateToProps = (state) => {
   return {
-    todayTrendingTV: state.tv.todayTrendingTV
+    todayTrendingTV: state.tv.todayTrendingTV,
+    genres: state.tv.genres
   }
 }
 
 export default compose(
   connect(mapStateToProps,
-    { getTodayTrendingTVRequest }),
+    {
+      getTodayTrendingTVRequest,
+      getGenresRequest
+    }),
   withRouter
 )(TVContainer);

@@ -79,18 +79,21 @@ const Movies = (props) => {
   const getMoviesByGenreRequest = (genre) => {
     if (!hasNextPage) return;
 
-    if (fetching) {
       moviesAPI.getMoviesByGenre(page, genre)
         .then((response) => {
+          console.log(response)
           if (response.data.total_results === (movies.length + response.data.results.length)) {
             setHasNextPage(false);
           }
 
-          setMovies(movies => [...movies, ...response.data.results]);
+          setMovies(() => [...response.data.results]);
           setPage(page => page + 1);
         })
         .finally(() => setIsFetching(false));
-    }
+  }
+
+  const onGetMoviesByGenre = (genreId) => {
+    getMoviesByGenreRequest(genreId);
   }
 
   const moviesList = movies.map((movie, index) => (
@@ -141,7 +144,7 @@ const Movies = (props) => {
       id={genre.id}
       key={index}
       categoryTitle={genre.name}
-      onClick={() => getMoviesByGenreRequest(genre.name)}
+      onClick={() => onGetMoviesByGenre(genre.id)}
     />
   ));
 

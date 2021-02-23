@@ -8,6 +8,7 @@ const SET_TV_RECOMMENDATIONS = 'SET-TV-RECOMMENDATIONS';
 const SET_SIMILAR_TV = 'SET-SIMILAR-TV';
 const SET_TV_IMAGES = 'SET-TV-IMAGES';
 const SET_TV_VIDEOS = 'SET-TV-VIDEOS';
+const SET_GENRES = 'SET-GENRES';
 
 const initialState = {
   todayTrendingTV: [],
@@ -17,7 +18,8 @@ const initialState = {
   tvRecommendations: [],
   similarTV: [],
   tvImages: [],
-  tvVideos: []
+  tvVideos: [],
+  genres: []
 };
 
 const tvReducer = (state = initialState, action) => {
@@ -70,6 +72,12 @@ const tvReducer = (state = initialState, action) => {
         tvVideos: action.tvVideos
       }
     }
+    case SET_GENRES: {
+      return {
+        ...state,
+        genres: action.genres
+      }
+    }
     default: {
       return state;
     }
@@ -86,6 +94,7 @@ export const setTVRecommendations = (tvRecommendations) => ({ type: SET_TV_RECOM
 export const setSimilarTV = (similarTV) => ({ type: SET_SIMILAR_TV, similarTV });
 export const setTVImages = (tvImages) => ({ type: SET_TV_IMAGES, tvImages });
 export const setTVVideos = (tvVideos) => ({ type: SET_TV_VIDEOS, tvVideos });
+export const setGenres = (genres) => ({ type: SET_GENRES, genres });
 
 export const getTodayTrendingTVRequest = (currentPage) => (dispatch) => {
   tvAPI.getTodayTrendingTV(currentPage)
@@ -140,5 +149,12 @@ export const getTVVideosRequest = (tvId) => (dispatch) => {
   tvAPI.getTVVideos(tvId)
     .then(response => {
       dispatch(setTVVideos(response.data.results[0]));
+    });
+};
+
+export const getGenresRequest = () => (dispatch) => {
+  tvAPI.getGenres()
+    .then(response => {
+      dispatch(setGenres(response.data.genres));
     });
 };

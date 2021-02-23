@@ -13,6 +13,12 @@
   max-width: 100%;
   min-width: 20rem;
   font-size: 1.3rem;
+  cursor: pointer;
+  transition: 0.1s;
+
+  &:hover {
+    background: $CL_6_GREY;
+  }
 
   &__container {
     display: flex;
