@@ -16,7 +16,8 @@ const ROUTES = {
   TV_ITEM: '/tv',
   PERSON_ITEM: '/person',
   ADMIN_PANEL: '/admin-panel',
-  USER_ITEM: '/user'
+  USER_ITEM: '/user',
+  WATCH_LATER: '/watch-later'
 };
 
 export default ROUTES;

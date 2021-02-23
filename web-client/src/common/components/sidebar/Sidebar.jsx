@@ -7,11 +7,11 @@ import ROUTES from '../../constants/routes';
 
 import Logo from '../logo';
 import SidebarLink from '../sidebar-link';
-import Search from '../search';
 
 import moviesIcon from '../../../assets/icons/movies.svg';
 import tvIcon from '../../../assets/icons/tv.svg';
 import showMoreIcon from '../../../assets/icons/show-more.svg';
+import watchLaterIcon from '../../../assets/icons/watch_later.svg';
 
 import './sidebar.scss';
 
@@ -47,6 +47,17 @@ const Sidebar = (props) => {
           activeClassName={classNames('sidebar__nav-link-active', className)}
           to={ROUTES.SHOW_MORE}
           caption="Show more"
+        />
+        <div className="sidebar__subtitle-container">
+          <h3 className="sidebar__subtitle">My library</h3>
+        </div>
+        <SidebarLink
+          glyph={watchLaterIcon.id}
+          viewBox={watchLaterIcon.viewBox}
+          className={classNames('sidebar__nav-link', className)}
+          activeClassName={classNames('sidebar__nav-link-active', className)}
+          to={ROUTES.WATCH_LATER}
+          caption="Watch later"
         />
       </div>
     </nav>

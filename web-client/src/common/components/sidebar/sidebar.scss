@@ -29,4 +29,16 @@
       background: $CL_7_GREY;
     }
   }
+
+  &__subtitle {
+    text-transform: uppercase;
+    margin: 3rem 0 0;
+    font-size: 1.5rem;
+
+    &-container {
+      border-bottom: 0.1rem solid $BLACK;
+      padding: 0.7rem 0;
+      margin-bottom: 1rem;
+    }
+  }
 }
