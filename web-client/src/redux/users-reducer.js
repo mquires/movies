@@ -8,20 +8,7 @@ const SET_USER = 'SET-USER';
 const initialState = {
   user: null,
   users: [],
-  userPosts: [
-    {
-      id: 1,
-      comment: '123123'
-    },
-    {
-      id: 2,
-      comment: '123123'
-    },
-    {
-      id: 3,
-      comment: '123123'
-    }
-  ]
+  userPosts: []
 };
 
 const usersReducer = (state = initialState, action) => {
@@ -40,8 +27,7 @@ const usersReducer = (state = initialState, action) => {
     }
     case ADD_POST: {
       const newPost = {
-        id: 4,
-        comment: action.postText,
+        post: action.postText
       };
       return {
         ...state,
@@ -80,4 +66,16 @@ export const getUserByIdRequest = (userId) => (dispatch) => {
       console.log(response)
       dispatch(setUser(response.data));
     });
+};
+
+export const getPostsByIdRequest = (userId) => (dispatch) => {
+  usersAPI.getPostsById(userId)
+    .then(response => {
+      dispatch(setUserPosts(response.data));
+    });
+};
+
+export const addPostRequest = (userId, post) => (dispatch) => {
+  usersAPI.addPost(userId, post)
+    .then(() => dispatch(addPost(post)));
 };

@@ -11,4 +11,13 @@
   &:hover {
     background: $CL_1_GREY;
   }
+
+  &__name {
+    font-weight: 700;
+    font-size: 1.8rem;
+  }
+
+  &__comment {
+    font-size: 1.5rem;
+  }
 }

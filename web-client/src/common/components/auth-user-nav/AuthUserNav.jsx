@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { NavLink } from 'react-router-dom';
+import { NavLink, withRouter } from 'react-router-dom';
 import ROUTES from '../../constants/routes';
 
 import Avatar from '../avatar';
@@ -65,4 +65,4 @@ AuthUserNav.defaultProps = {
   className: undefined
 }
 
-export default AuthUserNav;
+export default withRouter(AuthUserNav);

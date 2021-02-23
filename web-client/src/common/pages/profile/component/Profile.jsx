@@ -30,7 +30,8 @@ const Profile = (props) => {
     <CommentItem
       id={userPost.id}
       key={index}
-      comment={userPost.comment}
+      name={userPost.name}
+      comment={userPost.post}
       src="http://t2.gstatic.com/images?q=tbn:ANd9GcQRmj9gO7hiNSpI6D7-3UE5ejpqfRdocu1jEEB-HIkBivMZz0GJ1-1-3mBR5Ept"
       alt="item"
     />

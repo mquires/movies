@@ -13,6 +13,7 @@ import Icon from '../icon';
 import playIcon from '../../../assets/icons/play-button.svg';
 import closeIcon from '../../../assets/icons/close.svg';
 import Preloader from '../preloader';
+import ErrorMessage from '../error-message/ErrorMessage';
 
 const DetailItemBackground = (props) => {
   const {
@@ -30,11 +31,13 @@ const DetailItemBackground = (props) => {
         isOpen ?
           <>
             {
+              video ?
               <ReactPlayer className="detail-item__background-image"
                 playing
                 width="100%"
                 url={`https://www.youtube.com/watch?v=${video.key}`}
-              />
+              /> :
+              <ErrorMessage message="Video is unavailable" className="detail-item__background-image" />
             }
             <Icon
               className="detail-item__close-button"

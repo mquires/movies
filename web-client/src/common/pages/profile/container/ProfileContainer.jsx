@@ -2,7 +2,11 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { compose } from 'redux';
-import { addPost, getUserByIdRequest } from '../../../../redux/users-reducer';
+import {
+  getUserByIdRequest,
+  getPostsByIdRequest,
+  addPostRequest
+} from '../../../../redux/users-reducer';
 
 import Profile from '../component';
 
@@ -10,18 +14,46 @@ class ProfileContainer extends React.Component {
   componentDidMount() {
     const {
       getUserByIdRequest,
+      getPostsByIdRequest,
       match
     } = this.props;
 
+    if (!match.params.id) {
+      match.params.id = localStorage.getItem('id');
+      if (!match.params.id) {
+        history.push(ROUTES.LOGIN);
+      }
+    }
+
     getUserByIdRequest(match.params.id);
+    getPostsByIdRequest(match.params.id);
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (prevProps.match.params.id !== this.props.match.params.id) {
+      const {
+        getUserByIdRequest,
+        match
+      } = this.props;
+
+      if (!match.params.id) {
+        match.params.id = localStorage.getItem('id');
+        if (!match.params.id) {
+          history.push(ROUTES.LOGIN);
+        }
+      }
+
+      getUserByIdRequest(match.params.id);
+    }
   }
 
   onSendPost(comment) {
     const {
-      addPost
+      addPostRequest,
+      match
     } = this.props;
 
-    addPost(comment.comment);
+    addPostRequest(match.params.id, comment.comment);
   }
 
   render() {
@@ -43,8 +75,9 @@ const mapStateToProps = (state) => {
 
 export default compose(
   connect(mapStateToProps, {
-    addPost,
-    getUserByIdRequest
+    getUserByIdRequest,
+    getPostsByIdRequest,
+    addPostRequest
   }),
   withRouter
 )(ProfileContainer);

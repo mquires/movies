@@ -21,5 +21,13 @@ export const usersAPI = {
 
   getUserById(id) {
     return instance.get(`user/${id}`);
+  },
+
+  getPostsById(id) {
+    return instance.get(`user/${id}/posts`);
+  },
+
+  addPost(id, post) {
+    return instance.post(`user/${id}/add-post`, { id, post });
   }
 };
