@@ -34,7 +34,7 @@ const FeedbackForm = (props) => {
       />
       <EntryField
         component={Select}
-        name="feedback-type"
+        name="feedbackType"
         validate={[required]}
       >
         <option disabled>Select feedback type</option>

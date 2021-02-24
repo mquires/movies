@@ -6,7 +6,7 @@ import { getUsersRequest } from '../../../../redux/users-reducer';
 import ROUTES from '../../../constants/routes';
 
 import AdminPanelUsersList from '../users-list';
-import AdminPanelFeedback from '../feedback';
+import AdminPanelFeedbackContainer from '../feedback/container';
 
 class AdminPanelContainer extends React.Component {
   componentDidMount() {
@@ -21,7 +21,7 @@ class AdminPanelContainer extends React.Component {
     return (
       <Switch>
         <Route exact path={ROUTES.ADMIN_PANEL} render={() => <AdminPanelUsersList {...this.props} />} />
-        <Route path={`${ROUTES.ADMIN_PANEL}/feedback`} render={() => <AdminPanelFeedback {...this.props} />} />
+        <Route path={`${ROUTES.ADMIN_PANEL}/feedback`} render={() => <AdminPanelFeedbackContainer {...this.props} />} />
         <Route path={`${ROUTES.ADMIN_PANEL}/reports`} render={() => <div>reports</div>} />
       </Switch>
     );

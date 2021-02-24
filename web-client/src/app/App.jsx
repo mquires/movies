@@ -31,7 +31,6 @@ import LatestMoviesContainer from "../common/pages/latest-movies/container";
 import FeedbackContainer from "../common/pages/feedback/container";
 
 import './app.scss';
-import AdminPanelFeedback from "../common/pages/admin-panel/feedback";
 
 const history = createBrowserHistory();
 

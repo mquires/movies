@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import ROUTES from '../../../constants/routes';
 import moment from 'moment';
@@ -13,9 +13,11 @@ import Comments from '../../../components/comments';
 import CommentItem from '../../../components/comment-item';
 import Icon from '../../../components/icon';
 import Preloader from '../../../components/preloader';
+import Popup from '../../../components/popups/main-popup';
 
 import likesIcon from '../../../../assets/icons/favorite.svg';
 import commentsIcon from '../../../../assets/icons/comment.svg';
+import reportIcon from '../../../../assets/icons/report.svg';
 
 import './profile.scss';
 
@@ -23,8 +25,14 @@ const Profile = (props) => {
   const {
     userPosts,
     onSendPost,
-    user
+    user,
+    onSendReport
   } = props;
+
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggleMenu = () => setIsOpen(!isOpen);
+  const closeMenu = () => setIsOpen(false);
 
   const userPostsList = userPosts.map((userPost, index) => (
     <CommentItem
@@ -42,6 +50,9 @@ const Profile = (props) => {
       className="profile"
       title="Profile"
     >
+      {
+        isOpen && <Popup onSubmit={onSendReport}>ewfewffew</Popup>
+      }
       {
         !user ?
           <Preloader /> :
@@ -61,20 +72,27 @@ const Profile = (props) => {
                   <p className="profile__stats">Created: {moment(user.createdAt).format("MMMM Do YYYY, h:mm:ss a")}</p>
                   <p className="profile__stats">
                     <Icon
-                      className="profile__likes-icon"
+                      className="profile__icon-likes"
                       glyph={likesIcon.id}
                       viewBox={likesIcon.viewBox}
-                    />
-          153
-          </p>
+                    />153</p>
                   <p className="profile__stats">
                     <Icon
-                      className="profile__comments-icon"
+                      className="profile__icon-comments"
                       glyph={commentsIcon.id}
                       viewBox={commentsIcon.viewBox}
+                    />1544</p>
+                  <div
+                    className="profile__report"
+                    onClick={toggleMenu}
+                  >
+                    <Icon
+                      glyph={reportIcon.id}
+                      viewBox={reportIcon.viewBox}
+                      className="profile__icon-report"
                     />
-          1544
-          </p>
+                    <p>Report</p>
+                  </div>
                 </div>
               </div>
             </div>

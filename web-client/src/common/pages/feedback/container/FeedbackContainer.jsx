@@ -2,18 +2,26 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { compose } from 'redux';
-import { setFeedback } from '../../../../redux/feedback-reducer';
+import { sendFeedbackRequest } from '../../../../redux/feedback-reducer';
 
 import Feedback from '../component';
 
 class FeedbackContainer extends React.Component {
   onSendFeedback(feedback) {
+    console.log(feedback);
+
     const {
-      setFeedback
+      sendFeedbackRequest
     } = this.props;
 
-    setFeedback(feedback);
-    console.log(feedback);
+    const {
+      name,
+      email,
+      comments,
+      feedbackType
+    } = feedback;
+
+    sendFeedbackRequest(name, email, comments, feedbackType)
   }
 
   render() {
@@ -34,7 +42,7 @@ const mapStateToProps = (state) => {
 
 export default compose(
   connect(mapStateToProps, {
-    setFeedback
+    sendFeedbackRequest
   }),
   withRouter
 )(FeedbackContainer);

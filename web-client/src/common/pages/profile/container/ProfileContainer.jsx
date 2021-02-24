@@ -5,7 +5,8 @@ import { compose } from 'redux';
 import {
   getUserByIdRequest,
   getPostsByIdRequest,
-  addPostRequest
+  addPostRequest,
+  addReportRequest
 } from '../../../../redux/users-reducer';
 import ROUTES from '../../../constants/routes';
 
@@ -59,11 +60,22 @@ class ProfileContainer extends React.Component {
     addPostRequest(match.params.id, comment.comment);
   }
 
+  onSendReport(report) {
+    console.log(report);
+    const {
+      addReportRequest,
+      match
+    } = this.props;
+
+    addReportRequest(match.params.id, report.report, report.name);
+  }
+
   render() {
     return (
       <Profile
         {...this.props}
         onSendPost={this.onSendPost.bind(this)}
+        onSendReport={this.onSendReport.bind(this)}
       />
     );
   }
@@ -80,7 +92,8 @@ export default compose(
   connect(mapStateToProps, {
     getUserByIdRequest,
     getPostsByIdRequest,
-    addPostRequest
+    addPostRequest,
+    addReportRequest
   }),
   withRouter
 )(ProfileContainer);

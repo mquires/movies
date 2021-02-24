@@ -4,11 +4,14 @@ const SET_USERS = 'SET-USERS';
 const SET_USER_POSTS = 'SET-USER-POSTS';
 const ADD_POST = 'ADD-POST';
 const SET_USER = 'SET-USER';
+const SET_REPORTS = 'SET-REPORTS';
+const ADD_REPORT = 'ADD-REPORT';
 
 const initialState = {
   user: null,
   users: [],
-  userPosts: []
+  userPosts: [],
+  reports: []
 };
 
 const usersReducer = (state = initialState, action) => {
@@ -40,6 +43,23 @@ const usersReducer = (state = initialState, action) => {
         user: action.user
       }
     }
+    case SET_REPORTS: {
+      return {
+        ...state,
+        reports: action.reports
+      }
+    }
+    case ADD_REPORT: {
+      const newReport = {
+        report: action.report,
+        name: action.name
+      };
+
+      return {
+        ...state,
+        reports: [...state.reports, newReport]
+      }
+    }
     default: {
       return state;
     }
@@ -52,6 +72,8 @@ export const setUsers = (users) => ({ type: SET_USERS, users });
 export const setUserPosts = (userPosts) => ({ type: SET_USER_POSTS, userPosts });
 export const addPost = (postText) => ({ type: ADD_POST, postText });
 export const setUser = (user) => ({ type: SET_USER, user });
+export const setReports = (reports) => ({ type: SET_REPORTS, reports });
+export const addReport = (report) => ({ type: ADD_REPORT, report });
 
 export const getUsersRequest = () => (dispatch) => {
   usersAPI.getAllUsers()
@@ -78,4 +100,9 @@ export const getPostsByIdRequest = (userId) => (dispatch) => {
 export const addPostRequest = (userId, post) => (dispatch) => {
   usersAPI.addPost(userId, post)
     .then(() => dispatch(addPost(post)));
+};
+
+export const addReportRequest = (userId, report, name) => (dispatch) => {
+  usersAPI.addReport(userId, report, name)
+    .then(() => dispatch(addReport(report, name)));
 };

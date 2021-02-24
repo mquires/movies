@@ -2,5 +2,25 @@
 
 .feedback-item {
   border-radius: 0.6rem;
-  border: 0.1rem solid $CL_5_GREY;
+  border: 0.1rem solid $CL_6_GREY;
+  padding: 1rem 2rem;
+
+  &__info-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &__icon-text {
+    display: flex;
+    align-items: center;
+    font-size: 1.6rem;
+    margin: 0.5rem 0;
+    gap: 1rem;
+    fill: $RED;
+  }
+
+  &__feedback-title {
+    margin: 1rem 0 0.5rem;
+  }
 }

@@ -7,23 +7,18 @@
   border-radius: 20px/50px;
   background-clip: padding-box;
   text-align: center;
+  z-index: 9999999;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: red;
 }
 
 .overlay {
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
   background: rgba(0, 0, 0, 0.7);
   transition: opacity 500ms;
-  visibility: hidden;
-  opacity: 0;
-
-  &:target {
-    visibility: visible;
-    opacity: 1;
-  }
+  background: red;
 }
 
 .popup {

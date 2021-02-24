@@ -28,12 +28,37 @@
     }
   }
 
-  &__likes-icon {
-    fill: $RED;
+  &__report {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    color: $BLUE;
+    font-weight: 700;
+    border: 0.1rem solid $CL_6_GREY;
+    border-radius: 0.6rem;
+    width: 11rem;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    transition: background 0.1s;
+
+    &:hover {
+      background: $CL_5_GREY;
+    }
   }
 
-  &__comments-icon {
-    fill: $BLUE;
+  &__icon {
+    &-likes {
+      fill: $RED;
+      width: 2rem;
+      height: 2rem;
+    }
+
+    &-comments,
+    &-report {
+      fill: $BLUE;
+      width: 2rem;
+      height: 2rem;
+    }
   }
 
   &__category {
