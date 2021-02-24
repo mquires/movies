@@ -5,6 +5,7 @@ import ROUTES from '../../../constants/routes';
 
 import SectionPage from '../../../components/page-components/section-page';
 import ActorItem from '../../../components/items/actor-item';
+import Preloader from '../../../components/preloader';
 
 const PopularPersons = () => {
   const [persons, setPersons] = useState([]);
@@ -26,7 +27,7 @@ const PopularPersons = () => {
     }
   }
 
-  useEffect(() => findPersonRequest(), []);
+  //useEffect(() => findPersonRequest(), []);
   useEffect(() => getPersonRequest(), [fetching]);
 
   const findPersonRequest = (query) => {
@@ -56,7 +57,7 @@ const PopularPersons = () => {
   const onFindPerson = (person) => {
     findPersonRequest(person.search);
 
-    !person.search && getPersonRequest();
+    !person.search || persons.length === 0 && getPersonRequest();
   }
 
   const popularPersonsList = persons.map((popularPerson, index) => (
@@ -72,7 +73,10 @@ const PopularPersons = () => {
 
   return (
     <SectionPage title="Popular persons" onChange={onFindPerson}>
-      {popularPersonsList}
+      {persons.length === 0 ?
+        <Preloader /> :
+        popularPersonsList
+      }
     </SectionPage>
   );
 };

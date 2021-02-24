@@ -17,7 +17,12 @@ const ROUTES = {
   PERSON_ITEM: '/person',
   ADMIN_PANEL: '/admin-panel',
   USER_ITEM: '/user',
-  WATCH_LATER: '/watch-later'
+  WATCH_LATER: '/watch-later',
+  TOP_RATED_TV: '/top-rated-tv',
+  TOP_WEEK_MOVIES: '/top-week-movies',
+  TOP_WEEK_SERIALS: '/top-week-serials',
+  TODAY_POPULAR_PERSONS: '/today-popular-persons',
+  LATEST_MOVIES: '/latest-movies'
 };
 
 export default ROUTES;

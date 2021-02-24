@@ -1,0 +1,59 @@
+@import '../../../assets/styles/abstracts/variables';
+
+.show-more-page-title {
+  background-color: #000;
+  height: 20rem;
+  position: relative;
+  backdrop-filter: blur(4px);
+  overflow: hidden;
+  border-radius: 0.5rem;
+  z-index: -2;
+  width: 100%;
+
+  &__title {
+    position: absolute;
+    top: 0;
+    left: 0;
+    min-width: 30%;
+    z-index: 2;
+    height: 20rem;
+    backdrop-filter: blur(4px);
+    background-color: rgba(0, 0, 0, 0.3);
+
+    &-text {
+      color: $WHITE;
+      margin: 1rem 0;
+    }
+
+    &-content {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 20rem;
+    }
+  }
+
+  &__image {
+    width: 100%;
+    object-fit: cover;
+    height: 20rem;
+    opacity: 0.8;
+    background-color: $BLACK;
+  }
+
+  &__icon {
+    width: 3rem;
+    height: 3rem;
+    display: flex;
+    margin: 0 auto;
+    fill: $RED;
+
+    &-container {
+      background: $CL_1_GREY;
+      padding: 1rem;
+      width: 5rem;
+      border-radius: 1rem;
+    }
+  }
+}

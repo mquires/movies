@@ -23,19 +23,19 @@ const ShowMore = () => {
         <div className="show-more__container">
           <ShowMoreItem
             title="Top week's movies"
-            navLink={ROUTES.POPULAR_PERSONS}
+            navLink={ROUTES.TOP_WEEK_MOVIES}
             src={topWeeksMovies}
             alt="Top week's movies"
           />
           <ShowMoreItem
             title="Top week's serials"
-            navLink={ROUTES.POPULAR_PERSONS}
+            navLink={ROUTES.TOP_WEEK_SERIALS}
             src={topWeeksSerials}
             alt="Top week's serials"
           />
           <ShowMoreItem
             title="Top rated TV Shows"
-            navLink={ROUTES.POPULAR_PERSONS}
+            navLink={ROUTES.TOP_RATED_TV}
             src={topRatedTV}
             alt="Top rated TV Shows"
           />
@@ -47,7 +47,7 @@ const ShowMore = () => {
           />
           <ShowMoreItem
             title="The best actors today"
-            navLink={ROUTES.POPULAR_PERSONS}
+            navLink={ROUTES.TODAY_POPULAR_PERSONS}
             src={theBestActorsToday}
             alt="The best actors today"
           />
@@ -59,7 +59,7 @@ const ShowMore = () => {
           />
           <ShowMoreItem
             title="The latest movies"
-            navLink={ROUTES.POPULAR_PERSONS}
+            navLink={ROUTES.LATEST_MOVIES}
             src={theLatestMovies}
             alt="Latest movies"
           />

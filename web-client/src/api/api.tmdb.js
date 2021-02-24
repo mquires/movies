@@ -61,6 +61,14 @@ export const moviesAPI = {
 
   getMoviesByGenre(currentPage, genre) {
     return instance.get(`discover/movie?api_key=${API_KEY}&page=${currentPage}&with_genres=${genre}`);
+  },
+
+  getTopWeekMovies(currentPage) {
+    return instance.get(`trending/movie/week?api_key=${API_KEY}&page=${currentPage}`);
+  },
+
+  getLatestMovies() {
+    return instance.get(`movie/latest?api_key=${API_KEY}`);
   }
 };
 
@@ -83,6 +91,10 @@ export const personsAPI = {
 
   getPersonTVCredits(personId) {
     return instance.get(`person/${personId}/tv_credits?api_key=${API_KEY}`);
+  },
+
+  getTodayBestActors(currentPage) {
+    return instance.get(`trending/person/day?api_key=${API_KEY}&page=${currentPage}`);
   }
 };
 
@@ -134,4 +146,12 @@ export const tvAPI = {
   getTVByGenre(currentPage, genre) {
     return instance.get(`discover/tv?api_key=${API_KEY}&page=${currentPage}&with_genres=${genre}`);
   },
+
+  getTopRatedTV(currentPage) {
+    return instance.get(`tv/top_rated?api_key=${API_KEY}&page=${currentPage}`);
+  },
+
+  getTopWeekSerials(currentPage) {
+    return instance.get(`trending/tv/week?api_key=${API_KEY}&page=${currentPage}`);
+  }
 };

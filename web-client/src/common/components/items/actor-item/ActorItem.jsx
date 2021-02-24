@@ -6,6 +6,8 @@ import { NavLink } from 'react-router-dom';
 import Image from '../../image';
 import Item from '../item';
 
+import noPhoto from '../../../../assets/images/no-photo.png';
+
 import './actor-item.scss';
 
 const ActorItem = (props) => {
@@ -22,6 +24,7 @@ const ActorItem = (props) => {
       >
         <Image
           className="actor-item__image"
+          onError={(e) => e.target.src = noPhoto}
           {...restProps}
         />
         <p className="actor-item__category">artist</p>

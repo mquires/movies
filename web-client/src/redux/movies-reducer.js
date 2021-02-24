@@ -13,6 +13,7 @@ const SET_MOVIES_KEYWORDS = 'SET-MOVIES-KEYWORDS';
 const SET_MOVIES_CAST = 'SET-MOVIES-CAST';
 const SET_MOVIE_VIDEOS = 'SET-MOVIE-VIDEOS';
 const SET_GENRES = 'SET-GENRES';
+const SET_LATEST_MOVIES = 'SET-LATEST-MOVIES';
 
 const initialState = {
   genres: [],
@@ -27,7 +28,8 @@ const initialState = {
   similarMovies: [],
   moviesKeywords: [],
   moviesCast: [],
-  movieVideos: []
+  movieVideos: [],
+  latestMovies: []
 };
 
 const moviesReducer = (state = initialState, action) => {
@@ -110,6 +112,12 @@ const moviesReducer = (state = initialState, action) => {
         genres: action.genres
       }
     }
+    case SET_LATEST_MOVIES: {
+      return {
+        ...state,
+        latestMovies: action.latestMovies
+      }
+    }
     default: {
       return state;
     }
@@ -131,6 +139,7 @@ export const setMoviesKeywords = (moviesKeywords) => ({ type: SET_MOVIES_KEYWORD
 export const setMoviesCast = (moviesCast) => ({ type: SET_MOVIES_CAST, moviesCast });
 export const setMovieVideos = (movieVideos) => ({ type: SET_MOVIE_VIDEOS, movieVideos });
 export const setGenres = (genres) => ({ type: SET_GENRES, genres });
+export const setLatestMovies = (latestMovies) => ({ type: SET_LATEST_MOVIES, latestMovies });
 
 export const getTopRatedMoviesRequest = (currentPage) => (dispatch) => {
   moviesAPI.getTopRatedMovies(currentPage)
@@ -209,5 +218,13 @@ export const getGenresRequest = () => (dispatch) => {
   moviesAPI.getGenres()
     .then(response => {
       dispatch(setGenres(response.data.genres));
+    });
+};
+
+export const getLatestMoviesRequest = () => (dispatch) => {
+  moviesAPI.getLatestMovies()
+    .then(response => {
+      console.log(response)
+      dispatch(setLatestMovies(response.data));
     });
 };

@@ -14,7 +14,7 @@ import MoviesContainer from "../common/pages/movies/container";
 import ProfileContainer from "../common/pages/profile/container";
 import TopRatedMovies from "../common/pages/top-rated-movies/component";
 import TVContainer from "../common/pages/tv/container";
-import UpcomingMoviesContainer from "../common/pages/upcoming-movies/container";
+import UpcomingMovies from "../common/pages/upcoming-movies";
 import TrendsMovies from "../common/pages/trends-movies/component";
 import PopularPersons from "../common/pages/popular-persons/component";
 import ShowMore from "../common/pages/show-more/component";
@@ -23,6 +23,11 @@ import MovieDetailsContainer from "../common/pages/movie-details/container";
 import TVDetailsContainer from "../common/pages/tv-details/container";
 import PersonDetailsContainer from "../common/pages/person-details/container";
 import AdminPanelContainer from "../common/pages/admin-panel/container";
+import TopRatedTV from "../common/pages/top-rated-tv";
+import TopWeekMovies from "../common/pages/top-week-movies";
+import TopWeekSerials from "../common/pages/top-week-serials";
+import TodayBestActors from "../common/pages/today-best-actors";
+import LatestMoviesContainer from "../common/pages/latest-movies/container";
 
 import './app.scss';
 
@@ -80,7 +85,7 @@ const App = () => {
               />
               <Route
                 path={ROUTES.UPCOMING_MOVIES}
-                render={() => <UpcomingMoviesContainer />}
+                render={() => <UpcomingMovies />}
               />
               <Route
                 path={ROUTES.ALL_TODAY_TRENDS_TV}
@@ -101,6 +106,26 @@ const App = () => {
               <Route
                 path={`${ROUTES.ADMIN_PANEL}`}
                 render={() => <AdminPanelContainer />}
+              />
+              <Route
+                path={`${ROUTES.TOP_RATED_TV}`}
+                render={() => <TopRatedTV />}
+              />
+              <Route
+                path={`${ROUTES.TOP_WEEK_MOVIES}`}
+                render={() => <TopWeekMovies />}
+              />
+              <Route
+                path={`${ROUTES.TOP_WEEK_SERIALS}`}
+                render={() => <TopWeekSerials />}
+              />
+              <Route
+                path={`${ROUTES.TODAY_POPULAR_PERSONS}`}
+                render={() => <TodayBestActors />}
+              />
+              <Route
+                path={`${ROUTES.LATEST_MOVIES}`}
+                render={() => <LatestMoviesContainer />}
               />
             </Switch>
           </div>
