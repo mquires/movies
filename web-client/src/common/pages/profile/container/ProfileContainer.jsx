@@ -7,6 +7,7 @@ import {
   getPostsByIdRequest,
   addPostRequest
 } from '../../../../redux/users-reducer';
+import ROUTES from '../../../constants/routes';
 
 import Profile from '../component';
 
@@ -15,7 +16,8 @@ class ProfileContainer extends React.Component {
     const {
       getUserByIdRequest,
       getPostsByIdRequest,
-      match
+      match,
+      history
     } = this.props;
 
     if (!match.params.id) {
@@ -33,7 +35,8 @@ class ProfileContainer extends React.Component {
     if (prevProps.match.params.id !== this.props.match.params.id) {
       const {
         getUserByIdRequest,
-        match
+        match,
+        history
       } = this.props;
 
       if (!match.params.id) {

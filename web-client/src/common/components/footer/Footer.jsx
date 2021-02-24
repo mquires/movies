@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { NavLink } from 'react-router-dom';
+import ROUTES from '../../constants/routes';
 
 import './footer.scss';
 
@@ -18,7 +19,7 @@ const Footer = (props) => {
           <NavLink className="footer__nav-link" to="#">Support</NavLink>
         </li>
         <li className="footer__nav-item">
-          <NavLink className="footer__nav-link" to="#">Feedback</NavLink>
+          <NavLink className="footer__nav-link" to={ROUTES.FEEDBACK}>Feedback</NavLink>
         </li>
       </ul>
     </footer>

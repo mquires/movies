@@ -28,8 +28,10 @@ import TopWeekMovies from "../common/pages/top-week-movies";
 import TopWeekSerials from "../common/pages/top-week-serials";
 import TodayBestActors from "../common/pages/today-best-actors";
 import LatestMoviesContainer from "../common/pages/latest-movies/container";
+import FeedbackContainer from "../common/pages/feedback/container";
 
 import './app.scss';
+import AdminPanelFeedback from "../common/pages/admin-panel/feedback";
 
 const history = createBrowserHistory();
 
@@ -126,6 +128,10 @@ const App = () => {
               <Route
                 path={`${ROUTES.LATEST_MOVIES}`}
                 render={() => <LatestMoviesContainer />}
+              />
+              <Route
+                path={`${ROUTES.FEEDBACK}`}
+                render={() => <FeedbackContainer />}
               />
             </Switch>
           </div>

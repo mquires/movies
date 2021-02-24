@@ -22,7 +22,8 @@ const ROUTES = {
   TOP_WEEK_MOVIES: '/top-week-movies',
   TOP_WEEK_SERIALS: '/top-week-serials',
   TODAY_POPULAR_PERSONS: '/today-popular-persons',
-  LATEST_MOVIES: '/latest-movies'
+  LATEST_MOVIES: '/latest-movies',
+  FEEDBACK: '/feedback'
 };
 
 export default ROUTES;

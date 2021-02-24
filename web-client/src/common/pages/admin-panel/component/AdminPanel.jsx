@@ -2,28 +2,17 @@ import React from 'react';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import ROUTES from '../../../constants/routes';
+import { NavLink } from 'react-router-dom';
 
 import PageComponent from '../../../components/page-components/page-component';
-import FindUsersItem from '../../../components/find-users-item';
 
 import './admin-panel.scss';
 
 const AdminPanel = (props) => {
   const {
     className,
-    users
+    children
   } = props;
-
-  const usersList = users.map((user, index) => (
-    <FindUsersItem
-      className="admin-panel__user-item"
-      navLink={`${ROUTES.PROFILE}/${user.id}`}
-      id={user.id}
-      key={index}
-      name={user.name}
-      createdAt={user.createdAt}
-    />
-  ));
 
   return (
     <PageComponent
@@ -33,11 +22,28 @@ const AdminPanel = (props) => {
       <div className="admin-panel__container">
         <div className="admin-panel__nav">
           <ul className="admin-panel__nav-list">
-            <li className="admin-panel__nav-item">Users list</li>
+            <NavLink
+              to={ROUTES.ADMIN_PANEL}
+              className="admin-panel__nav-item"
+            >
+              Users list
+            </NavLink>
+            <NavLink
+              to={`${ROUTES.ADMIN_PANEL}/feedback`}
+              className="admin-panel__nav-item"
+            >
+              Feedback list
+            </NavLink>
+            <NavLink
+              to={`${ROUTES.ADMIN_PANEL}/reports`}
+              className="admin-panel__nav-item"
+            >
+              Reports
+            </NavLink>
           </ul>
         </div>
         <div className="admin-panel__content">
-          {usersList}
+          {children}
         </div>
       </div>
     </PageComponent>

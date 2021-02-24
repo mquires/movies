@@ -1,10 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
+import { Route, Switch, withRouter } from 'react-router-dom';
 import { compose } from 'redux';
 import { getUsersRequest } from '../../../../redux/users-reducer';
+import ROUTES from '../../../constants/routes';
 
-import AdminPanel from '../component';
+import AdminPanelUsersList from '../users-list';
+import AdminPanelFeedback from '../feedback';
 
 class AdminPanelContainer extends React.Component {
   componentDidMount() {
@@ -17,7 +19,11 @@ class AdminPanelContainer extends React.Component {
 
   render() {
     return (
-      <AdminPanel {...this.props} />
+      <Switch>
+        <Route exact path={ROUTES.ADMIN_PANEL} render={() => <AdminPanelUsersList {...this.props} />} />
+        <Route path={`${ROUTES.ADMIN_PANEL}/feedback`} render={() => <AdminPanelFeedback {...this.props} />} />
+        <Route path={`${ROUTES.ADMIN_PANEL}/reports`} render={() => <div>reports</div>} />
+      </Switch>
     );
   }
 }
