@@ -6,10 +6,9 @@ import ROUTES from '../../constants/routes';
 import PageComponentNoTitle from '../../components/page-components/page-component-no-title';
 import Logo from '../../components/logo';
 import Button from '../../components/buttons/main-button';
-import Icon from '../../components/icon';
 import Image from '../../components/image';
+import LinkButton from '../../components/buttons/link-button';
 
-import rightArrow from '../../../assets/icons/right-arrow.svg';
 import mainWindow from '../../../assets/images/main.jpg';
 
 import './main.scss';
@@ -27,10 +26,7 @@ const Main = () => {
           <NavLink className="main__try-it-free" to={ROUTES.LOGIN}>
             <Button caption="Try it free" />
           </NavLink>
-          <NavLink to={"#"} className="main__learn-more">
-            Learn more
-        <Icon glyph={rightArrow.id} viewBox={rightArrow.viewBox} />
-          </NavLink>
+          <LinkButton navLink={ROUTES.MAIN}>Learn more</LinkButton>
         </div>
         <div>
           <Image className="main__image" src={mainWindow} alt="Main window" />

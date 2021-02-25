@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import ROUTES from '../../../constants/routes';
 import { moviesAPI } from '../../../../api/api.tmdb';
+import { NavLink } from 'react-router-dom';
 
 import PageComponent from '../../../components/page-components/page-component';
 import MovieItem from '../../../components/movie-item';
@@ -16,12 +17,16 @@ import noWallpaper from '../../../../assets/images/no-wallpaper.jpg';
 
 import './movies.scss';
 
+import LoginPopup from '../../../components/popups/login-popup/LoginPopup';
+import ReportPopup from '../../../components/popups/report-popup/ReportPopup';
+
 const Movies = (props) => {
   const {
     topRatedMovies,
     todayTrendingMovies,
     isTopRatedFetching,
-    genres
+    genres,
+    onSubmit
   } = props;
 
   const [movies, setMovies] = useState([]);
@@ -79,17 +84,17 @@ const Movies = (props) => {
   const getMoviesByGenreRequest = (genre) => {
     if (!hasNextPage) return;
 
-      moviesAPI.getMoviesByGenre(page, genre)
-        .then((response) => {
-          console.log(response)
-          if (response.data.total_results === (movies.length + response.data.results.length)) {
-            setHasNextPage(false);
-          }
+    moviesAPI.getMoviesByGenre(page, genre)
+      .then((response) => {
+        console.log(response)
+        if (response.data.total_results === (movies.length + response.data.results.length)) {
+          setHasNextPage(false);
+        }
 
-          setMovies(() => [...response.data.results]);
-          setPage(page => page + 1);
-        })
-        .finally(() => setIsFetching(false));
+        setMovies(() => [...response.data.results]);
+        setPage(page => page + 1);
+      })
+      .finally(() => setIsFetching(false));
   }
 
   const onGetMoviesByGenre = (genreId) => {
@@ -148,11 +153,35 @@ const Movies = (props) => {
     />
   ));
 
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggleMenu = () => setIsOpen(!isOpen);
+  const closeMenu = () => setIsOpen(false);
+
   return (
     <PageComponent
       className="movies"
       title="Movies"
     >
+      {
+        /*isOpen &&
+        <ReportPopup
+          open={toggleMenu}
+          onRequestClose={closeMenu}
+          onSubmit={onSubmit}
+        />
+        /*<LoginPopup
+          open={toggleMenu}
+          onRequestClose={closeMenu}
+          onSubmit={onSubmit}
+        />*/
+      }
+      <div
+        className="profile__report"
+        onClick={toggleMenu}
+      >
+        <p>Report</p>
+      </div>
       <Categories title="Find more">
         {genresList}
       </Categories>

@@ -31,6 +31,7 @@ import LatestMoviesContainer from "../common/pages/latest-movies/container";
 import FeedbackContainer from "../common/pages/feedback/container";
 
 import './app.scss';
+import Support from "../common/pages/support/Support";
 
 const history = createBrowserHistory();
 
@@ -131,6 +132,10 @@ const App = () => {
               <Route
                 path={`${ROUTES.FEEDBACK}`}
                 render={() => <FeedbackContainer />}
+              />
+              <Route
+                path={`${ROUTES.SUPPORT}`}
+                render={() => <Support />}
               />
             </Switch>
           </div>

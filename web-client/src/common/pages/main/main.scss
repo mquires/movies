@@ -30,20 +30,6 @@
     max-width: 44rem;
   }
 
-  &__learn-more {
-    display: flex;
-    align-items: center;
-    color: $BLACK;
-    text-decoration: none;
-    justify-content: center;
-    margin: 2.5rem 0;
-    font-size: 1.4rem;
-
-    &:hover {
-      text-decoration: underline;
-    }
-  }
-
   &__image {
     width: 100%;
     max-width: 160rem;

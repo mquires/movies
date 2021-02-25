@@ -1,0 +1,15 @@
+@import '../../../../assets/styles/abstracts/variables';
+
+.link-button {
+  display: flex;
+  align-items: center;
+  color: $BLACK;
+  text-decoration: none;
+  justify-content: center;
+  margin: 2.5rem 0;
+  font-size: 1.4rem;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}

@@ -1,26 +1,27 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import Drawer from 'react-drag-drawer';
 
 import './popup.scss';
-import ReportForm from '../../forms/report-form';
 
 const Popup = (props) => {
 	const {
 		className,
 		children,
-		onSubmit
+		open,
+		onRequestClose
 	} = props;
 
 	return (
-		<div className={classNames("overlay", className)}>
-			<div className="popup">
-				<div className="close">&times;</div>
-				<div className="content">
-					<ReportForm onSubmit={onSubmit} />
-				</div>
+		<Drawer
+			open={open}
+			onRequestClose={onRequestClose}
+		>
+			<div className={classNames("popup", className)}>
+				{children}
 			</div>
-		</div>
+		</Drawer>
 	);
 };
 

@@ -16,7 +16,7 @@ const Footer = (props) => {
       <p className="footer__copyright">Copyright &copy; 2021. All rights reserved.</p>
       <ul className="footer__nav">
         <li className="footer__nav-item">
-          <NavLink className="footer__nav-link" to="#">Support</NavLink>
+          <NavLink className="footer__nav-link" to={ROUTES.SUPPORT}>Support</NavLink>
         </li>
         <li className="footer__nav-item">
           <NavLink className="footer__nav-link" to={ROUTES.FEEDBACK}>Feedback</NavLink>

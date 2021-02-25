@@ -6,7 +6,12 @@ import { NavLink } from 'react-router-dom';
 
 import PageComponent from '../../../components/page-components/page-component';
 
+import usersIcon from '../../../../assets/icons/user-circle.svg';
+import feedbackIcon from '../../../../assets/icons/feedback.svg';
+import reportIcon from '../../../../assets/icons/report.svg';
+
 import './admin-panel.scss';
+import Icon from '../../../components/icon';
 
 const AdminPanel = (props) => {
   const {
@@ -26,18 +31,33 @@ const AdminPanel = (props) => {
               to={ROUTES.ADMIN_PANEL}
               className="admin-panel__nav-item"
             >
+              <Icon
+                className="admin-panel__nav-item-icon"
+                glyph={usersIcon.id}
+                viewBox={usersIcon.viewBox}
+              />
               Users list
             </NavLink>
             <NavLink
               to={`${ROUTES.ADMIN_PANEL}/feedback`}
               className="admin-panel__nav-item"
             >
+              <Icon
+                className="admin-panel__nav-item-icon"
+                glyph={feedbackIcon.id}
+                viewBox={feedbackIcon.viewBox}
+              />
               Feedback list
             </NavLink>
             <NavLink
               to={`${ROUTES.ADMIN_PANEL}/reports`}
               className="admin-panel__nav-item"
             >
+              <Icon
+                className="admin-panel__nav-item-icon"
+                glyph={reportIcon.id}
+                viewBox={reportIcon.viewBox}
+              />
               Reports
             </NavLink>
           </ul>

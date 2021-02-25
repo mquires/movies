@@ -2,18 +2,18 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import AdminPanel from '../../component';
-import FeedbackItem from '../../../../components/feedback-item';
+import ReportItem from '../../../../components/report-item';
 
-import './admin-panel-feedback.scss';
+import './admin-panel-reports.scss';
 
 const AdminPanelReports = (props) => {
   const {
-    feedbackList
+  
   } = props;
 
   return (
-    <AdminPanel className="admin-panel-feedback">
-      {feedbackItemsList}
+    <AdminPanel className="admin-panel-reports">
+      <ReportItem name="123123" userName="username" report="report" />
     </AdminPanel>
   );
 };

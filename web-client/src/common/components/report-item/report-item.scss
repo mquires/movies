@@ -1,0 +1,20 @@
+@import "../../../assets/styles/abstracts/variables";
+
+.report-item {
+  box-shadow: 0px 2px 35px 14px rgba(13, 13, 13, 0.04);
+  border-radius: 1rem;
+  padding: 2rem;
+
+  & h3 {
+    margin: 1rem 0;
+  }
+
+  &__icon-text {
+    display: flex;
+    align-items: center;
+    font-size: 1.6rem;
+    margin: 0.5rem 0;
+    gap: 1rem;
+    fill: $RED;
+  }
+}

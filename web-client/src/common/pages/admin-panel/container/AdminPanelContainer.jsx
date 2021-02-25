@@ -7,6 +7,7 @@ import ROUTES from '../../../constants/routes';
 
 import AdminPanelUsersList from '../users-list';
 import AdminPanelFeedbackContainer from '../feedback/container';
+import AdminPanelReportsContainer from '../reports/container';
 
 class AdminPanelContainer extends React.Component {
   componentDidMount() {
@@ -22,7 +23,7 @@ class AdminPanelContainer extends React.Component {
       <Switch>
         <Route exact path={ROUTES.ADMIN_PANEL} render={() => <AdminPanelUsersList {...this.props} />} />
         <Route path={`${ROUTES.ADMIN_PANEL}/feedback`} render={() => <AdminPanelFeedbackContainer {...this.props} />} />
-        <Route path={`${ROUTES.ADMIN_PANEL}/reports`} render={() => <div>reports</div>} />
+        <Route path={`${ROUTES.ADMIN_PANEL}/reports`} render={() => <AdminPanelReportsContainer {...this.props} />} />
       </Switch>
     );
   }

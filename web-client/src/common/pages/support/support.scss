@@ -1,0 +1,79 @@
+@import '../../../assets/styles/abstracts/variables';
+
+.support {
+  &__container {
+    max-width: 160rem;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  &__cover {
+    &-container {
+      position: relative;
+    }
+
+    filter: brightness(0.7);
+    width: 100%;
+    height: 40vh;
+    object-fit: cover;
+  }
+
+  &__title {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    font-size: 3rem;
+    color: $WHITE;
+  }
+
+  &__section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    padding: 4rem;
+
+    &-title {
+      font-size: 3rem;
+      margin: 2rem 0;
+    }
+
+    &-text {
+      max-width: 38rem;
+    }
+
+    &-paragraph {
+      margin: 2rem 0;
+    }
+
+    &-image {
+      width: 50%;
+      margin: 0 auto;
+    }
+
+    &-link {
+      justify-content: flex-start;
+    }
+  }
+
+  &__row-sections {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    justify-content: center;
+  }
+
+  &__column-section {
+    text-align: center;
+
+    & .support__section-text {
+      margin: 0 auto;
+    }
+
+    & .support__section-link {
+      justify-content: center;
+    }
+  }
+}

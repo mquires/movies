@@ -24,6 +24,17 @@
       text-decoration: none;
       color: $BLACK;
       transition: background 0.1s;
+      display: grid;
+      grid-template-columns: 0.2fr 2.5fr;
+      text-align: start;
+      gap: 3vw;
+      align-items: center;
+      fill: $RED;
+
+      &-icon {
+        width: 2rem;
+        height: 2rem;
+      }
 
       &:hover {
         background: $CL_2_GREY;

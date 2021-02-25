@@ -29,7 +29,8 @@
       }
 
       &-link {
-        display: flex;
+        display: grid;
+        grid-template-columns: 0.5fr 1fr;
         align-items: center;
         justify-content: center;
         gap: 1rem;
