@@ -5,6 +5,7 @@ import { NavLink } from 'react-router-dom';
 import Image from '../image';
 import Icon from '../icon';
 
+import noWallpaper from '../../../assets/images/no-wallpaper.jpg';
 import languageIcon from '../../../assets/icons/language.svg';
 
 import './movie-item.scss';
@@ -18,6 +19,7 @@ const MovieItem = (props) => {
     releaseDate,
     navLink,
     onClick,
+    onError,
     ...restProps
   } = props;
 
@@ -29,6 +31,7 @@ const MovieItem = (props) => {
     >
       <Image
         className="movie-item__image"
+        onError={(e) => e.target.src = noWallpaper}
         {...restProps}
       />
       <div className="movie-item__info">

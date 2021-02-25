@@ -1,4 +1,5 @@
 import { usersAPI } from "../api/api";
+import { reset } from "redux-form";
 
 const SET_USERS = 'SET-USERS';
 const SET_USER_POSTS = 'SET-USER-POSTS';
@@ -85,7 +86,6 @@ export const getUsersRequest = () => (dispatch) => {
 export const getUserByIdRequest = (userId) => (dispatch) => {
   usersAPI.getUserById(userId)
     .then(response => {
-      console.log(response)
       dispatch(setUser(response.data));
     });
 };
@@ -104,5 +104,15 @@ export const addPostRequest = (userId, post) => (dispatch) => {
 
 export const addReportRequest = (userId, report, name) => (dispatch) => {
   usersAPI.addReport(userId, report, name)
-    .then(() => dispatch(addReport(report, name)));
+    .then(() => {
+      dispatch(addReport(report, name));
+      dispatch(reset('comment'));
+    });
+};
+
+export const getAllReportsRequest = () => (dispatch) => {
+  usersAPI.getAllReports()
+    .then(response => {
+      dispatch(setReports(response.data));
+    });
 };

@@ -8,12 +8,24 @@ import './admin-panel-reports.scss';
 
 const AdminPanelReports = (props) => {
   const {
-  
+    reports
   } = props;
+
+  const reportsList = reports.map((report, index) => (
+    <ReportItem
+      id={report.id}
+      key={index}
+      className="admin-panel-reports__item"
+      name={report.name}
+      UserId={report.UserId}
+      report={report.report}
+      createdAt={report.createdAt}
+    />
+  ));
 
   return (
     <AdminPanel className="admin-panel-reports">
-      <ReportItem name="123123" userName="username" report="report" />
+      {reportsList}
     </AdminPanel>
   );
 };

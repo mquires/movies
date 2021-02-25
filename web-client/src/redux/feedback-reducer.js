@@ -43,7 +43,6 @@ export const setFeedback = (feedbackList) => ({ type: SET_FEEDBACK, feedbackList
 export const sendFeedbackRequest = (name, email, comments, feedbackType) => (dispatch) => {
   feedbackAPI.sendFeedback(name, email, comments, feedbackType)
     .then(response => {
-      console.log(response)
       dispatch(addFeedback(response.data));
     })
 };
@@ -51,7 +50,6 @@ export const sendFeedbackRequest = (name, email, comments, feedbackType) => (dis
 export const getFeedbacksRequest = () => (dispatch) => {
   feedbackAPI.getFeedbacks()
     .then(response => {
-      console.log(response)
       dispatch(setFeedback(response.data));
     });
 };

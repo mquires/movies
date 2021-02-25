@@ -1,18 +1,18 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import ROUTES from '../../constants/routes';
+import ROUTES from '../../../constants/routes';
 import classNames from 'classnames';
 
-import Image from '../../components/image';
-import LinkButton from '../../components/buttons/link-button';
-import Footer from '../../components/footer';
-import SupportPopup from '../../components/popups/support-popup';
+import Image from '../../../components/image';
+import LinkButton from '../../../components/buttons/link-button';
+import Footer from '../../../components/footer';
+import SupportPopup from '../../../components/popups/support-popup';
 
-import supportCover from '../../../assets/images/support.jpg';
-import learnApp from '../../../assets/images/support_1.png';
-import watchTrailers from '../../../assets/images/support_2.png';
-import question from '../../../assets/images/support_3.png';
-import report from '../../../assets/images/support_4.png';
+import supportCover from '../../../../assets/images/support.jpg';
+import learnApp from '../../../../assets/images/support_1.png';
+import watchTrailers from '../../../../assets/images/support_2.png';
+import question from '../../../../assets/images/support_3.png';
+import report from '../../../../assets/images/support_4.png';
 
 import './support.scss';
 

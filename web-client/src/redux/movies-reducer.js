@@ -224,7 +224,6 @@ export const getGenresRequest = () => (dispatch) => {
 export const getLatestMoviesRequest = () => (dispatch) => {
   moviesAPI.getLatestMovies()
     .then(response => {
-      console.log(response)
       dispatch(setLatestMovies(response.data));
     });
 };

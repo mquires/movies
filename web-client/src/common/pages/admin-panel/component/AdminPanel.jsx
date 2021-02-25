@@ -9,6 +9,7 @@ import PageComponent from '../../../components/page-components/page-component';
 import usersIcon from '../../../../assets/icons/user-circle.svg';
 import feedbackIcon from '../../../../assets/icons/feedback.svg';
 import reportIcon from '../../../../assets/icons/report.svg';
+import supportIcon from '../../../../assets/icons/support.svg';
 
 import './admin-panel.scss';
 import Icon from '../../../components/icon';
@@ -59,6 +60,17 @@ const AdminPanel = (props) => {
                 viewBox={reportIcon.viewBox}
               />
               Reports
+            </NavLink>
+            <NavLink
+              to={`${ROUTES.ADMIN_PANEL}/support-list`}
+              className="admin-panel__nav-item"
+            >
+              <Icon
+                className="admin-panel__nav-item-icon"
+                glyph={supportIcon.id}
+                viewBox={supportIcon.viewBox}
+              />
+              Support list
             </NavLink>
           </ul>
         </div>

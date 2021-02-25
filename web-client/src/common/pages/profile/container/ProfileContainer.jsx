@@ -9,6 +9,7 @@ import {
   addReportRequest
 } from '../../../../redux/users-reducer';
 import ROUTES from '../../../constants/routes';
+import { reset } from "redux-form";
 
 import Profile from '../component';
 
@@ -51,16 +52,17 @@ class ProfileContainer extends React.Component {
     }
   }
 
-  onSendPost(comment) {
+  onSendPost(comment, dispatch) {
     const {
       addPostRequest,
       match
     } = this.props;
 
     addPostRequest(match.params.id, comment.comment);
+    dispatch(reset("comment"));
   }
 
-  onSendReport(report) {
+  onSendReport(report, dispatch) {
     console.log(report);
     const {
       addReportRequest,
@@ -68,6 +70,7 @@ class ProfileContainer extends React.Component {
     } = this.props;
 
     addReportRequest(match.params.id, report.report, report.name);
+    dispatch(reset("report"));
   }
 
   render() {

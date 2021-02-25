@@ -2,35 +2,35 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { compose } from 'redux';
-import { getAllReportsRequest } from '../../../../../redux/users-reducer';
+import { getSupportsRequest } from '../../../../../redux/support-reducer';
 
-import AdminPanelReports from '../component';
+import AdminPanelFeedback from '../component';
 
-class AdminPanelReportsContainer extends React.Component {
+class AdminPanelFeedbackContainer extends React.Component {
   componentDidMount() {
     const {
-      getAllReportsRequest
+      getSupportsRequest
     } = this.props;
 
-    getAllReportsRequest();
+    getSupportsRequest();
   }
 
   render() {
     return (
-      <AdminPanelReports {...this.props} />
+      <AdminPanelFeedback {...this.props} />
     );
   }
 }
 
 const mapStateToProps = (state) => {
   return {
-    reports: state.users.reports
+    supportList: state.support.supportList
   }
 }
 
 export default compose(
   connect(mapStateToProps, {
-    getAllReportsRequest
+    getSupportsRequest
   }),
   withRouter
-)(AdminPanelReportsContainer);
+)(AdminPanelFeedbackContainer);

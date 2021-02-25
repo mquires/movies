@@ -7,6 +7,7 @@ import personsReducer from './persons-reducer';
 import tvReducer from './tv-reducer';
 import usersReducer from './users-reducer';
 import feedbackReducer from './feedback-reducer';
+import supportReducer from './support-reducer';
 
 const reducers = combineReducers({
   auth: authReducer,
@@ -15,6 +16,7 @@ const reducers = combineReducers({
   tv: tvReducer,
   users: usersReducer,
   feedback: feedbackReducer,
+  support: supportReducer,
   form: formReducer
 });
 

@@ -33,6 +33,10 @@ export const usersAPI = {
 
   addReport(id, report, name) {
     return instance.post(`user/${id}/add-report`, { id, report, name });
+  },
+
+  getAllReports() {
+    return instance.get('get-reports');
   }
 };
 
@@ -43,5 +47,15 @@ export const feedbackAPI = {
 
   getFeedbacks() {
     return instance.get('get-feedback');
+  }
+};
+
+export const supportAPI = {
+  sendSupport(name, problem, details) {
+    return instance.post('add-support', { name, problem, details });
+  },
+
+  getSupports() {
+    return instance.get('get-supports');
   }
 };

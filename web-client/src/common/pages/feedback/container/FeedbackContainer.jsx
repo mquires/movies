@@ -3,13 +3,12 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { compose } from 'redux';
 import { sendFeedbackRequest } from '../../../../redux/feedback-reducer';
+import { reset } from "redux-form";
 
 import Feedback from '../component';
 
 class FeedbackContainer extends React.Component {
-  onSendFeedback(feedback) {
-    console.log(feedback);
-
+  onSendFeedback(feedback, dispatch) {
     const {
       sendFeedbackRequest
     } = this.props;
@@ -21,7 +20,8 @@ class FeedbackContainer extends React.Component {
       feedbackType
     } = feedback;
 
-    sendFeedbackRequest(name, email, comments, feedbackType)
+    sendFeedbackRequest(name, email, comments, feedbackType);
+    dispatch(reset("feedback"));
   }
 
   render() {

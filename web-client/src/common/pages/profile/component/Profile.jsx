@@ -13,7 +13,7 @@ import Comments from '../../../components/comments';
 import CommentItem from '../../../components/comment-item';
 import Icon from '../../../components/icon';
 import Preloader from '../../../components/preloader';
-import Popup from '../../../components/popups/main-popup';
+import ReportPopup from '../../../components/popups/report-popup';
 
 import likesIcon from '../../../../assets/icons/favorite.svg';
 import commentsIcon from '../../../../assets/icons/comment.svg';
@@ -51,7 +51,12 @@ const Profile = (props) => {
       title="Profile"
     >
       {
-        isOpen && <Popup onSubmit={onSendReport}>ewfewffew</Popup>
+        isOpen &&
+        <ReportPopup
+          open={toggleMenu}
+          onRequestClose={closeMenu}
+          onSubmit={onSendReport}
+        />
       }
       {
         !user ?
@@ -60,7 +65,7 @@ const Profile = (props) => {
             <div className="profile__main-info">
               <Avatar
                 className="profile__avatar"
-                src="https://miro.medium.com/max/10000/0*wZAcNrIWFFjuJA78"
+                src="https://off-cs.ru/upload/2018/06/1451529920117.jpeg"
                 alt="avatar"
               />
               <div className="profile__main-info-wrapper">
@@ -136,7 +141,7 @@ const Profile = (props) => {
               />
               <MovieTvItem
                 navLink={ROUTES.MAIN}
-                src="http://t2.gstatic.com/images?q=tbn:ANd9GcQRmj9gO7hiNSpI6D7-3UE5ejpqfRdocu1jEEB-HIkBivMZz0GJ1-1-3mBR5Ept"
+                src="https://miro.medium.com/max/10000/0*wZAcNrIWFFjuJA78"
                 alt="item"
                 title="Walli-e"
               />

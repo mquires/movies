@@ -7,31 +7,33 @@ import Icon from '../../components/icon';
 
 import userIcon from '../../../assets/icons/user.svg';
 
-import './report-item.scss';
+import './support-item.scss';
 
-const ReportItem = (props) => {
+const SupportItem = (props) => {
   const {
     className,
     name,
-    UserId,
-    report,
+    problem,
+    details,
     createdAt
   } = props;
 
   return (
-    <article className={classNames("report-item", className)}>
-      <div className="report-item__icon-text">
+    <article className={classNames("support-item", className)}>
+      <div className="support-item__icon-text">
         <Icon glyph={userIcon.id} viewBox={userIcon.viewBox} />
         {name}
       </div>
-      <h3>Report user:</h3>
-      <p>id: {UserId}</p>
-      <h3>Report:</h3>
-      <p>{report}</p>
+      <h3>Problem:</h3>
+      <p>{problem}</p>
       <h3>Created at:</h3>
       <p>{moment(createdAt).format("MMMM Do YYYY, h:mm:ss a")}</p>
+      <div className="support-item__details">
+        <h3>Details:</h3>
+        <p>{details}</p>
+      </div>
     </article>
   );
 };
 
-export default ReportItem;
+export default SupportItem;
