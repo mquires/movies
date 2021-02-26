@@ -13,12 +13,18 @@ import CategoryItem from '../../../components/categories/category-item';
 import Categories from '../../../components/categories';
 
 import './tv.scss';
+import LoginPopup from '../../../components/popups/login-popup';
 
 const TV = (props) => {
   const {
     todayTrendingTV,
     genres
   } = props;
+
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggleMenu = () => setIsOpen(!isOpen);
+  const closeMenu = () => setIsOpen(false);
 
   const [tv, setTV] = useState([]);
 
@@ -76,7 +82,8 @@ const TV = (props) => {
     <MovieItem
       id={tvItem.id}
       key={index}
-      navLink={`/tv/${tvItem.id}`}
+      navLink={localStorage.getItem('token') ? `${ROUTES.TV_ITEM}/${tvItem.id}` : '#'}
+      onClick={!localStorage.getItem('token') && toggleMenu}
       movieName={tvItem.name}
       movieOverview={tvItem.overview}
       language={tvItem.original_language}
@@ -133,6 +140,13 @@ const TV = (props) => {
       className="movies"
       title="TV"
     >
+      {
+        isOpen &&
+        <LoginPopup
+          open={toggleMenu}
+          onRequestClose={closeMenu}
+        />
+      }
       <Categories title="Find more">
         {genresList}
       </Categories>

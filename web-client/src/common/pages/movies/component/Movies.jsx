@@ -11,6 +11,7 @@ import SectionInfo from '../../../components/section-info';
 import TrendsItem from '../../../components/trends-item';
 import SectionInfoSeeAll from '../../../components/section-info/section-info-see-all';
 import Preloader from '../../../components/preloader';
+import LoginPopup from '../../../components/popups/login-popup';
 
 import noWallpaper from '../../../../assets/images/no-wallpaper.jpg';
 
@@ -24,6 +25,11 @@ const Movies = (props) => {
     genres,
     onSubmit
   } = props;
+
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggleMenu = () => setIsOpen(!isOpen);
+  const closeMenu = () => setIsOpen(false);
 
   const [movies, setMovies] = useState([]);
 
@@ -99,8 +105,9 @@ const Movies = (props) => {
 
   const moviesList = movies.map((movie, index) => (
     <MovieItem
-      navLink={`${ROUTES.MOVIE_ITEM}/${movie.id}`}
+      navLink={localStorage.getItem('token') ? `${ROUTES.MOVIE_ITEM}/${movie.id}` : '#'}
       id={movie.id}
+      onClick={!localStorage.getItem('token') && toggleMenu}
       key={index}
       movieName={movie.original_title}
       movieOverview={movie.overview}
@@ -154,6 +161,13 @@ const Movies = (props) => {
       className="movies"
       title="Movies"
     >
+      {
+        isOpen &&
+        <LoginPopup
+          open={toggleMenu}
+          onRequestClose={closeMenu}
+        />
+      }
       <Categories title="Find more">
         {genresList}
       </Categories>
