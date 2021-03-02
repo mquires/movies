@@ -108,7 +108,8 @@ const Profile = (props) => {
             >
               {userPostsList}
             </Comments>
-            <SectionInfo title="Liked movies">
+            <div>
+              <h3>liked movies</h3>
               <MovieTvItem
                 navLink={ROUTES.MAIN}
                 src="https://miro.medium.com/max/10000/0*wZAcNrIWFFjuJA78"
@@ -145,8 +146,9 @@ const Profile = (props) => {
                 alt="item"
                 title="Walli-e"
               />
-            </SectionInfo>
-            <SectionInfo title="Favourite actors">
+            </div>
+            <div>
+              <h3>Favourite actors</h3>
               <ActorItem
                 navLink={ROUTES.MAIN}
                 src="http://t2.gstatic.com/images?q=tbn:ANd9GcQRmj9gO7hiNSpI6D7-3UE5ejpqfRdocu1jEEB-HIkBivMZz0GJ1-1-3mBR5Ept"
@@ -165,7 +167,7 @@ const Profile = (props) => {
                 alt="item"
                 title="Johnny Depp"
               />
-            </SectionInfo>
+            </div>
           </>
       }
     </PageComponent>

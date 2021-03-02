@@ -22,8 +22,6 @@ class FeedbackContainer extends React.Component {
     } = feedback;
 
     sendFeedbackRequest(name, email, comments, feedbackType)
-    //todo  .then(() => <LoginPopup />);
-
     dispatch(reset("feedback"));
   }
 
