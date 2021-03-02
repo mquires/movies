@@ -5,8 +5,6 @@ import { moviesAPI } from '../../../../api/api.tmdb';
 
 import PageComponent from '../../../components/page-components/page-component';
 import MovieItem from '../../../components/movie-item';
-import Categories from '../../../components/categories';
-import CategoryItem from '../../../components/categories/category-item';
 import SectionInfo from '../../../components/section-info';
 import TrendsItem from '../../../components/trends-item';
 import SectionInfoSeeAll from '../../../components/section-info/section-info-see-all';
@@ -22,8 +20,7 @@ const Movies = (props) => {
     topRatedMovies,
     todayTrendingMovies,
     isTopRatedFetching,
-    genres,
-    onSubmit
+    genres
   } = props;
 
   const [isOpen, setIsOpen] = useState(false);
@@ -77,6 +74,13 @@ const Movies = (props) => {
     }
   }
 
+  const getMoviesResetRequest = () => {
+    moviesAPI.getMovies(1)
+      .then((response) => {
+        setMovies(() => [...response.data.results]);
+      })
+  }
+
   const onFindMovie = (movie) => {
     findMovieRequest(movie.search);
 
@@ -88,7 +92,6 @@ const Movies = (props) => {
 
     moviesAPI.getMoviesByGenre(page, genre)
       .then((response) => {
-        console.log(response)
         if (response.data.total_results === (movies.length + response.data.results.length)) {
           setHasNextPage(false);
         }
@@ -147,15 +150,6 @@ const Movies = (props) => {
     />
   ));
 
-  const genresList = genres.map((genre, index) => (
-    <CategoryItem
-      id={genre.id}
-      key={index}
-      categoryTitle={genre.name}
-      onClick={() => onGetMoviesByGenre(genre.id)}
-    />
-  ));
-
   return (
     <PageComponent
       className="movies"
@@ -168,9 +162,6 @@ const Movies = (props) => {
           onRequestClose={closeMenu}
         />
       }
-      <Categories title="Find more">
-        {genresList}
-      </Categories>
       <SectionInfoSeeAll
         className="section-items"
         title="Today's trends"
@@ -197,6 +188,10 @@ const Movies = (props) => {
         className="movies__list"
         title="Movies list"
         onChange={onFindMovie}
+        onSubmit={onFindMovie}
+        genres={genres}
+        onClick={onGetMoviesByGenre}
+        onResetClick={getMoviesResetRequest}
       >
         {moviesList}
       </SectionInfo>

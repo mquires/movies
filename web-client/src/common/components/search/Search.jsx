@@ -8,6 +8,7 @@ import Icon from '../icon';
 import findIcon from '../../../assets/icons/find.svg';
 
 import './search.scss';
+import Button from '../buttons/main-button';
 
 const Search = (props) => {
   const {
@@ -31,6 +32,11 @@ const Search = (props) => {
         type="search"
         placeholder="Search"
         name="search"
+      />
+      <Button
+        className="search__button"
+        caption="Find"
+        onSubmit={handleSubmit}
       />
     </form>
   );

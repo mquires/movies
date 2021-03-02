@@ -72,6 +72,13 @@ const TV = (props) => {
     }
   }
 
+  const getTVResetRequest = () => {
+    tvAPI.getTV(1)
+      .then((response) => {
+        setTV(() => [...response.data.results]);
+      })
+  }
+
   const onFindTV = (tv) => {
     findTVRequest(tv.search);
 
@@ -126,15 +133,6 @@ const TV = (props) => {
     getTVByGenreRequest(genreId);
   }
 
-  const genresList = genres.map((genre, index) => (
-    <CategoryItem
-      id={genre.id}
-      key={index}
-      categoryTitle={genre.name}
-      onClick={() => onGetTVByGenre(genre.id)}
-    />
-  ));
-
   return (
     <PageComponent
       className="movies"
@@ -147,9 +145,6 @@ const TV = (props) => {
           onRequestClose={closeMenu}
         />
       }
-      <Categories title="Find more">
-        {genresList}
-      </Categories>
       <SectionInfoSeeAll
         className="section-items"
         title="Today's trends"
@@ -165,6 +160,10 @@ const TV = (props) => {
         className="movies__list"
         title="TV list"
         onChange={onFindTV}
+        onSubmit={onFindTV}
+        genres={genres}
+        onClick={onGetTVByGenre}
+        onResetClick={getTVResetRequest}
       >
         {tvList}
       </SectionInfo>

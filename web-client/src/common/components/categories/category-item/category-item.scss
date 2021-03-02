@@ -3,15 +3,15 @@
 .category-item {
   background: #f2f2f7;
   border-radius: 1.5rem;
-  height: 5.8rem;
+  height: 4.5rem;
   color: $RED;
   stroke: $RED;
   fill: $RED;
   display: flex;
   align-items: center;
   justify-content: center;
-  max-width: 100%;
-  min-width: 20rem;
+ // max-width: 100%;
+  width: 14rem;
   font-size: 1.3rem;
   cursor: pointer;
   transition: 0.1s;
