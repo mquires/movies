@@ -33,6 +33,7 @@ import FeedbackContainer from "../common/pages/feedback/container";
 import './app.scss';
 import SupportContainer from "../common/pages/support/container";
 import Chat from "../common/components/chat/Chat";
+import ChatButton from '../common/components/buttons/chat-button';
 
 const history = createBrowserHistory();
 
@@ -139,7 +140,7 @@ const App = () => {
                 render={() => <SupportContainer />}
               />
             </Switch>
-            <Chat />
+            <ChatButton />
           </div>
         </Router>
       </div>

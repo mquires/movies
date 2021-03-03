@@ -1,8 +1,64 @@
+@import "../../../assets/styles/abstracts/variables";
+
 .chat {
-  position: absolute;
-  top: 50%;
-  bottom: 50rem;
-  width: 150rem;
-  height: 50rem;
-  background: red;
+  position: fixed;
+  right: 10vw;
+  bottom: 5vh;
+  background: $WHITE;
+  height: 35rem;
+  border: 0.1rem solid $CL_6_GREY;
+  border-radius: 0.6rem;
+  box-shadow: 0px 2px 35px 14px rgba(13, 13, 13, 0.04);
+  padding: 2rem;
+
+  &__container {
+    display: flex;
+  }
+
+  &__users {
+    border-right: 0.1rem solid $CL_6_GREY;
+    width: 20rem;
+    margin-right: 3rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding-right: 2rem;
+    overflow-y: auto;
+    height: 31rem;
+  }
+
+  &__messenger {
+    position: relative;
+  }
+
+  &__messages {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    overflow-y: auto;
+    height: 22rem;
+    width: 50rem;
+  }
+
+  &__send-container {
+    position: absolute;
+    left: 0;
+    border-top: 0.1rem solid $CL_6_GREY;
+    width: 100%;
+    margin-top: 1rem;
+
+    &-wrapper {
+      padding: 1rem 2rem;
+    }
+  }
+
+  &__textarea {
+    background: none;
+    font-family: $FONT_FAMILY;
+    resize: none;
+    width: 100%;
+    border: none;
+    outline: none;
+    margin-bottom: 0.5rem;
+  }
 }

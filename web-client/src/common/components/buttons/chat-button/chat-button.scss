@@ -1,0 +1,24 @@
+@import "../../../../assets/styles/abstracts/variables";
+
+.chat-button {
+  border-radius: 50%;
+  position: fixed;
+  bottom: 5vh;
+  right: 5vw;
+  width: 4.5rem;
+  height: 4.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &:hover {
+    background: $BLUE;
+    border-color: $BLUE;
+  }
+  
+  &__icon {
+    width: 2rem;
+    height: 2rem;
+    fill: $WHITE;
+  }
+}

@@ -1,0 +1,12 @@
+.chat-message-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+
+  &__text {
+    border-radius: 1.5rem;
+    padding: 1rem;
+    width: 40%;
+    word-wrap: break-word;
+  }
+}

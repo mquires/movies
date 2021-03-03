@@ -1,0 +1,15 @@
+@import '../../../../assets/styles/abstracts/variables';
+
+.chat-user {
+  border-radius: 0.6rem;
+  text-decoration: none;
+  color: $BLACK;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  
+  &:hover {
+    background: $CL_6_GREY;
+  }
+}
