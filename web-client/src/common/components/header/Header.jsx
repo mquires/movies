@@ -22,6 +22,7 @@ const Header = (props) => {
         {
           isAuth ?
             <div className="header__user">
+              <p className="header__user-email">{localStorage.getItem('email')}</p>
               <AuthUserNav />
               <Button onClick={onLogout} caption="Logout" />
             </div> :

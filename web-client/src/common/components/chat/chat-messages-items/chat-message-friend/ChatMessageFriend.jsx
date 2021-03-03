@@ -13,10 +13,12 @@ const ChatMessageFriend = (props) => {
   } = props;
 
   return (
-    <ChatMessageItem
-      className={classNames("chat-message-friend", className)}
-      {...restProps}
-    />
+    <div className="chat-message-friend__side">
+      <ChatMessageItem
+        className={classNames("chat-message-friend", className)}
+        {...restProps}
+      />
+    </div>
   );
 }
 

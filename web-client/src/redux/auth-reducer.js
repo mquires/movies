@@ -27,9 +27,9 @@ export const loginUser = (email, password) => {
   return (dispatch) => {
     return authAPI.login(email, password)
       .then((response) => {
-        console.log(response)
         localStorage.setItem('token', response.data.values.token);
         localStorage.setItem('id', response.data.values.id);
+        localStorage.setItem('email', response.data.values.email);
         dispatch(setAuthUser(true));
       })
       .catch(() => {

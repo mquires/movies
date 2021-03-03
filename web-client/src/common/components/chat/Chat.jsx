@@ -13,13 +13,18 @@ class Chat extends React.Component {
 
     this.state = {
       inputMessage: '',
-      messages: []
+      messages: [],
+      email: ''
     }
   }
 
   componentDidMount() {
     const url = 'http://localhost:3500/';
-    this.socket = io.connect(url);
+    this.socket = io.connect(url, {
+      query: {
+        token: localStorage.getItem('token')
+      }
+    });
 
     this.socket.on('new-message', (newMessage) => {
       this.setState({ messages: this.state.messages.concat(newMessage) });
@@ -55,16 +60,22 @@ class Chat extends React.Component {
           <div className="chat__messenger">
             <div className="chat__messages">
               {this.state.messages.map((message, index) => (
-                <div
-                  id={message.id}
-                  key={index}
-                >
-                  {message}
-                </div>
+                <>
+                  {
+                    localStorage.getItem('email') == message.email ?
+                      <ChatMessageMe
+                        id={message.id}
+                        key={index}
+                        caption={message.message}
+                      /> :
+                      <ChatMessageFriend
+                        id={message.id}
+                        key={index}
+                        caption={message.message}
+                      />
+                  }
+                </>
               ))}
-              <ChatMessageFriend caption="jdnwkekvwenwjevwkevnjwevnwekvjwekvknwevkwevnwevn" name="Kevin" />
-              <ChatMessageMe caption="jdnwkekvwenwjevwkevnjwevnwekvjwekvknwevkwevnwevn" name="me" />
-              <ChatMessageMe caption="jdnwkekvwenwjevwkevnjwevnwekvjwekvknwevkwevnwevn" name="me" />
             </div>
             <div className="chat__send-container">
               <div className="chat__send-container-wrapper">

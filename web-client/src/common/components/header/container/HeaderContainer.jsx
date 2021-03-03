@@ -29,6 +29,7 @@ class HeaderContainer extends React.Component {
     } = this.props;
 
     localStorage.removeItem('token');
+    localStorage.removeItem('email');
 
     setIsAuth(null, localStorage.removeItem('id'));
 

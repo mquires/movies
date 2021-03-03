@@ -26,5 +26,9 @@
     display: flex;
     align-items: center;
     gap: 2rem;
+
+    &-email {
+      font-size: 1.3rem;
+    }
   }
 }
