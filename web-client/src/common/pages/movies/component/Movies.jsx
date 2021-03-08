@@ -9,7 +9,6 @@ import SectionInfo from '../../../components/section-info';
 import TrendsItem from '../../../components/trends-item';
 import SectionInfoSeeAll from '../../../components/section-info/section-info-see-all';
 import Preloader from '../../../components/preloader';
-import LoginPopup from '../../../components/popups/login-popup';
 
 import noWallpaper from '../../../../assets/images/no-wallpaper.jpg';
 
@@ -20,13 +19,9 @@ const Movies = (props) => {
     topRatedMovies,
     todayTrendingMovies,
     isTopRatedFetching,
-    genres
+    genres,
+    onSendMovieDetails
   } = props;
-
-  const [isOpen, setIsOpen] = useState(false);
-
-  const toggleMenu = () => setIsOpen(!isOpen);
-  const closeMenu = () => setIsOpen(false);
 
   const [movies, setMovies] = useState([]);
 
@@ -110,7 +105,6 @@ const Movies = (props) => {
     <MovieItem
       navLink={localStorage.getItem('token') ? `${ROUTES.MOVIE_ITEM}/${movie.id}` : '#'}
       id={movie.id}
-      onClick={!localStorage.getItem('token') && toggleMenu}
       key={index}
       movieName={movie.original_title}
       movieOverview={movie.overview}
@@ -119,6 +113,7 @@ const Movies = (props) => {
       src={`http://image.tmdb.org/t/p/w1280/${movie.poster_path}`}
       alt={movie.original_title}
       onError={(e) => e.target.src = noWallpaper}
+      onWatchLaterClick={() => onSendMovieDetails(localStorage.getItem('id'), movie.id)}
     />
   ));
 
@@ -155,13 +150,6 @@ const Movies = (props) => {
       className="movies"
       title="Movies"
     >
-      {
-        isOpen &&
-        <LoginPopup
-          open={toggleMenu}
-          onRequestClose={closeMenu}
-        />
-      }
       <SectionInfoSeeAll
         className="section-items"
         title="Today's trends"

@@ -1,15 +1,18 @@
+import { contentAPI } from "../api/api";
 import { personsAPI } from "../api/api.tmdb";
 
 const SET_POPULAR_PERSONS = 'SET-POPULAR-PERSONS';
 const SET_IS_FETCHING = 'SET-IS-FETCHING';
 const SET_PERSON_DETAILS = 'SET-PERSON-DETAILS';
 const SET_PERSON_MOVIE_CREDITS = 'SET-PERSON-MOVIE-CREDITS';
+const SET_FAVORITE_PERSONS = 'SET-FAVORITE-PERSON';
 
 const initialState = {
   popularPersons: [],
   isFetching: false,
   personDetails: [],
-  personMovieCredits: []
+  personMovieCredits: [],
+  favoritePerson: []
 };
 
 const personsReducer = (state = initialState, action) => {
@@ -38,6 +41,12 @@ const personsReducer = (state = initialState, action) => {
         personMovieCredits: action.personMovieCredits
       }
     }
+    case SET_FAVORITE_PERSONS: {
+      return {
+        ...state,
+        favoritePerson: action.favoritePerson
+      }
+    }
     default: {
       return state;
     }
@@ -50,6 +59,7 @@ export const setPopularPersons = (popularPersons) => ({ type: SET_POPULAR_PERSON
 export const setIsFetching = (isFetching) => ({ type: SET_IS_FETCHING, isFetching });
 export const setPersonDetails = (personDetails) => ({ type: SET_PERSON_DETAILS, personDetails });
 export const setPersonMovieCredits = (personMovieCredits) => ({ type: SET_PERSON_MOVIE_CREDITS, personMovieCredits });
+export const setFavoritePersons = (favoritePerson) => ({ type: SET_FAVORITE_PERSONS, favoritePerson });
 
 export const getPopularPersonsRequest = () => (dispatch) => {
   personsAPI.getPopularPersons()
@@ -70,6 +80,7 @@ export const findPersonRequest = (query) => (dispatch) => {
 export const getPersonDetailsRequest = (personId) => (dispatch) => {
   personsAPI.getPersonDetails(personId)
     .then(response => {
+      console.log(response.data)
      dispatch(setPersonDetails(response.data));
     });
 };
@@ -79,4 +90,30 @@ export const getPersonMovieCreditsRequest = (personId) => (dispatch) => {
     .then(response => {
      dispatch(setPersonMovieCredits(response.data.cast));
     });
+};
+
+export const sendFavoritePersonRequest = (userId, personId) => () => {
+  personsAPI.getPersonDetails(personId)
+    .then(response => {
+      const {
+        id,
+        name,
+        profile_path
+      } = response.data;
+
+      contentAPI.sendFavoritePerson(
+        userId,
+        id,
+        name,
+        profile_path
+      );
+    })
+};
+
+export const getFavoritePersonRequest = (id) => (dispatch) => {
+  contentAPI.getFavoritePerson(id)
+    .then(response => {
+      console.log(response)
+      dispatch(setFavoritePersons(response.data));
+    })
 };

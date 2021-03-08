@@ -8,6 +8,8 @@ import {
   addPostRequest,
   addReportRequest
 } from '../../../../redux/users-reducer';
+import { getFavoritePersonRequest } from '../../../../redux/persons-reducer';
+import { getFavoriteMovieRequest } from '../../../../redux/movies-reducer';
 import ROUTES from '../../../constants/routes';
 import { reset } from "redux-form";
 
@@ -18,6 +20,8 @@ class ProfileContainer extends React.Component {
     const {
       getUserByIdRequest,
       getPostsByIdRequest,
+      getFavoritePersonRequest,
+      getFavoriteMovieRequest,
       match,
       history
     } = this.props;
@@ -31,12 +35,17 @@ class ProfileContainer extends React.Component {
 
     getUserByIdRequest(match.params.id);
     getPostsByIdRequest(match.params.id);
+    getFavoritePersonRequest(match.params.id);
+    getFavoriteMovieRequest(match.params.id);
   }
 
   componentDidUpdate(prevProps, prevState) {
     if (prevProps.match.params.id !== this.props.match.params.id) {
       const {
         getUserByIdRequest,
+        getPostsByIdRequest,
+        getFavoritePersonRequest,
+        getFavoriteMovieRequest,
         match,
         history
       } = this.props;
@@ -49,6 +58,9 @@ class ProfileContainer extends React.Component {
       }
 
       getUserByIdRequest(match.params.id);
+      getPostsByIdRequest(match.params.id);
+      getFavoritePersonRequest(match.params.id);
+      getFavoriteMovieRequest(match.params.id);
     }
   }
 
@@ -63,7 +75,6 @@ class ProfileContainer extends React.Component {
   }
 
   onSendReport(report, dispatch) {
-    console.log(report);
     const {
       addReportRequest,
       match
@@ -87,7 +98,9 @@ class ProfileContainer extends React.Component {
 const mapStateToProps = (state) => {
   return {
     userPosts: state.users.userPosts,
-    user: state.users.user
+    user: state.users.user,
+    favoritePerson: state.persons.favoritePerson,
+    favoriteMovie: state.movies.favoriteMovie
   }
 }
 
@@ -96,7 +109,9 @@ export default compose(
     getUserByIdRequest,
     getPostsByIdRequest,
     addPostRequest,
-    addReportRequest
+    addReportRequest,
+    getFavoritePersonRequest,
+    getFavoriteMovieRequest
   }),
   withRouter
 )(ProfileContainer);

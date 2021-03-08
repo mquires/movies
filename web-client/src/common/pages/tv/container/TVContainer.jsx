@@ -7,6 +7,8 @@ import {
   getGenresRequest
 } from '../../../../redux/tv-reducer';
 
+import { sendWatchLaterTVRequest } from '../../../../redux/watch-later-reducer';
+
 import TV from '../component';
 
 class TVContainer extends React.Component {
@@ -20,9 +22,17 @@ class TVContainer extends React.Component {
     getGenresRequest();
   }
 
+  onSendTVDetails(userId, tvId) {
+    const {
+      sendWatchLaterTVRequest
+    } = this.props;
+
+    sendWatchLaterTVRequest(userId, tvId);
+  }
+
   render() {
     return (
-      <TV {...this.props} />
+      <TV {...this.props} onSendTVDetails={this.onSendTVDetails.bind(this)} />
     );
   }
 }
@@ -38,7 +48,8 @@ export default compose(
   connect(mapStateToProps,
     {
       getTodayTrendingTVRequest,
-      getGenresRequest
+      getGenresRequest,
+      sendWatchLaterTVRequest
     }),
   withRouter
 )(TVContainer);

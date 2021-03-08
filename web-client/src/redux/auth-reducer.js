@@ -30,6 +30,7 @@ export const loginUser = (email, password) => {
         localStorage.setItem('token', response.data.values.token);
         localStorage.setItem('id', response.data.values.id);
         localStorage.setItem('email', response.data.values.email);
+        localStorage.setItem('avatarImage', response.data.values.avatarImage);
         dispatch(setAuthUser(true));
       })
       .catch(() => {
@@ -49,6 +50,8 @@ export const signupUser = (name, email, password, confirmPassword) => {
         .then((response) => {
           localStorage.setItem('token', response.data.values.token);
           localStorage.setItem('id', response.data.values.id);
+          localStorage.setItem('email', response.data.values.email);
+          localStorage.setItem('avatarImage', response.data.values.avatarImage);
           dispatch(setAuthUser(true));
         })
         .catch(() => {

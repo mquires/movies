@@ -2,42 +2,46 @@ import React from "react";
 import { Switch, Route, Router } from 'react-router-dom';
 import { createBrowserHistory } from 'history';
 import { Provider } from 'react-redux';
-import ROUTES from '../common/constants/routes'
+import ROUTES from '../../common/constants/routes'
 
-import HeaderContainer from "../common/components/header/container";
-import Sidebar from "../common/components/sidebar";
+import HeaderContainer from "../../common/components/header/container";
+import Sidebar from "../../common/components/sidebar";
 
-import Main from "../common/pages/main";
-import LoginContainer from "../common/pages/login/container";
-import RegistrationContainer from "../common/pages/registration/container";
-import MoviesContainer from "../common/pages/movies/container";
-import ProfileContainer from "../common/pages/profile/container";
-import TopRatedMovies from "../common/pages/top-rated-movies/component";
-import TVContainer from "../common/pages/tv/container";
-import UpcomingMovies from "../common/pages/upcoming-movies";
-import TrendsMovies from "../common/pages/trends-movies/component";
-import PopularPersons from "../common/pages/popular-persons/component";
-import ShowMore from "../common/pages/show-more/component";
-import TrendsTV from "../common/pages/trends-tv/component";
-import MovieDetailsContainer from "../common/pages/movie-details/container";
-import TVDetailsContainer from "../common/pages/tv-details/container";
-import PersonDetailsContainer from "../common/pages/person-details/container";
-import AdminPanelContainer from "../common/pages/admin-panel/container";
-import TopRatedTV from "../common/pages/top-rated-tv";
-import TopWeekMovies from "../common/pages/top-week-movies";
-import TopWeekSerials from "../common/pages/top-week-serials";
-import TodayBestActors from "../common/pages/today-best-actors";
-import LatestMoviesContainer from "../common/pages/latest-movies/container";
-import FeedbackContainer from "../common/pages/feedback/container";
+import Main from "../../common/pages/main";
+import LoginContainer from "../../common/pages/login/container";
+import RegistrationContainer from "../../common/pages/registration/container";
+import MoviesContainer from "../../common/pages/movies/container";
+import ProfileContainer from "../../common/pages/profile/container";
+import TopRatedMovies from "../../common/pages/top-rated-movies/component";
+import TVContainer from "../../common/pages/tv/container";
+import UpcomingMovies from "../../common/pages/upcoming-movies";
+import TrendsMovies from "../../common/pages/trends-movies/component";
+import PopularPersons from "../../common/pages/popular-persons/component";
+import ShowMore from "../../common/pages/show-more/component";
+import TrendsTV from "../../common/pages/trends-tv/component";
+import MovieDetailsContainer from "../../common/pages/movie-details/container";
+import TVDetailsContainer from "../../common/pages/tv-details/container";
+import PersonDetailsContainer from "../../common/pages/person-details/container";
+import AdminPanelContainer from "../../common/pages/admin-panel/container";
+import TopRatedTV from "../../common/pages/top-rated-tv";
+import TopWeekMovies from "../../common/pages/top-week-movies";
+import TopWeekSerials from "../../common/pages/top-week-serials";
+import TodayBestActors from "../../common/pages/today-best-actors";
+import LatestMoviesContainer from "../../common/pages/latest-movies/container";
+import FeedbackContainer from "../../common/pages/feedback/container";
+import SupportContainer from "../../common/pages/support/container";
+import ChatButton from '../../common/components/buttons/chat-button';
+import WatchLaterContainer from "../../common/pages/watch-later/watch-later/container";
 
 import './app.scss';
-import SupportContainer from "../common/pages/support/container";
-import Chat from "../common/components/chat/Chat";
-import ChatButton from '../common/components/buttons/chat-button';
 
 const history = createBrowserHistory();
 
-const App = () => {
+const App = (props) => {
+  const {
+    isAuth
+  } = props;
+
   return (
     <Provider store={store}>
       <div className="app">
@@ -139,8 +143,14 @@ const App = () => {
                 path={`${ROUTES.SUPPORT}`}
                 render={() => <SupportContainer />}
               />
+              <Route
+                path={`${ROUTES.WATCH_LATER}`}
+                render={() => <WatchLaterContainer />}
+              />
             </Switch>
-            <ChatButton />
+            {
+              isAuth && <ChatButton />
+            }
           </div>
         </Router>
       </div>

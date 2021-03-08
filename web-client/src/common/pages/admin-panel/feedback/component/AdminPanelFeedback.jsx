@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 import AdminPanel from '../../component';
 import FeedbackItem from '../../../../components/feedback-item';
+import EmptyListMessage from '../../../../components/empty-list-message';
 
 import './admin-panel-feedback.scss';
 
@@ -26,7 +27,7 @@ const AdminPanelFeedback = (props) => {
 
   return (
     <AdminPanel className="admin-panel-feedback">
-      {feedbackItemsList}
+      {feedbackItemsList.length === 0 ? <EmptyListMessage /> : feedbackItemsList}
     </AdminPanel>
   );
 };

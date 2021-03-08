@@ -1,0 +1,47 @@
+@import "../../../assets/styles/abstracts/variables";
+
+.added-movie-item {
+  text-decoration: none;
+  color: $CL_14_GREY;
+  transition: 0.1s;
+
+  &:hover {
+    filter: brightness(0.7);
+  }
+
+  &__watch-later {
+    text-transform: uppercase;
+    font-size: 1.2rem;
+    font-weight: 500;
+  }
+
+  &__title {
+    font-size: 2.3rem;
+  }
+
+  &__release-date {
+    font-size: 1.4rem;
+  }
+
+  &__cover {
+    width: 100%;
+    border-radius: 0.6rem;
+    margin-top: 1rem;
+
+    &-container {
+      width: 45rem;
+      position: relative;
+    }
+  }
+
+  &__description {
+    position: absolute;
+    bottom: 2rem;
+    left: 1rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: $WHITE;
+    filter: brightness(1);
+  }
+}

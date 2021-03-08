@@ -14,7 +14,8 @@ export default function FindUsersItem(props) {
     navLink,
     className,
     name,
-    createdAt
+    createdAt,
+    ...restProps
   } = props;
 
   return (
@@ -25,8 +26,7 @@ export default function FindUsersItem(props) {
       <div className="find-users-item__contact">
         <Avatar
           className="find-users-item__avatar"
-          src="https://imagevars.gulfnews.com/2020/03/11/Reader-picture_170c9c539d6_original-ratio.jpg"
-          alt="avatar"
+          {...restProps}
         />
         <div className="find-users-item__contact-info">
           <p className="find-users-item__name">{name}</p>

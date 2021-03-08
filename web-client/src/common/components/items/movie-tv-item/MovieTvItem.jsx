@@ -6,24 +6,38 @@ import Image from '../../image';
 import Item from '../item';
 
 import './movie-tv-item.scss';
+import { NavLink } from 'react-router-dom';
 
 const MovieTvItem = (props) => {
   const {
     className,
+    navLink,
     ...restProps
   } = props;
 
   return (
-    <Item
+    <NavLink
       className={classNames("movie-tv-item", className)}
-      {...restProps}
+      to={navLink}
     >
-      <Image
-        className="movie-tv-item__image"
-        {...restProps}
-      />
-    </Item>
+      <Item {...restProps}>
+        <Image
+          className="movie-tv-item__image"
+          {...restProps}
+        />
+      </Item>
+    </NavLink>
   );
 };
+
+MovieTvItem.propTypes = {
+  className: PropTypes.string,
+  navLink: PropTypes.string
+}
+
+MovieTvItem.defaultProps = {
+  className: undefined,
+  navLink: "#"
+}
 
 export default MovieTvItem;

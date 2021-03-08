@@ -1,4 +1,9 @@
+@import "../../../../assets/styles/abstracts/variables";
+
 .movie-tv-item {
+  color: $BLACK;
+  text-decoration: none;
+
   &__image {
     max-width: 100%;
     object-fit: cover;

@@ -10,9 +10,9 @@ import usersIcon from '../../../../assets/icons/user-circle.svg';
 import feedbackIcon from '../../../../assets/icons/feedback.svg';
 import reportIcon from '../../../../assets/icons/report.svg';
 import supportIcon from '../../../../assets/icons/support.svg';
+import Icon from '../../../components/icon';
 
 import './admin-panel.scss';
-import Icon from '../../../components/icon';
 
 const AdminPanel = (props) => {
   const {

@@ -33,10 +33,11 @@
   &__subtitle {
     text-transform: uppercase;
     margin: 3rem 0 0;
-    font-size: 1.5rem;
+    font-size: 1.3rem;
+    color: $CL_12_GREY;
 
     &-container {
-      border-bottom: 0.1rem solid $BLACK;
+      border-bottom: 0.1rem solid $CL_12_GREY;
       padding: 0.7rem 0;
       margin-bottom: 1rem;
     }

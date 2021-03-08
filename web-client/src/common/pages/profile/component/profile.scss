@@ -1,6 +1,82 @@
 @import "../../../../assets/styles/abstracts/variables";
 
 .profile {
+  &__send-photo {
+    color: grey;
+    transition: 200ms color;
+
+    &__form {
+      padding: 1em;
+      margin: 1em;
+    }
+
+    & input[type="file"] {
+      outline: 0;
+      opacity: 0;
+      pointer-events: none;
+      user-select: none;
+    }
+
+    &-label {
+      width: 120px;
+      border: 2px dashed grey;
+      border-radius: 5px;
+      display: block;
+      padding: 1.2em;
+      transition: border 300ms ease;
+      cursor: pointer;
+      text-align: center;
+
+      &:hover {
+        border: 2px solid #000;
+      }
+
+      & i {
+        display: block;
+        font-size: 42px;
+        padding-bottom: 16px;
+        color: grey;
+        transition: 200ms color;
+      }
+    }
+  }
+
+  &__avatar {
+    &-container {
+      position: relative;
+      width: 50%;
+      display: flex;
+      justify-content: center;
+
+      &:hover .profile__avatar-image {
+        opacity: 0;
+      }
+
+      &:hover .profile__avatar-overlay {
+        opacity: 1;
+      }
+    }
+
+    &-overlay {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      opacity: 0;
+      transition: 0.5s ease;
+    }
+
+    &-button {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      -webkit-transform: translate(-50%, -50%);
+      -ms-transform: translate(-50%, -50%);
+      transform: translate(-50%, -50%);
+    }
+  }
+
   &__main-info {
     display: flex;
     align-items: flex-end;
@@ -14,9 +90,10 @@
     }
   }
 
-  &__avatar {
+  &__avatar-image {
     width: 20rem;
     height: auto;
+    transition: 0.5s ease;
   }
 
   &__stats {

@@ -9,22 +9,15 @@ import SectionInfo from '../../../components/section-info';
 import TrendsItem from '../../../components/trends-item';
 import SectionInfoSeeAll from '../../../components/section-info/section-info-see-all';
 import Preloader from '../../../components/preloader';
-import CategoryItem from '../../../components/categories/category-item';
-import Categories from '../../../components/categories';
 
 import './tv.scss';
-import LoginPopup from '../../../components/popups/login-popup';
 
 const TV = (props) => {
   const {
     todayTrendingTV,
-    genres
+    genres,
+    onSendTVDetails
   } = props;
-
-  const [isOpen, setIsOpen] = useState(false);
-
-  const toggleMenu = () => setIsOpen(!isOpen);
-  const closeMenu = () => setIsOpen(false);
 
   const [tv, setTV] = useState([]);
 
@@ -90,13 +83,13 @@ const TV = (props) => {
       id={tvItem.id}
       key={index}
       navLink={localStorage.getItem('token') ? `${ROUTES.TV_ITEM}/${tvItem.id}` : '#'}
-      onClick={!localStorage.getItem('token') && toggleMenu}
       movieName={tvItem.name}
       movieOverview={tvItem.overview}
       language={tvItem.original_language}
       releaseDate={tvItem.first_air_date}
       src={`http://image.tmdb.org/t/p/w1280/${tvItem.poster_path}`}
       alt={tvItem.name}
+      onWatchLaterClick={() => onSendTVDetails(localStorage.getItem('id'), tvItem.id)}
     />
   ));
 
@@ -138,13 +131,6 @@ const TV = (props) => {
       className="movies"
       title="TV"
     >
-      {
-        isOpen &&
-        <LoginPopup
-          open={toggleMenu}
-          onRequestClose={closeMenu}
-        />
-      }
       <SectionInfoSeeAll
         className="section-items"
         title="Today's trends"

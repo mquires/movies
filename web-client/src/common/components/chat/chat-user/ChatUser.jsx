@@ -11,20 +11,22 @@ const ChatUser = (props) => {
   const {
     className,
     navLink,
-    name
+    name,
+    onClick,
+    ...restProps
   } = props;
 
   return (
-    <NavLink
+    <div
       className={classNames("chat-user", className)}
       to={navLink}
+      onClick={onClick}
     >
       <Avatar
-        src="https://cdn.vox-cdn.com/thumbor/zFJuBWv5NjSeVilWJntvQcgji5M=/1400x1400/filters:format(jpeg)/cdn.vox-cdn.com/uploads/chorus_asset/file/19979927/jomi_avatar_nickleodeon_ringer.jpg"
-        alt="avatar"
+        {...restProps}
       />
       <p>{name}</p>
-    </NavLink>
+    </div>
   );
 }
 

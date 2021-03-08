@@ -8,6 +8,8 @@ import {
   getGenresRequest
 } from '../../../../redux/movies-reducer';
 
+import { sendWatchLaterRequest } from '../../../../redux/watch-later-reducer';
+
 import Movies from '../component';
 
 class MoviesContainer extends React.Component {
@@ -15,7 +17,7 @@ class MoviesContainer extends React.Component {
     const {
       getTodayTrendingMoviesRequest,
       getTopRatedMoviesRequest,
-      getGenresRequest
+      getGenresRequest,
     } = this.props;
 
     getTodayTrendingMoviesRequest(1);
@@ -23,9 +25,17 @@ class MoviesContainer extends React.Component {
     getGenresRequest();
   }
 
+  onSendMovieDetails(userId, movieId) {
+    const {
+      sendWatchLaterRequest
+    } = this.props;
+
+    sendWatchLaterRequest(userId, movieId);
+  }
+
   render() {
     return (
-      <Movies {...this.props} />
+      <Movies {...this.props} onSendMovieDetails={this.onSendMovieDetails.bind(this)} />
     );
   }
 }
@@ -44,7 +54,8 @@ export default compose(
     {
       getTodayTrendingMoviesRequest,
       getTopRatedMoviesRequest,
-      getGenresRequest
+      getGenresRequest,
+      sendWatchLaterRequest
     }),
   withRouter
 )(MoviesContainer);

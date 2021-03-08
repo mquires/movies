@@ -2,14 +2,12 @@ import React from 'react';
 import classNames from 'classnames';
 import { reduxForm } from 'redux-form';
 import BUTTON_TYPES from '../../../constants/button-types';
-import INPUT_TYPES from '../../../constants/input-types';
 
-import Input from '../../input';
 import Button from '../../buttons/main-button';
 import EntryField from '../../fields/EntryField';
+import Textarea from '../../textarea';
 
 import './comments-form.scss';
-import Textarea from '../../textarea/Textarea';
 
 const CommentsForm = (props) => {
   const {

@@ -1,0 +1,14 @@
+@import '../../../assets/styles/abstracts/variables';
+
+.favorite-star {
+  width: 2.5rem;
+  height: 2.5rem;
+  fill: $YELLOW;
+  stroke: none;
+  transition: 0.1s;
+  cursor: pointer;
+
+  &:hover {
+    transform: scale(1.3);
+  }
+}

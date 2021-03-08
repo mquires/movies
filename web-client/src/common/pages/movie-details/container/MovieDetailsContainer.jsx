@@ -10,7 +10,8 @@ import {
   getSimilarMoviesRequest,
   getMoviesKeywordsRequest,
   getMoviesCastRequest,
-  getMovieVideosRequest
+  getMovieVideosRequest,
+  sendFavoriteMovieRequest
 } from '../../../../redux/movies-reducer';
 
 import MovieDetails from '../component';
@@ -62,9 +63,17 @@ class MovieDetailsContainer extends React.Component {
     }
   }
 
+  onSendFavoriteMovie(userId, movieId) {
+    const {
+      sendFavoriteMovieRequest
+    } = this.props;
+
+    sendFavoriteMovieRequest(userId, movieId);
+  }
+
   render() {
     return (
-      <MovieDetails {...this.props} />
+      <MovieDetails onSendFavoriteMovie={this.onSendFavoriteMovie.bind(this)} {...this.props} />
     );
   }
 }
@@ -91,7 +100,8 @@ export default compose(
     getSimilarMoviesRequest,
     getMoviesKeywordsRequest,
     getMoviesCastRequest,
-    getMovieVideosRequest
+    getMovieVideosRequest,
+    sendFavoriteMovieRequest
   }),
   withRouter
 )(MovieDetailsContainer);

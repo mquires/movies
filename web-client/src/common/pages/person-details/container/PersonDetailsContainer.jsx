@@ -4,7 +4,8 @@ import { withRouter } from 'react-router-dom';
 import { compose } from 'redux';
 import {
   getPersonDetailsRequest,
-  getPersonMovieCreditsRequest
+  getPersonMovieCreditsRequest,
+  sendFavoritePersonRequest
 } from '../../../../redux/persons-reducer';
 
 import PersonDetails from '../component';
@@ -21,9 +22,17 @@ class PersonDetailsContainer extends React.Component {
     getPersonMovieCreditsRequest(match.params.id);
   }
 
+  onSendFavoritePerson(userId, personId) {
+    const {
+      sendFavoritePersonRequest
+    } = this.props;
+
+    sendFavoritePersonRequest(userId, personId);
+  }
+
   render() {
     return (
-      <PersonDetails {...this.props} />
+      <PersonDetails {...this.props} onSendFavoritePerson={this.onSendFavoritePerson.bind(this)} />
     );
   }
 }
@@ -38,7 +47,8 @@ const mapStateToProps = (state) => {
 export default compose(
   connect(mapStateToProps, {
     getPersonDetailsRequest,
-    getPersonMovieCreditsRequest
+    getPersonMovieCreditsRequest,
+    sendFavoritePersonRequest
   }),
   withRouter
 )(PersonDetailsContainer);

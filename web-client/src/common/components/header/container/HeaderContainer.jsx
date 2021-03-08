@@ -28,10 +28,8 @@ class HeaderContainer extends React.Component {
       history
     } = this.props;
 
-    localStorage.removeItem('token');
-    localStorage.removeItem('email');
-
-    setIsAuth(null, localStorage.removeItem('id'));
+    localStorage.clear();
+    setIsAuth();
 
     history.push(ROUTES.LOGIN);
   }

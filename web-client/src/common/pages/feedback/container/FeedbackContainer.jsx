@@ -6,7 +6,6 @@ import { sendFeedbackRequest } from '../../../../redux/feedback-reducer';
 import { reset } from "redux-form";
 
 import Feedback from '../component';
-import LoginPopup from '../../../components/popups/login-popup';
 
 class FeedbackContainer extends React.Component {
   onSendFeedback(feedback, dispatch) {
@@ -21,7 +20,7 @@ class FeedbackContainer extends React.Component {
       feedbackType
     } = feedback;
 
-    sendFeedbackRequest(name, email, comments, feedbackType)
+    sendFeedbackRequest(name, email, comments, feedbackType);
     dispatch(reset("feedback"));
   }
 
@@ -35,14 +34,8 @@ class FeedbackContainer extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-
-  }
-}
-
 export default compose(
-  connect(mapStateToProps, {
+  connect(null, {
     sendFeedbackRequest
   }),
   withRouter

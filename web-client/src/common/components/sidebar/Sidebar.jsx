@@ -28,7 +28,7 @@ const Sidebar = (props) => {
           glyph={moviesIcon.id}
           viewBox={moviesIcon.viewBox}
           className={classNames('sidebar__nav-link', className)}
-          activeClassName={classNames('sidebar__nav-link-active', className)}
+          activeclassname={classNames('sidebar__nav-link-active', className)}
           to={ROUTES.MOVIES}
           caption="Movies"
         />
@@ -36,7 +36,7 @@ const Sidebar = (props) => {
           glyph={tvIcon.id}
           viewBox={tvIcon.viewBox}
           className={classNames('sidebar__nav-link', className)}
-          activeClassName={classNames('sidebar__nav-link-active', className)}
+          activeclassname={classNames('sidebar__nav-link-active', className)}
           to={ROUTES.TV}
           caption="TV Series"
         />
@@ -44,21 +44,26 @@ const Sidebar = (props) => {
           glyph={showMoreIcon.id}
           viewBox={showMoreIcon.viewBox}
           className={classNames('sidebar__nav-link', className)}
-          activeClassName={classNames('sidebar__nav-link-active', className)}
+          activeclassname={classNames('sidebar__nav-link-active', className)}
           to={ROUTES.SHOW_MORE}
           caption="Show more"
         />
-        <div className="sidebar__subtitle-container">
-          <h3 className="sidebar__subtitle">My library</h3>
-        </div>
-        <SidebarLink
-          glyph={watchLaterIcon.id}
-          viewBox={watchLaterIcon.viewBox}
-          className={classNames('sidebar__nav-link', className)}
-          activeClassName={classNames('sidebar__nav-link-active', className)}
-          to={ROUTES.WATCH_LATER}
-          caption="Watch later"
-        />
+        {
+          localStorage.getItem('token') &&
+          <>
+            <div className="sidebar__subtitle-container">
+              <h3 className="sidebar__subtitle">My library</h3>
+            </div>
+            <SidebarLink
+              glyph={watchLaterIcon.id}
+              viewBox={watchLaterIcon.viewBox}
+              className={classNames('sidebar__nav-link', className)}
+              activeclassname={classNames('sidebar__nav-link-active', className)}
+              to={ROUTES.WATCH_LATER}
+              caption="Watch later"
+            />
+          </>
+        }
       </div>
     </nav>
   );

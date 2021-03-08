@@ -1,0 +1,16 @@
+.empty-list-message {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+  &__icon {
+    width: 6.5rem;
+    height: 6.5rem;
+  }
+
+  &__text {
+    font-weight: 500;
+    font-size: 1.7rem;
+  }
+}

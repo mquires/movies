@@ -9,6 +9,7 @@ import Icon from '../icon';
 
 import userIcon from '../../../assets/icons/user.svg';
 import adminIcon from '../../../assets/icons/admin_panel.svg';
+import noAvatar from '../../../assets/images/no-avatar.jpg';
 
 import './auth-user-nav.scss';
 
@@ -30,8 +31,8 @@ const AuthUserNav = (props) => {
       >
         <Avatar
           className="auth-user-nav__avatar"
-          src="https://off-cs.ru/upload/2018/06/1451529920117.jpeg"
-          alt="avatar"
+          src={localStorage.getItem('avatarImage') == "null" ? noAvatar : localStorage.getItem('avatarImage')}
+          alt={localStorage.getItem('email')}
         />
       </div>
       {

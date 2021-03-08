@@ -1,3 +1,4 @@
+import { contentAPI } from "../api/api";
 import { moviesAPI } from "../api/api.tmdb";
 
 const SET_TODAY_TRENDING_MOVIES = 'SET-TODAY-TRENDING-MOVIES';
@@ -14,6 +15,7 @@ const SET_MOVIES_CAST = 'SET-MOVIES-CAST';
 const SET_MOVIE_VIDEOS = 'SET-MOVIE-VIDEOS';
 const SET_GENRES = 'SET-GENRES';
 const SET_LATEST_MOVIES = 'SET-LATEST-MOVIES';
+const SET_FAVORITE_MOVIE = 'SET-FAVORITE-MOVIE';
 
 const initialState = {
   genres: [],
@@ -29,7 +31,8 @@ const initialState = {
   moviesKeywords: [],
   moviesCast: [],
   movieVideos: [],
-  latestMovies: []
+  latestMovies: [],
+  favoriteMovie: []
 };
 
 const moviesReducer = (state = initialState, action) => {
@@ -118,6 +121,12 @@ const moviesReducer = (state = initialState, action) => {
         latestMovies: action.latestMovies
       }
     }
+    case SET_FAVORITE_MOVIE: {
+      return {
+        ...state,
+        favoriteMovie: action.favoriteMovie
+      }
+    }
     default: {
       return state;
     }
@@ -140,6 +149,7 @@ export const setMoviesCast = (moviesCast) => ({ type: SET_MOVIES_CAST, moviesCas
 export const setMovieVideos = (movieVideos) => ({ type: SET_MOVIE_VIDEOS, movieVideos });
 export const setGenres = (genres) => ({ type: SET_GENRES, genres });
 export const setLatestMovies = (latestMovies) => ({ type: SET_LATEST_MOVIES, latestMovies });
+export const setFavoriteMovie = (favoriteMovie) => ({ type: SET_FAVORITE_MOVIE, favoriteMovie });
 
 export const getTopRatedMoviesRequest = (currentPage) => (dispatch) => {
   moviesAPI.getTopRatedMovies(currentPage)
@@ -147,7 +157,7 @@ export const getTopRatedMoviesRequest = (currentPage) => (dispatch) => {
       dispatch(setIsTopRatedFetching(true));
       dispatch(setTopRatedMovies(response.data.results));
       dispatch(setIsTopRatedFetching(false));
-    })
+    });
 };
 
 export const getTodayTrendingMoviesRequest = (currentPage) => (dispatch) => {
@@ -167,7 +177,6 @@ export const getUpcomingMoviesRequest = (currentPage) => (dispatch) => {
 export const getMovieDetailsRequest = (movieId) => (dispatch) => {
   moviesAPI.getMovieDetails(movieId)
     .then(response => {
-      console.log(response.data)
       dispatch(setMovieDetails(response.data));
     });
 };
@@ -226,4 +235,30 @@ export const getLatestMoviesRequest = () => (dispatch) => {
     .then(response => {
       dispatch(setLatestMovies(response.data));
     });
+};
+
+export const sendFavoriteMovieRequest = (userId, movieId) => () => {
+  moviesAPI.getMovieDetails(movieId)
+    .then(response => {
+      const {
+        id,
+        original_title,
+        backdrop_path
+      } = response.data;
+
+      contentAPI.sendFavoriteMovie(
+        userId,
+        id,
+        original_title,
+        backdrop_path
+      );
+    })
+};
+
+export const getFavoriteMovieRequest = (id) => (dispatch) => {
+  contentAPI.getFavoriteMovie(id)
+    .then(response => {
+      console.log(response)
+      dispatch(setFavoriteMovie(response.data));
+    })
 };

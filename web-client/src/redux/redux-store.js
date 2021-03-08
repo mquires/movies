@@ -8,6 +8,8 @@ import tvReducer from './tv-reducer';
 import usersReducer from './users-reducer';
 import feedbackReducer from './feedback-reducer';
 import supportReducer from './support-reducer';
+import watchLaterReducer from './watch-later-reducer';
+import messagesReducer from './messages-reducer';
 
 const reducers = combineReducers({
   auth: authReducer,
@@ -17,6 +19,8 @@ const reducers = combineReducers({
   users: usersReducer,
   feedback: feedbackReducer,
   support: supportReducer,
+  watchLater: watchLaterReducer,
+  messages: messagesReducer,
   form: formReducer
 });
 

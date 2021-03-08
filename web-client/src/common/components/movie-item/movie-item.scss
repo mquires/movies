@@ -1,14 +1,22 @@
-@import '../../../assets/styles/abstracts/variables';
+@import "../../../assets/styles/abstracts/variables";
 
 .movie-item {
-  border-radius: 1rem;
-  max-width: 30rem;
-  object-fit: cover;
-  overflow: hidden;
-  box-shadow: 0px 2px 35px 14px rgba(13, 13, 13, 0.04);
-  font-size: 1.3rem;
   text-decoration: none;
   color: $BLACK;
+
+  &__wrapper {
+    border-radius: 1rem;
+    max-width: 30rem;
+    object-fit: cover;
+    overflow: hidden;
+    box-shadow: 0px 2px 35px 14px rgba(13, 13, 13, 0.04);
+    font-size: 1.3rem;
+    position: relative;
+
+    &:hover .movie-item__watch-later {
+      opacity: 1;
+    }
+  }
 
   &__image {
     max-width: 100%;
@@ -52,5 +60,18 @@
 
   &__language-icon {
     margin-right: 0.5rem;
+  }
+
+  &__watch-later {
+    z-index: 99;
+    opacity: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    &:hover {
+      background: $WHITE;
+    }
   }
 }

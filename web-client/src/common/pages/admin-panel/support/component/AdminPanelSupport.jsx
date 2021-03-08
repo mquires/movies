@@ -2,9 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import AdminPanel from '../../component';
-import FeedbackItem from '../../../../components/feedback-item';
-import ReportItem from '../../../../components/report-item';
 import SupportItem from '../../../../components/support-item/SupportItem';
+import EmptyListMessage from '../../../../components/empty-list-message';
 
 const AdminPanelSupport = (props) => {
   const {
@@ -25,7 +24,7 @@ const AdminPanelSupport = (props) => {
 
   return (
     <AdminPanel className="admin-panel-feedback">
-      {supportItemList}
+      {supportItemList.length === 0 ? <EmptyListMessage /> : supportItemList}
     </AdminPanel>
   );
 };

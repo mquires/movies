@@ -31,7 +31,8 @@ const MovieDetails = (props) => {
     similarMovies,
     moviesKeywords,
     moviesCast,
-    movieVideos
+    movieVideos,
+    onSendFavoriteMovie
   } = props;
 
   const popularPersonsList = popularPersons.map((popularPerson, index) => (
@@ -155,6 +156,8 @@ const MovieDetails = (props) => {
                   language={movieDetails.original_language}
                   overview={movieDetails.overview}
                   posterImage={movieDetails.poster_path}
+                  onSendFavoriteMovie={onSendFavoriteMovie}
+                  movieDetails={movieDetails}
                 >
                   {
                     moviesKeywordsList.length === 0 ?

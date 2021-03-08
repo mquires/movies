@@ -44,4 +44,10 @@
       justify-content: center;
     }
   }
+
+  &__favorite {
+    &-container {
+      margin: 1rem 0;
+    }
+  }
 }

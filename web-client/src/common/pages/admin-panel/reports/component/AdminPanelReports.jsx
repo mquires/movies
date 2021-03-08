@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 import AdminPanel from '../../component';
 import ReportItem from '../../../../components/report-item';
+import EmptyListMessage from '../../../../components/empty-list-message';
 
 import './admin-panel-reports.scss';
 
@@ -25,7 +26,7 @@ const AdminPanelReports = (props) => {
 
   return (
     <AdminPanel className="admin-panel-reports">
-      {reportsList}
+      {reportsList.length === 0 ? <EmptyListMessage /> : reportsList}
     </AdminPanel>
   );
 };

@@ -10,14 +10,13 @@ const ChatMessageItem = (props) => {
   const {
     className,
     caption,
-    name
+    ...restProps
   } = props;
 
   return (
     <div className="chat-message-item">
       <Avatar className="chat-message-item__avatar"
-        src="https://cdn.vox-cdn.com/thumbor/zFJuBWv5NjSeVilWJntvQcgji5M=/1400x1400/filters:format(jpeg)/cdn.vox-cdn.com/uploads/chorus_asset/file/19979927/jomi_avatar_nickleodeon_ringer.jpg"
-        alt="avatar"
+        {...restProps}
       />
       <div className={classNames("chat-message-item__text", className)}>
         {caption}

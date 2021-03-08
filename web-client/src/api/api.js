@@ -8,7 +8,7 @@ export const authAPI = {
   login(email, password) {
     return instance.post('auth/signin', { email, password });
   },
-  
+
   signup(name, email, password) {
     return instance.post('auth/signup', { name, email, password })
   }
@@ -57,5 +57,49 @@ export const supportAPI = {
 
   getSupports() {
     return instance.get('get-supports');
+  }
+};
+
+export const contentAPI = {
+  sendWatchLaterMovie(id, movieId, original_title, poster_path, original_language, overview, release_date) {
+    return instance.post(`${id}/add-watch-later`, { movieId, original_title, poster_path, original_language, overview, release_date });
+  },
+
+  getWatchLaterMovies(id) {
+    return instance.get(`${id}/get-watch-later`);
+  },
+
+  sendWatchLaterTV(id, tvId, name, poster_path, overview, first_air_date) {
+    return instance.post(`${id}/add-watch-later-tv`, { tvId, name, poster_path, overview, first_air_date });
+  },
+
+  getWatchLaterTV(id) {
+    return instance.get(`${id}/get-watch-later-tv`);
+  },
+
+  sendFavoritePerson(id, personId, name, profile_path) {
+    return instance.post(`${id}/add-favorite-person`, { personId, name, profile_path });
+  },
+
+  getFavoritePerson(id) {
+    return instance.get(`${id}/get-favorite-person`);
+  },
+
+  sendFavoriteMovie(id, movieId, original_title, backdrop_path) {
+    return instance.post(`${id}/add-favorite-movie`, { movieId, original_title, backdrop_path });
+  },
+
+  getFavoriteMovie(id) {
+    return instance.get(`${id}/get-favorite-movie`);
+  }
+};
+
+export const messagesAPI = {
+  sendMessage(senderEmail, receiverEmail, message) {
+    return instance.post(``, { senderEmail, receiverEmail, message });
+  },
+
+  getMessages(senderEmail, receiverEmail) {
+    return instance.post(`get-messages`, { senderEmail, receiverEmail });
   }
 };

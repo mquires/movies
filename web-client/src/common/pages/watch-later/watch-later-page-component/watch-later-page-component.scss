@@ -1,0 +1,13 @@
+@import "../../../../assets/styles/abstracts/variables";
+
+.watch-later-page-component {
+  &__container {
+    display: flex;
+    margin: 0 auto;
+    max-width: 160rem;
+    gap: 2rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 2rem;
+  }
+}
