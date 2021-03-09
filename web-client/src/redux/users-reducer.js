@@ -7,12 +7,14 @@ const ADD_POST = 'ADD-POST';
 const SET_USER = 'SET-USER';
 const SET_REPORTS = 'SET-REPORTS';
 const ADD_REPORT = 'ADD-REPORT';
+const SET_USER_BY_EMAIL = 'SET-USER-BY-EMAIL';
 
 const initialState = {
   user: null,
   users: [],
   userPosts: [],
-  reports: []
+  reports: [],
+  userByEmail: null
 };
 
 const usersReducer = (state = initialState, action) => {
@@ -61,6 +63,12 @@ const usersReducer = (state = initialState, action) => {
         reports: [...state.reports, newReport]
       }
     }
+    case SET_USER_BY_EMAIL: {
+      return {
+        ...state,
+        userByEmail: action.userByEmail
+      }
+    }
     default: {
       return state;
     }
@@ -75,6 +83,7 @@ export const addPost = (postText) => ({ type: ADD_POST, postText });
 export const setUser = (user) => ({ type: SET_USER, user });
 export const setReports = (reports) => ({ type: SET_REPORTS, reports });
 export const addReport = (report) => ({ type: ADD_REPORT, report });
+export const setUserByEmail = (userByEmail) => ({ type: SET_USER_BY_EMAIL, userByEmail });
 
 export const getUsersRequest = () => (dispatch) => {
   usersAPI.getAllUsers()
@@ -114,5 +123,12 @@ export const getAllReportsRequest = () => (dispatch) => {
   usersAPI.getAllReports()
     .then(response => {
       dispatch(setReports(response.data));
+    });
+};
+
+export const getUserByEmailRequest = (email) => (dispatch) => {
+  usersAPI.getUserByEmail(email)
+    .then(response => {
+      dispatch(setUserByEmail(response.data));
     });
 };

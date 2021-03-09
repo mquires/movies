@@ -23,6 +23,10 @@ export const usersAPI = {
     return instance.get(`user/${id}`);
   },
 
+  getUserByEmail(email) {
+    return instance.get(`user?email=${email}`);
+  },
+
   getPostsById(id) {
     return instance.get(`user/${id}/posts`);
   },

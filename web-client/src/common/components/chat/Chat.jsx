@@ -1,22 +1,12 @@
 import React from 'react';
-import { reduxForm } from 'redux-form';
 import io from 'socket.io-client';
-import Button from '../buttons/main-button';
+import { connect } from 'react-redux';
+import { sendMessageRequest, getMessagesRequest } from '../../../redux/messages-reducer';
+import { getUsersRequest, getUserByEmailRequest } from '../../../redux/users-reducer';
+
+import ChatComponent from './chat-user/ChatComponent';
 import ChatMessageFriend from './chat-messages-items/chat-message-friend';
 import ChatMessageMe from './chat-messages-items/chat-message-me';
-import ChatUser from './chat-user';
-import EntryField from '../fields/EntryField';
-import Preloader from '../preloader';
-
-import './chat.scss';
-import Input from '../input';
-import BUTTON_TYPES from '../../constants/button-types';
-
-import { sendMessageRequest, getMessagesRequest } from '../../../redux/messages-reducer';
-import { getUsersRequest } from '../../../redux/users-reducer';
-import { connect } from 'react-redux';
-import ChatMessages from './chat-messages/ChatMessages';
-import ChatComponent from './chat-user/ChatComponent';
 
 import noAvatar from '../../../assets/images/no-avatar.jpg';
 
@@ -31,15 +21,13 @@ class Chat extends React.Component {
       usersList: [],
       receiver: '',
       sender: '',
-      messagesList: []
+      messagesList: [],
+      userByEmail: null,
+      typer: ''
     }
   }
 
   componentDidMount() {
-    const {
-      getMessagesRequest
-    } = this.props;
-
     const url = 'http://localhost:3500/';
     this.socket = io.connect(url, {
       query: {
@@ -47,56 +35,64 @@ class Chat extends React.Component {
       }
     });
 
-    /*  this.socket.on('new-message', (newMessage) => {
-        this.setState({ messages: this.state.messages.concat(newMessage) });
-      });*/
-
     this.socket.on('new-message', (data) => {
-      console.log('dsdsdsdsdsdsd', data)
-
-      console.log(data.message)
       this.setState({
         messages: this.state.messages.concat(
-          <ChatMessageFriend
-            caption={data.message}
-            alt=""
-          />
+          this.props.userByEmail.map((userByEmail, index) => (
+            <ChatMessageFriend
+              id={userByEmail.id}
+              key={index}
+              src={!userByEmail.avatarImage ? noAvatar : userByEmail.avatarImage}
+              caption={data.message}
+              alt=""
+            />
+          ))
         )
       });
     });
 
+    this.socket.on('user typing', () => {
+      this.setState({ typer: `${this.state.receiver} is typing...` });
+    });
+
+    this.socket.on('user stopped typing', () => {
+      this.setState({ typer: '' });
+    });
+
     this.socket.emit('user_connected', localStorage.getItem('email'));
 
-    this.socket.on('user_connected', (username) => {
-      console.log(username)
-
-      //todo this.setState({ usersList: this.state.usersList.concat(username) });
-
+    this.socket.on('user_connected', () => {
       this.props.getUsersRequest();
     })
-
   }
 
   onUserSelected(username) {
     const {
-      getMessagesRequest
+      getMessagesRequest,
+      getUserByEmailRequest
     } = this.props;
-    console.log('username: ', username)
 
     this.setState({ receiver: username });
-
-    //getMessagesRequest(this.state.sender, this.state.receiver);
-
     getMessagesRequest(localStorage.getItem('email'), username);
+    this.setState({ messages: [] });
 
-    this.setState({ messages: [] })
+    getUserByEmailRequest(username);
+    this.setState({ typer: '' });
   }
 
   handleInputChange(e) {
-    this.setState({ inputMessage: e.target.value })
+    this.setState({ inputMessage: e.target.value });
+
+    e.target.onkeyup = e => {
+      this.socket.emit('user typing');
+
+      if (e.target.value === '') {
+        this.socket.emit('user stopped typing');
+      }
+    };
   }
 
-  handleMessageSent() {
+  handleMessageSent(e) {
     const {
       sendMessageRequest
     } = this.props;
@@ -108,12 +104,12 @@ class Chat extends React.Component {
       message: this.state.inputMessage
     });
 
-    //  sendMessageRequest(this.state.sender, this.state.receiver, this.state.inputMessage)
-    sendMessageRequest(localStorage.getItem('email'), this.state.receiver, this.state.inputMessage)
+    sendMessageRequest(localStorage.getItem('email'), this.state.receiver, this.state.inputMessage);
 
     this.setState({
       messages: this.state.messages.concat(
         <ChatMessageMe
+          key={e.target.key}
           caption={this.state.inputMessage}
           src={localStorage.getItem('avatarImage') == "null" ? noAvatar : localStorage.getItem('avatarImage')}
           alt=""
@@ -122,38 +118,12 @@ class Chat extends React.Component {
     });
 
     this.setState({ inputMessage: '' });
+    this.socket.emit('user stopped typing');
   }
 
   componentWillUnmount() {
     this.socket.close();
   }
-
-  onSendChatUser(user) {
-    console.log('usern123ame', user.name)
-
-    //this.socket.emit('user_connected', user.name);
-    //this.socket.emit('user_connected', localStorage.getItem('email'));
-    this.setState({ sender: user.name });
-  }
-
-  /* {this.state.messages.map((message, index) => (
-                <>
-                  {
-                    localStorage.getItem('email') == message.email ?
-                      <ChatMessageMe
-                        id={message.id}
-                        key={index}
-                        caption={message.message}
-                      /> :
-                      <ChatMessageFriend
-                        id={message.id}
-                        key={index}
-                        caption={message.message}
-                      />
-                  }
-                </>
-              ))}*/
-
 
   render() {
     return (
@@ -165,8 +135,10 @@ class Chat extends React.Component {
         onUserSelected={this.onUserSelected.bind(this)}
         handleInputChange={this.handleInputChange.bind(this)}
         handleMessageSent={this.handleMessageSent.bind(this)}
-        onSendChatUser={this.onSendChatUser.bind(this)}
         users={this.props.users}
+        receiver={this.state.receiver}
+        userByEmail={this.props.userByEmail}
+        typer={this.state.typer}
       />
     )
   }
@@ -175,8 +147,15 @@ class Chat extends React.Component {
 const mapStateToProps = (state) => {
   return {
     messages: state.messages.messages,
-    users: state.users.users
+    users: state.users.users,
+    userByEmail: state.users.userByEmail
   }
 }
 
-export default connect(mapStateToProps, { sendMessageRequest, getMessagesRequest, getUsersRequest })(Chat);
+export default connect(mapStateToProps,
+  {
+    sendMessageRequest,
+    getMessagesRequest,
+    getUsersRequest,
+    getUserByEmailRequest
+  })(Chat);

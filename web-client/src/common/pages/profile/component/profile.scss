@@ -44,9 +44,10 @@
   &__avatar {
     &-container {
       position: relative;
-      width: 50%;
+      //width: 50%;
       display: flex;
       justify-content: center;
+      height: 20rem;
 
       &:hover .profile__avatar-image {
         opacity: 0;

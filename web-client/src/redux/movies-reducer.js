@@ -258,7 +258,6 @@ export const sendFavoriteMovieRequest = (userId, movieId) => () => {
 export const getFavoriteMovieRequest = (id) => (dispatch) => {
   contentAPI.getFavoriteMovie(id)
     .then(response => {
-      console.log(response)
       dispatch(setFavoriteMovie(response.data));
     })
 };

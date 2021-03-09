@@ -24,12 +24,8 @@ export default messagesReducer;
 
 export const sendMessage = (message) => ({ type: SEND_MESSAGE, message });
 
-export const sendMessageRequest = (senderEmail, receiverEmail, message) => (dispatch) => {
-  messagesAPI.sendMessage(senderEmail, receiverEmail, message)
-    .then(response => {
-      console.log(response)
-      //dispatch(sendMessage(response.data));
-    })
+export const sendMessageRequest = (senderEmail, receiverEmail, message) => () => {
+  messagesAPI.sendMessage(senderEmail, receiverEmail, message);
 };
 
 export const getMessagesRequest = (senderEmail, receiverEmail) => (dispatch) => {

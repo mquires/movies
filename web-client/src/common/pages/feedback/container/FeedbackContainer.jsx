@@ -34,8 +34,14 @@ class FeedbackContainer extends React.Component {
   }
 }
 
+const mapStateToProps = (state) => {
+  return {
+    successSending: state.feedback.successSending
+  }
+}
+
 export default compose(
-  connect(null, {
+  connect(mapStateToProps, {
     sendFeedbackRequest
   }),
   withRouter

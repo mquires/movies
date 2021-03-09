@@ -13,6 +13,7 @@ const ChatUser = (props) => {
     navLink,
     name,
     onClick,
+    securityName,
     ...restProps
   } = props;
 
@@ -25,7 +26,8 @@ const ChatUser = (props) => {
       <Avatar
         {...restProps}
       />
-      <p>{name}</p>
+      <p className="chat-user__name">{name}</p>
+      <p>{securityName}</p>
     </div>
   );
 }

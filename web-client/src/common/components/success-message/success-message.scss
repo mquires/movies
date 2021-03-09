@@ -1,0 +1,36 @@
+@import "../../../assets/styles/abstracts/variables";
+
+.success-message {
+  border: 0.1rem solid $CL_1_GREEN;
+  color: $CL_1_GREEN;
+  background-color: $CL_2_GREEN;
+  position: fixed;
+  top: 20vh;
+  right: 10vw;
+  animation: FadeAnimation 0.3s ease-in;
+  animation: HideAnimation 0.3s ease-out 4.7s;
+}
+
+@keyframes FadeAnimation {
+  0% {
+    opacity: 0;
+    visibility: visible;
+  }
+
+  100% {
+    opacity: 1;
+    visibility: hidden;
+  }
+}
+
+@keyframes HideAnimation {
+  100% {
+    opacity: 0;
+    visibility: hidden;
+  }
+
+  0% {
+    opacity: 1;
+    visibility: visible;
+  }
+}

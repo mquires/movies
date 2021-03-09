@@ -80,7 +80,6 @@ export const findPersonRequest = (query) => (dispatch) => {
 export const getPersonDetailsRequest = (personId) => (dispatch) => {
   personsAPI.getPersonDetails(personId)
     .then(response => {
-      console.log(response.data)
      dispatch(setPersonDetails(response.data));
     });
 };
@@ -113,7 +112,6 @@ export const sendFavoritePersonRequest = (userId, personId) => () => {
 export const getFavoritePersonRequest = (id) => (dispatch) => {
   contentAPI.getFavoritePerson(id)
     .then(response => {
-      console.log(response)
       dispatch(setFavoritePersons(response.data));
     })
 };
