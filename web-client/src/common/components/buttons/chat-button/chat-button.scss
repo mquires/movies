@@ -2,20 +2,39 @@
 
 .chat-button {
   border-radius: 50%;
-  position: fixed;
-  bottom: 5vh;
-  right: 5vw;
   width: 4.5rem;
   height: 4.5rem;
   display: flex;
   align-items: center;
   justify-content: center;
 
+  &__container {
+    position: fixed;
+    bottom: 5vh;
+    right: 5vw;
+    display: flex;
+    align-items: flex-end;
+    gap: 1rem;
+  }
+
+  &__arrow {
+    width: 2rem;
+    height: 2rem;
+    transform: rotate(90deg);
+    fill: $RED;
+  }
+
+  &__wrapper {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
   &:hover {
     background: $BLUE;
     border-color: $BLUE;
   }
-  
+
   &__icon {
     width: 2rem;
     height: 2rem;

@@ -65,6 +65,7 @@ const ChatComponent = (props) => {
                     <Preloader /> :
                     userByEmail.map((userByEmailItem, index) => (
                       <Avatar
+                        key={index}
                         src={!userByEmailItem.avatarImage ? noAvatar : userByEmailItem.avatarImage}
                         alt={userByEmailItem.name}
                       />

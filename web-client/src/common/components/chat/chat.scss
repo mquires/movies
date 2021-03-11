@@ -1,29 +1,23 @@
 @import "../../../assets/styles/abstracts/variables";
 
 .chat {
-  position: fixed;
-  right: 10vw;
-  bottom: 5vh;
-  background: $WHITE;
   height: 35rem;
-  border: 0.1rem solid $CL_6_GREY;
   border-radius: 0.6rem;
-  box-shadow: 0px 2px 35px 14px rgba(13, 13, 13, 0.04);
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
   padding: 2rem 0;
   z-index: 99;
+  background: $CL_16_GREY;
 
   &__container {
     display: flex;
   }
 
   &__users {
-    border-right: 0.1rem solid $CL_6_GREY;
+    border-right: 0.1rem solid $CL_9_GREY;
     width: 20rem;
-    //margin-right: 3rem;
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
-    //padding-right: 2rem;
     padding: 0 2rem;
     overflow-y: auto;
     height: 31rem;
@@ -37,7 +31,7 @@
       align-items: center;
       gap: 1rem;
       padding: 0 1rem 1rem;
-      border-bottom: 0.1rem solid $CL_6_GREY;
+      border-bottom: 0.1rem solid $CL_9_GREY;
     }
 
     &-empty {
@@ -55,12 +49,12 @@
       &-icon {
         width: 8rem;
         height: 8rem;
-        fill: $CL_6_GREY;
+        fill: $CL_15_GREY;
       }
 
       &-text {
         font-weight: 500;
-        color: $CL_6_GREY;
+        color: $CL_15_GREY;
       }
     }
 
@@ -83,7 +77,7 @@
   &__send-container {
     position: absolute;
     left: 0;
-    border-top: 0.1rem solid $CL_6_GREY;
+    border-top: 0.1rem solid $CL_9_GREY;
     width: 100%;
     margin-top: 1rem;
 

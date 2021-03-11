@@ -4,11 +4,12 @@ import PropTypes from 'prop-types';
 
 import Button from '../main-button';
 import Icon from '../../icon';
+import Chat from '../../chat/Chat';
 
 import chatIcon from '../../../../assets/icons/chat.svg';
+import arrowIcon from '../../../../assets/icons/arrow.svg';
 
 import './chat-button.scss';
-import Chat from '../../chat/Chat';
 
 const ChatButton = (props) => {
   const {
@@ -20,21 +21,26 @@ const ChatButton = (props) => {
   const toggleMenu = () => setIsOpen(!isOpen);
 
   return (
-    <>
-      {
-        isOpen && <Chat />
-      }
-      <Button
-        className={classNames('chat-button', className)}
-        onClick={toggleMenu}
-      >
-        <Icon
-          className="chat-button__icon"
-          glyph={chatIcon.id}
-          viewBox={chatIcon.viewBox}
-        />
-      </Button>
-    </>
+    <div className="chat-button__container">
+      {isOpen && <Chat />}
+      <div className="chat-button__wrapper">
+        {isOpen && <Icon
+          className="chat-button__arrow"
+          glyph={arrowIcon.id}
+          viewBox={arrowIcon.viewBox}
+        />}
+        <Button
+          className={classNames('chat-button', className)}
+          onClick={toggleMenu}
+        >
+          <Icon
+            className="chat-button__icon"
+            glyph={chatIcon.id}
+            viewBox={chatIcon.viewBox}
+          />
+        </Button>
+      </div>
+    </div>
   );
 }
 

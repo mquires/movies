@@ -29,6 +29,7 @@
     "webpack-dev-server": "^3.11.2"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.15.2",
     "@types/react-transition-group": "^4.4.1",
     "axios": "^0.21.1",
     "bootstrap": "^4.6.0",
