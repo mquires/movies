@@ -1,3 +1,4 @@
+import { contentAPI } from "../api/api";
 import { tvAPI } from "../api/api.tmdb";
 
 const SET_TODAY_TRENDING_TV = 'SET-TODAY-TRENDING-TV';
@@ -9,6 +10,8 @@ const SET_SIMILAR_TV = 'SET-SIMILAR-TV';
 const SET_TV_IMAGES = 'SET-TV-IMAGES';
 const SET_TV_VIDEOS = 'SET-TV-VIDEOS';
 const SET_GENRES = 'SET-GENRES';
+const SET_FAVORITE_SERIAL = 'SET-FAVORITE-SERIAL';
+const SET_SUCCESS_SENDING = 'SET-SUCCESS-SENDING';
 
 const initialState = {
   todayTrendingTV: [],
@@ -19,7 +22,9 @@ const initialState = {
   similarTV: [],
   tvImages: [],
   tvVideos: [],
-  genres: []
+  genres: [],
+  favoriteSerial: [],
+  successSending: false
 };
 
 const tvReducer = (state = initialState, action) => {
@@ -78,6 +83,18 @@ const tvReducer = (state = initialState, action) => {
         genres: action.genres
       }
     }
+    case SET_FAVORITE_SERIAL: {
+      return {
+        ...state,
+        favoriteSerial: action.favoriteSerial
+      }
+    }
+    case SET_SUCCESS_SENDING: {
+      return {
+        ...state,
+        successSending: action.successSending
+      }
+    }
     default: {
       return state;
     }
@@ -95,6 +112,8 @@ export const setSimilarTV = (similarTV) => ({ type: SET_SIMILAR_TV, similarTV })
 export const setTVImages = (tvImages) => ({ type: SET_TV_IMAGES, tvImages });
 export const setTVVideos = (tvVideos) => ({ type: SET_TV_VIDEOS, tvVideos });
 export const setGenres = (genres) => ({ type: SET_GENRES, genres });
+export const setFavoriteSerial = (favoriteSerial) => ({ type: SET_FAVORITE_SERIAL, favoriteSerial });
+export const setSuccessSending = (successSending) => ({ type: SET_SUCCESS_SENDING, successSending });
 
 export const getTodayTrendingTVRequest = (currentPage) => (dispatch) => {
   tvAPI.getTodayTrendingTV(currentPage)
@@ -106,6 +125,7 @@ export const getTodayTrendingTVRequest = (currentPage) => (dispatch) => {
 export const getTVDetailsRequest = (tvId) => (dispatch) => {
   tvAPI.getTVDetails(tvId)
     .then(response => {
+      console.log(response)
       dispatch(setTVDetails(response.data));
     });
 };
@@ -157,4 +177,33 @@ export const getGenresRequest = () => (dispatch) => {
     .then(response => {
       dispatch(setGenres(response.data.genres));
     });
+};
+
+export const sendFavoriteSerialRequest = (userId, tvId) => (dispatch) => {
+  tvAPI.getTVDetails(tvId)
+    .then(response => {
+      const {
+        id,
+        name,
+        backdrop_path
+      } = response.data;
+
+      contentAPI.sendFavoriteSerial(
+        userId,
+        id,
+        name,
+        backdrop_path
+      );
+      dispatch(setSuccessSending(true));
+    });
+  setTimeout(() => {
+    dispatch(setSuccessSending(false));
+  }, 5000);
+};
+
+export const getFavoriteSerialRequest = (id) => (dispatch) => {
+  contentAPI.getFavoriteSerial(id)
+    .then(response => {
+      dispatch(setFavoriteSerial(response.data));
+    })
 };

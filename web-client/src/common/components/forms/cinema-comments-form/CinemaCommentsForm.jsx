@@ -1,4 +1,5 @@
 import React from 'react';
+import classNames from 'classnames';
 import { reduxForm } from 'redux-form';
 import BUTTON_TYPES from '../../../constants/button-types';
 import { required } from '../../../../utils/validators';
@@ -8,39 +9,35 @@ import Button from '../../buttons/main-button';
 import EntryField from '../../fields/EntryField';
 import Textarea from '../../textarea';
 
-import './report-form.scss';
+import './cinema-comments-form.scss';
 
-const ReportForm = (props) => {
+const CinemaCommentsForm = (props) => {
   const {
+    className,
     handleSubmit
   } = props;
 
   return (
     <form
       onSubmit={handleSubmit}
-      className="form"
+      className={classNames("form", className)}
     >
       <EntryField
-        name={"name"}
-        component={Input}
-        placeholder="Your name"
-        validate={[required]}
-      />
-      <EntryField
         component={Textarea}
-        name="report"
-        placeholder="Write your report"
+        name="cinemaComment"
+        placeholder="Add a public comment..."
         validate={[required]}
-        className="report-form__textarea"
+        className="cinema-comments-form__textarea"
       />
       <Button
-        caption="Send report"
+        className="cinema-comments-form__button"
+        caption="Comment"
         type={BUTTON_TYPES.SUBMIT}
       />
     </form>
   );
 };
 
-const ReportReduxForm = reduxForm({ form: 'report' })(ReportForm);
+const CinemaCommentsReduxForm = reduxForm({ form: 'cinemaComments' })(CinemaCommentsForm);
 
-export default ReportReduxForm;
+export default CinemaCommentsReduxForm;

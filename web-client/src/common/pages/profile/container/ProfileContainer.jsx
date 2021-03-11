@@ -10,6 +10,7 @@ import {
 } from '../../../../redux/users-reducer';
 import { getFavoritePersonRequest } from '../../../../redux/persons-reducer';
 import { getFavoriteMovieRequest } from '../../../../redux/movies-reducer';
+import { getFavoriteSerialRequest } from '../../../../redux/tv-reducer';
 import ROUTES from '../../../constants/routes';
 import { reset } from "redux-form";
 
@@ -22,6 +23,7 @@ class ProfileContainer extends React.Component {
       getPostsByIdRequest,
       getFavoritePersonRequest,
       getFavoriteMovieRequest,
+      getFavoriteSerialRequest,
       match,
       history
     } = this.props;
@@ -37,6 +39,7 @@ class ProfileContainer extends React.Component {
     getPostsByIdRequest(match.params.id);
     getFavoritePersonRequest(match.params.id);
     getFavoriteMovieRequest(match.params.id);
+    getFavoriteSerialRequest(match.params.id);
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -46,6 +49,7 @@ class ProfileContainer extends React.Component {
         getPostsByIdRequest,
         getFavoritePersonRequest,
         getFavoriteMovieRequest,
+        getFavoriteSerialRequest,
         match,
         history
       } = this.props;
@@ -61,6 +65,7 @@ class ProfileContainer extends React.Component {
       getPostsByIdRequest(match.params.id);
       getFavoritePersonRequest(match.params.id);
       getFavoriteMovieRequest(match.params.id);
+      getFavoriteSerialRequest(match.params.id);
     }
   }
 
@@ -100,7 +105,9 @@ const mapStateToProps = (state) => {
     userPosts: state.users.userPosts,
     user: state.users.user,
     favoritePerson: state.persons.favoritePerson,
-    favoriteMovie: state.movies.favoriteMovie
+    favoriteMovie: state.movies.favoriteMovie,
+    successSending: state.users.successSending,
+    favoriteSerial: state.tv.favoriteSerial
   }
 }
 
@@ -111,7 +118,8 @@ export default compose(
     addPostRequest,
     addReportRequest,
     getFavoritePersonRequest,
-    getFavoriteMovieRequest
+    getFavoriteMovieRequest,
+    getFavoriteSerialRequest
   }),
   withRouter
 )(ProfileContainer);

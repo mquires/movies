@@ -20,7 +20,8 @@ const Movies = (props) => {
     todayTrendingMovies,
     isTopRatedFetching,
     genres,
-    onSendMovieDetails
+    onSendMovieDetails,
+    successSending
   } = props;
 
   const [movies, setMovies] = useState([]);
@@ -114,6 +115,7 @@ const Movies = (props) => {
       alt={movie.original_title}
       onError={(e) => e.target.src = noWallpaper}
       onWatchLaterClick={() => onSendMovieDetails(localStorage.getItem('id'), movie.id)}
+      successSending={successSending}
     />
   ));
 

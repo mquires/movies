@@ -6,13 +6,15 @@ const SET_IS_FETCHING = 'SET-IS-FETCHING';
 const SET_PERSON_DETAILS = 'SET-PERSON-DETAILS';
 const SET_PERSON_MOVIE_CREDITS = 'SET-PERSON-MOVIE-CREDITS';
 const SET_FAVORITE_PERSONS = 'SET-FAVORITE-PERSON';
+const SET_SUCCESS_SENDING = 'SET-SUCCESS-SENDING';
 
 const initialState = {
   popularPersons: [],
   isFetching: false,
   personDetails: [],
   personMovieCredits: [],
-  favoritePerson: []
+  favoritePerson: [],
+  successSending: false
 };
 
 const personsReducer = (state = initialState, action) => {
@@ -47,6 +49,12 @@ const personsReducer = (state = initialState, action) => {
         favoritePerson: action.favoritePerson
       }
     }
+    case SET_SUCCESS_SENDING: {
+      return {
+        ...state,
+        successSending: action.successSending
+      }
+    }
     default: {
       return state;
     }
@@ -60,6 +68,7 @@ export const setIsFetching = (isFetching) => ({ type: SET_IS_FETCHING, isFetchin
 export const setPersonDetails = (personDetails) => ({ type: SET_PERSON_DETAILS, personDetails });
 export const setPersonMovieCredits = (personMovieCredits) => ({ type: SET_PERSON_MOVIE_CREDITS, personMovieCredits });
 export const setFavoritePersons = (favoritePerson) => ({ type: SET_FAVORITE_PERSONS, favoritePerson });
+export const setSuccessSending = (successSending) => ({ type: SET_SUCCESS_SENDING, successSending });
 
 export const getPopularPersonsRequest = () => (dispatch) => {
   personsAPI.getPopularPersons()
@@ -80,18 +89,18 @@ export const findPersonRequest = (query) => (dispatch) => {
 export const getPersonDetailsRequest = (personId) => (dispatch) => {
   personsAPI.getPersonDetails(personId)
     .then(response => {
-     dispatch(setPersonDetails(response.data));
+      dispatch(setPersonDetails(response.data));
     });
 };
 
 export const getPersonMovieCreditsRequest = (personId) => (dispatch) => {
   personsAPI.getPersonMovieCredits(personId)
     .then(response => {
-     dispatch(setPersonMovieCredits(response.data.cast));
+      dispatch(setPersonMovieCredits(response.data.cast));
     });
 };
 
-export const sendFavoritePersonRequest = (userId, personId) => () => {
+export const sendFavoritePersonRequest = (userId, personId) => (dispatch) => {
   personsAPI.getPersonDetails(personId)
     .then(response => {
       const {
@@ -106,7 +115,11 @@ export const sendFavoritePersonRequest = (userId, personId) => () => {
         name,
         profile_path
       );
-    })
+      dispatch(setSuccessSending(true));
+    });
+  setTimeout(() => {
+    dispatch(setSuccessSending(false));
+  }, 5000);
 };
 
 export const getFavoritePersonRequest = (id) => (dispatch) => {

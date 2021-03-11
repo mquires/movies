@@ -27,6 +27,10 @@ export const usersAPI = {
     return instance.get(`user?email=${email}`);
   },
 
+  getUserData(id) {
+    return instance.get(`user-data?id=${id}`);
+  },
+
   getPostsById(id) {
     return instance.get(`user/${id}/posts`);
   },
@@ -95,6 +99,14 @@ export const contentAPI = {
 
   getFavoriteMovie(id) {
     return instance.get(`${id}/get-favorite-movie`);
+  },
+
+  sendFavoriteSerial(id, tvId, name, backdrop_path) {
+    return instance.post(`${id}/add-favorite-serial`, { tvId, name, backdrop_path });
+  },
+
+  getFavoriteSerial(id) {
+    return instance.get(`${id}/get-favorite-serial`);
   }
 };
 
@@ -105,5 +117,15 @@ export const messagesAPI = {
 
   getMessages(senderEmail, receiverEmail) {
     return instance.post(`get-messages`, { senderEmail, receiverEmail });
+  }
+};
+
+export const commentsAPI = {
+  sendMovieComment(movieId, comment, UserId) {
+    return instance.post('add-movie-comment', { movieId, comment, UserId });
+  },
+
+  getMovieComments(id) {
+    return instance.get(`${id}/get-movie-comments`);
   }
 };

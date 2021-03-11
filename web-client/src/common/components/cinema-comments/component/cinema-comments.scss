@@ -1,0 +1,22 @@
+.cinema-comments {
+  &__form {
+    display: block;
+    margin: 1.5rem 0;
+    width: 100%;
+
+    &-container {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+    }
+  }
+
+  &__comments {
+    margin: 1rem 0;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    max-height: 40vh;
+    overflow-y: scroll;
+  }
+}

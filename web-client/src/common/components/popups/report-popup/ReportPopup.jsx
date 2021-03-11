@@ -4,6 +4,7 @@ import classNames from 'classnames';
 
 import Popup from '../main-popup';
 import ReportForm from '../../forms/report-form';
+import PageWithSuccessMessage from '../../page-components/page-with-success-message';
 
 import './report-popup.scss';
 
@@ -11,17 +12,23 @@ const ReportPopup = (props) => {
   const {
     className,
     onSubmit,
+    successSending,
     ...restProps
   } = props;
 
   return (
-    <Popup
-      {...restProps}
-      className={classNames("report-popup")}
+    <PageWithSuccessMessage
+      successSending={successSending}
+      message="Submit successfully"
     >
-      <h3 className="report-popup__popup-title">Describe your report</h3>
-      <ReportForm onSubmit={onSubmit} />
-    </Popup>
+      <Popup
+        {...restProps}
+        className={classNames("report-popup")}
+      >
+        <h3 className="report-popup__popup-title">Describe your report</h3>
+        <ReportForm onSubmit={onSubmit} />
+      </Popup>
+    </PageWithSuccessMessage>
   );
 };
 

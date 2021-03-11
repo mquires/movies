@@ -7,8 +7,8 @@
   position: fixed;
   top: 20vh;
   right: 10vw;
-  animation: FadeAnimation 0.3s ease-in;
-  animation: HideAnimation 0.3s ease-out 4.7s;
+  animation: FadeAnimation 0.3s ease-in, HideAnimation 0.3s ease-out 4.7s;
+  z-index: 100;
 }
 
 @keyframes FadeAnimation {

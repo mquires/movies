@@ -19,7 +19,8 @@ import './support.scss';
 const Support = (props) => {
   const {
     className,
-    onSubmit
+    onSubmit,
+    successSending
   } = props;
 
   const [isOpen, setIsOpen] = useState(false);
@@ -84,6 +85,7 @@ const Support = (props) => {
                   open={toggleMenu}
                   onRequestClose={closeMenu}
                   onSubmit={onSubmit}
+                  successSending={successSending}
                 />
               }
             </div>

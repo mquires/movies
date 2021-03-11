@@ -8,13 +8,17 @@ const SET_USER = 'SET-USER';
 const SET_REPORTS = 'SET-REPORTS';
 const ADD_REPORT = 'ADD-REPORT';
 const SET_USER_BY_EMAIL = 'SET-USER-BY-EMAIL';
+const SET_USER_DATA = 'SET-USER-DATA';
+const SET_SUCCESS_SENDING = 'SET-SUCCESS-SENDING';
 
 const initialState = {
   user: null,
   users: [],
   userPosts: [],
   reports: [],
-  userByEmail: null
+  userByEmail: null,
+  userData: null,
+  successSending: false
 };
 
 const usersReducer = (state = initialState, action) => {
@@ -69,6 +73,18 @@ const usersReducer = (state = initialState, action) => {
         userByEmail: action.userByEmail
       }
     }
+    case SET_USER_DATA: {
+      return {
+        ...state,
+        userData: action.userData
+      }
+    }
+    case SET_SUCCESS_SENDING: {
+      return {
+        ...state,
+        successSending: action.successSending
+      }
+    }
     default: {
       return state;
     }
@@ -84,6 +100,8 @@ export const setUser = (user) => ({ type: SET_USER, user });
 export const setReports = (reports) => ({ type: SET_REPORTS, reports });
 export const addReport = (report) => ({ type: ADD_REPORT, report });
 export const setUserByEmail = (userByEmail) => ({ type: SET_USER_BY_EMAIL, userByEmail });
+export const setUserData = (userData) => ({ type: SET_USER_DATA, userData });
+export const setSuccessSending = (successSending) => ({ type: SET_SUCCESS_SENDING, successSending });
 
 export const getUsersRequest = () => (dispatch) => {
   usersAPI.getAllUsers()
@@ -116,7 +134,11 @@ export const addReportRequest = (userId, report, name) => (dispatch) => {
     .then(() => {
       dispatch(addReport(report, name));
       dispatch(reset('comment'));
+      dispatch(setSuccessSending(true));
     });
+  setTimeout(() => {
+    dispatch(setSuccessSending(false));
+  }, 5000);
 };
 
 export const getAllReportsRequest = () => (dispatch) => {
@@ -130,5 +152,12 @@ export const getUserByEmailRequest = (email) => (dispatch) => {
   usersAPI.getUserByEmail(email)
     .then(response => {
       dispatch(setUserByEmail(response.data));
+    });
+};
+
+export const getUserDataRequest = (id) => (dispatch) => {
+  usersAPI.getUserData(id)
+    .then(response => {
+      dispatch(setUserData(response.data));
     });
 };

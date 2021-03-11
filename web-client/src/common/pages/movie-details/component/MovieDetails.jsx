@@ -13,13 +13,15 @@ import MovieTvItem from '../../../components/items/movie-tv-item';
 import Preloader from '../../../components/preloader';
 import ErrorMessage from '../../../components/error-message/ErrorMessage';
 import DetailItemBackground from '../../../components/detail-item-background';
+import DetailItemPoster from '../../../components/detail-item-poster/DetailItemPoster';
+import DetailItemSectionList from '../../../components/detail-item-section-list';
+import PageWithSuccessMessage from '../../../components/page-components/page-with-success-message';
+import CinemaCommentsContainer from '../../../components/cinema-comments/container';
 
 import noPhoto from '../../../../assets/images/no-photo.png';
 import noAvatar from '../../../../assets/images/no-avatar.jpg';
 
 import './movie-details.scss';
-import DetailItemPoster from '../../../components/detail-item-poster/DetailItemPoster';
-import DetailItemSectionList from '../../../components/detail-item-section-list';
 
 const MovieDetails = (props) => {
   const {
@@ -32,7 +34,9 @@ const MovieDetails = (props) => {
     moviesKeywords,
     moviesCast,
     movieVideos,
-    onSendFavoriteMovie
+    onSendFavoriteMovie,
+    successSending,
+    onSendMovieComment
   } = props;
 
   const popularPersonsList = popularPersons.map((popularPerson, index) => (
@@ -139,83 +143,89 @@ const MovieDetails = (props) => {
   (!movieDetails?.production_companies) && <Preloader />;
 
   return (
-    <section className={classNames("movie-details", className)}>
-      {!movieDetails ?
-        <Preloader /> :
-        <>
-          <DetailItemBackground
-            backgroundImage={movieDetails.backdrop_path}
-            title={movieDetails.original_title}
-            video={movieVideos}
-          />
-          <div className="movie-details__container">
-            <div className="movie-details__info-wrapper">
-              <div className="movie-details__info">
-                <DetailItemPoster
-                  budget={movieDetails.budget}
-                  language={movieDetails.original_language}
-                  overview={movieDetails.overview}
-                  posterImage={movieDetails.poster_path}
-                  onSendFavoriteMovie={onSendFavoriteMovie}
-                  movieDetails={movieDetails}
-                >
-                  {
-                    moviesKeywordsList.length === 0 ?
-                      <ErrorMessage message="List is empty" /> :
-                      <>{moviesKeywordsList}</>
-                  }
-                </DetailItemPoster>
-                <SectionInfoSeeAll title="Pictures" navLink={ROUTES.MAIN} className="movie-details__section-info">
-                  <ul className="movie-details__pictures-list">
+    <PageWithSuccessMessage
+      successSending={successSending}
+      message="The movie was successfully added"
+    >
+      <section className={classNames("movie-details", className)}>
+        {!movieDetails ?
+          <Preloader /> :
+          <>
+            <DetailItemBackground
+              backgroundImage={movieDetails.backdrop_path}
+              title={movieDetails.original_title}
+              video={movieVideos}
+            />
+            <div className="movie-details__container">
+              <div className="movie-details__info-wrapper">
+                <div className="movie-details__info">
+                  <DetailItemPoster
+                    budget={movieDetails.budget}
+                    language={movieDetails.original_language}
+                    overview={movieDetails.overview}
+                    posterImage={movieDetails.poster_path}
+                    onSendFavoriteMovie={onSendFavoriteMovie}
+                    movieDetails={movieDetails}
+                  >
                     {
-                      movieImagesList.length === 0 ?
+                      moviesKeywordsList.length === 0 ?
                         <ErrorMessage message="List is empty" /> :
-                        <>{movieImagesList}</>
+                        <>{moviesKeywordsList}</>
                     }
-                  </ul>
-                </SectionInfoSeeAll>
-                <DetailItemSectionList title="Similar movies">
-                  {
-                    similarMoviesList.length === 0 ?
-                      <ErrorMessage message="List is empty" /> :
-                      <>{similarMoviesList}</>
-                  }
-                </DetailItemSectionList>
-                <DetailItemSectionList title="Production companies">
-                  {
-                    productionCompaniesList.length === 0 ?
-                      <ErrorMessage message="List is empty" /> :
-                      <>{productionCompaniesList}</>
-                  }
-                </DetailItemSectionList>
-                <DetailItemSectionList title="Recommendations">
-                  {
-                    recommendationsList.length === 0 ?
-                      <ErrorMessage message="List is empty" /> :
-                      <>{recommendationsList}</>
-                  }
-                </DetailItemSectionList>
-                <SectionInfoSeeAll
-                  className="section-items"
-                  title="Popular persons"
-                  navLink={ROUTES.POPULAR_PERSONS}
-                >
-                  {popularPersonsList}
-                </SectionInfoSeeAll>
+                  </DetailItemPoster>
+                  <CinemaCommentsContainer onSendMovieComment={onSendMovieComment} />
+                  <SectionInfoSeeAll title="Pictures" navLink={ROUTES.MAIN} className="movie-details__section-info">
+                    <ul className="movie-details__pictures-list">
+                      {
+                        movieImagesList.length === 0 ?
+                          <ErrorMessage message="List is empty" /> :
+                          <>{movieImagesList}</>
+                      }
+                    </ul>
+                  </SectionInfoSeeAll>
+                  <DetailItemSectionList title="Similar movies">
+                    {
+                      similarMoviesList.length === 0 ?
+                        <ErrorMessage message="List is empty" /> :
+                        <>{similarMoviesList}</>
+                    }
+                  </DetailItemSectionList>
+                  <DetailItemSectionList title="Production companies">
+                    {
+                      productionCompaniesList.length === 0 ?
+                        <ErrorMessage message="List is empty" /> :
+                        <>{productionCompaniesList}</>
+                    }
+                  </DetailItemSectionList>
+                  <DetailItemSectionList title="Recommendations">
+                    {
+                      recommendationsList.length === 0 ?
+                        <ErrorMessage message="List is empty" /> :
+                        <>{recommendationsList}</>
+                    }
+                  </DetailItemSectionList>
+                  <SectionInfoSeeAll
+                    className="section-items"
+                    title="Popular persons"
+                    navLink={ROUTES.POPULAR_PERSONS}
+                  >
+                    {popularPersonsList}
+                  </SectionInfoSeeAll>
+                </div>
+              </div>
+              <div className="movie-details__cast">
+                <h3 className="movie-details__cast-title">Cast</h3>
+                {
+                  moviesCastList.length === 0 ?
+                    <ErrorMessage message="List is empty" /> :
+                    <>{moviesCastList}</>
+                }
               </div>
             </div>
-            <div className="movie-details__cast">
-              <h3 className="movie-details__cast-title">Cast</h3>
-              {
-                moviesCastList.length === 0 ?
-                  <ErrorMessage message="List is empty" /> :
-                  <>{moviesCastList}</>
-              }
-            </div>
-          </div>
-        </>
-      }
-    </section>
+          </>
+        }
+      </section>
+    </PageWithSuccessMessage>
   );
 };
 

@@ -16,7 +16,8 @@ const TV = (props) => {
   const {
     todayTrendingTV,
     genres,
-    onSendTVDetails
+    onSendTVDetails,
+    successSending
   } = props;
 
   const [tv, setTV] = useState([]);
@@ -90,6 +91,7 @@ const TV = (props) => {
       src={`http://image.tmdb.org/t/p/w1280/${tvItem.poster_path}`}
       alt={tvItem.name}
       onWatchLaterClick={() => onSendTVDetails(localStorage.getItem('id'), tvItem.id)}
+      successSending={successSending}
     />
   ));
 

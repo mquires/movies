@@ -28,4 +28,10 @@ class SupportContainer extends React.Component {
   }
 };
 
-export default connect(null, { sendSupportRequest })(SupportContainer);
+const mapStateToProps = (state) => {
+  return {
+    successSending: state.support.successSending
+  }
+}
+
+export default connect(mapStateToProps, { sendSupportRequest })(SupportContainer);

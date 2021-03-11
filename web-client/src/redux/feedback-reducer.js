@@ -57,7 +57,7 @@ export const sendFeedbackRequest = (name, email, comments, feedbackType) => (dis
     });
     setTimeout(() => {
       dispatch(setSuccessSending(false));
-    }, 5000)
+    }, 5000);
 };
 
 export const getFeedbacksRequest = () => (dispatch) => {

@@ -29,7 +29,9 @@ const Profile = (props) => {
     user,
     onSendReport,
     favoritePerson,
-    favoriteMovie
+    favoriteMovie,
+    successSending,
+    favoriteSerial
   } = props;
 
   const [isOpen, setIsOpen] = useState(false);
@@ -70,6 +72,17 @@ const Profile = (props) => {
     />
   ));
 
+  const favoriteSerialsList = favoriteSerial?.map((favoriteSerialItem, index) => (
+    <MovieTvItem
+      id={favoriteSerialItem.id}
+      key={index}
+      navLink={`${ROUTES.TV_ITEM}/${favoriteSerialItem.tvId}`}
+      src={`http://image.tmdb.org/t/p/w1280${favoriteSerialItem.backdrop_path}`}
+      alt={favoriteSerialItem.name}
+      title={favoriteSerialItem.name}
+    />
+  ));
+
   return (
     <PageComponent
       className="profile"
@@ -81,6 +94,7 @@ const Profile = (props) => {
           open={toggleMenu}
           onRequestClose={closeMenu}
           onSubmit={onSendReport}
+          successSending={successSending}
         />
       }
       {
@@ -151,6 +165,9 @@ const Profile = (props) => {
             </Comments>
             <DetailItemSectionList title="Favorite movies">
               {favoriteMoviesList.length === 0 ? <EmptyListMessage /> : favoriteMoviesList}
+            </DetailItemSectionList>
+            <DetailItemSectionList title="Favorite serials">
+              {favoriteSerialsList.length === 0 ? <EmptyListMessage /> : favoriteSerialsList}
             </DetailItemSectionList>
             <DetailItemSectionList title="Favorite actors">
               {favoritePersonsList.length === 0 ? <EmptyListMessage /> : favoritePersonsList}

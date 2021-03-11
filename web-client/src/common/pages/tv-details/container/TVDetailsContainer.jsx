@@ -10,7 +10,8 @@ import {
   getTVRecommendationsRequest,
   getSimilarTVRequest,
   getTVImagesRequest,
-  getTVVideosRequest
+  getTVVideosRequest,
+  sendFavoriteSerialRequest
 } from '../../../../redux/tv-reducer';
 
 import TVDetails from '../component';
@@ -62,9 +63,20 @@ class TVDetailsContainer extends React.Component {
     }
   }
 
+  onSendFavoriteSerial(userId, tvId) {
+    const {
+      sendFavoriteSerialRequest
+    } = this.props;
+
+    sendFavoriteSerialRequest(userId, tvId);
+  }
+
   render() {
     return (
-      <TVDetails {...this.props} />
+      <TVDetails
+        {...this.props}
+        onSendFavoriteSerial={this.onSendFavoriteSerial.bind(this)}
+      />
     );
   }
 }
@@ -78,7 +90,8 @@ const mapStateToProps = (state) => {
     tvRecommendations: state.tv.tvRecommendations,
     similarTV: state.tv.similarTV,
     tvImages: state.tv.tvImages,
-    tvVideos: state.tv.tvVideos
+    tvVideos: state.tv.tvVideos,
+    successSending: state.tv.successSending
   }
 }
 
@@ -91,7 +104,8 @@ export default compose(
     getTVRecommendationsRequest,
     getSimilarTVRequest,
     getTVImagesRequest,
-    getTVVideosRequest
+    getTVVideosRequest,
+    sendFavoriteSerialRequest
   }),
   withRouter
 )(TVDetailsContainer);

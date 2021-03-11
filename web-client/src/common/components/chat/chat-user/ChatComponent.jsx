@@ -31,7 +31,7 @@ const ChatComponent = (props) => {
   } = props;
 
   return (
-    <div className="chat">
+    <div className={classNames("chat", className)}>
       <div className="chat__container">
         <div className="chat__users">
           {users.map((userItem, index) => (

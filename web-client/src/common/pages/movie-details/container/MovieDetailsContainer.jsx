@@ -11,7 +11,9 @@ import {
   getMoviesKeywordsRequest,
   getMoviesCastRequest,
   getMovieVideosRequest,
-  sendFavoriteMovieRequest
+  sendFavoriteMovieRequest,
+  sendMovieCommentRequest,
+  getMovieCommentsRequest
 } from '../../../../redux/movies-reducer';
 
 import MovieDetails from '../component';
@@ -27,6 +29,7 @@ class MovieDetailsContainer extends React.Component {
       getMoviesKeywordsRequest,
       getMoviesCastRequest,
       getMovieVideosRequest,
+      getMovieCommentsRequest,
       match
     } = this.props;
 
@@ -38,6 +41,7 @@ class MovieDetailsContainer extends React.Component {
     getMoviesKeywordsRequest(match.params.id);
     getMoviesCastRequest(match.params.id);
     getMovieVideosRequest(match.params.id);
+    getMovieCommentsRequest(match.params.id);
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -50,6 +54,7 @@ class MovieDetailsContainer extends React.Component {
         getMoviesKeywordsRequest,
         getMoviesCastRequest,
         getMovieVideosRequest,
+        getMovieCommentsRequest,
         match
       } = this.props;
 
@@ -60,6 +65,7 @@ class MovieDetailsContainer extends React.Component {
       getMoviesKeywordsRequest(match.params.id);
       getMoviesCastRequest(match.params.id);
       getMovieVideosRequest(match.params.id);
+      getMovieCommentsRequest(match.params.id);
     }
   }
 
@@ -71,9 +77,22 @@ class MovieDetailsContainer extends React.Component {
     sendFavoriteMovieRequest(userId, movieId);
   }
 
+  onSendMovieComment(userId, comment, username, avatarImage, createdAt) {
+    const {
+      sendMovieCommentRequest,
+      match
+    } = this.props;
+
+    sendMovieCommentRequest(match.params.id, comment, userId, username, avatarImage, createdAt);
+  }
+
   render() {
     return (
-      <MovieDetails onSendFavoriteMovie={this.onSendFavoriteMovie.bind(this)} {...this.props} />
+      <MovieDetails
+        onSendFavoriteMovie={this.onSendFavoriteMovie.bind(this)}
+        onSendMovieComment={this.onSendMovieComment.bind(this)}
+        {...this.props}
+      />
     );
   }
 }
@@ -87,7 +106,8 @@ const mapStateToProps = (state) => {
     similarMovies: state.movies.similarMovies,
     moviesKeywords: state.movies.moviesKeywords,
     moviesCast: state.movies.moviesCast,
-    movieVideos: state.movies.movieVideos
+    movieVideos: state.movies.movieVideos,
+    successSending: state.movies.successSending
   }
 }
 
@@ -101,7 +121,9 @@ export default compose(
     getMoviesKeywordsRequest,
     getMoviesCastRequest,
     getMovieVideosRequest,
-    sendFavoriteMovieRequest
+    sendFavoriteMovieRequest,
+    sendMovieCommentRequest,
+    getMovieCommentsRequest
   }),
   withRouter
 )(MovieDetailsContainer);

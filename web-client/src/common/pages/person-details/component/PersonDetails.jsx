@@ -8,6 +8,7 @@ import Preloader from '../../../components/preloader';
 import TrendsItem from '../../../components/trends-item';
 import ErrorMessage from '../../../components/error-message';
 import FavoriteStar from '../../../components/favorite-star';
+import PageWithSuccessMessage from '../../../components/page-components/page-with-success-message';
 
 import './person-details.scss';
 
@@ -16,7 +17,8 @@ const PersonDetails = (props) => {
     className,
     personDetails,
     personMovieCredits,
-    onSendFavoritePerson
+    onSendFavoritePerson,
+    successSending
   } = props;
 
   const alsoKnownAsList = (!personDetails?.also_known_as) ?
@@ -41,78 +43,83 @@ const PersonDetails = (props) => {
   ));
 
   return (
-    <section className={classNames("person-details", className)}>
-      <div className="person-details__container">
-        {
-          !personDetails ?
-            <Preloader /> :
-            <div className="person-details__person">
-              <div className="person-details__contacts">
-                <Image
-                  className="person-details__avatar"
-                  src={`http://image.tmdb.org/t/p/w1280${personDetails.profile_path}`}
-                  alt={personDetails.name}
-                />
-                <div className="person-details__favorite-container">
-                  <FavoriteStar onClick={() => onSendFavoritePerson(localStorage.getItem('id'), personDetails.id)} />
-                </div>
-                <h3>Personal info</h3>
-                <h4 className="person-details__quaternary-title">Known For</h4>
-                {
-                  !personDetails.known_for_department ?
-                    <ErrorMessage message="We don't know any information" /> :
-                    <p>{personDetails.known_for_department}</p>
-                }
-                <h4 className="person-details__quaternary-title">Gender</h4>
-                {
-                  personDetails.gender === 1 ?
-                    <p>Female</p> :
-                    <p>Male</p>
-                }
-                <h4 className="person-details__quaternary-title">Birthday</h4>
-                {
-                  !personDetails.birthday ?
-                    <ErrorMessage message="We don't know the birthday" /> :
-                    <p>{personDetails.birthday}</p>
-                }
-                <h4 className="person-details__quaternary-title">Place of Birth</h4>
-                {
-                  !personDetails.place_of_birth ?
-                    <ErrorMessage message="We don't know the place of birth" /> :
-                    <p>{personDetails.place_of_birth}</p>
-                }
-                <h4 className="person-details__quaternary-title">Also Known As</h4>
-                {
-                  alsoKnownAsList.length === 0 ?
-                    <ErrorMessage message="List is empty" /> :
-                    <>{alsoKnownAsList}</>
-                }
-              </div>
-              <div className="person-details__main-info">
-                <h2>{personDetails.name}</h2>
-                <h3>Biography</h3>
-                <p className="person-details__biography">
+    <PageWithSuccessMessage
+      successSending={successSending}
+      message="The person was successfully added"
+    >
+      <section className={classNames("person-details", className)}>
+        <div className="person-details__container">
+          {
+            !personDetails ?
+              <Preloader /> :
+              <div className="person-details__person">
+                <div className="person-details__contacts">
+                  <Image
+                    className="person-details__avatar"
+                    src={`http://image.tmdb.org/t/p/w1280${personDetails.profile_path}`}
+                    alt={personDetails.name}
+                  />
+                  <div className="person-details__favorite-container">
+                    <FavoriteStar onClick={() => onSendFavoritePerson(localStorage.getItem('id'), personDetails.id)} />
+                  </div>
+                  <h3>Personal info</h3>
+                  <h4 className="person-details__quaternary-title">Known For</h4>
                   {
-                    !personDetails.biography ?
-                      <ErrorMessage message="Biography is empty" /> :
-                      <>{personDetails.biography}</>
+                    !personDetails.known_for_department ?
+                      <ErrorMessage message="We don't know any information" /> :
+                      <p>{personDetails.known_for_department}</p>
                   }
-                </p>
-                <div className="person-details__known-for">
-                  <h3>Known For</h3>
-                  <div className="person-details__known-for-info">
+                  <h4 className="person-details__quaternary-title">Gender</h4>
+                  {
+                    personDetails.gender === 1 ?
+                      <p>Female</p> :
+                      <p>Male</p>
+                  }
+                  <h4 className="person-details__quaternary-title">Birthday</h4>
+                  {
+                    !personDetails.birthday ?
+                      <ErrorMessage message="We don't know the birthday" /> :
+                      <p>{personDetails.birthday}</p>
+                  }
+                  <h4 className="person-details__quaternary-title">Place of Birth</h4>
+                  {
+                    !personDetails.place_of_birth ?
+                      <ErrorMessage message="We don't know the place of birth" /> :
+                      <p>{personDetails.place_of_birth}</p>
+                  }
+                  <h4 className="person-details__quaternary-title">Also Known As</h4>
+                  {
+                    alsoKnownAsList.length === 0 ?
+                      <ErrorMessage message="List is empty" /> :
+                      <>{alsoKnownAsList}</>
+                  }
+                </div>
+                <div className="person-details__main-info">
+                  <h2>{personDetails.name}</h2>
+                  <h3>Biography</h3>
+                  <p className="person-details__biography">
                     {
-                      personMovieCreditsList.length === 0 ?
-                        <ErrorMessage message="List is empty" /> :
-                        <>{personMovieCreditsList}</>
+                      !personDetails.biography ?
+                        <ErrorMessage message="Biography is empty" /> :
+                        <>{personDetails.biography}</>
                     }
+                  </p>
+                  <div className="person-details__known-for">
+                    <h3>Known For</h3>
+                    <div className="person-details__known-for-info">
+                      {
+                        personMovieCreditsList.length === 0 ?
+                          <ErrorMessage message="List is empty" /> :
+                          <>{personMovieCreditsList}</>
+                      }
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-        }
-      </div>
-    </section>
+          }
+        </div>
+      </section>
+    </PageWithSuccessMessage>
   );
 };
 

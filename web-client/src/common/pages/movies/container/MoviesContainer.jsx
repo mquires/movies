@@ -45,7 +45,8 @@ const mapStateToProps = (state) => {
     todayTrendingMovies: state.movies.todayTrendingMovies,
     topRatedMovies: state.movies.topRatedMovies,
     isTopRatedFetching: state.movies.isTopRatedFetching,
-    genres: state.movies.genres
+    genres: state.movies.genres,
+    successSending: state.watchLater.successSending
   }
 }
 

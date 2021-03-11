@@ -40,7 +40,8 @@ class PersonDetailsContainer extends React.Component {
 const mapStateToProps = (state) => {
   return {
     personDetails: state.persons.personDetails,
-    personMovieCredits: state.persons.personMovieCredits
+    personMovieCredits: state.persons.personMovieCredits,
+    successSending: state.persons.successSending
   }
 }
 

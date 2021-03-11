@@ -1,0 +1,28 @@
+@import '../../../../assets/styles/abstracts/variables';
+
+.cinema-comment-item {
+  display: flex;
+  gap: 2rem;
+
+  &__content {
+    &-title {
+      display: flex;
+      gap: 1rem;
+      font-size: 1.4rem;
+      margin-bottom: 0.5rem;
+    }
+  }
+
+  &__name {
+    font-weight: 500;
+  }
+
+  &__date {
+    color: $CL_8_GREY;
+  }
+
+  &__comment {
+    font-size: 1.4rem;
+    line-height: 2rem;
+  }
+}

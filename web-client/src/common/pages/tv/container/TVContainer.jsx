@@ -40,7 +40,8 @@ class TVContainer extends React.Component {
 const mapStateToProps = (state) => {
   return {
     todayTrendingTV: state.tv.todayTrendingTV,
-    genres: state.tv.genres
+    genres: state.tv.genres,
+    successSending: state.watchLater.successSending
   }
 }
 

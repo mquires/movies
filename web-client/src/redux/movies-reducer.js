@@ -1,4 +1,4 @@
-import { contentAPI } from "../api/api";
+import { commentsAPI, contentAPI } from "../api/api";
 import { moviesAPI } from "../api/api.tmdb";
 
 const SET_TODAY_TRENDING_MOVIES = 'SET-TODAY-TRENDING-MOVIES';
@@ -16,6 +16,9 @@ const SET_MOVIE_VIDEOS = 'SET-MOVIE-VIDEOS';
 const SET_GENRES = 'SET-GENRES';
 const SET_LATEST_MOVIES = 'SET-LATEST-MOVIES';
 const SET_FAVORITE_MOVIE = 'SET-FAVORITE-MOVIE';
+const SET_SUCCESS_SENDING = 'SET-SUCCESS-SENDING';
+const ADD_COMMENT = 'ADD-COMMENT';
+const SET_MOVIE_COMMENTS = 'SET-MOVIE-COMMENTS';
 
 const initialState = {
   genres: [],
@@ -32,7 +35,10 @@ const initialState = {
   moviesCast: [],
   movieVideos: [],
   latestMovies: [],
-  favoriteMovie: []
+  favoriteMovie: [],
+  successSending: false,
+  movieComments: [],
+  oldMovieComments: []
 };
 
 const moviesReducer = (state = initialState, action) => {
@@ -127,6 +133,29 @@ const moviesReducer = (state = initialState, action) => {
         favoriteMovie: action.favoriteMovie
       }
     }
+    case SET_SUCCESS_SENDING: {
+      return {
+        ...state,
+        successSending: action.successSending
+      }
+    }
+    case ADD_COMMENT: {
+      const newComment = {
+        name: action.name,
+        comment: action.comment,
+        avatarImage: action.avatarImage
+      };
+      return {
+        ...state,
+        movieComments: [...state.movieComments, newComment].reverse()
+      };
+    }
+    case SET_MOVIE_COMMENTS: {
+      return {
+        ...state,
+        oldMovieComments: action.oldMovieComments.reverse()
+      }
+    }
     default: {
       return state;
     }
@@ -150,6 +179,9 @@ export const setMovieVideos = (movieVideos) => ({ type: SET_MOVIE_VIDEOS, movieV
 export const setGenres = (genres) => ({ type: SET_GENRES, genres });
 export const setLatestMovies = (latestMovies) => ({ type: SET_LATEST_MOVIES, latestMovies });
 export const setFavoriteMovie = (favoriteMovie) => ({ type: SET_FAVORITE_MOVIE, favoriteMovie });
+export const setSuccessSending = (successSending) => ({ type: SET_SUCCESS_SENDING, successSending });
+export const addComment = (name, comment, avatarImage) => ({ type: ADD_COMMENT, name, comment, avatarImage });
+export const setMovieComments = (oldMovieComments) => ({ type: SET_MOVIE_COMMENTS, oldMovieComments });
 
 export const getTopRatedMoviesRequest = (currentPage) => (dispatch) => {
   moviesAPI.getTopRatedMovies(currentPage)
@@ -237,7 +269,7 @@ export const getLatestMoviesRequest = () => (dispatch) => {
     });
 };
 
-export const sendFavoriteMovieRequest = (userId, movieId) => () => {
+export const sendFavoriteMovieRequest = (userId, movieId) => (dispatch) => {
   moviesAPI.getMovieDetails(movieId)
     .then(response => {
       const {
@@ -252,12 +284,35 @@ export const sendFavoriteMovieRequest = (userId, movieId) => () => {
         original_title,
         backdrop_path
       );
-    })
+      dispatch(setSuccessSending(true));
+    });
+  setTimeout(() => {
+    dispatch(setSuccessSending(false));
+  }, 5000);
 };
 
 export const getFavoriteMovieRequest = (id) => (dispatch) => {
   contentAPI.getFavoriteMovie(id)
     .then(response => {
       dispatch(setFavoriteMovie(response.data));
+    })
+};
+
+export const sendMovieCommentRequest = (movieId, comment, userId, username, avatarImage, createdAt) => (dispatch) => {
+  moviesAPI.getMovieDetails(movieId)
+    .then(response => {
+      const { id } = response.data;
+
+      commentsAPI.sendMovieComment(id, comment, userId)
+        .then((response) => {
+          dispatch(addComment(username, comment, avatarImage, createdAt));
+        });
+    });
+};
+
+export const getMovieCommentsRequest = (id) => (dispatch) => {
+  commentsAPI.getMovieComments(id)
+    .then(response => {
+      dispatch(setMovieComments(response.data.values));
     })
 };

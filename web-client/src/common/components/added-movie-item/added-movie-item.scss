@@ -4,6 +4,7 @@
   text-decoration: none;
   color: $CL_14_GREY;
   transition: 0.1s;
+  width: 45rem;
 
   &:hover {
     filter: brightness(0.7);
@@ -17,6 +18,9 @@
 
   &__title {
     font-size: 2.3rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   &__release-date {
@@ -27,6 +31,7 @@
     width: 100%;
     border-radius: 0.6rem;
     margin-top: 1rem;
+    filter: brightness(0.7);
 
     &-container {
       width: 45rem;
