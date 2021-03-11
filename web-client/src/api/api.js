@@ -11,6 +11,10 @@ export const authAPI = {
 
   signup(name, email, password) {
     return instance.post('auth/signup', { name, email, password })
+  },
+
+  authMe(token) {
+    return instance.get(`auth-me?token=${token}`)
   }
 };
 

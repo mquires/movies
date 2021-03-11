@@ -2,6 +2,7 @@ import { stopSubmit } from "redux-form";
 import { authAPI } from "../api/api";
 
 const SET_AUTH_USER = 'SET-AUTH-USER';
+const SET_AUTH_USER_DATA = 'SET-AUTH-USER-DATA';
 
 const initialState = {
   isAuth: false
@@ -15,6 +16,12 @@ const authReducer = (state = initialState, action) => {
         isAuth: action.isAuth
       };
     }
+    case SET_AUTH_USER_DATA: {
+      return {
+        ...state,
+        ...action.payload
+      };
+    }
     default: {
       return state;
     }
@@ -22,6 +29,23 @@ const authReducer = (state = initialState, action) => {
 };
 
 export const setAuthUser = (isAuth) => ({ type: SET_AUTH_USER, isAuth });
+export const setAuthUserData = (userId, email, name, avatarImage, isSetUserAuth) => (
+  { type: SET_AUTH_USER_DATA, payload: { userId, email, name, avatarImage, isSetUserAuth } }
+);
+
+export const getAuthUserDataRequest = (token) => (dispatch) => {
+  return authAPI.authMe(token)
+    .then((data) => {
+      const {
+        userId,
+        email,
+        name,
+        avatarImage
+      } = data.data;
+
+      dispatch(setAuthUserData(userId, email, name, avatarImage, true));
+    });
+}
 
 export const loginUser = (email, password) => {
   return (dispatch) => {
