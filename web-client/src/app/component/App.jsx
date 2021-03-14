@@ -32,6 +32,7 @@ import FeedbackContainer from "../../common/pages/feedback/container";
 import SupportContainer from "../../common/pages/support/container";
 import ChatButton from '../../common/components/buttons/chat-button';
 import WatchLaterContainer from "../../common/pages/watch-later/watch-later/container";
+import ScrollToTop from "../../common/components/scroll-to-top/ScrollToTop";
 
 import './app.scss';
 
@@ -46,6 +47,7 @@ const App = (props) => {
     <Provider store={store}>
       <div className="app">
         <Router history={history}>
+          <ScrollToTop />
           <Sidebar />
           <div className="app__content">
             <HeaderContainer />

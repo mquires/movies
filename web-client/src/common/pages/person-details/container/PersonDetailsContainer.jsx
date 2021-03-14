@@ -41,7 +41,8 @@ const mapStateToProps = (state) => {
   return {
     personDetails: state.persons.personDetails,
     personMovieCredits: state.persons.personMovieCredits,
-    successSending: state.persons.successSending
+    successSending: state.persons.successSending,
+    userId: state.auth.userId
   }
 }
 

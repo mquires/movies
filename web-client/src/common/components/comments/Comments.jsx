@@ -14,14 +14,15 @@ const Comments = (props) => {
     title,
     children,
     onSubmit,
-    match
+    match,
+    userId
   } = props;
 
   return (
     <div className={classNames("comments", className)}>
       <h3 className="comments__title">{title}</h3>
       {
-        localStorage.getItem('id') != match.params.id ?
+        userId != match.params.id ?
           <ErrorMessage className="comments__error" message="You can't send any posts" /> :
           <CommentsForm
             onSubmit={onSubmit}

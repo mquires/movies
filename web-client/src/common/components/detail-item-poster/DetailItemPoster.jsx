@@ -6,8 +6,8 @@ import Image from '../../components/image';
 import moneyIcon from '../../../assets/icons/money.svg';
 import languageIcon from '../../../assets/icons/language.svg';
 import noWallpaper from '../../../assets/images/no-wallpaper.jpg';
-import FavoriteStar from "../favorite-star";
-import Preloader from "../preloader";
+import FavoriteStarFilled from "../favorite-star/favorite-star-filled";
+import FavoriteStarOutlined from "../favorite-star/favorite-star-outlined";
 
 const DetailItemPoster = (props) => {
   const {
@@ -17,7 +17,10 @@ const DetailItemPoster = (props) => {
     overview,
     posterImage,
     onSendFavoriteMovie,
-    movieDetails
+    movieDetails,
+    isFavoriteMovie,
+    onDeteleFavoriteMovieByUserId,
+    userId
   } = props;
 
   return (
@@ -42,7 +45,11 @@ const DetailItemPoster = (props) => {
               <p>{language}</p>
             </li>
             <li className="movie-details__secondary-info-item">
-              <FavoriteStar onClick={() => onSendFavoriteMovie(localStorage.getItem('id'), movieDetails.id)} />
+              {
+                isFavoriteMovie ?
+                  <FavoriteStarFilled onClick={() => onDeteleFavoriteMovieByUserId(userId, movieDetails.id)} /> :
+                  <FavoriteStarOutlined onClick={() => onSendFavoriteMovie(userId, movieDetails.id)} />
+              }
             </li>
           </ul>
         </div>

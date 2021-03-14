@@ -13,7 +13,9 @@ import {
   getMovieVideosRequest,
   sendFavoriteMovieRequest,
   sendMovieCommentRequest,
-  getMovieCommentsRequest
+  getMovieCommentsRequest,
+  getMovieDetailsByUserIdRequest,
+  deteleFavoriteMovieByUserIdRequest
 } from '../../../../redux/movies-reducer';
 
 import MovieDetails from '../component';
@@ -30,6 +32,8 @@ class MovieDetailsContainer extends React.Component {
       getMoviesCastRequest,
       getMovieVideosRequest,
       getMovieCommentsRequest,
+      getMovieDetailsByUserIdRequest,
+      userId,
       match
     } = this.props;
 
@@ -42,6 +46,7 @@ class MovieDetailsContainer extends React.Component {
     getMoviesCastRequest(match.params.id);
     getMovieVideosRequest(match.params.id);
     getMovieCommentsRequest(match.params.id);
+    getMovieDetailsByUserIdRequest(userId, match.params.id);
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -55,7 +60,9 @@ class MovieDetailsContainer extends React.Component {
         getMoviesCastRequest,
         getMovieVideosRequest,
         getMovieCommentsRequest,
-        match
+        match,
+        getMovieDetailsByUserIdRequest,
+        userId
       } = this.props;
 
       getMovieDetailsRequest(match.params.id);
@@ -66,6 +73,17 @@ class MovieDetailsContainer extends React.Component {
       getMoviesCastRequest(match.params.id);
       getMovieVideosRequest(match.params.id);
       getMovieCommentsRequest(match.params.id);
+      getMovieDetailsByUserIdRequest(userId, match.params.id);
+    }
+
+    if (prevProps.userId !== this.props.userId) {
+      const {
+        getMovieDetailsByUserIdRequest,
+        userId,
+        match
+      } = this.props;
+
+      getMovieDetailsByUserIdRequest(userId, match.params.id);
     }
   }
 
@@ -75,6 +93,14 @@ class MovieDetailsContainer extends React.Component {
     } = this.props;
 
     sendFavoriteMovieRequest(userId, movieId);
+  }
+
+  onDeteleFavoriteMovieByUserId(userId, movieId) {
+    const {
+      deteleFavoriteMovieByUserIdRequest
+    } = this.props;
+
+    deteleFavoriteMovieByUserIdRequest(userId, movieId);
   }
 
   onSendMovieComment(userId, comment, username, avatarImage, createdAt) {
@@ -91,6 +117,7 @@ class MovieDetailsContainer extends React.Component {
       <MovieDetails
         onSendFavoriteMovie={this.onSendFavoriteMovie.bind(this)}
         onSendMovieComment={this.onSendMovieComment.bind(this)}
+        onDeteleFavoriteMovieByUserId={this.onDeteleFavoriteMovieByUserId.bind(this)}
         {...this.props}
       />
     );
@@ -107,7 +134,9 @@ const mapStateToProps = (state) => {
     moviesKeywords: state.movies.moviesKeywords,
     moviesCast: state.movies.moviesCast,
     movieVideos: state.movies.movieVideos,
-    successSending: state.movies.successSending
+    successSending: state.movies.successSending,
+    userId: state.auth.userId,
+    isFavoriteMovie: state.movies.isFavoriteMovie
   }
 }
 
@@ -123,7 +152,9 @@ export default compose(
     getMovieVideosRequest,
     sendFavoriteMovieRequest,
     sendMovieCommentRequest,
-    getMovieCommentsRequest
+    getMovieCommentsRequest,
+    getMovieDetailsByUserIdRequest,
+    deteleFavoriteMovieByUserIdRequest
   }),
   withRouter
 )(MovieDetailsContainer);

@@ -27,7 +27,9 @@ const ChatComponent = (props) => {
     users,
     userByEmail,
     typer,
-    receiver
+    receiver,
+    email,
+    avatarImage
   } = props;
 
   return (
@@ -77,12 +79,12 @@ const ChatComponent = (props) => {
                   {messages.map((message, index) => (
                     <>
                       {
-                        localStorage.getItem('email') == message.senderEmail ?
+                        email == message.senderEmail ?
                           <ChatMessageMe
                             id={message.id}
                             key={index}
                             caption={message.message}
-                            src={localStorage.getItem('avatarImage') == "null" ? noAvatar : localStorage.getItem('avatarImage')}
+                            src={!avatarImage ? noAvatar : avatarImage}
                             alt=""
                           /> :
                           <>

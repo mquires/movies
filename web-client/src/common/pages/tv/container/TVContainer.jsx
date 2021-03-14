@@ -41,7 +41,8 @@ const mapStateToProps = (state) => {
   return {
     todayTrendingTV: state.tv.todayTrendingTV,
     genres: state.tv.genres,
-    successSending: state.watchLater.successSending
+    successSending: state.watchLater.successSending,
+    userId: state.auth.userId
   }
 }
 

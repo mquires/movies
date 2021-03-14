@@ -15,7 +15,9 @@ import './auth-user-nav.scss';
 
 const AuthUserNav = (props) => {
   const {
-    className
+    className,
+    name,
+    avatarImage
   } = props;
 
   const [isOpen, setIsOpen] = useState(false);
@@ -31,8 +33,8 @@ const AuthUserNav = (props) => {
       >
         <Avatar
           className="auth-user-nav__avatar"
-          src={localStorage.getItem('avatarImage') == "null" ? noAvatar : localStorage.getItem('avatarImage')}
-          alt={localStorage.getItem('email')}
+          src={!avatarImage ? noAvatar : avatarImage}
+          alt={name}
         />
       </div>
       {

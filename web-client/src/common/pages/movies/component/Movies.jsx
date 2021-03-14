@@ -21,7 +21,8 @@ const Movies = (props) => {
     isTopRatedFetching,
     genres,
     onSendMovieDetails,
-    successSending
+    successSending,
+    userId
   } = props;
 
   const [movies, setMovies] = useState([]);
@@ -114,7 +115,7 @@ const Movies = (props) => {
       src={`http://image.tmdb.org/t/p/w1280/${movie.poster_path}`}
       alt={movie.original_title}
       onError={(e) => e.target.src = noWallpaper}
-      onWatchLaterClick={() => onSendMovieDetails(localStorage.getItem('id'), movie.id)}
+      onWatchLaterClick={() => onSendMovieDetails(userId, movie.id)}
       successSending={successSending}
     />
   ));

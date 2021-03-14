@@ -111,6 +111,14 @@ export const contentAPI = {
 
   getFavoriteSerial(id) {
     return instance.get(`${id}/get-favorite-serial`);
+  },
+
+  getMovieDetailsByUserId(userId, movieId) {
+    return instance.get(`movie-details?userId=${userId}&movieId=${movieId}`);
+  },
+
+  deleteFavoriteMovieByUserId(userId, movieId) {
+    return instance.delete(`delete-favorite-movie?userId=${userId}&movieId=${movieId}`);
   }
 };
 

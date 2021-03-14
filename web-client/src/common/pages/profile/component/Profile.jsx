@@ -31,7 +31,8 @@ const Profile = (props) => {
     favoritePerson,
     favoriteMovie,
     successSending,
-    favoriteSerial
+    favoriteSerial,
+    userId
   } = props;
 
   const [isOpen, setIsOpen] = useState(false);
@@ -160,6 +161,7 @@ const Profile = (props) => {
               className="profile__posts"
               title="Posts"
               onSubmit={onSendPost}
+              userId={userId}
             >
               {userPostsList.length === 0 ? <EmptyListMessage /> : userPostsList}
             </Comments>

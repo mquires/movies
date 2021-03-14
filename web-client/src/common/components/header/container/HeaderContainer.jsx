@@ -2,14 +2,16 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Redirect, withRouter } from 'react-router-dom';
 import { compose } from 'redux';
-import { setIsAuth } from '../../../../redux/auth-reducer';
+import { setIsAuth, logoutRequest } from '../../../../redux/auth-reducer';
 import ROUTES from '../../../constants/routes';
 
 import Header from '../Header';
 
 const mapStateToProps = (state) => {
   return {
-    isAuth: state.auth.isAuth
+    isAuth: state.auth.isAuth,
+    name: state.auth.name,
+    avatarImage: state.auth.avatarImage,
   }
 }
 
@@ -25,9 +27,11 @@ class HeaderContainer extends React.Component {
   onLogout() {
     const {
       setIsAuth,
-      history
+      history,
+      logoutRequest
     } = this.props;
 
+    logoutRequest();
     localStorage.clear();
     setIsAuth();
 
@@ -35,18 +39,17 @@ class HeaderContainer extends React.Component {
   }
 
   render() {
-    const {
-      isAuth
-    } = this.props;
-
     return (
-      <Header isAuth={isAuth} onLogout={this.onLogout.bind(this)} />
+      <Header
+        {...this.props}
+        onLogout={this.onLogout.bind(this)}
+      />
     );
   }
 };
 
 const HeaderContainerConnect = compose(
-  connect(mapStateToProps, { setIsAuth }),
+  connect(mapStateToProps, { setIsAuth, logoutRequest }),
   withRouter
 )(HeaderContainer);
 

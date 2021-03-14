@@ -36,7 +36,10 @@ const MovieDetails = (props) => {
     movieVideos,
     onSendFavoriteMovie,
     successSending,
-    onSendMovieComment
+    onSendMovieComment,
+    isFavoriteMovie,
+    onDeteleFavoriteMovieByUserId,
+    userId
   } = props;
 
   const popularPersonsList = popularPersons.map((popularPerson, index) => (
@@ -166,6 +169,9 @@ const MovieDetails = (props) => {
                     posterImage={movieDetails.poster_path}
                     onSendFavoriteMovie={onSendFavoriteMovie}
                     movieDetails={movieDetails}
+                    isFavoriteMovie={isFavoriteMovie}
+                    onDeteleFavoriteMovieByUserId={onDeteleFavoriteMovieByUserId}
+                    userId={userId}
                   >
                     {
                       moviesKeywordsList.length === 0 ?

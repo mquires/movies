@@ -29,7 +29,7 @@ class ProfileContainer extends React.Component {
     } = this.props;
 
     if (!match.params.id) {
-      match.params.id = localStorage.getItem('id');
+      match.params.id = this.props.userId;
       if (!match.params.id) {
         history.push(ROUTES.LOGIN);
       }
@@ -55,7 +55,7 @@ class ProfileContainer extends React.Component {
       } = this.props;
 
       if (!match.params.id) {
-        match.params.id = localStorage.getItem('id');
+        match.params.id = this.props.userId;
         if (!match.params.id) {
           history.push(ROUTES.LOGIN);
         }
@@ -107,7 +107,8 @@ const mapStateToProps = (state) => {
     favoritePerson: state.persons.favoritePerson,
     favoriteMovie: state.movies.favoriteMovie,
     successSending: state.users.successSending,
-    favoriteSerial: state.tv.favoriteSerial
+    favoriteSerial: state.tv.favoriteSerial,
+    userId: state.auth.userId
   }
 }
 

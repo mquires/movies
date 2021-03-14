@@ -13,7 +13,9 @@ const Header = (props) => {
   const {
     className,
     isAuth,
-    onLogout
+    onLogout,
+    name,
+    avatarImage
   } = props;
 
   return (
@@ -22,8 +24,11 @@ const Header = (props) => {
         {
           isAuth ?
             <div className="header__user">
-              <p className="header__user-email">{localStorage.getItem('email')}</p>
-              <AuthUserNav />
+              <p className="header__user-email">{name}</p>
+              <AuthUserNav
+                name={name}
+                avatarImage={avatarImage}
+              />
               <Button onClick={onLogout} caption="Logout" />
             </div> :
             <NavLink to={ROUTES.LOGIN}>

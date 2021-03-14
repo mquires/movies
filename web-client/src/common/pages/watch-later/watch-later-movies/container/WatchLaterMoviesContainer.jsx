@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { compose } from 'redux';
 import { getWatchLaterRequest } from '../../../../../redux/watch-later-reducer';
+import ROUTES from '../../../../constants/routes';
 
 import WatchLaterMovies from '../component';
 
@@ -11,11 +12,12 @@ class WatchLaterMoviesContainer extends React.Component {
     const {
       getWatchLaterRequest,
       match,
-      history
+      history,
+      userId
     } = this.props;
 
     if (!match.params.id) {
-      match.params.id = localStorage.getItem('id');
+      match.params.id = userId;
       if (!match.params.id) {
         history.push(ROUTES.LOGIN);
       }
@@ -33,7 +35,8 @@ class WatchLaterMoviesContainer extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    watchLater: state.watchLater.watchLater
+    watchLater: state.watchLater.watchLater,
+    userId: state.auth.userId
   }
 }
 

@@ -5,8 +5,8 @@
   color: $CL_1_GREEN;
   background-color: $CL_2_GREEN;
   position: fixed;
-  top: 20vh;
-  right: 10vw;
+  bottom: 10vh;
+  left: 3vw;
   animation: FadeAnimation 0.3s ease-in, HideAnimation 0.3s ease-out 4.7s;
   z-index: 100;
 }

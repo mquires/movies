@@ -7,8 +7,9 @@ import Image from '../../../components/image';
 import Preloader from '../../../components/preloader';
 import TrendsItem from '../../../components/trends-item';
 import ErrorMessage from '../../../components/error-message';
-import FavoriteStar from '../../../components/favorite-star';
 import PageWithSuccessMessage from '../../../components/page-components/page-with-success-message';
+import FavoriteStarFilled from '../../../components/favorite-star/favorite-star-filled';
+import FavoriteStarOutlined from '../../../components/favorite-star/favorite-star-outlined';
 
 import './person-details.scss';
 
@@ -18,7 +19,8 @@ const PersonDetails = (props) => {
     personDetails,
     personMovieCredits,
     onSendFavoritePerson,
-    successSending
+    successSending,
+    userId
   } = props;
 
   const alsoKnownAsList = (!personDetails?.also_known_as) ?
@@ -60,7 +62,7 @@ const PersonDetails = (props) => {
                     alt={personDetails.name}
                   />
                   <div className="person-details__favorite-container">
-                    <FavoriteStar onClick={() => onSendFavoritePerson(localStorage.getItem('id'), personDetails.id)} />
+                    <FavoriteStarOutlined onClick={() => onSendFavoritePerson(userId, personDetails.id)} />
                   </div>
                   <h3>Personal info</h3>
                   <h4 className="person-details__quaternary-title">Known For</h4>

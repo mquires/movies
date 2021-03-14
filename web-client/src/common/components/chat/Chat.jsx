@@ -24,7 +24,10 @@ class Chat extends React.Component {
       messagesList: [],
       userByEmail: null,
       typer: ''
-    }
+    },
+
+    this.typing;
+    this.timeout = undefined;
   }
 
   componentDidMount() {
@@ -59,7 +62,7 @@ class Chat extends React.Component {
       this.setState({ typer: '' });
     });
 
-    this.socket.emit('user_connected', localStorage.getItem('email'));
+    this.socket.emit('user_connected', this.props.email);
 
     this.socket.on('user_connected', () => {
       this.props.getUsersRequest();
@@ -73,21 +76,29 @@ class Chat extends React.Component {
     } = this.props;
 
     this.setState({ receiver: username });
-    getMessagesRequest(localStorage.getItem('email'), username);
+    getMessagesRequest(this.props.email, username);
     this.setState({ messages: [] });
 
     getUserByEmailRequest(username);
     this.setState({ typer: '' });
   }
 
+  timeoutFunction = () => {
+    this.typing = false;
+    this.socket.emit('user stopped typing');
+  }
+
   handleInputChange(e) {
     this.setState({ inputMessage: e.target.value });
 
-    e.target.onkeyup = e => {
-      this.socket.emit('user typing');
-
-      if (e.target.value === '') {
-        this.socket.emit('user stopped typing');
+    e.target.onkeyup = () => {
+      if (!this.typing) {
+        this.typing = true;
+        this.socket.emit('user typing');
+        this.timeout = setTimeout(this.timeoutFunction, 3000);
+      } else {
+        clearTimeout(this.timeout);
+        this.timeout = setTimeout(this.timeoutFunction, 3000);
       }
     };
   }
@@ -99,19 +110,19 @@ class Chat extends React.Component {
 
     if (!this.state.inputMessage) return;
     this.socket.emit('send-message', {
-      senderEmail: localStorage.getItem('email'),
+      senderEmail: this.props.email,
       receiverEmail: this.state.receiver,
       message: this.state.inputMessage
     });
 
-    sendMessageRequest(localStorage.getItem('email'), this.state.receiver, this.state.inputMessage);
+    sendMessageRequest(this.props.email, this.state.receiver, this.state.inputMessage);
 
     this.setState({
       messages: this.state.messages.concat(
         <ChatMessageMe
           key={e.target.key}
           caption={this.state.inputMessage}
-          src={localStorage.getItem('avatarImage') == "null" ? noAvatar : localStorage.getItem('avatarImage')}
+          src={!this.props.avatarImage ? noAvatar : this.props.avatarImage}
           alt=""
         />
       )
@@ -139,6 +150,7 @@ class Chat extends React.Component {
         receiver={this.state.receiver}
         userByEmail={this.props.userByEmail}
         typer={this.state.typer}
+        {...this.props}
       />
     )
   }
@@ -148,7 +160,9 @@ const mapStateToProps = (state) => {
   return {
     messages: state.messages.messages,
     users: state.users.users,
-    userByEmail: state.users.userByEmail
+    userByEmail: state.users.userByEmail,
+    email: state.auth.email,
+    avatarImage: state.auth.avatarImage
   }
 }
 

@@ -15,7 +15,9 @@ const CinemaComments = (props) => {
     className,
     onSendComment,
     movieComments,
-    oldMovieComments
+    oldMovieComments,
+    avatarImage,
+    email,
   } = props;
 
   const movieCommentsList = movieComments.map((movieComment, index) => (
@@ -47,8 +49,8 @@ const CinemaComments = (props) => {
       <h3>Comments</h3>
       <div className="cinema-comments__form-container">
         <Avatar
-          src={localStorage.getItem('avatarImage') == 'null' ? noAvatar : localStorage.getItem('avatarImage')}
-          alt={localStorage.getItem('email')}
+          src={!avatarImage ? noAvatar : avatarImage}
+          alt={email}
         />
         <CinemaCommentsForm
           className="cinema-comments__form"

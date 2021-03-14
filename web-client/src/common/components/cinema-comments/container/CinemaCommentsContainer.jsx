@@ -15,7 +15,7 @@ class CinemaCommentsContainer extends React.Component {
       getUserDataRequest
     } = this.props;
 
-    getUserDataRequest(localStorage.getItem('id'));
+    getUserDataRequest(this.props.id);
   }
 
   onSendComment(cinemaComments, dispatch) {
@@ -48,7 +48,10 @@ const mapStateToProps = (state) => {
     movieComments: state.movies.movieComments,
     movieComments: state.movies.movieComments,
     oldMovieComments: state.movies.oldMovieComments,
-    userData: state.users.userData
+    userData: state.users.userData,
+    email: state.auth.email,
+    avatarImage: state.auth.avatarImage,
+    id: state.auth.userId
   }
 }
 

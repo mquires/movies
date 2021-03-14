@@ -19,6 +19,8 @@ const SET_FAVORITE_MOVIE = 'SET-FAVORITE-MOVIE';
 const SET_SUCCESS_SENDING = 'SET-SUCCESS-SENDING';
 const ADD_COMMENT = 'ADD-COMMENT';
 const SET_MOVIE_COMMENTS = 'SET-MOVIE-COMMENTS';
+const SET_MOVIE_DETAILS_BY_USER_ID = 'SET-MOVIE-DETAILS-BY-USER-ID';
+const IS_FAVORITE_MOVIE = 'IS-FAVORITE-MOVIE';
 
 const initialState = {
   genres: [],
@@ -38,7 +40,9 @@ const initialState = {
   favoriteMovie: [],
   successSending: false,
   movieComments: [],
-  oldMovieComments: []
+  oldMovieComments: [],
+  movieDetailsByUserId: [],
+  isFavoriteMovie: []
 };
 
 const moviesReducer = (state = initialState, action) => {
@@ -156,6 +160,18 @@ const moviesReducer = (state = initialState, action) => {
         oldMovieComments: action.oldMovieComments.reverse()
       }
     }
+    case SET_MOVIE_DETAILS_BY_USER_ID: {
+      return {
+        ...state,
+        movieDetailsByUserId: action.movieDetailsByUserId
+      }
+    }
+    case IS_FAVORITE_MOVIE: {
+      return {
+        ...state,
+        isFavoriteMovie: action.isFavoriteMovie
+      }
+    }
     default: {
       return state;
     }
@@ -182,6 +198,8 @@ export const setFavoriteMovie = (favoriteMovie) => ({ type: SET_FAVORITE_MOVIE, 
 export const setSuccessSending = (successSending) => ({ type: SET_SUCCESS_SENDING, successSending });
 export const addComment = (name, comment, avatarImage) => ({ type: ADD_COMMENT, name, comment, avatarImage });
 export const setMovieComments = (oldMovieComments) => ({ type: SET_MOVIE_COMMENTS, oldMovieComments });
+export const setIsFavoriteMovie = (isFavoriteMovie) => ({ type: IS_FAVORITE_MOVIE, isFavoriteMovie });
+export const setMovieDetailsByUserId = (movieDetailsByUserId) => ({ type: SET_MOVIE_DETAILS_BY_USER_ID, movieDetailsByUserId });
 
 export const getTopRatedMoviesRequest = (currentPage) => (dispatch) => {
   moviesAPI.getTopRatedMovies(currentPage)
@@ -285,6 +303,7 @@ export const sendFavoriteMovieRequest = (userId, movieId) => (dispatch) => {
         backdrop_path
       );
       dispatch(setSuccessSending(true));
+      dispatch(setIsFavoriteMovie(true));
     });
   setTimeout(() => {
     dispatch(setSuccessSending(false));
@@ -315,4 +334,22 @@ export const getMovieCommentsRequest = (id) => (dispatch) => {
     .then(response => {
       dispatch(setMovieComments(response.data.values));
     })
+};
+
+export const getMovieDetailsByUserIdRequest = (userId, movieId) => (dispatch) => {
+  contentAPI.getMovieDetailsByUserId(userId, movieId)
+    .then(response => {
+      dispatch(setMovieDetailsByUserId(response.data.values));
+      response.data.length === 0 ? dispatch(setIsFavoriteMovie(false)) : dispatch(setIsFavoriteMovie(true));
+    })
+    .catch(() => {
+      dispatch(setIsFavoriteMovie(false));
+    })
+};
+
+export const deteleFavoriteMovieByUserIdRequest = (userId, movieId) => (dispatch) => {
+  contentAPI.deleteFavoriteMovieByUserId(userId, movieId)
+    .then(() => {
+      dispatch(setIsFavoriteMovie(false));
+    });
 };
