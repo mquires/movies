@@ -5,7 +5,9 @@ import { compose } from 'redux';
 import {
   getPersonDetailsRequest,
   getPersonMovieCreditsRequest,
-  sendFavoritePersonRequest
+  sendFavoritePersonRequest,
+  getPersonDetailsByUserIdRequest,
+  deteleFavoritePersonByUserIdRequest
 } from '../../../../redux/persons-reducer';
 
 import PersonDetails from '../component';
@@ -15,11 +17,35 @@ class PersonDetailsContainer extends React.Component {
     const {
       getPersonDetailsRequest,
       getPersonMovieCreditsRequest,
+      getPersonDetailsByUserIdRequest,
       match
     } = this.props;
 
     getPersonDetailsRequest(match.params.id);
     getPersonMovieCreditsRequest(match.params.id);
+    getPersonDetailsByUserIdRequest(match.params.id);
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (prevProps !== this.props) {
+      const {
+        getPersonDetailsByUserIdRequest,
+        match,
+        userId
+      } = this.props;
+
+      getPersonDetailsByUserIdRequest(userId, match.params.id);
+    }
+
+    if (prevProps.userId !== this.props.userId) {
+      const {
+        getPersonDetailsByUserIdRequest,
+        userId,
+        match
+      } = this.props;
+
+      getPersonDetailsByUserIdRequest(userId, match.params.id);
+    }
   }
 
   onSendFavoritePerson(userId, personId) {
@@ -30,9 +56,21 @@ class PersonDetailsContainer extends React.Component {
     sendFavoritePersonRequest(userId, personId);
   }
 
+  onDeteleFavoritePersonByUserId(userId, personId) {
+    const {
+      deteleFavoritePersonByUserIdRequest
+    } = this.props;
+
+    deteleFavoritePersonByUserIdRequest(userId, personId);
+  }
+
   render() {
     return (
-      <PersonDetails {...this.props} onSendFavoritePerson={this.onSendFavoritePerson.bind(this)} />
+      <PersonDetails
+        {...this.props}
+        onSendFavoritePerson={this.onSendFavoritePerson.bind(this)}
+        onDeteleFavoritePersonByUserId={this.onDeteleFavoritePersonByUserId.bind(this)}
+      />
     );
   }
 }
@@ -42,7 +80,8 @@ const mapStateToProps = (state) => {
     personDetails: state.persons.personDetails,
     personMovieCredits: state.persons.personMovieCredits,
     successSending: state.persons.successSending,
-    userId: state.auth.userId
+    userId: state.auth.userId,
+    isFavoritePerson: state.persons.isFavoritePerson
   }
 }
 
@@ -50,7 +89,9 @@ export default compose(
   connect(mapStateToProps, {
     getPersonDetailsRequest,
     getPersonMovieCreditsRequest,
-    sendFavoritePersonRequest
+    sendFavoritePersonRequest,
+    getPersonDetailsByUserIdRequest,
+    deteleFavoritePersonByUserIdRequest
   }),
   withRouter
 )(PersonDetailsContainer);

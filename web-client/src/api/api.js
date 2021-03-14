@@ -119,6 +119,22 @@ export const contentAPI = {
 
   deleteFavoriteMovieByUserId(userId, movieId) {
     return instance.delete(`delete-favorite-movie?userId=${userId}&movieId=${movieId}`);
+  },
+
+  getTVDetailsByUserId(userId, tvId) {
+    return instance.get(`tv-details?userId=${userId}&tvId=${tvId}`);
+  },
+
+  deleteFavoriteTVByUserId(userId, tvId) {
+    return instance.delete(`delete-favorite-tv?userId=${userId}&tvId=${tvId}`);
+  },
+
+  getPersonDetailsByUserId(userId, personId) {
+    return instance.get(`person-details?userId=${userId}&personId=${personId}`);
+  },
+
+  deleteFavoritePersonByUserId(userId, personId) {
+    return instance.delete(`delete-favorite-person?userId=${userId}&personId=${personId}`);
   }
 };
 

@@ -20,7 +20,9 @@ const PersonDetails = (props) => {
     personMovieCredits,
     onSendFavoritePerson,
     successSending,
-    userId
+    userId,
+    isFavoritePerson,
+    onDeteleFavoritePersonByUserId
   } = props;
 
   const alsoKnownAsList = (!personDetails?.also_known_as) ?
@@ -62,7 +64,11 @@ const PersonDetails = (props) => {
                     alt={personDetails.name}
                   />
                   <div className="person-details__favorite-container">
-                    <FavoriteStarOutlined onClick={() => onSendFavoritePerson(userId, personDetails.id)} />
+                    {
+                      isFavoritePerson ?
+                        <FavoriteStarFilled onClick={() => onDeteleFavoritePersonByUserId(userId, personDetails.id)} /> :
+                        <FavoriteStarOutlined onClick={() => onSendFavoritePerson(userId, personDetails.id)} />
+                    }
                   </div>
                   <h3>Personal info</h3>
                   <h4 className="person-details__quaternary-title">Known For</h4>

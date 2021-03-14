@@ -11,7 +11,9 @@ import {
   getSimilarTVRequest,
   getTVImagesRequest,
   getTVVideosRequest,
-  sendFavoriteSerialRequest
+  sendFavoriteSerialRequest,
+  deteleFavoriteTVByUserIdRequest,
+  getTVDetailsByUserIdRequest
 } from '../../../../redux/tv-reducer';
 
 import TVDetails from '../component';
@@ -27,7 +29,9 @@ class TVDetailsContainer extends React.Component {
       getSimilarTVRequest,
       getTVImagesRequest,
       getTVVideosRequest,
-      match
+      getTVDetailsByUserIdRequest,
+      match,
+      userId
     } = this.props;
 
     getPopularPersonsRequest(1);
@@ -38,6 +42,7 @@ class TVDetailsContainer extends React.Component {
     getSimilarTVRequest(match.params.id);
     getTVImagesRequest(match.params.id);
     getTVVideosRequest(match.params.id);
+    getTVDetailsByUserIdRequest(userId, match.params.id);
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -50,7 +55,9 @@ class TVDetailsContainer extends React.Component {
         getSimilarTVRequest,
         getTVImagesRequest,
         getTVVideosRequest,
-        match
+        getTVDetailsByUserIdRequest,
+        match,
+        userId
       } = this.props;
 
       getTVDetailsRequest(match.params.id);
@@ -60,6 +67,17 @@ class TVDetailsContainer extends React.Component {
       getSimilarTVRequest(match.params.id);
       getTVImagesRequest(match.params.id);
       getTVVideosRequest(match.params.id);
+      getTVDetailsByUserIdRequest(userId, match.params.id);
+    }
+
+    if (prevProps.userId !== this.props.userId) {
+      const {
+        getTVDetailsByUserIdRequest,
+        userId,
+        match
+      } = this.props;
+
+      getTVDetailsByUserIdRequest(userId, match.params.id);
     }
   }
 
@@ -71,11 +89,20 @@ class TVDetailsContainer extends React.Component {
     sendFavoriteSerialRequest(userId, tvId);
   }
 
+  onDeteleFavoriteTVByUserId(userId, tvId) {
+    const {
+      deteleFavoriteTVByUserIdRequest
+    } = this.props;
+
+    deteleFavoriteTVByUserIdRequest(userId, tvId);
+  }
+
   render() {
     return (
       <TVDetails
         {...this.props}
         onSendFavoriteSerial={this.onSendFavoriteSerial.bind(this)}
+        onDeteleFavoriteTVByUserId={this.onDeteleFavoriteTVByUserId.bind(this)}
       />
     );
   }
@@ -91,7 +118,9 @@ const mapStateToProps = (state) => {
     similarTV: state.tv.similarTV,
     tvImages: state.tv.tvImages,
     tvVideos: state.tv.tvVideos,
-    successSending: state.tv.successSending
+    successSending: state.tv.successSending,
+    userId: state.auth.userId,
+    isFavoriteTV: state.tv.isFavoriteTV
   }
 }
 
@@ -105,7 +134,9 @@ export default compose(
     getSimilarTVRequest,
     getTVImagesRequest,
     getTVVideosRequest,
-    sendFavoriteSerialRequest
+    sendFavoriteSerialRequest,
+    deteleFavoriteTVByUserIdRequest,
+    getTVDetailsByUserIdRequest
   }),
   withRouter
 )(TVDetailsContainer);

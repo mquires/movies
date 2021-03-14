@@ -7,6 +7,8 @@ const SET_PERSON_DETAILS = 'SET-PERSON-DETAILS';
 const SET_PERSON_MOVIE_CREDITS = 'SET-PERSON-MOVIE-CREDITS';
 const SET_FAVORITE_PERSONS = 'SET-FAVORITE-PERSON';
 const SET_SUCCESS_SENDING = 'SET-SUCCESS-SENDING';
+const SET_PERSON_DETAILS_BY_USER_ID = 'SET-PERSON-DETAILS-BY-USER-ID';
+const IS_FAVORITE_PERSON = 'IS-FAVORITE-PERSON';
 
 const initialState = {
   popularPersons: [],
@@ -14,7 +16,9 @@ const initialState = {
   personDetails: [],
   personMovieCredits: [],
   favoritePerson: [],
-  successSending: false
+  successSending: false,
+  personDetailsByUserId: [],
+  isFavoritePerson: []
 };
 
 const personsReducer = (state = initialState, action) => {
@@ -55,6 +59,18 @@ const personsReducer = (state = initialState, action) => {
         successSending: action.successSending
       }
     }
+    case SET_PERSON_DETAILS_BY_USER_ID: {
+      return {
+        ...state,
+        personDetailsByUserId: action.personDetailsByUserId
+      }
+    }
+    case IS_FAVORITE_PERSON: {
+      return {
+        ...state,
+        isFavoritePerson: action.isFavoritePerson
+      }
+    }
     default: {
       return state;
     }
@@ -69,6 +85,8 @@ export const setPersonDetails = (personDetails) => ({ type: SET_PERSON_DETAILS, 
 export const setPersonMovieCredits = (personMovieCredits) => ({ type: SET_PERSON_MOVIE_CREDITS, personMovieCredits });
 export const setFavoritePersons = (favoritePerson) => ({ type: SET_FAVORITE_PERSONS, favoritePerson });
 export const setSuccessSending = (successSending) => ({ type: SET_SUCCESS_SENDING, successSending });
+export const setIsFavoritePerson = (isFavoritePerson) => ({ type: IS_FAVORITE_PERSON, isFavoritePerson });
+export const setPersonDetailsByUserId = (personDetailsByUserId) => ({ type: SET_PERSON_DETAILS_BY_USER_ID, personDetailsByUserId });
 
 export const getPopularPersonsRequest = () => (dispatch) => {
   personsAPI.getPopularPersons()
@@ -116,6 +134,7 @@ export const sendFavoritePersonRequest = (userId, personId) => (dispatch) => {
         profile_path
       );
       dispatch(setSuccessSending(true));
+      dispatch(setIsFavoritePerson(true));
     });
   setTimeout(() => {
     dispatch(setSuccessSending(false));
@@ -127,4 +146,22 @@ export const getFavoritePersonRequest = (id) => (dispatch) => {
     .then(response => {
       dispatch(setFavoritePersons(response.data));
     })
+};
+
+export const getPersonDetailsByUserIdRequest = (userId, personId) => (dispatch) => {
+  contentAPI.getPersonDetailsByUserId(userId, personId)
+    .then(response => {
+      dispatch(setPersonDetailsByUserId(response.data.values));
+      response.data.length === 0 ? dispatch(setIsFavoritePerson(false)) : dispatch(setIsFavoritePerson(true));
+    })
+    .catch(() => {
+      dispatch(setIsFavoritePerson(false));
+    });
+};
+
+export const deteleFavoritePersonByUserIdRequest = (userId, personId) => (dispatch) => {
+  contentAPI.deleteFavoritePersonByUserId(userId, personId)
+    .then(() => {
+      dispatch(setIsFavoritePerson(false));
+    });
 };

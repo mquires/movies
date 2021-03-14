@@ -12,6 +12,8 @@ const SET_TV_VIDEOS = 'SET-TV-VIDEOS';
 const SET_GENRES = 'SET-GENRES';
 const SET_FAVORITE_SERIAL = 'SET-FAVORITE-SERIAL';
 const SET_SUCCESS_SENDING = 'SET-SUCCESS-SENDING';
+const SET_TV_DETAILS_BY_USER_ID = 'SET-TV-DETAILS-BY-USER-ID';
+const IS_FAVORITE_TV = 'IS-FAVORITE-TV';
 
 const initialState = {
   todayTrendingTV: [],
@@ -24,7 +26,9 @@ const initialState = {
   tvVideos: [],
   genres: [],
   favoriteSerial: [],
-  successSending: false
+  successSending: false,
+  tvDetailsByUserId: [],
+  isFavoriteTV: []
 };
 
 const tvReducer = (state = initialState, action) => {
@@ -95,6 +99,18 @@ const tvReducer = (state = initialState, action) => {
         successSending: action.successSending
       }
     }
+    case SET_TV_DETAILS_BY_USER_ID: {
+      return {
+        ...state,
+        tvDetailsByUserId: action.tvDetailsByUserId
+      }
+    }
+    case IS_FAVORITE_TV: {
+      return {
+        ...state,
+        isFavoriteTV: action.isFavoriteTV
+      }
+    }
     default: {
       return state;
     }
@@ -114,6 +130,8 @@ export const setTVVideos = (tvVideos) => ({ type: SET_TV_VIDEOS, tvVideos });
 export const setGenres = (genres) => ({ type: SET_GENRES, genres });
 export const setFavoriteSerial = (favoriteSerial) => ({ type: SET_FAVORITE_SERIAL, favoriteSerial });
 export const setSuccessSending = (successSending) => ({ type: SET_SUCCESS_SENDING, successSending });
+export const setIsFavoriteTV = (isFavoriteTV) => ({ type: IS_FAVORITE_TV, isFavoriteTV });
+export const setTVDetailsByUserId = (tvDetailsByUserId) => ({ type: SET_TV_DETAILS_BY_USER_ID, tvDetailsByUserId });
 
 export const getTodayTrendingTVRequest = (currentPage) => (dispatch) => {
   tvAPI.getTodayTrendingTV(currentPage)
@@ -195,6 +213,7 @@ export const sendFavoriteSerialRequest = (userId, tvId) => (dispatch) => {
         backdrop_path
       );
       dispatch(setSuccessSending(true));
+      dispatch(setIsFavoriteTV(true));
     });
   setTimeout(() => {
     dispatch(setSuccessSending(false));
@@ -206,4 +225,22 @@ export const getFavoriteSerialRequest = (id) => (dispatch) => {
     .then(response => {
       dispatch(setFavoriteSerial(response.data));
     })
+};
+
+export const getTVDetailsByUserIdRequest = (userId, tvId) => (dispatch) => {
+  contentAPI.getTVDetailsByUserId(userId, tvId)
+    .then(response => {
+      dispatch(setTVDetailsByUserId(response.data.values));
+      response.data.length === 0 ? dispatch(setIsFavoriteTV(false)) : dispatch(setIsFavoriteTV(true));
+    })
+    .catch(() => {
+      dispatch(setIsFavoriteTV(false));
+    })
+};
+
+export const deteleFavoriteTVByUserIdRequest = (userId, tvId) => (dispatch) => {
+  contentAPI.deleteFavoriteTVByUserId(userId, tvId)
+    .then(() => {
+      dispatch(setIsFavoriteTV(false));
+    });
 };
