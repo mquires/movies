@@ -1,0 +1,10 @@
+@import "../../../../assets/styles/abstracts/variables";
+
+.cancel-button {
+  background: $CL_12_GREY;
+
+  &:hover {
+    border: 0.2rem solid $CL_12_GREY;
+    color: $CL_12_GREY;
+  }
+}

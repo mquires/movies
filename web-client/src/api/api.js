@@ -57,6 +57,10 @@ export const usersAPI = {
 
   getAdditionalUserData(id) {
     return instance.get(`get-additional-user-data?userId=${id}`);
+  },
+
+  deleteUser(token) {
+    return instance.delete(`delete-user?token=${token}`);
   }
 };
 

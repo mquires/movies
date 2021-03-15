@@ -3,12 +3,21 @@ import { connect } from 'react-redux';
 import { Route, Switch, withRouter } from 'react-router-dom';
 import { compose } from 'redux';
 import ROUTES from '../../../constants/routes';
-import { sendAdditionalUserDataRequest, getAdditionalUserDataRequest } from '../../../../redux/users-reducer';
-import { reset } from "redux-form";
+import { sendAdditionalUserDataRequest, getAdditionalUserDataRequest, deleteUserRequest } from '../../../../redux/users-reducer';
+import { logoutRequest, setIsAuth } from '../../../../redux/auth-reducer';
 
 import EditProfile from '../edit-profile';
 
 class SettingsContainer extends React.Component {
+  componentDidMount() {
+    const {
+      getAdditionalUserDataRequest,
+      userId
+    } = this.props;
+
+    getAdditionalUserDataRequest(userId);
+  }
+
   componentDidUpdate(prevProps, prevState) {
     if (prevProps.userId !== this.props.userId) {
       const {
@@ -20,7 +29,7 @@ class SettingsContainer extends React.Component {
     }
   }
 
-  onSendEditProfile(editProfile, dispatch) {
+  onSendEditProfile(editProfile) {
     const {
       sendAdditionalUserDataRequest,
       userId
@@ -35,7 +44,22 @@ class SettingsContainer extends React.Component {
     } = editProfile;
 
     sendAdditionalUserDataRequest(userId, bio, gender, nickname, phone, website);
-    dispatch(reset("editProfile"));
+  }
+
+  onDeleteUser() {
+    const {
+      deleteUserRequest,
+      setIsAuth,
+      history,
+      logoutRequest
+    } = this.props;
+
+    deleteUserRequest(localStorage.getItem('token'));
+    logoutRequest();
+    localStorage.clear();
+    setIsAuth();
+
+    history.push(ROUTES.LOGIN);
   }
 
   render() {
@@ -44,7 +68,13 @@ class SettingsContainer extends React.Component {
         <Route
           exact
           path={ROUTES.SETTINGS}
-          render={() => <EditProfile {...this.props} onSendEditProfile={this.onSendEditProfile.bind(this)} />} />
+          render={() => <EditProfile
+            {...this.props}
+            onSendEditProfile={this.onSendEditProfile.bind(this)}
+            onDeleteUser={this.onDeleteUser.bind(this)}
+          />
+          }
+        />
       </Switch>
     );
   }
@@ -62,7 +92,10 @@ const mapStateToProps = (state) => {
 export default compose(
   connect(mapStateToProps, {
     sendAdditionalUserDataRequest,
-    getAdditionalUserDataRequest
+    getAdditionalUserDataRequest,
+    deleteUserRequest,
+    logoutRequest,
+    setIsAuth
   }),
   withRouter
 )(SettingsContainer);

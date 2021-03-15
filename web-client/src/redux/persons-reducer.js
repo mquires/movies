@@ -138,7 +138,7 @@ export const sendFavoritePersonRequest = (userId, personId) => (dispatch) => {
     });
   setTimeout(() => {
     dispatch(setSuccessSending(false));
-  }, 5000);
+  }, 3000);
 };
 
 export const getFavoritePersonRequest = (id) => (dispatch) => {

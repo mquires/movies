@@ -16,7 +16,8 @@ const EditProfile = (props) => {
     onSendEditProfile,
     successSending,
     name,
-    additionalUserData
+    additionalUserData,
+    onDeleteUser
   } = props;
 
   const {
@@ -33,24 +34,29 @@ const EditProfile = (props) => {
       successSending={successSending}
       message="Submit successfully"
     >
-      <Settings>
-        <div className="edit-profile__name">
-          <Avatar
-            src={!avatarImage ? noAvatar : avatarImage}
-            alt={name}
+      {additionalUserData.length === 0 ?
+        <Preloader /> :
+        <Settings>
+          <div className="edit-profile__name">
+            <Avatar
+              src={!avatarImage ? noAvatar : avatarImage}
+              alt={name}
+            />
+            <h3 className="edit-profile__name-title">{name}</h3>
+          </div>
+          <EditProfileForm
+            className="edit-profile__form"
+            onSubmit={onSendEditProfile}
+            onDeleteUser={onDeleteUser}
+            initialValues={{
+              nickname: nickname,
+              website: website,
+              bio: bio,
+              phone: phone,
+              gender: gender
+            }}
           />
-          <h3 className="edit-profile__name-title">{name}</h3>
-        </div>
-        <EditProfileForm
-          className="edit-profile__form"
-          onSubmit={onSendEditProfile}
-          nickname={nickname}
-          website={website}
-          bio={bio}
-          phone={phone}
-          gender={gender}
-        />
-      </Settings>
+        </Settings>}
     </PageWithSuccessMessage>
   );
 };

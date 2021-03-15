@@ -1,5 +1,6 @@
 import { stopSubmit } from "redux-form";
 import { authAPI } from "../api/api";
+import { setAdditionalUserData } from './users-reducer';
 
 const SET_AUTH_USER = 'SET-AUTH-USER';
 const SET_AUTH_USER_DATA = 'SET-AUTH-USER-DATA';
@@ -48,7 +49,8 @@ export const getAuthUserDataRequest = (token) => (dispatch) => {
 }
 
 export const logoutRequest = () => (dispatch) => {
-  return dispatch(setAuthUserData(null, null, null, null, false));
+  dispatch(setAuthUserData(null, null, null, null, false));
+  dispatch(setAdditionalUserData([]));
 }
 
 export const loginUser = (email, password) => {

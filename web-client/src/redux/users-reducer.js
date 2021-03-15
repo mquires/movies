@@ -184,7 +184,14 @@ export const sendAdditionalUserDataRequest = (id, bio, gender, nickname, phone, 
 export const getAdditionalUserDataRequest = (id) => (dispatch) => {
   usersAPI.getAdditionalUserData(id)
     .then(response => {
-      console.log(response)
       dispatch(setAdditionalUserData(response.data));
+    });
+};
+
+export const deleteUserRequest = (token) => (dispatch) => {
+  usersAPI.deleteUser(token)
+    .then(() => {
+      localStorage.removeItem('token');
+      dispatch(setAdditionalUserData([]));
     });
 };

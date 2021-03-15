@@ -1,0 +1,26 @@
+@import '../../../../assets/styles/abstracts/variables';
+
+.dangerous-popup {
+  &__logo {
+    margin-bottom: 2rem;
+  }
+
+  &__text {
+    line-height: 3.5rem;
+    margin: 5rem 0;
+  }
+
+  &__danger {
+    width: 15rem;
+    height: 15rem;
+    fill: $RED;
+    display: flex;
+    margin: 0 auto;
+  }
+
+  &__buttons {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+}

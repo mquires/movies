@@ -1,9 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import classNames from 'classnames';
 import { reduxForm } from 'redux-form';
 import { NavLink } from 'react-router-dom';
 import BUTTON_TYPES from '../../../constants/button-types';
-import { required } from '../../../../utils/validators';
 
 import Input from '../../input';
 import Button from '../../buttons/main-button';
@@ -13,6 +12,7 @@ import Icon from '../../icon';
 import Select from '../../select';
 
 import proAccIcon from '../../../../assets/icons/switch_account.svg';
+import DangerousPopup from '../../popups/dangerous-popup';
 
 import './edit-profile-form.scss';
 
@@ -20,18 +20,28 @@ const EditProfileForm = (props) => {
   const {
     className,
     handleSubmit,
-    nickname,
-    website,
-    bio,
-    phone,
-    gender
+    onDeleteUser
   } = props;
+
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggleMenu = () => setIsOpen(!isOpen);
+  const closeMenu = () => setIsOpen(false);
 
   return (
     <form
       onSubmit={handleSubmit}
       className={classNames("form", className)}
     >
+      {
+        isOpen &&
+        <DangerousPopup
+          open={toggleMenu}
+          onRequestClose={closeMenu}
+          cancelClick={closeMenu}
+          onDeleteUser={onDeleteUser}
+        />
+      }
       <EntryField
         className="edit-profile-form__input"
         component={Input}
@@ -60,7 +70,6 @@ const EditProfileForm = (props) => {
         component={Input}
         name="phone"
         placeholder="Phone number"
-        value="1123213123213"
       />
       <EntryField
         component={Select}
@@ -88,26 +97,15 @@ const EditProfileForm = (props) => {
           caption="Submit"
           type={BUTTON_TYPES.SUBMIT}
         />
-        <NavLink
-          to="#"
+        <div
+          onClick={toggleMenu}
           className="edit-profile-form__link"
         >
           Delete your personal account
-      </NavLink>
+      </div>
       </div>
     </form>
   );
 };
 
-const EditProfileReduxForm = reduxForm({
-  form: 'editProfile',
-  initialValues: {
-    nickname: props.nickname,
-    website: props.website,
-    bio: props.bio,
-    phone: props.phone,
-    gender: props.gender
-  }
-})(EditProfileForm);
-
-export default EditProfileReduxForm;
+export default reduxForm({ form: 'editProfile' })(EditProfileForm);
