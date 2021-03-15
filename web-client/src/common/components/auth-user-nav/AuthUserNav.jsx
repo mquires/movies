@@ -9,6 +9,7 @@ import Icon from '../icon';
 
 import userIcon from '../../../assets/icons/user.svg';
 import adminIcon from '../../../assets/icons/admin_panel.svg';
+import settingsIcon from '../../../assets/icons/settings.svg';
 import noAvatar from '../../../assets/images/no-avatar.jpg';
 
 import './auth-user-nav.scss';
@@ -68,6 +69,21 @@ const AuthUserNav = (props) => {
                 viewBox={adminIcon.viewBox}
               />
               Admin panel
+              </NavLink>
+          </li>
+          <li
+            className="auth-user-nav__list-item"
+            onClick={closeMenu}
+          >
+            <NavLink
+              className="auth-user-nav__list-item-link"
+              to={ROUTES.SETTINGS}
+            >
+              <Icon
+                glyph={settingsIcon.id}
+                viewBox={settingsIcon.viewBox}
+              />
+              Settings
               </NavLink>
           </li>
         </ul>

@@ -10,6 +10,7 @@ const ADD_REPORT = 'ADD-REPORT';
 const SET_USER_BY_EMAIL = 'SET-USER-BY-EMAIL';
 const SET_USER_DATA = 'SET-USER-DATA';
 const SET_SUCCESS_SENDING = 'SET-SUCCESS-SENDING';
+const SET_ADDITIONAL_USER_DATA = 'SET-ADDITIONAL-USER-DATA';
 
 const initialState = {
   user: null,
@@ -18,7 +19,8 @@ const initialState = {
   reports: [],
   userByEmail: null,
   userData: null,
-  successSending: false
+  successSending: false,
+  additionalUserData: []
 };
 
 const usersReducer = (state = initialState, action) => {
@@ -85,6 +87,12 @@ const usersReducer = (state = initialState, action) => {
         successSending: action.successSending
       }
     }
+    case SET_ADDITIONAL_USER_DATA: {
+      return {
+        ...state,
+        additionalUserData: action.additionalUserData
+      }
+    }
     default: {
       return state;
     }
@@ -102,6 +110,7 @@ export const addReport = (report) => ({ type: ADD_REPORT, report });
 export const setUserByEmail = (userByEmail) => ({ type: SET_USER_BY_EMAIL, userByEmail });
 export const setUserData = (userData) => ({ type: SET_USER_DATA, userData });
 export const setSuccessSending = (successSending) => ({ type: SET_SUCCESS_SENDING, successSending });
+export const setAdditionalUserData = (additionalUserData) => ({ type: SET_ADDITIONAL_USER_DATA, additionalUserData });
 
 export const getUsersRequest = () => (dispatch) => {
   usersAPI.getAllUsers()
@@ -159,5 +168,23 @@ export const getUserDataRequest = (id) => (dispatch) => {
   usersAPI.getUserData(id)
     .then(response => {
       dispatch(setUserData(response.data));
+    });
+};
+
+export const sendAdditionalUserDataRequest = (id, bio, gender, nickname, phone, website) => (dispatch) => {
+  usersAPI.addAdditionalUserData(id, bio, gender, nickname, phone, website)
+    .then(() => {
+      dispatch(setSuccessSending(true));
+    });
+  setTimeout(() => {
+    dispatch(setSuccessSending(false));
+  }, 5000);
+};
+
+export const getAdditionalUserDataRequest = (id) => (dispatch) => {
+  usersAPI.getAdditionalUserData(id)
+    .then(response => {
+      console.log(response)
+      dispatch(setAdditionalUserData(response.data));
     });
 };

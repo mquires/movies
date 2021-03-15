@@ -49,6 +49,14 @@ export const usersAPI = {
 
   getAllReports() {
     return instance.get('get-reports');
+  },
+
+  addAdditionalUserData(id, bio, gender, nickname, phone, website) {
+    return instance.post(`update-user?userId=${id}`, { bio, gender, nickname, phone, website });
+  },
+
+  getAdditionalUserData(id) {
+    return instance.get(`get-additional-user-data?userId=${id}`);
   }
 };
 

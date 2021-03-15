@@ -33,6 +33,7 @@ import SupportContainer from "../../common/pages/support/container";
 import ChatButton from '../../common/components/buttons/chat-button';
 import WatchLaterContainer from "../../common/pages/watch-later/watch-later/container";
 import ScrollToTop from "../../common/components/scroll-to-top/ScrollToTop";
+import SettingsContainer from "../../common/pages/settings/container";
 
 import './app.scss';
 
@@ -148,6 +149,10 @@ const App = (props) => {
               <Route
                 path={`${ROUTES.WATCH_LATER}`}
                 render={() => <WatchLaterContainer />}
+              />
+              <Route
+                path={`${ROUTES.SETTINGS}`}
+                render={() => <SettingsContainer />}
               />
             </Switch>
             {

@@ -37,9 +37,9 @@ const FeedbackForm = (props) => {
         name="feedbackType"
         validate={[required]}
       >
-        <option disabled>Select feedback type</option>
+        <option selected disabled>Select feedback type</option>
         <option value="Feature request">Feature request</option>
-        <option selected value="Bug report">Bug report</option>
+        <option value="Bug report">Bug report</option>
         <option value="Performance">Performance</option>
         <option value="Software/Hardware Compatibility">Software/Hardware Compatibility</option>
         <option value="Data Loss">Data Loss</option>

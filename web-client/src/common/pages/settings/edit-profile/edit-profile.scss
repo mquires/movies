@@ -1,0 +1,19 @@
+@import '../../../../assets/styles/abstracts/variables';
+
+.edit-profile {
+  &__name {
+    display: flex;
+    align-items: flex-start;
+    gap: 2rem;
+    margin-bottom: 2rem;
+
+    &-title {
+      font-weight: 500;
+      color: $CL_8_GREY;
+    }
+  }
+
+  &__form {
+    width: 80%;
+  }
+}

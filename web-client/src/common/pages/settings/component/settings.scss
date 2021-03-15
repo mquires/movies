@@ -1,0 +1,17 @@
+@import "../../../../assets/styles/abstracts/variables";
+
+.settings {
+  &__container {
+    display: flex;
+    margin-top: 2rem;
+  }
+
+  &__nav {
+    margin-left: 3rem;
+  }
+
+  &__content {
+    margin: 0 5rem;
+    width: 100%;
+  }
+}

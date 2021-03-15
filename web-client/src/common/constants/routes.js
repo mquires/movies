@@ -24,7 +24,8 @@ const ROUTES = {
   TODAY_POPULAR_PERSONS: '/today-popular-persons',
   LATEST_MOVIES: '/latest-movies',
   FEEDBACK: '/feedback',
-  SUPPORT: '/support'
+  SUPPORT: '/support',
+  SETTINGS: '/settings'
 };
 
 export default ROUTES;

@@ -1,0 +1,44 @@
+@import "../../../../assets/styles/abstracts/variables";
+
+.edit-profile-form {
+  &__text {
+    font-size: 1.3rem;
+    color: $CL_8_GREY;
+  }
+
+  &__title {
+    font-size: 1.5rem;
+    color: $CL_8_GREY;
+  }
+
+  &__row-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &__switch {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: $BLUE;
+    font-size: 1.5rem;
+    gap: 1rem;
+    fill: $BLUE;
+
+    &-icon {
+      width: 2rem;
+      height: 2rem;
+    }
+  }
+
+  &__button {
+    margin-top: 1rem;
+    align-self: flex-start;
+  }
+
+  &__link {
+    text-decoration: none;
+    color: $BLUE;
+  }
+}
