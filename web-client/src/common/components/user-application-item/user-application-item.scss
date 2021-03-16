@@ -1,0 +1,37 @@
+@import "../../../assets/styles/abstracts/variables";
+
+.user-application-item {
+  box-shadow: 0px 2px 35px 14px rgba(13, 13, 13, 0.04);
+  padding: 2rem;
+  border-radius: 1.5rem;
+  fill: $RED;
+  cursor: pointer;
+  word-break: break-all;
+
+  &__avatar {
+    width: 7rem;
+    height: 7rem;
+  }
+
+  &__user {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+
+    &-data {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+
+      & h5 {
+        margin: 0.5rem 0;
+      }
+    }
+  }
+
+  &__data {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+}

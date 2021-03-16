@@ -35,7 +35,7 @@ const AuthUserNav = (props) => {
         <Avatar
           className="auth-user-nav__avatar"
           src={!avatarImage ? noAvatar : avatarImage}
-          alt={name}
+          alt={!name ? "Avatar" : name}
         />
       </div>
       {

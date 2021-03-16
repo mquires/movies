@@ -1,4 +1,4 @@
-import { usersAPI } from "../api/api";
+import { usersAPI, verificationAPI } from "../api/api";
 import { reset } from "redux-form";
 
 const SET_USERS = 'SET-USERS';
@@ -12,6 +12,7 @@ const SET_USER_DATA = 'SET-USER-DATA';
 const SET_SUCCESS_SENDING = 'SET-SUCCESS-SENDING';
 const SET_ADDITIONAL_USER_DATA = 'SET-ADDITIONAL-USER-DATA';
 const SET_VERIFICATION_USER_DATA = 'SET-VERIFICATION-USER-DATA';
+const SET_ALL_USERS_VERIFICATION_APPLICATIONS = 'SET-ALL-USERS-VERIFICATION-APPLICATIONS'; 
 
 const initialState = {
   user: null,
@@ -22,7 +23,8 @@ const initialState = {
   userData: null,
   successSending: false,
   additionalUserData: [],
-  verificationUserData: []
+  verificationUserData: [],
+  allUsersVerificationApplications: []
 };
 
 const usersReducer = (state = initialState, action) => {
@@ -101,6 +103,12 @@ const usersReducer = (state = initialState, action) => {
         verificationUserData: [...state.verificationUserData, action.verificationUserData]
       }
     }
+    case SET_ALL_USERS_VERIFICATION_APPLICATIONS: {
+      return {
+        ...state,
+        allUsersVerificationApplications: action.allUsersVerificationApplications
+      }
+    }
     default: {
       return state;
     }
@@ -120,6 +128,7 @@ export const setUserData = (userData) => ({ type: SET_USER_DATA, userData });
 export const setSuccessSending = (successSending) => ({ type: SET_SUCCESS_SENDING, successSending });
 export const setAdditionalUserData = (additionalUserData) => ({ type: SET_ADDITIONAL_USER_DATA, additionalUserData });
 export const setVerificationUserData = (verificationUserData) => ({ type: SET_VERIFICATION_USER_DATA, verificationUserData });
+export const setAllUsersVerificationApplications = (allUsersVerificationApplications) => ({ type: SET_ALL_USERS_VERIFICATION_APPLICATIONS, allUsersVerificationApplications });
 
 export const getUsersRequest = () => (dispatch) => {
   usersAPI.getAllUsers()
@@ -207,4 +216,12 @@ export const deleteUserRequest = (token) => (dispatch) => {
 
 export const applyUserVerificationRequest = (token, category, country, general, wikiArticle, website, socialNetworks) => (dispatch) => {
   usersAPI.applyUserVerification(token, category, country, general, wikiArticle, website, socialNetworks);
+};
+
+export const getAllUsersVerificationApplicationsRequest = () => (dispatch) => {
+  verificationAPI.getAllUsersVerificationApplications()
+    .then(response => {
+      console.log(response)
+      dispatch(setAllUsersVerificationApplications(response.data));
+    });
 };

@@ -68,6 +68,12 @@ export const usersAPI = {
   }
 };
 
+export const verificationAPI = {
+  getAllUsersVerificationApplications() {
+    return instance.get('get-user-verification-applications');
+  }
+};
+
 export const feedbackAPI = {
   sendFeedback(name, email, comments, feedbackType) {
     return instance.post('add-feedback', { name, email, comments, feedbackType });

@@ -41,7 +41,7 @@ const EditProfile = (props) => {
           <div className="edit-profile__name">
             <Avatar
               src={!avatarImage ? noAvatar : avatarImage}
-              alt={name}
+              alt={!name ? "Avatar" : name}
             />
             <h3 className="edit-profile__name-title">{name}</h3>
           </div>

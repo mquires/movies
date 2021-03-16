@@ -2,15 +2,16 @@ import React from 'react';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import ROUTES from '../../../constants/routes';
-import { NavLink } from 'react-router-dom';
 
 import PageComponent from '../../../components/page-components/page-component';
+import NavPage from '../../../components/nav-page';
+import NavPageItem from '../../../components/nav-page/nav-page-item';
 
 import usersIcon from '../../../../assets/icons/user-circle.svg';
 import feedbackIcon from '../../../../assets/icons/feedback.svg';
 import reportIcon from '../../../../assets/icons/report.svg';
 import supportIcon from '../../../../assets/icons/support.svg';
-import Icon from '../../../components/icon';
+import verificationIcon from '../../../../assets/icons/verification.svg';
 
 import './admin-panel.scss';
 
@@ -27,52 +28,38 @@ const AdminPanel = (props) => {
     >
       <div className="admin-panel__container">
         <div className="admin-panel__nav">
-          <ul className="admin-panel__nav-list">
-            <NavLink
-              to={ROUTES.ADMIN_PANEL}
-              className="admin-panel__nav-item"
-            >
-              <Icon
-                className="admin-panel__nav-item-icon"
-                glyph={usersIcon.id}
-                viewBox={usersIcon.viewBox}
-              />
-              Users list
-            </NavLink>
-            <NavLink
-              to={`${ROUTES.ADMIN_PANEL}/feedback`}
-              className="admin-panel__nav-item"
-            >
-              <Icon
-                className="admin-panel__nav-item-icon"
-                glyph={feedbackIcon.id}
-                viewBox={feedbackIcon.viewBox}
-              />
-              Feedback list
-            </NavLink>
-            <NavLink
-              to={`${ROUTES.ADMIN_PANEL}/reports`}
-              className="admin-panel__nav-item"
-            >
-              <Icon
-                className="admin-panel__nav-item-icon"
-                glyph={reportIcon.id}
-                viewBox={reportIcon.viewBox}
-              />
-              Reports
-            </NavLink>
-            <NavLink
-              to={`${ROUTES.ADMIN_PANEL}/support-list`}
-              className="admin-panel__nav-item"
-            >
-              <Icon
-                className="admin-panel__nav-item-icon"
-                glyph={supportIcon.id}
-                viewBox={supportIcon.viewBox}
-              />
-              Support list
-            </NavLink>
-          </ul>
+          <NavPage>
+            <NavPageItem
+              glyph={usersIcon.id}
+              viewBox={usersIcon.viewBox}
+              navLink={ROUTES.ADMIN_PANEL}
+              caption="Users list"
+            />
+            <NavPageItem
+              glyph={feedbackIcon.id}
+              viewBox={feedbackIcon.viewBox}
+              navLink={`${ROUTES.ADMIN_PANEL}/feedback`}
+              caption="Feedback list"
+            />
+            <NavPageItem
+              glyph={reportIcon.id}
+              viewBox={reportIcon.viewBox}
+              navLink={`${ROUTES.ADMIN_PANEL}/reports`}
+              caption="Reports"
+            />
+            <NavPageItem
+              glyph={supportIcon.id}
+              viewBox={supportIcon.viewBox}
+              navLink={`${ROUTES.ADMIN_PANEL}/support-list`}
+              caption="Support list"
+            />
+            <NavPageItem
+              glyph={verificationIcon.id}
+              viewBox={verificationIcon.viewBox}
+              navLink={`${ROUTES.ADMIN_PANEL}/users-verification`}
+              caption="Verification applications"
+            />
+          </NavPage>
         </div>
         <div className="admin-panel__content">
           {children}

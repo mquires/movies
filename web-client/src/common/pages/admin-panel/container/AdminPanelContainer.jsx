@@ -9,6 +9,7 @@ import AdminPanelUsersList from '../users-list';
 import AdminPanelFeedbackContainer from '../feedback/container';
 import AdminPanelReportsContainer from '../reports/container';
 import AdminPanelSupportContainer from '../support/container';
+import AdminPanelVerificationContainer from '../verification/container';
 
 class AdminPanelContainer extends React.Component {
   componentDidMount() {
@@ -26,6 +27,7 @@ class AdminPanelContainer extends React.Component {
         <Route path={`${ROUTES.ADMIN_PANEL}/feedback`} render={() => <AdminPanelFeedbackContainer {...this.props} />} />
         <Route path={`${ROUTES.ADMIN_PANEL}/reports`} render={() => <AdminPanelReportsContainer {...this.props} />} />
         <Route path={`${ROUTES.ADMIN_PANEL}/support-list`} render={() => <AdminPanelSupportContainer {...this.props} />} />
+        <Route path={`${ROUTES.ADMIN_PANEL}/users-verification`} render={() => <AdminPanelVerificationContainer {...this.props} />} />
       </Switch>
     );
   }

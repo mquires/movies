@@ -6,7 +6,7 @@ import VerificationFourthStep from '../VerificationFourthStep';
 import { setVerificationUserData, applyUserVerificationRequest } from '../../../../../../redux/users-reducer';
 
 class VerificationFourthStepContainer extends React.Component {
-  onSendVerification(verificationThirdStep) {
+  onSendVerification(verificationFourthStep) {
     const {
       setVerificationUserData,
       toggleFifthStep,
@@ -16,15 +16,21 @@ class VerificationFourthStepContainer extends React.Component {
 
     const {
       category,
-      country,
+      country
+    } = verificationUserData[0];
+
+    const {
       general,
-      wikiArticle,
+      wikiArticle
+    } = verificationUserData[1];
+
+    const {
       website,
       socialNetworks
-    } = verificationUserData;
+    } = verificationFourthStep;
 
-    setVerificationUserData(verificationThirdStep);
-    applyUserVerificationRequest(category, country, general, wikiArticle, website, socialNetworks);
+    setVerificationUserData(verificationFourthStep);
+    applyUserVerificationRequest(localStorage.getItem('token'), category, country, general, wikiArticle, website, socialNetworks);
     toggleFifthStep();
   }
 
