@@ -61,6 +61,10 @@ export const usersAPI = {
 
   deleteUser(token) {
     return instance.delete(`delete-user?token=${token}`);
+  },
+
+  applyUserVerification(token, category, country, general, wikiArticle, website, socialNetworks) {
+    return instance.post(`apply-user-verification?token=${token}`, { category, country, general, wikiArticle, website, socialNetworks });
   }
 };
 

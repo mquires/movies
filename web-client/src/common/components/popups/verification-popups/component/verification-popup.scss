@@ -1,0 +1,29 @@
+@import "../../../../../assets/styles/abstracts/variables";
+
+.verification-popup {
+  padding: 0;
+  margin: 0 auto;
+  overflow: hidden;
+  width: 50vw;
+  max-width: 59rem;
+
+  &__image {
+    width: 100%;
+    object-fit: cover;
+    height: 100%;
+
+    &-container {
+      background: $CL_6_GREY;
+      height: 18rem;
+    }
+  }
+
+  &__content {
+    padding: 2rem;
+    text-align: center;
+  }
+
+  &__text {
+    margin: 2rem 0;
+  }
+}

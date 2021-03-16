@@ -11,6 +11,7 @@ const SET_USER_BY_EMAIL = 'SET-USER-BY-EMAIL';
 const SET_USER_DATA = 'SET-USER-DATA';
 const SET_SUCCESS_SENDING = 'SET-SUCCESS-SENDING';
 const SET_ADDITIONAL_USER_DATA = 'SET-ADDITIONAL-USER-DATA';
+const SET_VERIFICATION_USER_DATA = 'SET-VERIFICATION-USER-DATA';
 
 const initialState = {
   user: null,
@@ -20,7 +21,8 @@ const initialState = {
   userByEmail: null,
   userData: null,
   successSending: false,
-  additionalUserData: []
+  additionalUserData: [],
+  verificationUserData: []
 };
 
 const usersReducer = (state = initialState, action) => {
@@ -93,6 +95,12 @@ const usersReducer = (state = initialState, action) => {
         additionalUserData: action.additionalUserData
       }
     }
+    case SET_VERIFICATION_USER_DATA: {
+      return {
+        ...state,
+        verificationUserData: [...state.verificationUserData, action.verificationUserData]
+      }
+    }
     default: {
       return state;
     }
@@ -111,6 +119,7 @@ export const setUserByEmail = (userByEmail) => ({ type: SET_USER_BY_EMAIL, userB
 export const setUserData = (userData) => ({ type: SET_USER_DATA, userData });
 export const setSuccessSending = (successSending) => ({ type: SET_SUCCESS_SENDING, successSending });
 export const setAdditionalUserData = (additionalUserData) => ({ type: SET_ADDITIONAL_USER_DATA, additionalUserData });
+export const setVerificationUserData = (verificationUserData) => ({ type: SET_VERIFICATION_USER_DATA, verificationUserData });
 
 export const getUsersRequest = () => (dispatch) => {
   usersAPI.getAllUsers()
@@ -194,4 +203,8 @@ export const deleteUserRequest = (token) => (dispatch) => {
       localStorage.removeItem('token');
       dispatch(setAdditionalUserData([]));
     });
+};
+
+export const applyUserVerificationRequest = (token, category, country, general, wikiArticle, website, socialNetworks) => (dispatch) => {
+  usersAPI.applyUserVerification(token, category, country, general, wikiArticle, website, socialNetworks);
 };

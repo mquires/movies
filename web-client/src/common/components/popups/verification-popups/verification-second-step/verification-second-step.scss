@@ -1,0 +1,16 @@
+.verification-second-step {
+  &__user {
+    &-avatar {
+      width: 7.5rem;
+      height: 7.5rem;
+    }
+  }
+
+  &__form {
+    margin: 2rem 0;
+  }
+
+  &__name {
+    margin: 1rem 0;
+  }
+}

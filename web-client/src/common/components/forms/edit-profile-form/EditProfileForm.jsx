@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import classNames from 'classnames';
 import { reduxForm } from 'redux-form';
-import { NavLink } from 'react-router-dom';
 import BUTTON_TYPES from '../../../constants/button-types';
 
 import Input from '../../input';
@@ -10,9 +9,13 @@ import EntryField from '../../fields/EntryField';
 import Textarea from '../../textarea';
 import Icon from '../../icon';
 import Select from '../../select';
+import VerificationFirstStep from '../../popups/verification-popups/verification-first-step';
+import VerificationThirdStepContainer from '../../popups/verification-popups/verification-third-step/container';
+import VerificationSecondStepContainer from '../../popups/verification-popups/verification-second-step/container';
+import VerificationFourthStepContainer from '../../popups/verification-popups/verification-fourth-step/container';
+import VerificationFifthStep from '../../popups/verification-popups/verification-fifth-step';
 
 import proAccIcon from '../../../../assets/icons/switch_account.svg';
-import DangerousPopup from '../../popups/dangerous-popup';
 
 import './edit-profile-form.scss';
 
@@ -24,9 +27,40 @@ const EditProfileForm = (props) => {
   } = props;
 
   const [isOpen, setIsOpen] = useState(false);
-
   const toggleMenu = () => setIsOpen(!isOpen);
   const closeMenu = () => setIsOpen(false);
+
+  const [isOpenFirstStep, setIsOpenFirstStep] = useState(false);
+  const toggleFirstStep = () => setIsOpenFirstStep(true);
+  const closeFirstStep = () => setIsOpenFirstStep(false);
+
+  const [isOpenSecondStep, setIsOpenSecondStep] = useState(false);
+  const toggleSecondStep = () => {
+    setIsOpenSecondStep(true);
+    setIsOpenFirstStep(false);
+  }
+  const closeSecondStep = () => setIsOpenSecondStep(false);
+
+  const [isOpenThirdStep, setIsOpenThirdStep] = useState(false);
+  const toggleThirdStep = () => {
+    setIsOpenThirdStep(true);
+    setIsOpenSecondStep(false);
+  }
+  const closeThirdStep = () => setIsOpenThirdStep(false);
+
+  const [isOpenFourthStep, setIsOpenFourthStep] = useState(false);
+  const toggleFourthStep = () => {
+    setIsOpenFourthStep(true);
+    setIsOpenThirdStep(false);
+  }
+  const closeFourthStep = () => setIsOpenFourthStep(false);
+
+  const [isOpenFifthStep, setIsOpenFifthStep] = useState(false);
+  const toggleFifthStep = () => {
+    setIsOpenFifthStep(true);
+    setIsOpenFourthStep(false);
+  }
+  const closeFifthStep = () => setIsOpenFifthStep(false);
 
   return (
     <form
@@ -78,11 +112,50 @@ const EditProfileForm = (props) => {
       >
         <option disabled>Select gender</option>
         <option value="Male">Male</option>
-        <option selected value="Female">Female</option>
+        <option value="Female">Female</option>
       </EntryField>
-      <NavLink
+      {
+        isOpenFirstStep &&
+        <VerificationFirstStep
+          open={toggleFirstStep}
+          onRequestClose={closeFirstStep}
+          toggleSecondStep={toggleSecondStep}
+        />
+      }
+      {
+        isOpenSecondStep &&
+        <VerificationSecondStepContainer
+          open={toggleSecondStep}
+          onRequestClose={closeSecondStep}
+          toggleThirdStep={toggleThirdStep}
+        />
+      }
+      {
+        isOpenThirdStep &&
+        <VerificationThirdStepContainer
+          open={toggleThirdStep}
+          onRequestClose={closeThirdStep}
+          toggleFourthStep={toggleFourthStep}
+        />
+      }
+      {
+        isOpenFourthStep &&
+        <VerificationFourthStepContainer
+          open={toggleFourthStep}
+          onRequestClose={closeFourthStep}
+          toggleFifthStep={toggleFifthStep}
+        />
+      }
+      {
+        isOpenFifthStep &&
+        <VerificationFifthStep
+          open={toggleFifthStep}
+          onRequestClose={closeFifthStep}
+        />
+      }
+      <div
         className="edit-profile-form__switch"
-        to="#"
+        onClick={toggleFirstStep}
       >
         <Icon
           glyph={proAccIcon.id}
@@ -90,7 +163,7 @@ const EditProfileForm = (props) => {
           className="edit-profile-form__switch-icon"
         />
         Switch to Pro Account
-      </NavLink>
+      </div>
       <div className="edit-profile-form__row-container">
         <Button
           className="edit-profile-form__button"

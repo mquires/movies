@@ -1,0 +1,13 @@
+@import '../../../../../assets/styles/abstracts/variables';
+
+.verification-third-step-form {
+  &__button {
+    align-self: center;
+  }
+
+  &__text {
+    font-size: 1.3rem;
+    color: $CL_8_GREY;
+    text-align: start;
+  }
+}

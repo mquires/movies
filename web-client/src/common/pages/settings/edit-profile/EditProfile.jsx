@@ -17,7 +17,8 @@ const EditProfile = (props) => {
     successSending,
     name,
     additionalUserData,
-    onDeleteUser
+    onDeleteUser,
+    setVerificationUserData
   } = props;
 
   const {
@@ -48,6 +49,7 @@ const EditProfile = (props) => {
             className="edit-profile__form"
             onSubmit={onSendEditProfile}
             onDeleteUser={onDeleteUser}
+            setVerificationUserData={setVerificationUserData}
             initialValues={{
               nickname: nickname,
               website: website,

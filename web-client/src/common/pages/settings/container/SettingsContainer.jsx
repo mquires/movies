@@ -3,7 +3,12 @@ import { connect } from 'react-redux';
 import { Route, Switch, withRouter } from 'react-router-dom';
 import { compose } from 'redux';
 import ROUTES from '../../../constants/routes';
-import { sendAdditionalUserDataRequest, getAdditionalUserDataRequest, deleteUserRequest } from '../../../../redux/users-reducer';
+import {
+  sendAdditionalUserDataRequest,
+  getAdditionalUserDataRequest,
+  deleteUserRequest,
+  setVerificationUserData
+} from '../../../../redux/users-reducer';
 import { logoutRequest, setIsAuth } from '../../../../redux/auth-reducer';
 
 import EditProfile from '../edit-profile';
@@ -95,7 +100,8 @@ export default compose(
     getAdditionalUserDataRequest,
     deleteUserRequest,
     logoutRequest,
-    setIsAuth
+    setIsAuth,
+    setVerificationUserData
   }),
   withRouter
 )(SettingsContainer);
